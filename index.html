@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOLD — Personal Website &amp; Life Map</title>
+  <meta name="description" content="Bold. CMO at Orbit. Building AI memory architectures (Lumen) and studying systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <!-- SITE HEADER / IDENTITY -->
+  <header class="site-header">
+    <div class="header-meta-bar">
+      <div>
+        <span class="tape-badge">BOLD</span>
+        <span style="margin-left: 10px; font-weight: 600;">PERSONAL BLUEPRINT</span>
+      </div>
+      <div>
+        <span id="live-time-display">--:--:--</span>
+      </div>
+    </div>
+
+    <div class="header-hero">
+      <!-- Main Hero Header Row: Left (Title & Tagline), Right (Time Cadence Aside) -->
+      <div class="hero-header-row">
+        <div class="hero-text-intro">
+          <h1 class="hero-title">BOLD</h1>
+          <p class="hero-tagline">
+            CMO at Orbit &bull; Building AI memory architectures &bull; India
+          </p>
+        </div>
+
+        <!-- Precision Time Cadence Monitor -->
+        <aside class="hero-cadence-aside" aria-label="Current month and year progress monitor">
+          <div class="cadence-aside-header">
+            <div class="cadence-badge-wrap">
+              <span class="cadence-live-dot" aria-hidden="true"></span>
+              <span class="cadence-aside-badge">CADENCE MONITOR</span>
+            </div>
+            <span class="cadence-aside-sub" id="cadence-date-str">SEP 2026 &bull; DAY 265 / 365</span>
+          </div>
+
+          <!-- Channel 1: Current Month (Top) -->
+          <div class="cadence-channel">
+            <div class="cadence-channel-header">
+              <span class="channel-label">MONTH // SEP</span>
+              <span class="channel-stat"><strong id="hero-month-days-left">8</strong>d left &bull; <span id="hero-month-pct-left">27%</span></span>
+            </div>
+            <div class="cadence-gauge-wrap">
+              <div class="cadence-gauge-track" role="progressbar" aria-label="Month progress graph">
+                <div class="cadence-gauge-fill" id="hero-month-fill"></div>
+                <div class="cadence-gauge-pin" id="hero-month-pin" aria-hidden="true"></div>
+              </div>
+              <div class="cadence-gauge-scale" aria-hidden="true">
+                <span>01</span>
+                <span>10</span>
+                <span>20</span>
+                <span>30</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Channel 2: Current Year (Bottom) -->
+          <div class="cadence-channel">
+            <div class="cadence-channel-header">
+              <span class="channel-label">YEAR // 2026</span>
+              <span class="channel-stat"><strong id="hero-year-days-left">100</strong>d left &bull; <span id="hero-year-pct-left">27%</span></span>
+            </div>
+            <div class="cadence-gauge-wrap">
+              <div class="cadence-gauge-track" role="progressbar" aria-label="Year progress graph">
+                <div class="cadence-gauge-fill" id="hero-year-fill"></div>
+                <div class="cadence-gauge-pin" id="hero-year-pin" aria-hidden="true"></div>
+              </div>
+              <div class="cadence-gauge-scale" aria-hidden="true">
+                <span>Q1</span>
+                <span>Q2</span>
+                <span>Q3</span>
+                <span>Q4</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Central Ideation & Sketchbook Collage (Inspired by Daria Stolyarova & Diego Frank) -->
+      <div class="sketchbook-collage-wrapper">
+        
+        <!-- Left Column: Identity & Tech Learning Callouts -->
+        <div class="collage-col collage-col-left">
+          <!-- Top Left Annotation -->
+          <div class="annotation-card note-top-left">
+            <span class="handwritten-label">Bold, 23, India</span>
+            <svg class="sketch-arrow" width="60" height="34" viewBox="0 0 60 34" fill="none" aria-hidden="true">
+              <path d="M 4 6 C 22 8, 38 14, 52 28" stroke="#162a56" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 42 27 L 52 28 L 50 18" stroke="#162a56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Bottom Left Annotation -->
+          <div class="annotation-card note-bottom-left">
+            <span class="handwritten-label">AI Memory Architecture (Lumen)</span>
+            <svg class="sketch-arrow" width="60" height="34" viewBox="0 0 60 34" fill="none" aria-hidden="true">
+              <path d="M 4 28 C 22 26, 38 20, 52 6" stroke="#162a56" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 42 7 L 52 6 L 50 16" stroke="#162a56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Center Column: Framed Portrait & Punchline Annotation -->
+        <div class="collage-col collage-col-center">
+          <div class="central-photo-frame">
+            <div class="washi-tape-top"></div>
+            <img src="./assets/bold_photo_3.png" alt="Bold portrait" class="central-photo-img">
+            <div class="washi-tape-bottom"></div>
+          </div>
+
+          <!-- Bottom Center Annotation -->
+          <div class="annotation-card note-bottom-center">
+            <svg class="sketch-arrow" width="36" height="28" viewBox="0 0 36 28" fill="none" aria-hidden="true">
+              <path d="M 18 25 C 20 18, 16 12, 14 5" stroke="#162a56" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 9 11 L 14 5 L 19 10" stroke="#162a56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="handwritten-label">*<span class="crossed-out">he doesn't know</span> building it anyway</span>
+          </div>
+        </div>
+
+        <!-- Right Column: CMO Annotation & Sticky Note -->
+        <div class="collage-col collage-col-right">
+          <!-- Top Right Annotation -->
+          <div class="annotation-card note-top-right">
+            <svg class="sketch-arrow" width="60" height="34" viewBox="0 0 60 34" fill="none" aria-hidden="true">
+              <path d="M 56 6 C 38 8, 22 14, 8 28" stroke="#162a56" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 10 18 L 8 28 L 18 27" stroke="#162a56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="handwritten-label">CMO @ Orbit (GTM &amp; Growth)</span>
+          </div>
+
+          <!-- Authentic Sticky Note (Post-It) -->
+          <div class="sticky-note">
+            <div class="sticky-note-header">Note to self</div>
+            <div class="sticky-note-text">
+              &bull; Push Orbit to 500 users<br>
+              &bull; Ship Lumen 3-tier memory engine<br>
+              &bull; Compound daily
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bio & Stats below the central collage -->
+      <div style="max-width: 680px; width: 100%;">
+        <ul class="hero-bio" style="margin: 0 auto 16px;">
+          <li>Building at the intersection of AI, products, growth, and technology.</li>
+          <li>Currently CMO at Orbit: user acquisition, GTM, and merchant journey positioning.</li>
+          <li>Exploring AI memory architectures, second-brain systems, and knowledge retrieval (Lumen).</li>
+          <li>Learning by building, experimenting, and documenting the raw process.</li>
+        </ul>
+
+        <div class="quick-stats-strip" style="justify-content: center;">
+          <div class="stat-item"><span>AGE:</span> <strong>23</strong></div>
+          <div class="stat-item"><span>LOCATION:</span> <strong>India</strong></div>
+          <div class="stat-item"><span>CURRENT ROLE:</span> <strong>CMO at Orbit</strong></div>
+          <div class="stat-item"><span>STATUS:</span> <strong>Active Build Mode</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Strip -->
+    <nav class="nav-strip" aria-label="Quick jumps" style="justify-content: center; margin-top: 32px;">
+      <a href="#section-polymath" class="nav-item">Core Drive</a>
+      <a href="#section-doing" class="nav-item">What I'm Doing</a>
+      <a href="#section-carry" class="nav-item">Everyday Carry</a>
+      <a href="#section-projects" class="nav-item">Projects</a>
+      <a href="#section-targets" class="nav-item">September Targets</a>
+      <a href="#section-horizon" class="nav-item">5-Year Horizon</a>
+      <a href="#section-bucket" class="nav-item">Bucket List</a>
+      <a href="#section-daily" class="nav-item">Daily Input</a>
+      <a href="#section-inspirations" class="nav-item">Inspirations</a>
+    </nav>
+  </header>
+
+  <!-- POLYMATH DEFINITION BLOCK -->
+  <section id="section-polymath">
+    <div class="polymath-quote-card">
+      <div class="polymath-term">
+        A polymath —
+      </div>
+      <p class="polymath-def">
+        (Greek: <em>πολυμαθής</em>, polymathes, "having learned much"; Latin: <em>homo universalis</em>, "universal human") 
+        is an individual whose knowledge spans a substantial number of subjects, known to draw on complex bodies of knowledge to solve specific problems.
+      </p>
+    </div>
+  </section>
+
+  <!-- 01: WHAT I AM CURRENTLY DOING -->
+  <section id="section-doing">
+    <div class="editorial-heading">
+      <span>What I Am Currently Doing</span>
+      <span class="heading-num">[01]</span>
+    </div>
+
+    <!-- Tactile Folder Tabs -->
+    <div class="folders-container">
+      <div class="folder-tabs-header" role="tablist">
+        <button class="folder-tab active" data-tab="tab-orbit">Orbit // Growth &amp; GTM</button>
+        <button class="folder-tab" data-tab="tab-lumen">Lumen // AI Memory</button>
+        <button class="folder-tab" data-tab="tab-routine">Daily Cadence &amp; Study</button>
+      </div>
+
+      <div class="folder-content">
+        <!-- Tab: Orbit -->
+        <div class="folder-pane active" id="tab-orbit">
+          <h3 class="folder-details-lead">Scaling Orbit user acquisition and merchant positioning</h3>
+          <p class="folder-text">
+            Leading growth, content, and GTM strategy for Orbit. Driving toward 300–500 active users this September with a 5% conversion target. 
+            Actively testing the merchant checkout flow, order reconciliation, and e-commerce synchronization to eliminate edge cases.
+          </p>
+        </div>
+
+        <!-- Tab: Lumen -->
+        <div class="folder-pane" id="tab-lumen">
+          <h3 class="folder-details-lead">Architecting hierarchical AI memory systems</h3>
+          <p class="folder-text">
+            Designing Lumen (Sheldon): an autonomous second-brain memory engine. 
+            Building a three-tier architecture that separates raw episodic logs, canonical entity memory, and abstract generalized knowledge using PostgreSQL, pgvector, and Supabase.
+          </p>
+        </div>
+
+        <!-- Tab: Daily Cadence -->
+        <div class="folder-pane" id="tab-routine">
+          <h3 class="folder-details-lead">Deep work schedule &amp; study protocol</h3>
+          <p class="folder-text">
+            Dedicating 6–8 hours daily to focused execution, distributed between Orbit growth campaigns, technical software development, and systems reading.
+          </p>
+          <div class="protocol-strip">
+            <span class="protocol-label">WORKFLOW</span>
+            <span>Orbit Growth &amp; GTM &rarr; Merchant Testing &rarr; Lumen Architecture &rarr; Systems &amp; AI Study</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02: EVERYDAY CARRY // INSIDE MY BRAIN -->
+  <section id="section-carry">
+    <div class="editorial-heading">
+      <span>Everyday Carry &bull; Inside My World</span>
+      <span class="heading-num">[02]</span>
+    </div>
+
+    <div class="flatlay-container">
+      <div class="flatlay-photo-frame">
+        <img src="./assets/bold_everyday_carry.jpg" alt="Everyday Carry Flat-lay for Bold" class="flatlay-img">
+      </div>
+      <p class="flatlay-caption">
+        Graph paper flat-lay: Orbit mint &bull; AI Memory Architecture notebook &bull; The Polymath &bull; Wireframe glasses &bull; BOLD tape label &bull; Japanese cards &bull; Retro Mac icon
+      </p>
+    </div>
+  </section>
+
+  <!-- 03: CURRENT PROJECTS -->
+  <section id="section-projects">
+    <div class="editorial-heading">
+      <span>Current Projects</span>
+      <span class="heading-num">[03]</span>
+    </div>
+
+    <div class="projects-list">
+      <!-- Project: Orbit -->
+      <article class="project-row">
+        <div class="project-row-top">
+          <h3 class="project-title">Orbit</h3>
+          <span class="project-role-badge">CMO &bull; Marketing &amp; Growth &bull; Active</span>
+        </div>
+        <div class="project-tagline">E-commerce growth and merchant intelligence platform</div>
+        <p class="project-desc">
+          Leading GTM, user acquisition, product positioning, and merchant research. 
+          Conducting end-to-end customer journey testing and driving growth toward September milestones.
+        </p>
+        <div class="project-tags-strip">
+          <span class="tag-pill">GTM Strategy</span>
+          <span class="tag-pill">User Acquisition</span>
+          <span class="tag-pill">Merchant Testing</span>
+          <span class="tag-pill">E-commerce Integration</span>
+        </div>
+        <div class="project-metrics-note">
+          <span>Target: 300–500 Active Users &bull; 5% Conversion</span>
+        </div>
+        <div class="retro-progress-box">
+          <div class="retro-progress-bar">
+            <div class="retro-progress-fill" style="width: 65%;"></div>
+          </div>
+          <span style="font-size: 0.8rem; font-weight: 700;">65%</span>
+        </div>
+      </article>
+
+      <!-- Project: Lumen -->
+      <article class="project-row">
+        <div class="project-row-top">
+          <h3 class="project-title">Lumen / Sheldon</h3>
+          <span class="project-role-badge">Creator &amp; Architect &bull; Prototype Phase</span>
+        </div>
+        <div class="project-tagline">AI memory engine and second-brain knowledge architecture</div>
+        <p class="project-desc">
+          A personal second-brain system structured across raw episodic logs, canonical memory, and abstract generalized concepts with semantic retrieval for autonomous agents.
+        </p>
+        <div class="project-tags-strip">
+          <span class="tag-pill">AI Memory</span>
+          <span class="tag-pill">pgvector</span>
+          <span class="tag-pill">PostgreSQL</span>
+          <span class="tag-pill">Supabase</span>
+          <span class="tag-pill">TypeScript</span>
+        </div>
+        <div class="project-metrics-note">
+          <span>Phase: Architecture &amp; Vector Pipeline Prototyping</span>
+        </div>
+        <div class="retro-progress-box">
+          <div class="retro-progress-bar">
+            <div class="retro-progress-fill" style="width: 35%;"></div>
+          </div>
+          <span style="font-size: 0.8rem; font-weight: 700;">35%</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 04: TARGETS (SEPTEMBER 2026) -->
+  <section id="section-targets">
+    <div class="editorial-heading">
+      <span>September 2026 Targets</span>
+      <span class="heading-num">[04]</span>
+    </div>
+
+    <!-- Architect's Diagnostic Ruler -->
+    <div class="targets-meta-strip">
+      <div class="targets-meta-col">
+        <span class="targets-meta-label">CYCLE COUNTDOWN</span>
+        <span class="targets-meta-val"><strong id="sep-days-left">8</strong> DAYS REMAINING</span>
+      </div>
+      <div class="targets-meta-divider" aria-hidden="true"></div>
+      <div class="targets-meta-col">
+        <span class="targets-meta-label">SEPTEMBER ELAPSED</span>
+        <span class="targets-meta-val"><strong id="sep-month-elapsed">73%</strong></span>
+      </div>
+      <div class="targets-meta-divider" aria-hidden="true"></div>
+      <div class="targets-meta-col">
+        <span class="targets-meta-label">AGGREGATE PACE</span>
+        <span class="targets-meta-val"><strong id="sep-avg-progress">48%</strong> OVERALL</span>
+      </div>
+    </div>
+
+    <!-- Filing Folder Deck -->
+    <div class="folder-deck-instruction">
+      <span class="deck-hint-pill">[FILING SYSTEM // CLICK ANY TAB TO PULL OUT DOSSIER]</span>
+    </div>
+    <div class="folder-deck" id="targets-list">
+      <!-- Populated dynamically by JavaScript -->
+    </div>
+  </section>
+
+  <!-- 05: 5-YEAR STRATEGIC HORIZON -->
+  <section id="section-horizon">
+    <div class="editorial-heading">
+      <span>5-Year Strategic Horizon (2026 &ndash; 2031)</span>
+      <span class="heading-num">[05]</span>
+    </div>
+
+    <div class="horizon-section" id="horizon-list">
+      <!-- Populated by JavaScript -->
+    </div>
+  </section>
+
+  <!-- 06: THE BUCKET LIST -->
+  <section id="section-bucket">
+    <div class="editorial-heading">
+      <span>The Bucket List</span>
+      <span class="heading-num">[06]</span>
+    </div>
+
+    <div class="bucket-summary">
+      <span>Click any ambition to toggle completion. Saves locally in your browser.</span>
+      <strong id="bucket-count-badge">[0/0 COMPLETED]</strong>
+    </div>
+
+    <div class="bucket-items-list" id="bucket-list-container">
+      <!-- Populated by JavaScript -->
+    </div>
+  </section>
+
+  <!-- 07: WHAT I LEARNED TODAY (ULTRA-MINIMAL LOG) -->
+  <section id="section-daily" class="daily-section-wrap">
+    <div class="editorial-heading">
+      <span>What I Learned Today</span>
+      <span class="heading-num">[07]</span>
+    </div>
+
+    <!-- Ultra-Minimal Quick Composer -->
+    <div class="minimal-composer">
+      <form id="daily-log-form">
+        <input type="text" id="log-title-input" class="composer-title-input" placeholder="Title or core takeaway..." required>
+        <textarea id="log-text-input" class="composer-body-input" placeholder="What did you learn today? Notes, test results, or shift in thinking..." required></textarea>
+        
+        <div class="composer-bottom-bar">
+          <div class="composer-tags-wrapper">
+            <span class="composer-hash">#</span>
+            <input type="text" id="log-tags-input" class="composer-tags-input" placeholder="tags (e.g. ai, memory, gtm)">
+          </div>
+
+          <div class="composer-actions">
+            <button type="button" id="export-logs-btn" class="composer-export-btn" title="Export all logs as Markdown">Export .md</button>
+            <button type="submit" class="composer-submit-btn">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Quiet Minimal Tag Filter Line -->
+    <div class="minimal-tag-filter" id="tag-filter-bar" role="tablist" aria-label="Filter entries by tag">
+      <!-- Populated dynamically: Filter: All · #ai · #gtm · #systems -->
+    </div>
+
+    <!-- Minimal Log Feed -->
+    <div class="minimal-log-feed" id="log-feed" role="feed" aria-label="Archived learning logs">
+      <!-- Populated by JavaScript -->
+    </div>
+  </section>
+
+  <!-- 08: INSPIRATIONS & VISUAL ARCHIVE -->
+  <section id="section-inspirations">
+    <div class="editorial-heading">
+      <span>Visual Archive &bull; Aesthetic References</span>
+      <span class="heading-num">[08]</span>
+    </div>
+    <p style="font-size: 0.88rem; color: var(--ink-secondary); margin-bottom: 20px;">
+      Not just aesthetic references, but mental models: what I admire, study, and actively extract into how I build, think, and design.
+    </p>
+
+    <div class="collage-masonry">
+      <!-- Item 01: Tony Stark in Workshop -->
+      <figure class="collage-item" style="--tilt: -1.2deg;">
+        <div class="tape-strip tape-top"></div>
+        <div class="collage-img-wrap">
+          <img src="./assets/tony_stark_builder.png" alt="Tony Stark in his workshop welding the Iron Man gauntlet" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[REF 01]</span>
+          <strong>Hands-On Prototyping &bull; The Tinkerer's Garage</strong>
+          <span class="collage-note">The obsessive builder impulse: making complex things with my own hands late at night, bypassing red tape, and closing the gap between raw thought and working prototypes through rapid iteration.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Item 02: Think Before You Click -->
+      <figure class="collage-item" style="--tilt: 1.4deg;">
+        <div class="collage-img-wrap">
+          <img src="./assets/media_1790024069851.jpg" alt="Think Before You Click retro PC net art" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[REF 02]</span>
+          <strong>Deliberate Computing &bull; 90s Net Soul</strong>
+          <span class="collage-note">Intentional digital presence. Treating the computer as a thinking instrument rather than an attention trap. Questioning every input before letting it shape my mind.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Item 03: Richard Feynman at Blackboard -->
+      <figure class="collage-item" style="--tilt: 0.8deg;">
+        <div class="tape-strip tape-corner-left"></div>
+        <div class="collage-img-wrap">
+          <img src="./assets/feynman_blackboard.png" alt="Richard Feynman at the blackboard with quantum physics equations" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[REF 03]</span>
+          <strong>First Principles &bull; Total Understanding</strong>
+          <span class="collage-note">"What I cannot create, I do not understand." The relentless drive to derive problems from scratch, strip away dogma, and break complex systems down until they are self-evident.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Item 04: Patrick Jane over Chessboard -->
+      <figure class="collage-item" style="--tilt: -1.5deg;">
+        <div class="collage-img-wrap">
+          <img src="./assets/patrick_jane_chess.png" alt="Patrick Jane smiling over a chessboard with a glass of tea" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[REF 04]</span>
+          <strong>Observant Calm &bull; Strategic Game Sense</strong>
+          <span class="collage-note">Total perceptive presence. Reading between the lines, staying playful under high stakes, and anticipating moves five steps ahead with calm, unbothered composure.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Item 05: Koto Uniqode Cross-Stitch Pixel Identity -->
+      <figure class="collage-item" style="--tilt: 1deg;">
+        <div class="tape-strip tape-top"></div>
+        <div class="collage-img-wrap">
+          <img src="./assets/media_1790022241866.png" alt="Koto Uniqode woven cross-stitch pixel identity" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[REF 05]</span>
+          <strong>Tactile Grid &bull; Digital Craft</strong>
+          <span class="collage-note">Proof that code and pixel systems don't have to feel cold or sterile. Extracting that woven, tactile warmth into digital interfaces so software feels physically crafted.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Item 06: Hydraulic Mech Suit Technical Blueprint -->
+      <figure class="collage-item" style="--tilt: -0.8deg;">
+        <div class="tape-strip tape-corner-right"></div>
+        <div class="collage-img-wrap">
+          <img src="./assets/mech_blueprint.png" alt="Technical engineering sketch of heavy hydraulic mech suit" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[REF 06]</span>
+          <strong>Architectural Density &bull; Subsystem Design</strong>
+          <span class="collage-note">The discipline of rigorous engineering blueprints. Drafting every joint, hydraulic load, and data pipeline with total mechanical clarity before building.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Item 07: Moon & Turbulent Ocean Waves -->
+      <figure class="collage-item" style="--tilt: 1.2deg;">
+        <div class="collage-img-wrap">
+          <img src="./assets/media_1790022393513.jpg" alt="Vibrant golden full moon over turbulent stylized ocean waves" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[REF 07]</span>
+          <strong>Stillness Amid Noise &bull; Long-Term Compounding</strong>
+          <span class="collage-note">The quiet anchor. Maintaining razor-sharp focus and internal stillness while market hype and external waves churn beneath. Doing the deep, solitary work when the world is asleep.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div>
+      <strong>BOLD</strong> &mdash; 2026 &bull; India
+    </div>
+    <div>
+      <span>HELVETICA &bull; IBM PLEX MONO &bull; WHITE CANVAS</span>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
