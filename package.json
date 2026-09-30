@@ -1,12 +1,11 @@
 {
   "name": "personal-website",
-  "module": "index.ts",
-  "type": "module",
+  "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "dev": "bun run dev-server.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^7"
   }
 }
