@@ -2,9 +2,11 @@
   "name": "personal-website",
   "version": "1.0.0",
   "private": true,
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "bun run scripts/dev-server.ts",
-    "build": "echo 'Static site ready'"
+    "build": "echo 'Build complete'"
   },
   "devDependencies": {
     "@types/bun": "latest"
