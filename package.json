@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "bun run dev-server.ts"
+    "dev": "bun run scripts/dev-server.ts",
+    "build": "echo 'Static site ready'"
   },
   "devDependencies": {
     "@types/bun": "latest"

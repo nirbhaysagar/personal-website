@@ -12,7 +12,8 @@ Bun.serve({
       pathname = "/index.html";
     }
 
-    const filePath = import.meta.dir + pathname;
+    const projectRoot = import.meta.dir + "/..";
+    const filePath = projectRoot + pathname;
     const file = Bun.file(filePath);
 
     if (await file.exists()) {

@@ -1,2 +1,4 @@
-server.ts
+scripts/
+*.ts
 dev-server.ts
+server.ts
