@@ -2,6 +2,18 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
+// Statically referenced so @vercel/nft bundles index.html with the function
+let indexHtml = '';
+try {
+  indexHtml = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+} catch (e1) {
+  try {
+    indexHtml = fs.readFileSync(path.join(process.cwd(), 'index.html'), 'utf8');
+  } catch (e2) {
+    console.error('Failed to preload index.html:', e2);
+  }
+}
+
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -17,42 +29,71 @@ const MIME_TYPES = {
   '.ttf': 'font/ttf'
 };
 
-function handler(req, res) {
-  let reqPath = (req.url || '/').split('?')[0];
-  if (reqPath === '/' || reqPath === '') {
-    reqPath = '/index.html';
+function resolveFile(rawPath) {
+  let safePath = path.normalize(rawPath).replace(/^(\.\.[\/\\])+/, '');
+  while (safePath.startsWith('/') || safePath.startsWith('\\')) {
+    safePath = safePath.slice(1);
   }
 
-  // Prevent directory traversal
-  const safePath = path.normalize(reqPath).replace(/^(\.\.[\/\\])+/, '');
-  const filePath = path.join(__dirname, safePath);
-  const ext = path.extname(filePath).toLowerCase();
+  const searchDirs = [
+    __dirname,
+    process.cwd(),
+    path.join(__dirname, '..'),
+    path.resolve('.')
+  ];
 
-  fs.readFile(filePath, (err, content) => {
-    if (err) {
-      if (err.code === 'ENOENT') {
-        // Fallback to index.html
-        fs.readFile(path.join(__dirname, 'index.html'), (e, indexContent) => {
-          if (e) {
-            res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-            res.end('404 Not Found');
-          } else {
-            res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-            res.end(indexContent);
-          }
-        });
-      } else {
-        res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
-        res.end(`Internal Server Error: ${err.code}`);
+  for (const dir of searchDirs) {
+    const full = path.join(dir, safePath);
+    try {
+      if (fs.existsSync(full) && fs.statSync(full).isFile()) {
+        return full;
       }
-    } else {
+    } catch (_) {}
+  }
+  return null;
+}
+
+function handler(req, res) {
+  let reqPath = (req.url || '/').split('?')[0];
+
+  // Route root and index directly
+  if (reqPath === '/' || reqPath === '' || reqPath === '/index.html') {
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'public, max-age=0, must-revalidate'
+    });
+    return res.end(indexHtml);
+  }
+
+  // Look for static file
+  const fullPath = resolveFile(reqPath);
+  if (fullPath) {
+    const ext = path.extname(fullPath).toLowerCase();
+    fs.readFile(fullPath, (err, content) => {
+      if (err) {
+        res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+        return res.end(`Server Error: ${err.code}`);
+      }
       res.writeHead(200, {
         'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
-        'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=31536000, immutable'
+        'Cache-Control': 'public, max-age=31536000, immutable'
       });
       res.end(content);
-    }
-  });
+    });
+    return;
+  }
+
+  // SPA fallback: return indexHtml if not found
+  if (indexHtml) {
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'public, max-age=0, must-revalidate'
+    });
+    return res.end(indexHtml);
+  }
+
+  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+  res.end('404 Not Found');
 }
 
 const server = http.createServer(handler);
