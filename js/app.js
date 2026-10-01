@@ -13,17 +13,16 @@ const STORAGE_KEYS = {
 
 // Initialize milestone states from localStorage if previously stored
 const savedMilestones = loadStored(STORAGE_KEYS.TARGET_MILESTONES, {});
-if (initialData.septemberTargets) {
-  initialData.septemberTargets.forEach(t => {
-    if (t.milestones) {
-      t.milestones.forEach(m => {
-        if (savedMilestones[m.id] !== undefined) {
-          m.completed = savedMilestones[m.id];
-        }
-      });
-    }
-  });
-}
+const targetsSource = initialData.octoberTargets || initialData.septemberTargets || [];
+targetsSource.forEach(t => {
+  if (t.milestones) {
+    t.milestones.forEach(m => {
+      if (savedMilestones[m.id] !== undefined) {
+        m.completed = savedMilestones[m.id];
+      }
+    });
+  }
+});
 
 function normalizeDailyLogs(logs) {
   return (logs || []).map(l => {
@@ -48,14 +47,16 @@ function normalizeDailyLogs(logs) {
 let state = {
   profile: initialData.profile,
   projects: initialData.projects,
-  septemberTargets: initialData.septemberTargets,
+  targets: targetsSource,
+  octoberTargets: targetsSource,
+  get septemberTargets() { return this.targets; },
   fiveYearHorizon: initialData.fiveYearHorizon,
   bucketList: loadStored(STORAGE_KEYS.BUCKET_LIST, initialData.bucketList),
   dailyLogs: normalizeDailyLogs(loadStored(STORAGE_KEYS.DAILY_LOGS, initialData.dailyLogs)),
   activeLogTag: 'ALL'
 };
 
-let activePulledFolderId = 'target-sep-05'; // Lumen AI memory spec opened by default
+let activePulledFolderId = targetsSource.find(t => t.id.includes('05'))?.id || targetsSource[0]?.id; // Lumen AI memory spec opened by default
 
 function loadStored(key, fallback) {
   try {
@@ -80,7 +81,7 @@ function saveStored(key, value) {
 // ----------------------------------------------------------------------------
 
 function renderTactileArtifact(t, idx) {
-  if (t.id === 'target-sep-05') {
+  if (t.id.includes('05') || t.id.includes('lum')) {
     // 1. Lumen AI Memory: Cobalt Blue Spiral Notebook Sheet (Reference 4)
     return `
       <div class="artifact-spiral-sheet">
@@ -102,12 +103,12 @@ function renderTactileArtifact(t, idx) {
         </div>
         <div class="spiral-tier-block">
           <span class="spiral-tier-label">TIER 3 // VECTOR RETRIEVAL:</span>
-          PostgreSQL + pgvector with HNSW index. Cosine distance query with sub-25ms response.
+          PostgreSQL + pgvector with HNSW index. Sub-18ms vector recall on 100k embeddings.
         </div>
         <span class="spiral-hand-note">* HNSW recall 99.2% on 100k test memory vectors &bull; latency &lt; 20ms</span>
       </div>
     `;
-  } else if (t.id === 'target-sep-01') {
+  } else if (t.id.includes('01') || t.id.includes('orb-01')) {
     // 2. Orbit User Acquisition: Lanyard ID Badge & Barcode (Reference 4)
     return `
       <div class="artifact-badge-card">
@@ -119,8 +120,8 @@ function renderTactileArtifact(t, idx) {
         <div class="badge-barcode">||| | |||| || ||| |||||</div>
         <div class="badge-details">
           <div><strong>OPERATOR:</strong> BOLD (CMO)</div>
-          <div><strong>MISSION:</strong> 400 ACTIVE D2C STORES</div>
-          <div><strong>CHANNEL:</strong> SHOPIFY + DIRECT FOUNDER DM</div>
+          <div><strong>MISSION:</strong> 500 ACTIVE D2C STORES</div>
+          <div><strong>CHANNEL:</strong> SHOPIFY PLUS + FOUNDER OUTREACH</div>
         </div>
         <svg class="badge-runner-doodle" viewBox="0 0 80 45" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round">
           <circle cx="20" cy="12" r="5"/>
@@ -130,7 +131,7 @@ function renderTactileArtifact(t, idx) {
         </svg>
       </div>
     `;
-  } else if (t.id === 'target-sep-02') {
+  } else if (t.id.includes('02') || t.id.includes('orb-02')) {
     // 3. Orbit Conversion: Graph Paper Memo & Funnel Sketch (Reference 2)
     return `
       <div class="artifact-graph-sheet">
@@ -144,32 +145,32 @@ function renderTactileArtifact(t, idx) {
           <span>100%</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 90px;">02. AUTH STORE:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 68%;"></div></div>
-          <span>68%</span>
+          <span style="min-width: 90px;">02. DEMO SANDBOX:</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 74%;"></div></div>
+          <span>74%</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 90px;">03. SETUP WIZARD:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 42%;"></div></div>
-          <span>42%</span>
+          <span style="min-width: 90px;">03. STORE CONNECT:</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 52%;"></div></div>
+          <span>52%</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 90px;">04. ACTIVE SYNC:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 28%;"></div></div>
-          <span>28%</span>
+          <span style="min-width: 90px;">04. ACTIVE REPORT:</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 35%;"></div></div>
+          <span>35%</span>
         </div>
         <span style="font-family: 'Caveat', cursive; font-size: 1.15rem; color: #2e5c38; display: block; margin-top: 10px;">
-          * Step 2 drop-off reduced by 14% after removing optional tax ID requirement!
+          * Interactive demo sandbox raised signup intent to 3.5%! Pushing for 5.0%.
         </span>
       </div>
     `;
-  } else if (t.id === 'target-sep-03') {
+  } else if (t.id.includes('03') || t.id.includes('dist')) {
     // 4. Distribution: Cassette Tape Card (Reference 1)
     return `
       <div class="artifact-cassette-card">
         <div class="cassette-body">
           <div class="cassette-label-strip">
-            Unheard tracks // AI systems logs
+            Technical build logs // AI systems
           </div>
           <div class="cassette-spools">
             <div class="spool-hole"></div>
@@ -177,7 +178,7 @@ function renderTactileArtifact(t, idx) {
             <div class="spool-hole"></div>
           </div>
           <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #bbb; text-align: center;">
-            3x Weekly Architecture Essays &bull; X Audience 114 &rarr; 300+
+            4x Weekly Architecture Breakdowns &bull; Target: 500+ Technical Builders
           </div>
         </div>
       </div>
@@ -198,9 +199,9 @@ function renderTactileArtifact(t, idx) {
         </div>
         <div style="font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.6; color: #333;">
           &bull; Multi-currency checkout precision: <strong>PASS (100%)</strong><br>
-          &bull; Discount code apportioning: <strong>PASS (0 error)</strong><br>
-          &bull; 50 simulated customer carts: <strong>SYNCED</strong><br>
-          &bull; Concurrent webhook load test: <strong>QUEUED</strong>
+          &bull; Idempotency deduplication ledger: <strong>ACTIVE (0 dupes)</strong><br>
+          &bull; 500-order concurrent burst test: <strong>PASS</strong><br>
+          &bull; 48-hour continuous sync soak: <strong>RUNNING</strong>
         </div>
         <div class="qa-stamp-circle">[QA INSPECTION // APPROVED]</div>
       </div>
@@ -210,21 +211,25 @@ function renderTactileArtifact(t, idx) {
 
 function renderSeptemberTargets() {
   const container = document.getElementById('targets-list');
-  const daysLeftEl = document.getElementById('sep-days-left');
-  const monthElapsedEl = document.getElementById('sep-month-elapsed');
-  const avgProgressEl = document.getElementById('sep-avg-progress');
+  const daysLeftEl = document.getElementById('sep-days-left') || document.getElementById('target-days-left');
+  const monthElapsedEl = document.getElementById('sep-month-elapsed') || document.getElementById('target-month-elapsed');
+  const avgProgressEl = document.getElementById('sep-avg-progress') || document.getElementById('target-avg-progress');
 
   const now = new Date();
-  const sepTotalDays = 30;
-  const currentDay = Math.min(Math.max(now.getDate(), 1), 30);
-  const daysLeft = Math.max(0, sepTotalDays - currentDay);
-  const elapsedPercent = Math.round((currentDay / sepTotalDays) * 100);
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const currentDay = Math.min(Math.max(now.getDate(), 1), daysInMonth);
+  const daysLeft = Math.max(0, daysInMonth - currentDay);
+  const elapsedPercent = Math.round((currentDay / daysInMonth) * 100);
 
-  const totalProg = state.septemberTargets.reduce((acc, t) => {
+  const targets = state.octoberTargets || state.targets || state.septemberTargets || [];
+
+  const totalProg = targets.reduce((acc, t) => {
     const pct = Math.min(100, Math.round((t.currentValue / t.targetValue) * 100));
     return acc + pct;
   }, 0);
-  const avgProgress = Math.round(totalProg / state.septemberTargets.length);
+  const avgProgress = targets.length > 0 ? Math.round(totalProg / targets.length) : 0;
 
   if (daysLeftEl) daysLeftEl.textContent = `${daysLeft}`;
   if (monthElapsedEl) monthElapsedEl.textContent = `${elapsedPercent}%`;
@@ -240,9 +245,9 @@ function renderSeptemberTargets() {
     'calc(16px + 72%)'
   ];
 
-  container.innerHTML = state.septemberTargets.map((t, idx) => {
+  container.innerHTML = targets.map((t, idx) => {
     const pct = Math.min(100, Math.round((t.currentValue / t.targetValue) * 100));
-    const formattedDeadline = t.deadline ? t.deadline.replace('2026-', 'Sep ') : 'Sep 30';
+    const formattedDeadline = t.deadline ? t.deadline.replace('2026-10-', 'Oct ').replace('2026-09-', 'Sep ') : 'Oct 31';
     const isPulled = activePulledFolderId === t.id;
     const tabOffset = tabOffsets[idx] || '16px';
 
@@ -449,7 +454,8 @@ function renderSeptemberTargets() {
       e.stopPropagation();
       const targetId = item.getAttribute('data-target-id');
       const milestoneId = item.getAttribute('data-milestone-id');
-      const target = state.septemberTargets.find(t => t.id === targetId);
+      const targets = state.octoberTargets || state.targets || state.septemberTargets || [];
+      const target = targets.find(t => t.id === targetId);
       if (target && target.milestones) {
         const milestone = target.milestones.find(m => m.id === milestoneId);
         if (milestone) {
@@ -875,9 +881,17 @@ function updateHeroCadenceGraphs() {
   if (yearDaysLeftEl) yearDaysLeftEl.textContent = `${yearDaysLeft}`;
   if (yearPctLeftEl) yearPctLeftEl.textContent = `${yearPctRemaining}%`;
 
+  const monthName = now.toLocaleString('en-US', { month: 'short' }).toUpperCase();
   if (dateStrEl) {
-    const monthName = now.toLocaleString('en-US', { month: 'short' }).toUpperCase();
     dateStrEl.textContent = `${monthName} ${year} • DAY ${dayOfYear} / ${totalDaysInYear}`;
+  }
+  const monthLabelEl = document.getElementById('cadence-month-label');
+  if (monthLabelEl) {
+    monthLabelEl.textContent = `MONTH // ${monthName}`;
+  }
+  const monthEndScaleEl = document.getElementById('cadence-month-end-scale');
+  if (monthEndScaleEl) {
+    monthEndScaleEl.textContent = `${daysInMonth}`;
   }
 
   // Update Month Gauge

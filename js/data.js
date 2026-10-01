@@ -20,7 +20,7 @@ export const initialData = {
     ],
     currentFocus: {
       headline: "Scaling Orbit user acquisition and architecting AI memory systems (Lumen).",
-      details: "Focusing daily execution on Orbit's September growth push (GTM, content, product validation, e-commerce positioning), while studying systems engineering and AI memory models.",
+      details: "Focusing daily execution on Orbit's October growth push (GTM, content, product validation, e-commerce positioning), while studying systems engineering and AI memory models.",
       activeCadence: "Orbit Marketing & GTM → Merchant Journey Testing → Lumen Architecture → Technical Study & Systems Review"
     }
   },
@@ -32,12 +32,12 @@ export const initialData = {
       tagline: "E-commerce growth & merchant intelligence platform",
       category: "GROWTH & PRODUCT",
       status: "ACTIVE — BUILDING",
-      progress: 65,
+      progress: 72,
       role: "CMO / Marketing & Growth",
       tech: ["GTM", "Product Positioning", "User Acquisition", "Content", "E-commerce Integration"],
-      description: "Leading marketing, growth, and positioning for Orbit. Conducting user research, merchant journey testing, and driving user acquisition toward September targets.",
+      description: "Leading marketing, growth, and positioning for Orbit. Conducting user research, merchant journey testing, and driving user acquisition toward October targets.",
       link: "#",
-      metrics: "Target: 300–500 Users — 5% Conversion Goal"
+      metrics: "Target: 500 Users — 5% Conversion Goal"
     },
     {
       id: "proj-lumen",
@@ -45,122 +45,122 @@ export const initialData = {
       tagline: "AI memory engine & personal second-brain architecture",
       category: "AI & RESEARCH",
       status: "ARCHITECTURE — PROTOTYPE",
-      progress: 35,
+      progress: 48,
       role: "Creator & Systems Architect",
       tech: ["AI Memory", "RAG", "PostgreSQL", "pgvector", "Supabase", "Prisma", "TypeScript"],
       description: "Researching and prototyping an AI memory system with hierarchical storage: raw journal streams, canonical memory, and abstract knowledge retrieval for autonomous agents.",
       link: "#",
-      metrics: "Architecture Design Phase — Vector Retrieval Pipeline"
+      metrics: "Architecture Prototype Phase — Vector Retrieval Pipeline"
     }
   ],
 
-  septemberTargets: [
+  octoberTargets: [
     {
-      id: "target-sep-01",
+      id: "target-oct-01",
       code: "SPEC // ORB-01",
       theme: "folder-manila",
       tabPos: 1,
       tabTitle: "[01] ORBIT ACQUISITION",
-      title: "Orbit User Acquisition & Merchant Outreach",
+      title: "Orbit User Acquisition & Merchant Scale",
       category: "ACQUISITION & GTM",
-      targetValue: 400,
-      currentValue: 120,
+      targetValue: 500,
+      currentValue: 240,
       unit: "users",
       status: "IN PROGRESS",
-      deadline: "2026-09-30",
-      notes: "Push toward the 300–500 active user milestone through direct merchant onboarding and founder networks.",
-      mission: "Systematically scale Orbit's initial merchant base from early closed beta to hundreds of active daily ecommerce storefronts. Build high-converting distribution loops directly with D2C operators in India & US.",
+      deadline: "2026-10-31",
+      notes: "Push toward the 500 active merchant store milestone through direct brand onboarding and ecosystem distribution.",
+      mission: "Systematically scale Orbit's merchant base across Shopify and WooCommerce stores. Establish repeatable founder-to-founder distribution channels and high-converting acquisition loops in US & India.",
       milestones: [
-        { id: "m-orb01-1", text: "Curate verified outreach ledger of 120 Shopify & WooCommerce store owners", completed: true },
-        { id: "m-orb01-2", text: "Deploy self-serve merchant onboarding v1 with zero-friction store connection", completed: true },
-        { id: "m-orb01-3", text: "Conduct 15 white-glove onboarding sessions to capture customer friction points", completed: false },
-        { id: "m-orb01-4", text: "Launch referral loop offering high-tier analytics for merchant-to-merchant invites", completed: false }
+        { id: "m-orb01-1", text: "Curate verified outreach ledger of 250 high-growth Shopify Plus store operators", completed: true },
+        { id: "m-orb01-2", text: "Deploy self-serve merchant onboarding v2 with zero-friction store connection", completed: true },
+        { id: "m-orb01-3", text: "Conduct 20 white-glove onboarding and retention interviews with store founders", completed: false },
+        { id: "m-orb01-4", text: "Launch merchant referral flywheel offering analytics upgrades for store invites", completed: false }
       ],
-      tactileMemo: "Need to confirm Shopify App Store API permission scopes before Friday rollout. Founder outreach converts at ~22%!",
+      tactileMemo: "Direct merchant outreach via Twitter/X and LinkedIn is converting at ~24%. Focus on high-GMV apparel and D2C brands!",
       techDetails: {
-        focus: "Storefront API & Webhook Ingestion",
-        metrics: "400 Active Merchant Stores • < 3 min Onboarding Time",
+        focus: "Storefront API, Automated Ingestion & Growth Loops",
+        metrics: "500 Active Merchant Stores • < 2 min Store Connection",
         deliverable: "Automated merchant ingestion queue & live referral ledger"
       }
     },
     {
-      id: "target-sep-02",
+      id: "target-oct-02",
       code: "SPEC // ORB-02",
       theme: "folder-sage",
       tabPos: 2,
       tabTitle: "[02] CONVERSION FUNNEL",
-      title: "Orbit Conversion Rate Optimization",
+      title: "Orbit Conversion Funnel & Retention Engine",
       category: "GROWTH & CRO",
       targetValue: 5.0,
-      currentValue: 2.8,
+      currentValue: 3.5,
       unit: "%",
       status: "OPTIMIZING",
-      deadline: "2026-09-30",
-      notes: "Targeting 5% visitor-to-active conversion via refined merchant onboarding.",
-      mission: "Eliminate cognitive friction and dropped sessions across the initial merchant setup wizard. Transform complex ecommerce integration into a 3-step, delightful setup flow.",
+      deadline: "2026-10-31",
+      notes: "Targeting 5% visitor-to-active conversion via streamlined merchant setup and live demo sandbox.",
+      mission: "Eliminate drop-off across the onboarding funnel. Ensure every merchant reaches their first 'aha moment' (discovering actionable checkout drop-off insights) within 90 seconds of connection.",
       milestones: [
-        { id: "m-orb02-1", text: "Map full PostHog event instrumentation across onboarding steps 1 through 4", completed: true },
-        { id: "m-orb02-2", text: "Prune 3 superfluous form inputs from initial merchant profile setup", completed: true },
-        { id: "m-orb02-3", text: "Implement interactive instant preview demo store with mock catalog data", completed: false },
-        { id: "m-orb02-4", text: "A/B test value proposition headlines: 'Revenue Intelligence' vs 'Checkout Insights'", completed: false }
+        { id: "m-orb02-1", text: "Map PostHog funnel analytics across every step from landing to first report", completed: true },
+        { id: "m-orb02-2", text: "Deploy interactive demo sandbox with sample store data on homepage", completed: true },
+        { id: "m-orb02-3", text: "Automate daily intelligence digest via WhatsApp and email for store owners", completed: false },
+        { id: "m-orb02-4", text: "A/B test pricing copy: 'Revenue Intelligence' vs 'Checkout Recovery'", completed: false }
       ],
-      tactileMemo: "Step 2 drop-off dropped by 14% after removing optional tax ID requirement. Keep it lean!",
+      tactileMemo: "Interactive sandbox demo increased signup intent by 18% in early user tests. Make it the hero CTA!",
       techDetails: {
-        focus: "PostHog Funnels & Interactive Demo Sandbox",
-        metrics: "5.0% Conversion Target (Current: 2.8%) • 45s Setup Time",
-        deliverable: "Streamlined 3-step onboarding flow with real-time feedback"
+        focus: "PostHog Funnel Tracking & Instant Demo Sandbox",
+        metrics: "5.0% Conversion Target (Current: 3.5%) • 45s Time-to-Value",
+        deliverable: "High-converting 3-step onboarding flow with real-time feedback"
       }
     },
     {
-      id: "target-sep-03",
+      id: "target-oct-03",
       code: "SPEC // DIST-01",
       theme: "folder-lavender",
       tabPos: 3,
       tabTitle: "[03] X / DISTRIBUTION",
-      title: "Audience Distribution & Technical Thought Leadership",
+      title: "Technical Thought Leadership & Audience Growth",
       category: "DISTRIBUTION",
-      targetValue: 300,
-      currentValue: 114,
+      targetValue: 500,
+      currentValue: 260,
       unit: "followers",
       status: "ACTIVE",
-      deadline: "2026-09-30",
-      notes: "Starting from 114; publishing insights on AI, growth, and building in public.",
-      mission: "Establish a high-density, technical distribution channel around AI memory architectures, ecommerce growth engineering, and raw build logs. Attract top-tier founders, builders, and collaborators.",
+      deadline: "2026-10-31",
+      notes: "Scaling from 114 to 500+ builders; publishing breakdowns on AI memory, systems, and growth engineering.",
+      mission: "Establish a high-signal technical presence around AI memory systems, distributed architecture, and startup growth. Attract ambitious founders, engineers, and collaborators.",
       milestones: [
-        { id: "m-dist01-1", text: "Lock in consistent 3x weekly publishing cadence on deep technical concepts", completed: true },
-        { id: "m-dist01-2", text: "Draft and publish deep-dive breakdown thread on hierarchical AI memory tiers", completed: false },
-        { id: "m-dist01-3", text: "Produce architectural diagrams comparing cosine vs dot product vector search", completed: false },
-        { id: "m-dist01-4", text: "Engage in 20+ substantive technical discussions in AI & systems developer circles", completed: false }
+        { id: "m-dist01-1", text: "Lock in consistent 4x weekly publishing schedule on engineering breakthroughs", completed: true },
+        { id: "m-dist01-2", text: "Publish deep architectural breakdown on 3-tier second-brain AI memory engines", completed: true },
+        { id: "m-dist01-3", text: "Release open-source interactive canvas playground for ecommerce journey modeling", completed: false },
+        { id: "m-dist01-4", text: "Host technical discussion on agent memory indexing and retrieval benchmarks", completed: false }
       ],
-      tactileMemo: "Audience grows when you show raw failure logs, benchmark numbers, and actual schema code, not generic advice.",
+      tactileMemo: "Audience grows fastest when sharing exact schema models, benchmarks, and production edge cases. Authenticity wins.",
       techDetails: {
-        focus: "Long-form Architecture Essays & Technical Diagrams",
-        metrics: "300 Engaged Technical Followers • 15+ Retweets / Deep Thread",
-        deliverable: "5 High-signal technical threads with custom blueprint visual diagrams"
+        focus: "Long-form Systems Essays & Interactive Architecture Diagrams",
+        metrics: "500 Engaged Technical Followers • 20+ Reposts per Deep Thread",
+        deliverable: "4 High-signal architectural essays with custom blueprint visuals"
       }
     },
     {
-      id: "target-sep-04",
+      id: "target-oct-04",
       code: "SPEC // QA-01",
       theme: "folder-ochre",
       tabPos: 4,
       tabTitle: "[04] MERCHANT QA",
-      title: "Orbit Merchant Journey & Checkout QA Matrix",
+      title: "Orbit Real-Time Webhooks & Multi-Currency Engine QA",
       category: "PRODUCT QA",
       targetValue: 100,
-      currentValue: 70,
+      currentValue: 85,
       unit: "%",
       status: "TESTING",
-      deadline: "2026-09-26",
-      notes: "Verify checkout final amounts, order flow, and Orbit ↔ e-commerce synchronization.",
-      mission: "Ensure bulletproof data fidelity between merchant ecommerce engines (Shopify/Woo) and Orbit's intelligence pipeline. Zero discrepancy in order totals, discount line items, and multi-currency conversions.",
+      deadline: "2026-10-25",
+      notes: "Verify zero discrepancy in order totals, discount code apportioning, and high-frequency webhook sync.",
+      mission: "Guarantee rock-solid data integrity between merchant ecommerce stores and Orbit's analytics pipeline. Handle high-volume sales events with zero dropped webhooks or calculation discrepancies.",
       milestones: [
-        { id: "m-qa01-1", text: "Build automated test suite for multi-currency conversion calculations", completed: true },
-        { id: "m-qa01-2", text: "Audit discount code edge cases (tiered promotions, stacked percentage vouchers)", completed: true },
-        { id: "m-qa01-3", text: "Run end-to-end checkout synchronization across 50 simulated customer carts", completed: true },
-        { id: "m-qa01-4", text: "Stress-test webhook ingestion queue against 100 concurrent order spikes", completed: false }
+        { id: "m-qa01-1", text: "Build automated test suite for multi-currency currency conversions and tax rates", completed: true },
+        { id: "m-qa01-2", text: "Audit complex discount edge cases (stacked coupon codes and tiered cart thresholds)", completed: true },
+        { id: "m-qa01-3", text: "Implement idempotency key tracking to eliminate duplicate webhook ingestion", completed: true },
+        { id: "m-qa01-4", text: "Run 48-hour continuous stress test simulating 500 concurrent order events", completed: false }
       ],
-      tactileMemo: "Found edge case: Shopify line-item refund webhooks don't always include tax apportioning. Patch ready.",
+      tactileMemo: "Idempotency ledger completely eliminated duplicate order records during webhook retries. 0 error rate!",
       techDetails: {
         focus: "Webhook Replay Harness & Discrepancy Auditor",
         metrics: "100% Test Suite Coverage • 0 Discrepancy Tolerance",
@@ -168,34 +168,38 @@ export const initialData = {
       }
     },
     {
-      id: "target-sep-05",
+      id: "target-oct-05",
       code: "SPEC // LUM-01",
       theme: "folder-slate",
       tabPos: 5,
       tabTitle: "[05] LUMEN AI SPEC",
-      title: "Lumen AI Memory Architecture Specification",
+      title: "Lumen AI Memory Prototype & TypeScript SDK",
       category: "AI & SYSTEMS",
       targetValue: 100,
-      currentValue: 45,
+      currentValue: 60,
       unit: "%",
       status: "PROTOTYPING",
-      deadline: "2026-09-30",
-      notes: "Document schema for raw storage, canonical memory, and vector semantic retrieval.",
-      mission: "Architect and formalize the technical specification for Lumen: a 3-tier memory engine for AI agents that bridges raw chronological experience, consolidated canonical profiles, and semantic vector retrieval.",
+      deadline: "2026-10-31",
+      notes: "Deploy functional prototype of 3-tier memory engine with sub-30ms vector recall for personal agent use.",
+      mission: "Build and benchmark the working prototype of Lumen (Sheldon): an autonomous second-brain memory engine that combines episodic chronological streams, canonical profile synthesis, and HNSW vector search.",
       milestones: [
-        { id: "m-lum01-1", text: "Specify 3-tier memory storage schema (Raw Event Stream → Canonical Synthesis → Vector)", completed: true },
-        { id: "m-lum01-2", text: "Benchmark pgvector HNSW vs IVFFlat indexing latency on 100,000 synthetic memories", completed: true },
-        { id: "m-lum01-3", text: "Prototype consolidation worker that summarizes weekly conversation clusters", completed: false },
-        { id: "m-lum01-4", text: "Publish interactive schema playground and open-source architecture document", completed: false }
+        { id: "m-lum01-1", text: "Formalize 3-tier memory schema in PostgreSQL with pgvector extension", completed: true },
+        { id: "m-lum01-2", text: "Benchmark HNSW indexing: achieved 18ms latency with 99.2% recall on 100k vectors", completed: true },
+        { id: "m-lum01-3", text: "Prototype consolidation worker that extracts recurring beliefs and preferences", completed: true },
+        { id: "m-lum01-4", text: "Publish TypeScript SDK and interactive browser visualizer for memory graphs", completed: false }
       ],
       tactileMemo: "HNSW index gives ~18ms lookup at 99% recall vs IVFFlat's 34ms! Perfect for real-time conversation agents.",
       techDetails: {
         focus: "Hierarchical RAG, PostgreSQL / pgvector, TypeScript SDK",
-        metrics: "Sub-50ms Vector Retrieval • 3-Tier Storage Hierarchy",
-        deliverable: "Open-source architectural whitepaper + interactive memory playground"
+        metrics: "Sub-30ms Vector Retrieval • 3-Tier Storage Hierarchy",
+        deliverable: "Functional memory prototype + interactive memory playground"
       }
     }
   ],
+  // Backwards compatibility alias
+  get septemberTargets() {
+    return this.octoberTargets;
+  },
 
   fiveYearHorizon: [
     {
@@ -265,6 +269,13 @@ export const initialData = {
   ],
 
   dailyLogs: [
+    {
+      id: "log-104",
+      date: "2026-10-01",
+      title: "Transitioning from heuristic search to hierarchical graph memory",
+      learned: "Flat vector retrieval falls apart when context exceeds 50 sessions. By clustering episodic logs into canonical knowledge nodes at ingestion time, recall accuracy jumps from 72% to 94% with half the token overhead.",
+      tags: ["ai", "memory", "systems"]
+    },
     {
       id: "log-101",
       date: "2026-09-21",
