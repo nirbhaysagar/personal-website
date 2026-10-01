@@ -2620,43 +2620,155 @@ body {
 html[data-theme="dark"] {
   --bg-canvas: #0c0e12;
   --bg-paper: #141720;
-  --bg-subtle: #1b202c;
+  --bg-subtle: #1c222e;
   --ink-primary: #f2f5fa;
-  --ink-secondary: #b2bac8;
-  --ink-muted: #6e798e;
-  --rule-strong: #333c4d;
-  --rule-light: #202632;
-  --rule-dashed: #2d3545;
-  --tape-red: #d32f2f;
+  --ink-secondary: #a7b4c9;
+  --ink-muted: #728198;
+  --rule-strong: #384357;
+  --rule-light: #222a38;
+  --rule-dashed: #2e384b;
+  --tape-red: #e53935;
   --tape-text: #ffffff;
+  background-color: #0c0e12;
+  color: #f2f5fa;
 }
 
 html[data-theme="dark"] body {
-  background-color: var(--bg-canvas);
+  background-color: #0c0e12;
+  color: #f2f5fa;
+}
+
+/* Header & Controls in Dark Mode */
+html[data-theme="dark"] .site-header {
+  border-bottom-color: var(--rule-strong);
+}
+
+html[data-theme="dark"] .header-meta-bar {
+  border-bottom-color: var(--rule-light);
+  color: var(--ink-muted);
+}
+
+html[data-theme="dark"] .theme-toggle-btn {
+  background: #181d27;
+  border-color: #384357;
+  color: #f2f5fa;
+}
+
+html[data-theme="dark"] .theme-toggle-btn:hover {
+  background: #232a38;
+  border-color: #63738e;
+  box-shadow: 2px 2px 0px #384357;
+}
+
+/* Hero Section in Dark Mode */
+html[data-theme="dark"] .hero-title {
+  color: #f2f5fa;
+}
+
+html[data-theme="dark"] .hero-tagline {
+  color: var(--ink-secondary);
+}
+
+html[data-theme="dark"] .hero-bio {
+  color: var(--ink-secondary);
+}
+
+html[data-theme="dark"] .hero-bio li::before {
+  color: #f2f5fa;
+}
+
+html[data-theme="dark"] .quick-stats-strip {
+  border-top-color: var(--rule-light);
+}
+
+html[data-theme="dark"] .stat-item strong {
   color: var(--ink-primary);
+}
+
+html[data-theme="dark"] .stat-item span {
+  color: var(--ink-muted);
 }
 
 /* Hero Cadence Monitor in Dark Mode */
 html[data-theme="dark"] .hero-cadence-aside {
-  background: #131720;
-  border-color: #333c4d;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  background: #141720;
+  border-color: #384357;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
 }
 
 html[data-theme="dark"] .cadence-aside-header {
-  border-bottom-color: #232a38;
+  border-bottom-color: #222a38;
+}
+
+html[data-theme="dark"] .cadence-aside-badge {
+  color: #f2f5fa;
 }
 
 html[data-theme="dark"] .cadence-channel-header {
-  color: var(--ink-secondary);
+  color: #a7b4c9;
 }
 
 html[data-theme="dark"] .cadence-gauge-track {
-  background: #202735;
-  border-color: #333c4d;
+  background: #1c222e;
+  border-color: #384357;
+}
+
+html[data-theme="dark"] .cadence-gauge-fill {
+  background: #f2f5fa;
 }
 
 html[data-theme="dark"] .cadence-gauge-scale {
+  color: #728198;
+}
+
+html[data-theme="dark"] .cadence-stat-chip {
+  background: #1c222e;
+  border-color: #384357;
+  color: #a7b4c9;
+}
+
+/* Sketchbook / Ideation Centerpiece in Dark Mode */
+html[data-theme="dark"] .central-photo-frame {
+  background: #181d28;
+  border-color: #384357;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .sticky-note {
+  background: #252213;
+  border-color: #4a401c;
+  box-shadow: 4px 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .sticky-note-header {
+  color: #e5c358;
+  border-bottom-color: rgba(229, 195, 88, 0.3);
+}
+
+html[data-theme="dark"] .sticky-note-text {
+  color: #faecc0;
+}
+
+html[data-theme="dark"] .handwritten-label {
+  color: #7da5fb;
+}
+
+html[data-theme="dark"] .washi-tape-top,
+html[data-theme="dark"] .washi-tape-bottom {
+  background: rgba(140, 125, 95, 0.45);
+}
+
+/* Section Headings in Dark Mode */
+html[data-theme="dark"] .editorial-heading {
+  border-bottom-color: var(--rule-strong);
+}
+
+html[data-theme="dark"] .editorial-heading > span:first-child,
+html[data-theme="dark"] .heading-num {
+  color: var(--ink-primary);
+}
+
+html[data-theme="dark"] .heading-sub {
   color: var(--ink-muted);
 }
 
@@ -2676,9 +2788,10 @@ html[data-theme="dark"] .nav-item:hover {
 html[data-theme="dark"] .polymath-quote-card {
   background: var(--bg-paper);
   border-left-color: var(--tape-red);
+  color: var(--ink-primary);
 }
 
-/* What I am Doing Tabs */
+/* Section 03: Projects & Tabs in Dark Mode */
 html[data-theme="dark"] .folder-tabs-header {
   border-bottom-color: var(--rule-strong);
 }
@@ -2700,11 +2813,14 @@ html[data-theme="dark"] .folder-content {
   background: var(--bg-canvas);
 }
 
-/* Project Cards */
 html[data-theme="dark"] .project-row {
   background: var(--bg-paper);
   border-color: var(--rule-strong);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"] .project-row:hover {
+  background: #191e2b;
 }
 
 html[data-theme="dark"] .tag-pill {
@@ -2723,66 +2839,169 @@ html[data-theme="dark"] .retro-progress-box {
   border-color: var(--rule-strong);
 }
 
-/* Section 04: Folder Deck Dark Tints */
+/* ==========================================================================
+   Section 04: Folder Deck Dark Tints & Components
+   ========================================================================== */
 html[data-theme="dark"] .targets-meta-strip {
   border-color: var(--rule-strong);
   background: var(--bg-paper);
 }
 
 html[data-theme="dark"] .folder-item {
-  border-color: #333c4d;
+  border-color: #384357;
+  background: #141720;
 }
 
 html[data-theme="dark"] .folder-lip {
-  border-color: #333c4d;
+  border-color: #384357;
 }
 
-html[data-theme="dark"] .folder-dossier-inner {
-  background: var(--bg-paper);
-  border-color: #333c4d;
-  color: var(--ink-primary);
+html[data-theme="dark"] .folder-lip-title {
+  color: #f2f5fa;
 }
 
-html[data-theme="dark"] .folder-manila {
-  --folder-body: #17150f;
-  --folder-lip: #2d2614;
-  --folder-border: #4d4022;
+html[data-theme="dark"] .folder-code-badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f2f5fa;
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
-html[data-theme="dark"] .folder-sage {
-  --folder-body: #0e1712;
-  --folder-lip: #143020;
-  --folder-border: #215436;
+html[data-theme="dark"] .folder-pull-btn {
+  background: #1c222e;
+  border-color: #384357;
+  color: #f2f5fa;
 }
 
-html[data-theme="dark"] .folder-lavender {
-  --folder-body: #15111d;
-  --folder-lip: #2b1f3e;
-  --folder-border: #473268;
+html[data-theme="dark"] .folder-pull-btn:hover {
+  background: #252d3d;
+  border-color: #556682;
 }
 
-html[data-theme="dark"] .folder-ochre {
-  --folder-body: #18110b;
-  --folder-lip: #362010;
-  --folder-border: #5a341a;
+html[data-theme="dark"] .folder-mini-track {
+  background: #1c222e;
+  border-color: #384357;
 }
 
-html[data-theme="dark"] .folder-slate {
-  --folder-body: #0e1522;
-  --folder-lip: #152945;
-  --folder-border: #234574;
+html[data-theme="dark"] .folder-mini-fill {
+  background: #f2f5fa;
+}
+
+html[data-theme="dark"] .folder-mini-pct {
+  color: #f2f5fa;
+}
+
+/* Expanded Dossier Interior */
+html[data-theme="dark"] .folder-dossier {
+  background: #141720;
+}
+
+html[data-theme="dark"] .dossier-paper-sheet {
+  background: #141720;
+  border-color: #384357;
+  color: #f2f5fa;
+}
+
+html[data-theme="dark"] .dossier-header-bar {
+  border-bottom-color: #384357;
+}
+
+html[data-theme="dark"] .dossier-title {
+  color: #f2f5fa;
+}
+
+html[data-theme="dark"] .dossier-check-item {
+  border-color: #242c3b;
+  background: #181d27;
+}
+
+html[data-theme="dark"] .dossier-check-item:hover {
+  background: #202735;
+  border-color: #384357;
+}
+
+html[data-theme="dark"] .dossier-check-box {
+  background: #141720;
+  border-color: #384357;
+  color: #f2f5fa;
+}
+
+html[data-theme="dark"] .dossier-check-item.completed .dossier-check-box {
+  background: #f2f5fa;
+  color: #0c0e12;
+}
+
+html[data-theme="dark"] .dossier-check-text {
+  color: #d8e2f0;
+}
+
+html[data-theme="dark"] .dossier-metric-deck {
+  background: #161b24;
+  border-color: #384357;
+}
+
+html[data-theme="dark"] .dossier-pct-large {
+  color: #f2f5fa;
+}
+
+html[data-theme="dark"] .spec-meter-track {
+  background: #141720;
+  border-color: #384357;
+}
+
+html[data-theme="dark"] .spec-tick {
+  background: #252d3d;
+}
+
+html[data-theme="dark"] .spec-tick.filled {
+  background: #f2f5fa;
+}
+
+/* Saturated Folder Colorways in Dark Mode */
+html[data-theme="dark"] .folder-item.folder-manila {
+  background: #19160e;
+  --folder-bg: #19160e;
+  --folder-lip-bg: #2b2311;
+  --folder-border: #4d3d19;
+}
+
+html[data-theme="dark"] .folder-item.folder-sage {
+  background: #0d1712;
+  --folder-bg: #0d1712;
+  --folder-lip-bg: #132a1e;
+  --folder-border: #1e4d34;
+}
+
+html[data-theme="dark"] .folder-item.folder-lavender {
+  background: #161220;
+  --folder-bg: #161220;
+  --folder-lip-bg: #271c3c;
+  --folder-border: #473070;
+}
+
+html[data-theme="dark"] .folder-item.folder-ochre {
+  background: #1a120b;
+  --folder-bg: #1a120b;
+  --folder-lip-bg: #331f0f;
+  --folder-border: #5a3518;
+}
+
+html[data-theme="dark"] .folder-item.folder-slate {
+  background: #0e1524;
+  --folder-bg: #0e1524;
+  --folder-lip-bg: #152742;
+  --folder-border: #224370;
 }
 
 /* Tactile Artifacts in Dark Mode */
 html[data-theme="dark"] .artifact-spiral-sheet {
   background: #101624;
-  border-color: #233758;
+  border: 1px solid #233758;
   color: #dbe6f8;
 }
 
 html[data-theme="dark"] .artifact-badge-card {
   background: #161a22;
-  border-color: #333c4d;
+  border: 1px solid #384357;
   color: #f0f3f8;
 }
 
@@ -2792,18 +3011,18 @@ html[data-theme="dark"] .artifact-badge-card svg {
 
 html[data-theme="dark"] .artifact-graph-sheet {
   background: #111a14;
-  border-color: #20402b;
+  border: 1px solid #20402b;
   color: #daf2e1;
 }
 
 html[data-theme="dark"] .artifact-cassette-card {
   background: #141720;
-  border-color: #333c4d;
+  border: 1px solid #384357;
 }
 
 html[data-theme="dark"] .artifact-qa-sheet {
   background: #181410;
-  border-color: #403224;
+  border: 1px solid #403224;
   color: #f5e8d8;
 }
 
@@ -2889,15 +3108,27 @@ html[data-theme="dark"] .tag-filter-link.active {
   color: var(--ink-primary);
 }
 
-/* Photos & Frames */
+/* Photos & Frames & Visual References */
 html[data-theme="dark"] .polaroid-card,
-html[data-theme="dark"] .flatlay-photo-frame {
+html[data-theme="dark"] .flatlay-photo-frame,
+html[data-theme="dark"] .collage-item {
   background: #141720;
   border-color: var(--rule-strong);
   box-shadow: 4px 6px 0px rgba(0, 0, 0, 0.4);
 }
 
-html[data-theme="dark"] .polaroid-caption {
+html[data-theme="dark"] .collage-img-wrap {
+  background: #1c222e;
+}
+
+html[data-theme="dark"] .polaroid-caption,
+html[data-theme="dark"] .collage-caption {
   color: var(--ink-secondary);
 }
+
+html[data-theme="dark"] .site-footer {
+  border-top-color: var(--rule-strong);
+  color: var(--ink-secondary);
+}
+
 

@@ -14,13 +14,36 @@
       try {
         var saved = localStorage.getItem('bold_theme');
         var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (saved === 'dark' || (!saved && prefersDark)) {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        } else {
-          document.documentElement.setAttribute('data-theme', 'light');
-        }
+        var theme = (saved === 'dark' || (!saved && prefersDark)) ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
       } catch (e) {}
     })();
+
+    function updateThemeButton(theme) {
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      var isDark = theme === 'dark';
+      var txt = btn.querySelector('.theme-toggle-text');
+      var ico = btn.querySelector('.theme-toggle-indicator');
+      if (txt) txt.textContent = isDark ? 'LIGHT' : 'DARK';
+      if (ico) ico.textContent = isDark ? '☼' : '◐';
+      btn.setAttribute('title', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+      btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    }
+
+    function toggleTheme() {
+      var html = document.documentElement;
+      var current = html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      try {
+        localStorage.setItem('bold_theme', next);
+      } catch (e) {}
+      updateThemeButton(next);
+    }
+
+    window.toggleTheme = toggleTheme;
+    window.updateThemeButton = updateThemeButton;
   </script>
 </head>
 <body>
@@ -34,10 +57,16 @@
       </div>
       <div class="header-meta-controls">
         <span id="live-time-display">--:--:--</span>
-        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light theme" title="Toggle theme">
+        <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle dark and light theme" title="Toggle theme">
           <span class="theme-toggle-indicator" aria-hidden="true">◐</span>
           <span class="theme-toggle-text">DARK</span>
         </button>
+        <script>
+          (function() {
+            var current = document.documentElement.getAttribute('data-theme') || 'light';
+            updateThemeButton(current);
+          })();
+        </script>
       </div>
     </div>
 
