@@ -918,10 +918,42 @@ function updateHeroCadenceGraphs() {
 }
 
 // ----------------------------------------------------------------------------
+// THEME SWITCHER (DARK & LIGHT MODE)
+// ----------------------------------------------------------------------------
+
+function setupThemeToggle() {
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (!toggleBtn) return;
+
+  function updateToggleUI(currentTheme) {
+    const isDark = currentTheme === 'dark';
+    const textEl = toggleBtn.querySelector('.theme-toggle-text');
+    const iconEl = toggleBtn.querySelector('.theme-toggle-indicator');
+    if (textEl) textEl.textContent = isDark ? 'LIGHT' : 'DARK';
+    if (iconEl) iconEl.textContent = isDark ? '☼' : '◐';
+    toggleBtn.setAttribute('title', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+  }
+
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  updateToggleUI(currentTheme);
+
+  toggleBtn.addEventListener('click', () => {
+    const active = document.documentElement.getAttribute('data-theme') || 'light';
+    const nextTheme = active === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    try {
+      localStorage.setItem('bold_theme', nextTheme);
+    } catch (_) {}
+    updateToggleUI(nextTheme);
+  });
+}
+
+// ----------------------------------------------------------------------------
 // INITIAL BOOTSTRAP
 // ----------------------------------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', () => {
+  setupThemeToggle();
   renderCrossStitchHero();
   updateHeroCadenceGraphs();
   setupFolderTabs();

@@ -2568,3 +2568,336 @@ body {
     transform: none !important;
   }
 }
+
+/* ==========================================================================
+   THEME SWITCHER CONTROLS
+   ========================================================================== */
+
+.header-meta-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-paper);
+  border: 1px solid var(--rule-strong);
+  color: var(--ink-primary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: all 0.15s ease;
+  user-select: none;
+  line-height: 1.4;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-subtle);
+  border-color: var(--ink-primary);
+  box-shadow: 2px 2px 0px var(--rule-strong);
+}
+
+.theme-toggle-btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.theme-toggle-indicator {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   DARK THEME PALETTE & COMPONENT STYLES
+   ========================================================================== */
+
+html[data-theme="dark"] {
+  --bg-canvas: #0c0e12;
+  --bg-paper: #141720;
+  --bg-subtle: #1b202c;
+  --ink-primary: #f2f5fa;
+  --ink-secondary: #b2bac8;
+  --ink-muted: #6e798e;
+  --rule-strong: #333c4d;
+  --rule-light: #202632;
+  --rule-dashed: #2d3545;
+  --tape-red: #d32f2f;
+  --tape-text: #ffffff;
+}
+
+html[data-theme="dark"] body {
+  background-color: var(--bg-canvas);
+  color: var(--ink-primary);
+}
+
+/* Hero Cadence Monitor in Dark Mode */
+html[data-theme="dark"] .hero-cadence-aside {
+  background: #131720;
+  border-color: #333c4d;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="dark"] .cadence-aside-header {
+  border-bottom-color: #232a38;
+}
+
+html[data-theme="dark"] .cadence-channel-header {
+  color: var(--ink-secondary);
+}
+
+html[data-theme="dark"] .cadence-gauge-track {
+  background: #202735;
+  border-color: #333c4d;
+}
+
+html[data-theme="dark"] .cadence-gauge-scale {
+  color: var(--ink-muted);
+}
+
+/* Navigation items in Dark Mode */
+html[data-theme="dark"] .nav-item {
+  color: var(--ink-secondary);
+  border-color: var(--rule-light);
+}
+
+html[data-theme="dark"] .nav-item:hover {
+  background: var(--bg-subtle);
+  color: var(--ink-primary);
+  border-color: var(--rule-strong);
+}
+
+/* Polymath Quote Card */
+html[data-theme="dark"] .polymath-quote-card {
+  background: var(--bg-paper);
+  border-left-color: var(--tape-red);
+}
+
+/* What I am Doing Tabs */
+html[data-theme="dark"] .folder-tabs-header {
+  border-bottom-color: var(--rule-strong);
+}
+
+html[data-theme="dark"] .folder-tab {
+  background: var(--bg-paper);
+  border-color: var(--rule-strong);
+  color: var(--ink-secondary);
+}
+
+html[data-theme="dark"] .folder-tab.active {
+  background: var(--bg-canvas);
+  color: var(--ink-primary);
+  border-bottom-color: var(--bg-canvas);
+}
+
+html[data-theme="dark"] .folder-content {
+  border-color: var(--rule-strong);
+  background: var(--bg-canvas);
+}
+
+/* Project Cards */
+html[data-theme="dark"] .project-row {
+  background: var(--bg-paper);
+  border-color: var(--rule-strong);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"] .tag-pill {
+  background: var(--bg-subtle);
+  border-color: var(--rule-strong);
+  color: var(--ink-secondary);
+}
+
+html[data-theme="dark"] .project-role-badge {
+  background: var(--bg-subtle);
+  color: var(--ink-primary);
+}
+
+html[data-theme="dark"] .retro-progress-box {
+  background: #1c222e;
+  border-color: var(--rule-strong);
+}
+
+/* Section 04: Folder Deck Dark Tints */
+html[data-theme="dark"] .targets-meta-strip {
+  border-color: var(--rule-strong);
+  background: var(--bg-paper);
+}
+
+html[data-theme="dark"] .folder-item {
+  border-color: #333c4d;
+}
+
+html[data-theme="dark"] .folder-lip {
+  border-color: #333c4d;
+}
+
+html[data-theme="dark"] .folder-dossier-inner {
+  background: var(--bg-paper);
+  border-color: #333c4d;
+  color: var(--ink-primary);
+}
+
+html[data-theme="dark"] .folder-manila {
+  --folder-body: #17150f;
+  --folder-lip: #2d2614;
+  --folder-border: #4d4022;
+}
+
+html[data-theme="dark"] .folder-sage {
+  --folder-body: #0e1712;
+  --folder-lip: #143020;
+  --folder-border: #215436;
+}
+
+html[data-theme="dark"] .folder-lavender {
+  --folder-body: #15111d;
+  --folder-lip: #2b1f3e;
+  --folder-border: #473268;
+}
+
+html[data-theme="dark"] .folder-ochre {
+  --folder-body: #18110b;
+  --folder-lip: #362010;
+  --folder-border: #5a341a;
+}
+
+html[data-theme="dark"] .folder-slate {
+  --folder-body: #0e1522;
+  --folder-lip: #152945;
+  --folder-border: #234574;
+}
+
+/* Tactile Artifacts in Dark Mode */
+html[data-theme="dark"] .artifact-spiral-sheet {
+  background: #101624;
+  border-color: #233758;
+  color: #dbe6f8;
+}
+
+html[data-theme="dark"] .artifact-badge-card {
+  background: #161a22;
+  border-color: #333c4d;
+  color: #f0f3f8;
+}
+
+html[data-theme="dark"] .artifact-badge-card svg {
+  stroke: #f0f3f8;
+}
+
+html[data-theme="dark"] .artifact-graph-sheet {
+  background: #111a14;
+  border-color: #20402b;
+  color: #daf2e1;
+}
+
+html[data-theme="dark"] .artifact-cassette-card {
+  background: #141720;
+  border-color: #333c4d;
+}
+
+html[data-theme="dark"] .artifact-qa-sheet {
+  background: #181410;
+  border-color: #403224;
+  color: #f5e8d8;
+}
+
+/* 5-Year Horizon */
+html[data-theme="dark"] .timeline-card {
+  background: var(--bg-paper);
+  border-color: var(--rule-strong);
+}
+
+html[data-theme="dark"] .timeline-node {
+  background: var(--bg-canvas);
+  border-color: var(--rule-strong);
+}
+
+html[data-theme="dark"] .timeline-entry.current-phase .timeline-node {
+  background: var(--tape-red);
+  border-color: var(--tape-red);
+}
+
+/* Bucket List */
+html[data-theme="dark"] .bucket-category-badge {
+  background: var(--bg-subtle);
+  border-color: var(--rule-strong);
+  color: var(--ink-secondary);
+}
+
+html[data-theme="dark"] .bucket-item {
+  border-bottom-color: var(--rule-light);
+}
+
+html[data-theme="dark"] .bucket-item:hover {
+  background: var(--bg-subtle);
+}
+
+html[data-theme="dark"] .bucket-checkbox {
+  border-color: var(--rule-strong);
+  background: var(--bg-paper);
+}
+
+/* Section 07: Daily Input */
+html[data-theme="dark"] .quick-composer {
+  background: var(--bg-paper);
+  border-color: var(--rule-strong);
+}
+
+html[data-theme="dark"] .quick-title-input,
+html[data-theme="dark"] .quick-textarea,
+html[data-theme="dark"] .quick-tags-input {
+  background: transparent;
+  color: var(--ink-primary);
+}
+
+html[data-theme="dark"] .quick-title-input::placeholder,
+html[data-theme="dark"] .quick-textarea::placeholder,
+html[data-theme="dark"] .quick-tags-input::placeholder {
+  color: var(--ink-muted);
+}
+
+html[data-theme="dark"] .quick-save-btn {
+  background: var(--ink-primary);
+  color: var(--bg-canvas);
+}
+
+html[data-theme="dark"] .quick-save-btn:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+html[data-theme="dark"] .log-item {
+  border-bottom-color: var(--rule-light);
+}
+
+html[data-theme="dark"] .log-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+html[data-theme="dark"] .tag-filter-link {
+  color: var(--ink-muted);
+}
+
+html[data-theme="dark"] .tag-filter-link:hover,
+html[data-theme="dark"] .tag-filter-link.active {
+  color: var(--ink-primary);
+}
+
+/* Photos & Frames */
+html[data-theme="dark"] .polaroid-card,
+html[data-theme="dark"] .flatlay-photo-frame {
+  background: #141720;
+  border-color: var(--rule-strong);
+  box-shadow: 4px 6px 0px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .polaroid-caption {
+  color: var(--ink-secondary);
+}
+
