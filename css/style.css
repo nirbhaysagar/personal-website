@@ -1538,6 +1538,33 @@ body {
   transform: scale(1.05);
 }
 
+.dossier-check-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex-grow: 1;
+}
+
+.dossier-subtarget-group {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1px 5px;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+  width: fit-content;
+}
+
+html[data-theme="dark"] .dossier-subtarget-group {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--ink-secondary);
+}
+
 .dossier-check-text {
   font-size: 0.88rem;
   line-height: 1.45;

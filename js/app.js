@@ -9,7 +9,7 @@ const STORAGE_KEYS = {
   DAILY_LOGS: 'bold_daily_logs_v3',
   Q4_GOALS: 'bold_q4_goals_v1',
   BUCKET_LIST: 'bold_q4_goals_v1',
-  TARGET_MILESTONES: 'bold_target_milestones_v1'
+  TARGET_MILESTONES: 'bold_october_milestones_v4'
 };
 
 function initQ4Goals() {
@@ -36,6 +36,8 @@ targetsSource.forEach(t => {
         m.completed = savedMilestones[m.id];
       }
     });
+    const completedCount = t.milestones.filter(m => m.completed).length;
+    t.currentValue = t.milestones.length > 0 ? Math.round((completedCount / t.milestones.length) * t.targetValue) : 0;
   }
 });
 
@@ -106,13 +108,14 @@ function renderTactileArtifact(t, idx) {
         <div class="lanyard-slot" aria-hidden="true"></div>
         <div class="badge-header">
           <span class="badge-org">ORBIT // OCTOBER SPRINT</span>
-          <span class="spec-status-stamp">[YC W27 SUBMISSION]</span>
+          <span class="spec-status-stamp">[IN SPRINT (0%)]</span>
         </div>
         <div class="badge-barcode">||| | |||| || ||| |||||</div>
         <div class="badge-details">
-          <div><strong>USERS:</strong> 500+ TOTAL USERS &bull; 30+ PAID TIER</div>
-          <div><strong>ENTERPRISE:</strong> 2 AGENCIES ON CORE AI ENGINE</div>
-          <div><strong>YC BATCH:</strong> ORBIT SUBMITTED TO YC W27</div>
+          <div><strong>USERS:</strong> 0 / 500+ TOTAL USERS</div>
+          <div><strong>PAID:</strong> 0 / 30+ PAID SUBSCRIBERS</div>
+          <div><strong>ENTERPRISE:</strong> 0 / 2 AGENCIES ON CORE AI ENGINE</div>
+          <div><strong>YC BATCH:</strong> PITCH &amp; DECK SPRINT &bull; YC W27</div>
         </div>
         <svg class="badge-runner-doodle" viewBox="0 0 80 45" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round">
           <circle cx="20" cy="12" r="5"/>
@@ -122,8 +125,8 @@ function renderTactileArtifact(t, idx) {
         </svg>
       </div>
     `;
-  } else if (t.id.includes('02') || t.id.includes('yc') || t.id.includes('trace')) {
-    // 2. AgentTrace Launch, Audience (300+ X / 150+ Waitlist) & YC W27
+  } else if (t.id.includes('02') || t.id.includes('yc') || t.id.includes('trace') || t.id.includes('dist')) {
+    // 2. AgentTrace Launch, Audience & YC W27
     return `
       <div class="artifact-graph-sheet">
         <div class="washi-tape-strip" aria-hidden="true"></div>
@@ -132,26 +135,31 @@ function renderTactileArtifact(t, idx) {
         </div>
         <div class="funnel-bar-item">
           <span style="min-width: 110px;">YC W27 APPS:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 85%;"></div></div>
-          <span>ORBIT + TRACE</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
+          <span>0 / 2 SUBMITTED</span>
         </div>
         <div class="funnel-bar-item">
           <span style="min-width: 110px;">X REACH (300+):</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 45%;"></div></div>
-          <span>135 / 300</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
+          <span>0 / 300</span>
         </div>
         <div class="funnel-bar-item">
           <span style="min-width: 110px;">WAITLIST (150+):</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 35%;"></div></div>
-          <span>52 / 150</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
+          <span>0 / 150</span>
         </div>
-        <span style="font-family: 'Caveat', cursive; font-size: 1.15rem; color: #2e5c38; display: block; margin-top: 10px;">
+        <div class="funnel-bar-item">
+          <span style="min-width: 110px;">REDDIT KARMA:</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
+          <span>0 / 200+</span>
+        </div>
+        <span style="font-family: 'Caveat', cursive; font-size: 1.15rem; color: #2e5c38; display: block; margin-top: 8px;">
           * Full marketing sprint active: live telemetry &amp; trace replays on X!
         </span>
       </div>
     `;
-  } else if (t.id.includes('03') || t.id.includes('reddit') || t.id.includes('earn') || t.id.includes('40k')) {
-    // 3. Crack Reddit Code (200+ Karma) & Earn ₹40,000 Personally
+  } else if (t.id.includes('03') || t.id.includes('fin') || t.id.includes('40k')) {
+    // 3. Personal Income (₹40,000 Milestone)
     return `
       <div class="artifact-qa-sheet">
         <svg class="binder-clip-graphic" viewBox="0 0 40 50" fill="none" aria-hidden="true">
@@ -162,15 +170,15 @@ function renderTactileArtifact(t, idx) {
         </svg>
 
         <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
-          DISTRIBUTION &bull; PERSONAL CASHFLOW
+          PERSONAL CASHFLOW // OCTOBER SPRINT
         </div>
         <div style="font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.6; color: #333;">
-          &bull; Reddit Code: <strong>0 &rarr; 200+ KARMA</strong> (High Signal)<br>
-          &bull; October Income: <strong>₹40,000 PERSONAL NET</strong><br>
-          &bull; Distribution: <strong>RAW TECH DISSECTIONS &bull; NO SPAM</strong><br>
-          &bull; Funnel: <strong>REDDIT &rarr; AGENTTRACE &amp; CLIENT PIPELINE</strong>
+          &bull; October Income: <strong>₹0 / ₹40,000 PERSONAL NET</strong><br>
+          &bull; Pipeline: <strong>CLIENT &amp; FREELANCE SERVICES</strong><br>
+          &bull; Budget Status: <strong>STRICT ZERO-BURN DISCIPLINE</strong><br>
+          &bull; Target Runway: <strong>0% PROGRESS (CYCLE INITIATED)</strong>
         </div>
-        <div class="qa-stamp-circle">[OCTOBER DISCIPLINE // ₹40K RUNWAY]</div>
+        <div class="qa-stamp-circle">[RUNWAY DISCIPLINE // ₹40K TARGET]</div>
       </div>
     `;
   } else if (t.id.includes('04') || t.id.includes('self') || t.id.includes('flow') || t.id.includes('run')) {
@@ -187,7 +195,8 @@ function renderTactileArtifact(t, idx) {
             <div class="spool-hole"></div>
           </div>
           <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #bbb; text-align: center; line-height: 1.5;">
-            Daily Run &bull; Daily Stretch &bull; New Schedule &bull; Calmer, Sharper Version of Me
+            Daily Run &bull; Daily Stretch &bull; New Schedule &bull; Calmer, Sharper Version of Me<br>
+            <span style="color: #ffbe1a; font-weight: 700;">[DAY 04 / 31 ACTIVE &bull; 0% LOGGED]</span>
           </div>
         </div>
       </div>
@@ -210,13 +219,13 @@ function renderTactileArtifact(t, idx) {
         </div>
         <div class="spiral-tier-block">
           <span class="spiral-tier-label">READ 3 BOOKS:</span>
-          Systems thinking, narrative craft, and polymath knowledge absorption.
+          0 of 3 Books Completed [Systems &bull; Narrative &bull; Compounding].
         </div>
         <div class="spiral-tier-block">
           <span class="spiral-tier-label">FLOW &amp; KNOWLEDGE:</span>
           Entering deep effortless flow &bull; Broadening intellect horizons.
         </div>
-        <span class="spiral-hand-note">* Screenplay architecture + book synthesis notes.</span>
+        <span class="spiral-hand-note">* Screenplay architecture + book synthesis notes [0% Complete].</span>
       </div>
     `;
   }
@@ -313,7 +322,10 @@ function renderOctoberTargets() {
     const milestonesHtml = milestones.map(m => `
       <li class="dossier-check-item ${m.completed ? 'completed' : ''}" data-target-id="${t.id}" data-milestone-id="${m.id}">
         <span class="dossier-check-box">${m.completed ? '✓' : ''}</span>
-        <span class="dossier-check-text">${m.text}</span>
+        <div class="dossier-check-content">
+          ${m.group ? `<span class="dossier-subtarget-group">[${m.group}]</span>` : ''}
+          <span class="dossier-check-text">${m.text}</span>
+        </div>
       </li>
     `).join('');
 
@@ -521,6 +533,44 @@ function renderOctoberTargets() {
           if (countBadge) {
             countBadge.textContent = `[${completedCount}/${target.milestones.length} COMPLETED]`;
           }
+
+          // Recalculate target progress dynamically
+          const targetPct = target.milestones.length > 0 ? Math.round((completedCount / target.milestones.length) * 100) : 0;
+          target.currentValue = Math.round((completedCount / target.milestones.length) * target.targetValue);
+
+          // Update folder lip mini meter
+          const folderEl = container.querySelector(`.folder-item[data-id="${targetId}"]`);
+          if (folderEl) {
+            const miniFill = folderEl.querySelector('.folder-mini-fill');
+            const miniPct = folderEl.querySelector('.folder-mini-pct');
+            if (miniFill) miniFill.style.width = `${targetPct}%`;
+            if (miniPct) miniPct.textContent = `${targetPct}%`;
+
+            // Update dossier metric deck
+            const largePct = folderEl.querySelector('.dossier-pct-large');
+            const metricVal = folderEl.querySelector('.dossier-metric-val');
+            const meterTrack = folderEl.querySelector('.spec-meter-track');
+            if (largePct) largePct.textContent = `${targetPct}%`;
+            if (metricVal) metricVal.innerHTML = `<strong>${target.currentValue}</strong> / ${target.targetValue} ${target.unit}`;
+            if (meterTrack) {
+              const totalBlocks = 20;
+              const filled = Math.round((targetPct / 100) * totalBlocks);
+              meterTrack.innerHTML = Array.from({ length: totalBlocks }, (_, i) => 
+                `<span class="spec-tick ${i < filled ? 'filled' : ''}"></span>`
+              ).join('');
+            }
+          }
+
+          // Update overall aggregate pace in diagnostic ruler
+          const totalP = targets.reduce((acc, tg) => {
+            const p = tg.milestones && tg.milestones.length > 0 
+              ? Math.round((tg.milestones.filter(m => m.completed).length / tg.milestones.length) * 100)
+              : 0;
+            return acc + p;
+          }, 0);
+          const avgP = targets.length > 0 ? Math.round(totalP / targets.length) : 0;
+          const avgProgressEl = document.getElementById('oct-avg-progress') || document.getElementById('target-avg-progress');
+          if (avgProgressEl) avgProgressEl.textContent = `${avgP}%`;
 
           // Persist to localStorage
           const saved = loadStored(STORAGE_KEYS.TARGET_MILESTONES, {});
