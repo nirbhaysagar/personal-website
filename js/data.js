@@ -151,8 +151,8 @@ export const initialData = {
       currentValue: 85,
       unit: "%",
       status: "TESTING",
-      deadline: "2026-10-25",
-      notes: "Verify zero discrepancy in order totals, discount code apportioning, and high-frequency webhook sync.",
+      deadline: "2026-10-31",
+      notes: "Verify zero discrepancy in order totals, discount code apportioning, and high-frequency webhook sync across the 31-day October cycle.",
       mission: "Guarantee rock-solid data integrity between merchant ecommerce stores and Orbit's analytics pipeline. Handle high-volume sales events with zero dropped webhooks or calculation discrepancies.",
       milestones: [
         { id: "m-qa01-1", text: "Build automated test suite for multi-currency currency conversions and tax rates", completed: true },
@@ -269,6 +269,27 @@ export const initialData = {
   ],
 
   dailyLogs: [
+    {
+      id: "log-107",
+      date: "2026-10-04",
+      title: "Calibrating 31-day October sprints: velocity vs sustainable compounding",
+      learned: "A 31-day cycle gives enough room for three 10-day focused milestone blocks with a 24h buffer. Pacing daily progress against the 31-day timeline prevents end-of-cycle rush and ensures software quality remains uncompromising.",
+      tags: ["systems", "cadence", "focus"]
+    },
+    {
+      id: "log-106",
+      date: "2026-10-03",
+      title: "HNSW index vector clustering: sub-18ms retrieval benchmarks",
+      learned: "Tuning HNSW M=16 and efConstruction=64 in pgvector gives 99.2% recall with only 18ms latency across 100,000 vector embeddings. This unlocks conversational agent speed without sacrificing episodic retrieval accuracy.",
+      tags: ["ai", "memory", "benchmarks"]
+    },
+    {
+      id: "log-105",
+      date: "2026-10-02",
+      title: "Idempotency ledgers in high-concurrency ecommerce webhooks",
+      learned: "Network retries from Shopify/WooCommerce can flood ingestion queues during peak traffic. Hashing incoming event IDs into a Redis atomic ledger with a 48h TTL drops duplicate processing to exactly 0 without blocking pipeline throughput.",
+      tags: ["product", "qa", "systems"]
+    },
     {
       id: "log-104",
       date: "2026-10-01",

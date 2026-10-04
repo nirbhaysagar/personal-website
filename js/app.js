@@ -209,16 +209,17 @@ function renderTactileArtifact(t, idx) {
   }
 }
 
-function renderSeptemberTargets() {
+function renderOctoberTargets() {
   const container = document.getElementById('targets-list');
-  const daysLeftEl = document.getElementById('sep-days-left') || document.getElementById('target-days-left');
-  const monthElapsedEl = document.getElementById('sep-month-elapsed') || document.getElementById('target-month-elapsed');
-  const avgProgressEl = document.getElementById('sep-avg-progress') || document.getElementById('target-avg-progress');
+  const daysLeftEl = document.getElementById('oct-days-left') || document.getElementById('sep-days-left') || document.getElementById('target-days-left');
+  const monthElapsedEl = document.getElementById('oct-month-elapsed') || document.getElementById('sep-month-elapsed') || document.getElementById('target-month-elapsed');
+  const avgProgressEl = document.getElementById('oct-avg-progress') || document.getElementById('sep-avg-progress') || document.getElementById('target-avg-progress');
+  const ribbonEl = document.getElementById('october-days-ribbon');
 
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInMonth = new Date(year, month + 1, 0).getDate(); // 31 for October
   const currentDay = Math.min(Math.max(now.getDate(), 1), daysInMonth);
   const daysLeft = Math.max(0, daysInMonth - currentDay);
   const elapsedPercent = Math.round((currentDay / daysInMonth) * 100);
@@ -234,6 +235,41 @@ function renderSeptemberTargets() {
   if (daysLeftEl) daysLeftEl.textContent = `${daysLeft}`;
   if (monthElapsedEl) monthElapsedEl.textContent = `${elapsedPercent}%`;
   if (avgProgressEl) avgProgressEl.textContent = `${avgProgress}%`;
+
+  // Render 31-Day October Sprint Ribbon
+  if (ribbonEl) {
+    const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+    ribbonEl.innerHTML = `
+      <div class="ribbon-header">
+        <span class="ribbon-title">31-DAY OCTOBER SPRINT TIMELINE &bull; OCT 01 &rarr; OCT 31</span>
+        <span class="ribbon-status">[DAY ${String(currentDay).padStart(2, '0')} / 31 ACTIVE &bull; ${daysLeft} DAYS REMAINING]</span>
+      </div>
+      <div class="ribbon-grid" role="region" aria-label="October 31-day progress ribbon">
+        ${daysArray.map(d => {
+          let statusClass = 'day-future';
+          let marker = '&middot;';
+          let label = `Oct ${String(d).padStart(2, '0')}, 2026`;
+          if (d < currentDay) {
+            statusClass = 'day-past';
+            marker = '&#10003;';
+            label += ' (Completed)';
+          } else if (d === currentDay) {
+            statusClass = 'day-current';
+            marker = '&#9679;';
+            label += ' (TODAY - ACTIVE SPRINT)';
+          } else {
+            label += ' (Upcoming)';
+          }
+          return `
+            <div class="day-cell ${statusClass}" title="${label}" data-day="${d}">
+              <span class="day-num">${String(d).padStart(2, '0')}</span>
+              <span class="day-marker">${marker}</span>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
 
   if (!container) return;
 
@@ -825,6 +861,12 @@ function setupEventListeners() {
   }
   updateLiveTime();
   setInterval(updateLiveTime, 1000);
+
+  // Keep cadence graphs and 31-day October timeline dynamically updated every minute
+  setInterval(() => {
+    updateHeroCadenceGraphs();
+    renderOctoberTargets();
+  }, 60000);
 }
 
 function renderCrossStitchHero() {
@@ -928,6 +970,11 @@ function setupThemeToggle() {
   }
 }
 
+// Backwards compatibility alias
+function renderSeptemberTargets() {
+  renderOctoberTargets();
+}
+
 // ----------------------------------------------------------------------------
 // INITIAL BOOTSTRAP
 // ----------------------------------------------------------------------------
@@ -937,7 +984,7 @@ function initApp() {
   renderCrossStitchHero();
   updateHeroCadenceGraphs();
   setupFolderTabs();
-  renderSeptemberTargets();
+  renderOctoberTargets();
   renderFiveYearHorizon();
   renderBucketList();
   renderTagFilterBar();
