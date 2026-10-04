@@ -225,8 +225,9 @@
       <a href="#section-targets" class="nav-item" data-section="section-targets"><span class="nav-code">[04]</span> Targets</a>
       <a href="#section-horizon" class="nav-item" data-section="section-horizon"><span class="nav-code">[05]</span> Horizon</a>
       <a href="#section-bucket" class="nav-item" data-section="section-bucket"><span class="nav-code">[06]</span> Q4 Goals</a>
-      <a href="#section-daily" class="nav-item" data-section="section-daily"><span class="nav-code">[07]</span> Daily</a>
-      <a href="#section-inspirations" class="nav-item" data-section="section-inspirations"><span class="nav-code">[08]</span> Archive</a>
+      <a href="#section-radar" class="nav-item" data-section="section-radar"><span class="nav-code">[07]</span> Radar</a>
+      <a href="#section-daily" class="nav-item" data-section="section-daily"><span class="nav-code">[08]</span> Daily</a>
+      <a href="#section-inspirations" class="nav-item" data-section="section-inspirations"><span class="nav-code">[09]</span> Archive</a>
     </nav>
   </header>
 
@@ -528,11 +529,80 @@
     </div>
   </section>
 
-  <!-- 07: WHAT I LEARNED TODAY (ULTRA-MINIMAL LOG) -->
+  <!-- 07: INTELLECTUAL INTAKE RADAR // THE POLYMATH MATRIX -->
+  <section id="section-radar" class="radar-section-wrap">
+    <div class="editorial-heading">
+      <span>Intellectual Intake Radar &bull; The Polymath Matrix</span>
+      <span class="heading-num">[07]</span>
+    </div>
+
+    <!-- Radar Controller Banner -->
+    <div class="radar-controller-card">
+      <div class="radar-controller-top">
+        <div class="radar-badge-group">
+          <span class="radar-live-beacon" aria-hidden="true"></span>
+          <span class="radar-tag">[INTAKE RADAR // HYBRID AI ENGINE]</span>
+          <span class="radar-archetype-pill">SYNTHESIS: DA VINCI &times; MUSK &times; JANE &times; SCOFIELD &times; TESLA &times; ALTMAN</span>
+        </div>
+        <div class="radar-actions-strip">
+          <div class="radar-month-selector-wrap">
+            <label for="radar-month-select" class="radar-select-label">CYCLE:</label>
+            <select id="radar-month-select" class="radar-month-select" aria-label="Select month for knowledge radar">
+              <option value="2026-10" selected>OCTOBER 2026 (ACTIVE SPRINT)</option>
+              <option value="2026-11">NOVEMBER 2026 (ACCELERATION)</option>
+              <option value="2026-12">DECEMBER 2026 (HARVEST & SCALE)</option>
+            </select>
+          </div>
+          <button id="radar-shuffle-btn" class="radar-btn radar-btn-shuffle" type="button" title="Shuffle high-signal triad across polymath tracks">
+            <span>🎲 ROLL NEXT TRIAD</span>
+          </button>
+          <button id="radar-ai-toggle-btn" class="radar-btn radar-btn-ai" type="button" title="Configure or generate live AI recommendation brief">
+            <span>⚡ AI GENERATOR</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Month Focus Summary Subtitle -->
+      <div class="radar-focus-subtitle" id="radar-focus-subtitle">
+        <!-- Injected dynamically by JS -->
+      </div>
+
+      <!-- Polymath Archetype Filter Track Pills -->
+      <div class="radar-track-bar" id="radar-track-bar" role="tablist" aria-label="Filter intake recommendations by polymath archetype">
+        <!-- Injected dynamically by JS -->
+      </div>
+    </div>
+
+    <!-- Optional AI Key Drawer / Modal (Collapsible) -->
+    <div class="radar-ai-drawer" id="radar-ai-drawer" style="display: none;">
+      <div class="radar-ai-inner">
+        <div class="radar-ai-header">
+          <span class="radar-ai-title">⚡ AUTONOMOUS INTEL ENGINE (GOOGLE GEMINI API)</span>
+          <button id="radar-ai-close-btn" class="radar-ai-close" type="button" aria-label="Close AI settings">&times;</button>
+        </div>
+        <p class="radar-ai-desc">
+          Connect your free Google Gemini API key to autonomously research and generate bespoke Video + Substack + Book recommendations for any upcoming month or custom prompt based on your exact goals. Key is stored locally in your browser.
+        </p>
+        <div class="radar-ai-form-row">
+          <input type="password" id="radar-api-key-input" class="radar-ai-input" placeholder="Paste Gemini API Key (e.g. AIzaSy...)" autocomplete="off">
+          <button id="radar-ai-save-btn" class="radar-ai-action-btn" type="button">Save Key</button>
+          <button id="radar-ai-generate-btn" class="radar-ai-action-btn primary" type="button">Generate Live Brief</button>
+        </div>
+        <div id="radar-ai-status" class="radar-ai-status-msg"></div>
+      </div>
+    </div>
+
+    <!-- Active Triad Container (3-Column Grid) -->
+    <div class="radar-triad-grid" id="radar-triad-container" aria-live="polite">
+      <!-- Injected dynamically by JS: Video Intel, Substack Essay, Book Chapter -->
+    </div>
+  </section>
+
+  <!-- 08: WHAT I LEARNED TODAY (ULTRA-MINIMAL LOG) -->
   <section id="section-daily" class="daily-section-wrap">
     <div class="editorial-heading">
       <span>What I Learned Today</span>
-      <span class="heading-num">[07]</span>
+      <span class="heading-num">[08]</span>
     </div>
 
     <!-- Ultra-Minimal Quick Composer -->
@@ -566,11 +636,11 @@
     </div>
   </section>
 
-  <!-- 08: INSPIRATIONS & VISUAL ARCHIVE -->
+  <!-- 09: INSPIRATIONS & VISUAL ARCHIVE -->
   <section id="section-inspirations">
     <div class="editorial-heading">
       <span>Visual Archive &bull; Aesthetic References</span>
-      <span class="heading-num">[08]</span>
+      <span class="heading-num">[09]</span>
     </div>
     <p style="font-size: 0.88rem; color: var(--ink-secondary); margin-bottom: 20px;">
       Not just aesthetic references, but mental models: what I admire, study, and actively extract into how I build, think, and design.

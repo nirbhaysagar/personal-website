@@ -72,6 +72,10 @@ let state = {
   fiveYearHorizon: initialData.fiveYearHorizon,
   bucketList: q4GoalsList,
   q4Goals: q4GoalsList,
+  radarCurriculum: initialData.radarCurriculum,
+  selectedRadarMonth: '2026-10',
+  selectedRadarTrack: 'all',
+  activeRadarTriadIdx: 0,
   dailyLogs: normalizeDailyLogs(loadStored(STORAGE_KEYS.DAILY_LOGS, initialData.dailyLogs)),
   activeLogTag: 'ALL'
 };
@@ -678,6 +682,341 @@ function renderBucketList() {
 }
 
 // ----------------------------------------------------------------------------
+// RENDER INTELLECTUAL RADAR // POLYMATH INTAKE ENGINE
+// ----------------------------------------------------------------------------
+
+let currentRadarTriad = null;
+
+function extractToIntakeDailyLog(title, creator, takeaway, type) {
+  const titleInput = document.getElementById('log-title-input');
+  const textInput = document.getElementById('log-text-input');
+  const tagsInput = document.getElementById('log-tags-input');
+  const dailySection = document.getElementById('section-daily');
+
+  if (titleInput && textInput) {
+    titleInput.value = `Synthesis // ${title}`;
+    textInput.value = `[INTEL EXTRACTION // ${type.toUpperCase()}]\nSource: ${creator}\n\nCore Mental Model & Extraction:\n${takeaway}\n\nImmediate Action & Synthesis in Orbit / Script / AI Engineering:\n`;
+    if (tagsInput) {
+      tagsInput.value = `polymath, intake, ${type}`;
+    }
+    if (dailySection) {
+      dailySection.scrollIntoView({ behavior: 'smooth' });
+      textInput.focus();
+    }
+  }
+}
+
+function renderRadarSection() {
+  const container = document.getElementById('radar-triad-container');
+  const trackBar = document.getElementById('radar-track-bar');
+  const subtitleEl = document.getElementById('radar-focus-subtitle');
+  const monthSelect = document.getElementById('radar-month-select');
+  if (!container || !state.radarCurriculum) return;
+
+  const currentMonthKey = state.selectedRadarMonth || '2026-10';
+  if (monthSelect && monthSelect.value !== currentMonthKey) {
+    monthSelect.value = currentMonthKey;
+  }
+
+  const monthData = state.radarCurriculum.months[currentMonthKey] || state.radarCurriculum.months['2026-10'];
+  if (!monthData) return;
+
+  if (subtitleEl) {
+    subtitleEl.innerHTML = `
+      <span class="focus-lbl">ACTIVE FOCUS SYLLABUS:</span>
+      <span class="focus-txt">${monthData.focusSummary}</span>
+    `;
+  }
+
+  // Render Track Pills
+  if (trackBar) {
+    const tracks = state.radarCurriculum.tracks || [];
+    trackBar.innerHTML = tracks.map(t => {
+      const isActive = (state.selectedRadarTrack || 'all') === t.id;
+      return `
+        <button type="button" class="radar-track-pill ${isActive ? 'active' : ''}" data-track-id="${t.id}" role="tab" aria-selected="${isActive}">
+          <span class="pill-dot"></span>
+          <span class="pill-name">${t.name}</span>
+        </button>
+      `;
+    }).join('');
+
+    trackBar.querySelectorAll('.radar-track-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.selectedRadarTrack = btn.getAttribute('data-track-id');
+        state.activeRadarTriadIdx = 0;
+        renderRadarSection();
+      });
+    });
+  }
+
+  // Filter triads by track
+  const availableTriads = (state.selectedRadarTrack && state.selectedRadarTrack !== 'all')
+    ? monthData.triads.filter(t => t.trackId === state.selectedRadarTrack)
+    : monthData.triads;
+
+  const triadsToChooseFrom = availableTriads.length > 0 ? availableTriads : monthData.triads;
+  const triadIdx = (state.activeRadarTriadIdx || 0) % triadsToChooseFrom.length;
+  currentRadarTriad = triadsToChooseFrom[triadIdx];
+
+  if (!currentRadarTriad) return;
+
+  // Render the 3 Triad Cards: Video Intel, Substack Essay, Book Chapter
+  container.innerHTML = `
+    <!-- 01: Video Intel -->
+    <article class="radar-card radar-card-video">
+      <div class="radar-card-header">
+        <div class="radar-card-badge-row">
+          <span class="radar-format-badge format-video">[01 // VIDEO INTEL]</span>
+          <span class="radar-meta-badge">${currentRadarTriad.video.badge}</span>
+        </div>
+        <span class="radar-archetype-tag">${currentRadarTriad.video.archetype || currentRadarTriad.archetype}</span>
+      </div>
+      <div class="radar-card-body">
+        <h4 class="radar-card-title">${currentRadarTriad.video.title}</h4>
+        <div class="radar-creator-line">&bull; Creator: <strong>${currentRadarTriad.video.creator}</strong></div>
+        <p class="radar-takeaway">
+          <strong>CORE EXTRACTION:</strong> ${currentRadarTriad.video.takeaway}
+        </p>
+      </div>
+      <div class="radar-card-footer">
+        <a href="${currentRadarTriad.video.url}" target="_blank" rel="noopener noreferrer" class="radar-link-btn" title="Open video in new tab">
+          <span>WATCH VIDEO</span>
+          <span class="btn-arrow">&nearr;</span>
+        </a>
+        <button type="button" class="radar-extract-btn" data-type="video" data-title="${encodeURIComponent(currentRadarTriad.video.title)}" data-creator="${encodeURIComponent(currentRadarTriad.video.creator)}" data-takeaway="${encodeURIComponent(currentRadarTriad.video.takeaway)}">
+          <span>LOG TO #08</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- 02: Substack / Longform Essay -->
+    <article class="radar-card radar-card-essay">
+      <div class="radar-card-header">
+        <div class="radar-card-badge-row">
+          <span class="radar-format-badge format-essay">[02 // SUBSTACK ESSAY]</span>
+          <span class="radar-meta-badge">${currentRadarTriad.article.badge}</span>
+        </div>
+        <span class="radar-archetype-tag">${currentRadarTriad.article.archetype || currentRadarTriad.archetype}</span>
+      </div>
+      <div class="radar-card-body">
+        <h4 class="radar-card-title">${currentRadarTriad.article.title}</h4>
+        <div class="radar-creator-line">&bull; Author: <strong>${currentRadarTriad.article.author}</strong></div>
+        <p class="radar-takeaway">
+          <strong>CORE EXTRACTION:</strong> ${currentRadarTriad.article.takeaway}
+        </p>
+      </div>
+      <div class="radar-card-footer">
+        <a href="${currentRadarTriad.article.url}" target="_blank" rel="noopener noreferrer" class="radar-link-btn" title="Open article in new tab">
+          <span>READ ESSAY</span>
+          <span class="btn-arrow">&nearr;</span>
+        </a>
+        <button type="button" class="radar-extract-btn" data-type="essay" data-title="${encodeURIComponent(currentRadarTriad.article.title)}" data-creator="${encodeURIComponent(currentRadarTriad.article.author)}" data-takeaway="${encodeURIComponent(currentRadarTriad.article.takeaway)}">
+          <span>LOG TO #08</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- 03: Book Chapter / Specific Drill -->
+    <article class="radar-card radar-card-book">
+      <div class="radar-card-header">
+        <div class="radar-card-badge-row">
+          <span class="radar-format-badge format-book">[03 // BOOK CHAPTER]</span>
+          <span class="radar-meta-badge">${currentRadarTriad.book.badge}</span>
+        </div>
+        <span class="radar-archetype-tag">${currentRadarTriad.book.archetype || currentRadarTriad.archetype}</span>
+      </div>
+      <div class="radar-card-body">
+        <h4 class="radar-card-title">${currentRadarTriad.book.title}</h4>
+        <div class="radar-creator-line">&bull; Author: <strong>${currentRadarTriad.book.author}</strong> &bull; <em>${currentRadarTriad.book.chapter}</em> (${currentRadarTriad.book.pages})</div>
+        <p class="radar-takeaway">
+          <strong>DRILL / APPLICATION:</strong> ${currentRadarTriad.book.takeaway}
+        </p>
+      </div>
+      <div class="radar-card-footer">
+        <span class="radar-book-pill">DISSECT CHAPTER</span>
+        <button type="button" class="radar-extract-btn" data-type="book" data-title="${encodeURIComponent(currentRadarTriad.book.title + ' — ' + currentRadarTriad.book.chapter)}" data-creator="${encodeURIComponent(currentRadarTriad.book.author)}" data-takeaway="${encodeURIComponent(currentRadarTriad.book.takeaway)}">
+          <span>LOG TO #08</span>
+        </button>
+      </div>
+    </article>
+  `;
+
+  // Attach extraction listeners
+  container.querySelectorAll('.radar-extract-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.getAttribute('data-type') || 'intake';
+      const title = decodeURIComponent(btn.getAttribute('data-title') || '');
+      const creator = decodeURIComponent(btn.getAttribute('data-creator') || '');
+      const takeaway = decodeURIComponent(btn.getAttribute('data-takeaway') || '');
+      extractToIntakeDailyLog(title, creator, takeaway, type);
+    });
+  });
+}
+
+function setupRadarControls() {
+  const monthSelect = document.getElementById('radar-month-select');
+  const shuffleBtn = document.getElementById('radar-shuffle-btn');
+  const aiToggleBtn = document.getElementById('radar-ai-toggle-btn');
+  const aiDrawer = document.getElementById('radar-ai-drawer');
+  const aiCloseBtn = document.getElementById('radar-ai-close-btn');
+  const apiKeyInput = document.getElementById('radar-api-key-input');
+  const saveKeyBtn = document.getElementById('radar-ai-save-btn');
+  const generateBtn = document.getElementById('radar-ai-generate-btn');
+  const statusEl = document.getElementById('radar-ai-status');
+
+  if (monthSelect) {
+    monthSelect.addEventListener('change', (e) => {
+      state.selectedRadarMonth = e.target.value;
+      state.activeRadarTriadIdx = 0;
+      renderRadarSection();
+    });
+  }
+
+  if (shuffleBtn) {
+    shuffleBtn.addEventListener('click', () => {
+      state.activeRadarTriadIdx = (state.activeRadarTriadIdx || 0) + 1;
+      renderRadarSection();
+      const container = document.getElementById('radar-triad-container');
+      if (container) {
+        container.classList.add('triad-shuffle-pulse');
+        setTimeout(() => container.classList.remove('triad-shuffle-pulse'), 300);
+      }
+    });
+  }
+
+  // AI Drawer toggling
+  if (aiToggleBtn && aiDrawer) {
+    aiToggleBtn.addEventListener('click', () => {
+      const isVisible = aiDrawer.style.display !== 'none';
+      aiDrawer.style.display = isVisible ? 'none' : 'block';
+      if (!isVisible && apiKeyInput) {
+        apiKeyInput.value = localStorage.getItem('gemini_api_key') || '';
+      }
+    });
+  }
+
+  if (aiCloseBtn && aiDrawer) {
+    aiCloseBtn.addEventListener('click', () => {
+      aiDrawer.style.display = 'none';
+    });
+  }
+
+  if (saveKeyBtn && apiKeyInput && statusEl) {
+    saveKeyBtn.addEventListener('click', () => {
+      const key = apiKeyInput.value.trim();
+      if (key) {
+        localStorage.setItem('gemini_api_key', key);
+        statusEl.textContent = '✓ Gemini API key saved to browser storage.';
+        statusEl.className = 'radar-ai-status-msg success';
+      } else {
+        localStorage.removeItem('gemini_api_key');
+        statusEl.textContent = 'Key removed from storage.';
+        statusEl.className = 'radar-ai-status-msg';
+      }
+    });
+  }
+
+  if (generateBtn && apiKeyInput && statusEl) {
+    generateBtn.addEventListener('click', () => {
+      const key = apiKeyInput.value.trim() || localStorage.getItem('gemini_api_key');
+      if (!key) {
+        statusEl.textContent = 'Please paste a Gemini API key from Google AI Studio (free) to generate live custom briefs.';
+        statusEl.className = 'radar-ai-status-msg active';
+        apiKeyInput.focus();
+        return;
+      }
+      generateAiRadarBrief(key);
+    });
+  }
+}
+
+async function generateAiRadarBrief(apiKey) {
+  const statusEl = document.getElementById('radar-ai-status');
+  if (!statusEl) return;
+  statusEl.textContent = 'Contacting Gemini Neural Engine... synthesizing polymath intake...';
+  statusEl.className = 'radar-ai-status-msg active';
+
+  const currentMonthKey = state.selectedRadarMonth || '2026-10';
+  const trackObj = (state.radarCurriculum.tracks || []).find(t => t.id === state.selectedRadarTrack) || { name: 'Polymath Synthesis', badge: 'DA VINCI × MUSK × JANE × SCOFIELD × TESLA × ALTMAN' };
+
+  const prompt = `You are an elite polymath mentor designing a daily intake triad for an ambitious builder in ${currentMonthKey}.
+The builder synthesizes:
+1. Leonardo da Vinci (polymathic sketching, visual narrative, anatomy)
+2. Elon Musk & Nikola Tesla (first-principles physics, extreme velocity, mental machine simulation)
+3. Patrick Jane & Michael Scofield (acute deduction, baseline deviation detection, low latent inhibition, architectural system reverse-engineering)
+4. Sam Altman (hyper-scaling SaaS, founder outbound, Y Combinator W27 momentum, $10k MRR to $1M/mo leverage)
+
+Active track: "${trackObj.name}" (${trackObj.badge}).
+Return ONLY a valid JSON object (no markdown formatting, no code blocks) matching this exact schema:
+{
+  "trackId": "${state.selectedRadarTrack || 'first_principles'}",
+  "trackName": "${trackObj.name}",
+  "archetype": "${trackObj.badge}",
+  "video": {
+    "title": "Title of high-signal YouTube video or talk",
+    "creator": "Speaker or Channel",
+    "duration": "Duration (e.g. 28m)",
+    "url": "https://www.youtube.com/results?search_query=...",
+    "badge": "YOUTUBE // 28m",
+    "takeaway": "Specific core extraction and first-principles mental model."
+  },
+  "article": {
+    "title": "Title of Substack, blog post, or longform essay",
+    "author": "Author or Publication",
+    "readTime": "Reading time (e.g. 10m read)",
+    "url": "https://substack.com",
+    "badge": "SUBSTACK // 10m READ",
+    "takeaway": "Key thesis and strategic takeaway."
+  },
+  "book": {
+    "title": "Book Title",
+    "author": "Author",
+    "chapter": "Chapter number & title",
+    "pages": "Pages or section",
+    "badge": "BOOK // CH. XX",
+    "takeaway": "Actionable daily drill or mental model application."
+  }
+}`;
+
+  try {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1000 }
+      })
+    });
+
+    if (!res.ok) {
+      throw new Error(`API error: ${res.status} ${res.statusText}`);
+    }
+
+    const data = await res.json();
+    const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+    const parsedTriad = JSON.parse(cleanJson);
+
+    // Save into state
+    if (!state.radarCurriculum.months[currentMonthKey]) {
+      state.radarCurriculum.months[currentMonthKey] = {
+        monthName: currentMonthKey,
+        focusSummary: 'Autonomous AI Synthesis Cycle',
+        triads: []
+      };
+    }
+    state.radarCurriculum.months[currentMonthKey].triads.unshift(parsedTriad);
+    state.activeRadarTriadIdx = 0;
+    statusEl.textContent = '✓ Fresh AI triad synthesized and deployed into radar!';
+    statusEl.className = 'radar-ai-status-msg success';
+    renderRadarSection();
+  } catch (err) {
+    console.error('Gemini Radar generation failed:', err);
+    statusEl.textContent = `Synthesis notice: ${err.message}. Displaying pre-curated polymath curriculum.`;
+    statusEl.className = 'radar-ai-status-msg error';
+  }
+}
 // RENDER DAILY LOGS (MINIMAL & DYNAMIC USER TAG SYSTEM)
 // ----------------------------------------------------------------------------
 
@@ -1134,6 +1473,8 @@ function initApp() {
   renderOctoberTargets();
   renderFiveYearHorizon();
   renderBucketList();
+  renderRadarSection();
+  setupRadarControls();
   renderTagFilterBar();
   renderDailyLogs();
   setupEventListeners();

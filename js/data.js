@@ -320,6 +320,356 @@ export const initialData = {
   get bucketList() {
     return this.q4Goals;
   },
+  radarCurriculum: {
+    tracks: [
+      { id: "all", name: "All Synthesis", badge: "DA VINCI × MUSK × JANE × SCOFIELD × TESLA × ALTMAN" },
+      { id: "first_principles", name: "Hard Tech & Physics", badge: "ELON MUSK & NIKOLA TESLA" },
+      { id: "deduction_systems", name: "Deduction & Strategy", badge: "PATRICK JANE & MICHAEL SCOFIELD" },
+      { id: "saas_venture", name: "SaaS Scale & YC", badge: "SAM ALTMAN & Y COMBINATOR" },
+      { id: "cinema_story", name: "Cinema & Narrative", badge: "LEONARDO DA VINCI & VISUAL CINEMA" },
+      { id: "ai_architectures", name: "AI Memory & Agents", badge: "AGENTTRACE & LUMEN ARCHITECTURE" },
+      { id: "markets_capital", name: "Markets & Capital", badge: "MACRO TRADING & $20M LIQUID MOAT" }
+    ],
+    months: {
+      "2026-10": {
+        monthName: "October 2026",
+        focusSummary: "Orbit $10k MRR • YC W27 Prep • Feature Screenplay • Observational Deduction & Flow",
+        triads: [
+          {
+            trackId: "first_principles",
+            trackName: "Hard Tech & Physics",
+            archetype: "Elon Musk & Nikola Tesla",
+            video: {
+              title: "Elon Musk: The 5-Step Engineering Algorithm & First Principles Thinking",
+              creator: "Everyday Astronaut / Starbase",
+              duration: "24m",
+              url: "https://www.youtube.com/watch?v=t705r8ICkRw",
+              badge: "YOUTUBE // 24m",
+              takeaway: "Deconstruct every problem to fundamental physical truths instead of reasoning by analogy. Make requirements less dumb and delete parts relentlessly."
+            },
+            article: {
+              title: "The Industrial First Principles: Why Physics Always Beats Marketing",
+              author: "Casey Handmer",
+              readTime: "9m read",
+              url: "https://caseyhandmer.wordpress.com/",
+              badge: "SUBSTACK // 9m READ",
+              takeaway: "Radical mechanical simplicity and vertical iteration speed create compounding moats that capital alone cannot buy."
+            },
+            book: {
+              title: "Elon Musk",
+              author: "Walter Isaacson",
+              chapter: "Chapter 31: The Five Commandments of Production",
+              pages: "pp. 284–298",
+              badge: "BOOK // CH. 31",
+              takeaway: "The factory is the product. Delete any requirement that does not come from a specific human who takes personal responsibility."
+            }
+          },
+          {
+            trackId: "deduction_systems",
+            trackName: "Deduction & Strategy",
+            archetype: "Patrick Jane & Michael Scofield",
+            video: {
+              title: "The Science of Deduction: Micro-Expressions, Baselines & Behavioral Tells",
+              creator: "Joe Navarro (Former FBI Behavioral Analyst)",
+              duration: "21m",
+              url: "https://www.youtube.com/watch?v=4jwUXV4QaTw",
+              badge: "YOUTUBE // 21m",
+              takeaway: "Establish an environmental baseline within 60 seconds. Notice lip compression, torso leaning, and shoe direction before speaking."
+            },
+            article: {
+              title: "The Brain Attic: Organizing Perception & Eliminating Mental Noise",
+              author: "Maria Konnikova / FS",
+              readTime: "11m read",
+              url: "https://fs.blog/brain-attic/",
+              badge: "ESSAY // 11m READ",
+              takeaway: "Most people merely see, but they do not observe. Guard what enters your mental attic to preserve acute deductive agility."
+            },
+            book: {
+              title: "Mastermind: How to Think Like Sherlock Holmes",
+              author: "Maria Konnikova",
+              chapter: "Chapter 3: Stocking the Brain Attic (Attentional Mindfulness)",
+              pages: "pp. 57–82",
+              badge: "BOOK // CH. 03",
+              takeaway: "Observe 3 subtle environmental micro-discrepancies in every conversation today before engaging."
+            }
+          },
+          {
+            trackId: "saas_venture",
+            trackName: "SaaS Scale & YC",
+            archetype: "Sam Altman & Y Combinator",
+            video: {
+              title: "How to Succeed with a Startup: Compounding Advantage & Founder Velocity",
+              creator: "Sam Altman (Stanford CS183B)",
+              duration: "48m",
+              url: "https://www.youtube.com/watch?v=0lJKucu6HJc",
+              badge: "YOUTUBE // 48m",
+              takeaway: "The single most predictive metric of 100x founders is internal clock rate: the speed of decisions, code deploys, and customer calls."
+            },
+            article: {
+              title: "How to Get Your First 100 SaaS Customers & Scale to $10K MRR",
+              author: "Lenny Rachitsky (Lenny's Newsletter)",
+              readTime: "14m read",
+              url: "https://www.lennysnewsletter.com/",
+              badge: "SUBSTACK // 14m READ",
+              takeaway: "Founder outbound loops, authentic high-value Reddit breakdowns (0% spam), and closing design partner agencies."
+            },
+            book: {
+              title: "Zero to One",
+              author: "Peter Thiel",
+              chapter: "Chapter 8: Secrets (The Distribution Advantage)",
+              pages: "pp. 93–108",
+              badge: "BOOK // CH. 08",
+              takeaway: "Superior sales and distribution can create a monopoly even with no product differentiation, but superior product without distribution fails."
+            }
+          },
+          {
+            trackId: "cinema_story",
+            trackName: "Cinema & Narrative",
+            archetype: "Leonardo da Vinci & Visual Cinema",
+            video: {
+              title: "The Screenwriting Masterclass: Midpoints & Scene Tension Mechanics",
+              creator: "Michael Arndt (Oscar Winner — Toy Story 3)",
+              duration: "32m",
+              url: "https://www.youtube.com/watch?v=1u4b9K_n2hY",
+              badge: "YOUTUBE // 32m",
+              takeaway: "The midpoint shift: transitioning the protagonist from reactive self-preservation into proactive attack."
+            },
+            article: {
+              title: "Visual Geometry in Cinema: How Kurosawa and Fincher Block Scenes",
+              author: "Every Frame a Painting",
+              readTime: "8m read",
+              url: "https://everyframeapainting.tumblr.com/",
+              badge: "ESSAY // 8m READ",
+              takeaway: "Every frame must convey emotional power balances and hidden subtext through spatial depth and character triangle blocking."
+            },
+            book: {
+              title: "Story: Substance, Structure, Style and Principles of Screenwriting",
+              author: "Robert McKee",
+              chapter: "Chapter 9: Act Design & Turning Points",
+              pages: "pp. 181–207",
+              badge: "BOOK // CH. 09",
+              takeaway: "A scene turning point occurs when an action produces an unexpected reaction, opening a gap between expectation and reality."
+            }
+          },
+          {
+            trackId: "ai_architectures",
+            trackName: "AI Memory & Agents",
+            archetype: "AgentTrace & Lumen Architecture",
+            video: {
+              title: "State of AI Agents: Autonomous Tool Use, Memory & Reflection Loops",
+              creator: "Andrej Karpathy & Harrison Chase",
+              duration: "42m",
+              url: "https://www.youtube.com/watch?v=sal78ACtGTc",
+              badge: "YOUTUBE // 42m",
+              takeaway: "How memory reflection, vector indexing, and tool execution graphs bridge local AI agents to real-world capability."
+            },
+            article: {
+              title: "Patterns for Building LLM Systems: Hybrid BM25 + Vector Retrieval",
+              author: "Eugene Yan",
+              readTime: "12m read",
+              url: "https://eugeneyan.com/writing/llm-patterns/",
+              badge: "TECHNICAL // 12m READ",
+              takeaway: "Combining lexical exact-match BM25 with dense semantic vector embeddings for sub-20ms second-brain memory retrieval."
+            },
+            book: {
+              title: "Designing Data-Intensive Applications",
+              author: "Martin Kleppmann",
+              chapter: "Chapter 3: Storage and Retrieval Engines",
+              pages: "pp. 69–110",
+              badge: "BOOK // CH. 03",
+              takeaway: "Evaluate append-only segment logs, B-Trees, and LSM storage engines for maximum throughput in persistent memory stores."
+            }
+          },
+          {
+            trackId: "markets_capital",
+            trackName: "Markets & Capital",
+            archetype: "Macro Trading & $20M Liquid Moat",
+            video: {
+              title: "Stanley Druckenmiller: The Lost Art of Macro Trading & Asymmetric Bets",
+              creator: "Bloomberg Wealth / Oxford Union",
+              duration: "38m",
+              url: "https://www.youtube.com/watch?v=6m-qKq6f688",
+              badge: "YOUTUBE // 38m",
+              takeaway: "It is not whether you are right or wrong, but how much money you make when you are right and how little you lose when you are wrong."
+            },
+            article: {
+              title: "The Monetary Plumbing: How Global Liquidity Drives All Asset Prices",
+              author: "Alfonso Peccatiello (The Macro Compass)",
+              readTime: "10m read",
+              url: "https://themacrocompass.substack.com/",
+              badge: "SUBSTACK // 10m READ",
+              takeaway: "Central bank balance sheet liquidity and credit expansion dictate multi-month macro swings far beyond micro earnings reports."
+            },
+            book: {
+              title: "Reminiscences of a Stock Operator",
+              author: "Edwin Lefèvre",
+              chapter: "Chapter 8: The Tape Doesn't Lie (Patience & Timing)",
+              pages: "pp. 82–104",
+              badge: "BOOK // CH. 08",
+              takeaway: "Never fight the primary trend. The big money is not made in the individual fluctuations, but in sitting tight during the main swing."
+            }
+          }
+        ]
+      },
+      "2026-11": {
+        monthName: "November 2026",
+        focusSummary: "Orbit Scaling to 1,500 Users • AgentTrace YC Submission • Script 2nd Act • Cardistry & Markets",
+        triads: [
+          {
+            trackId: "first_principles",
+            trackName: "Hard Tech & Physics",
+            archetype: "Nikola Tesla & Elon Musk",
+            video: {
+              title: "Nikola Tesla's Visual Thinking: Simulating Machines Entirely in the Mind",
+              creator: "MIT OpenCourseWare / Innovation Archives",
+              duration: "28m",
+              url: "https://www.youtube.com/watch?v=KzK8dCcm7pQ",
+              badge: "YOUTUBE // 28m",
+              takeaway: "Tesla tested every part for wear inside his mental simulation engine before manufacturing physical prototypes."
+            },
+            article: {
+              title: "The Art of Doing Deep Technical Work in Complete Solitude",
+              author: "Paul Graham",
+              readTime: "8m read",
+              url: "http://paulgraham.com/",
+              badge: "ESSAY // 8m READ",
+              takeaway: "Major breakthroughs require long stretches of uninterrupted mental incubation away from conversational consensus."
+            },
+            book: {
+              title: "My Inventions",
+              author: "Nikola Tesla",
+              chapter: "Chapter 2: The Mental Visualization Method",
+              pages: "pp. 21–39",
+              badge: "BOOK // CH. 02",
+              takeaway: "Close your eyes: mentally simulate the entire architecture of a system in real-time before writing code."
+            }
+          },
+          {
+            trackId: "deduction_systems",
+            trackName: "Deduction & Strategy",
+            archetype: "Michael Scofield & Patrick Jane",
+            video: {
+              title: "Michael Scofield's Strategy: Blueprint Decomposition & Contingency Trees",
+              creator: "Systems Analysis / Narrative Engineering",
+              duration: "18m",
+              url: "https://www.youtube.com/watch?v=eE7O2F3J99Q",
+              badge: "YOUTUBE // 18m",
+              takeaway: "Low latent inhibition allows high-leverage thinkers to see latent utility in overlooked everyday constraints and protocols."
+            },
+            article: {
+              title: "Tacit Knowledge: Diagnosing Hidden System Failures Instantly",
+              author: "Cedric Chin (Commoncog)",
+              readTime: "13m read",
+              url: "https://commoncog.com/blog/",
+              badge: "SUBSTACK // 13m READ",
+              takeaway: "Developing fast, non-verbal situational awareness in complex engineering architectures and negotiations."
+            },
+            book: {
+              title: "What Every BODY Is Saying",
+              author: "Joe Navarro",
+              chapter: "Chapter 5: Torso, Arms & Limbic Defense Signals",
+              pages: "pp. 95–132",
+              badge: "BOOK // CH. 05",
+              takeaway: "Detect subconscious defensiveness before words are spoken by reading torso orientation and arm barricades."
+            }
+          },
+          {
+            trackId: "saas_venture",
+            trackName: "SaaS Scale & YC",
+            archetype: "Sam Altman & Y Combinator",
+            video: {
+              title: "Michael Seibel (YC): How to Talk to Early B2B Customers",
+              creator: "Y Combinator",
+              duration: "26m",
+              url: "https://www.youtube.com/watch?v=z1iF1c8w5Lg",
+              badge: "YOUTUBE // 26m",
+              takeaway: "Never ask users what feature they want; ask them what workflow cost them money and sleep this past Tuesday."
+            },
+            article: {
+              title: "Do Things That Don't Scale (The Relentless Hands-On Acquisition Engine)",
+              author: "Paul Graham",
+              readTime: "10m read",
+              url: "http://paulgraham.com/ds.html",
+              badge: "ESSAY // 10m READ",
+              takeaway: "Recruiting users manually one by one is how Stripe and Airbnb ignited their early compounding moats."
+            },
+            book: {
+              title: "Traction: How Any Startup Can Achieve Explosive Growth",
+              author: "Gabriel Weinberg",
+              chapter: "Chapter 6: Unconventional PR & Community Gravity",
+              pages: "pp. 71–94",
+              badge: "BOOK // CH. 06",
+              takeaway: "Identify 19 different acquisition channels and run micro-tests to find the single channel with asymmetric ROI."
+            }
+          }
+        ]
+      },
+      "2026-12": {
+        monthName: "December 2026",
+        focusSummary: "Orbit Harvest & $10k MRR • YC Interview Readiness • Script Polish • Q4 Goal Completion",
+        triads: [
+          {
+            trackId: "first_principles",
+            trackName: "Hard Tech & Physics",
+            archetype: "Jim Keller & Elon Musk",
+            video: {
+              title: "Jim Keller: The Art of CPU Architecture & First-Principles Computing",
+              creator: "Lex Fridman Podcast",
+              duration: "45m",
+              url: "https://www.youtube.com/watch?v=Nb2tebYAaOA",
+              badge: "YOUTUBE // 45m",
+              takeaway: "Strip away organizational cruft: legendary chips and software come from small teams working directly from physics."
+            },
+            article: {
+              title: "The Thermodynamics of Compounding Industrial Empires",
+              author: "Byrne Hobart (The Diff)",
+              readTime: "11m read",
+              url: "https://www.thediff.co/",
+              badge: "SUBSTACK // 11m READ",
+              takeaway: "Vertically integrated technical ventures capture 10x the margin of pure-software wrappers."
+            },
+            book: {
+              title: "Structures: Or Why Things Don't Fall Down",
+              author: "J.E. Gordon",
+              chapter: "Chapter 4: Tensile Strength & Mechanical Redundancy",
+              pages: "pp. 53–78",
+              badge: "BOOK // CH. 04",
+              takeaway: "Engineering safety margins: how natural and synthetic structures withstand catastrophic load shifts."
+            }
+          },
+          {
+            trackId: "deduction_systems",
+            trackName: "Deduction & Strategy",
+            archetype: "Patrick Jane & Michael Scofield",
+            video: {
+              title: "Derren Brown: Conversational Hypnosis & Inconspicuous Influence",
+              creator: "Psychology & Illusion Lecture Series",
+              duration: "30m",
+              url: "https://www.youtube.com/watch?v=F0p67W5-x9A",
+              badge: "YOUTUBE // 30m",
+              takeaway: "Pacing, leading, and strategic silence dismantle skepticism and reveal deep hidden motivations."
+            },
+            article: {
+              title: "Structural Invisibility: How Masterminds Operate Without Drawing Friction",
+              author: "Ribbonfarm",
+              readTime: "12m read",
+              url: "https://ribbonfarm.com/",
+              badge: "ESSAY // 12m READ",
+              takeaway: "Building transformative leverage quietly in the background before the competitive landscape realizes you hold the cards."
+            },
+            book: {
+              title: "The Art of War",
+              author: "Sun Tzu (Translated by Thomas Cleary)",
+              chapter: "Chapter 6: Emptiness and Fullness",
+              pages: "pp. 45–62",
+              badge: "BOOK // CH. 06",
+              takeaway: "Avoid strength, strike void; create asymmetric leverage through strategic positioning."
+            }
+          }
+        ]
+      }
+    }
+  },
 
   dailyLogs: [
     {
