@@ -58,11 +58,15 @@ function handler(req, res) {
 
   // Route root and index directly
   if (reqPath === '/' || reqPath === '' || reqPath === '/index.html') {
+    let freshHtml = indexHtml;
+    try {
+      freshHtml = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+    } catch (_) {}
     res.writeHead(200, {
       'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': 'public, max-age=0, must-revalidate'
     });
-    return res.end(indexHtml);
+    return res.end(freshHtml);
   }
 
   // Look for static file

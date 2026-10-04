@@ -82,19 +82,19 @@ function saveStored(key, value) {
 
 function renderTactileArtifact(t, idx) {
   if (t.id.includes('01') || t.id.includes('orb')) {
-    // 1. Orbit $10K MRR Lanyard Badge & Growth Engine Card
+    // 1. Orbit Marketing Engine (500+ Users, 30+ Paid, 2 Agencies & YC W27)
     return `
       <div class="artifact-badge-card">
         <div class="lanyard-slot" aria-hidden="true"></div>
         <div class="badge-header">
-          <span class="badge-org">ORBIT // REVENUE ENGINE</span>
-          <span class="spec-status-stamp">[SCALING]</span>
+          <span class="badge-org">ORBIT // OCTOBER SPRINT</span>
+          <span class="spec-status-stamp">[YC W27 SUBMISSION]</span>
         </div>
         <div class="badge-barcode">||| | |||| || ||| |||||</div>
         <div class="badge-details">
-          <div><strong>MISSION:</strong> $0 &rarr; $10,000 MRR</div>
-          <div><strong>CHANNELS:</strong> FOUNDER OUTREACH &bull; D2C</div>
-          <div><strong>CONVERSION:</strong> 5.0% TARGET &bull; 45s AHA MOMENT</div>
+          <div><strong>USERS:</strong> 500+ TOTAL USERS &bull; 30+ PAID TIER</div>
+          <div><strong>ENTERPRISE:</strong> 2 AGENCIES ON CORE AI ENGINE</div>
+          <div><strong>YC BATCH:</strong> ORBIT SUBMITTED TO YC W27</div>
         </div>
         <svg class="badge-runner-doodle" viewBox="0 0 80 45" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round">
           <circle cx="20" cy="12" r="5"/>
@@ -105,35 +105,35 @@ function renderTactileArtifact(t, idx) {
       </div>
     `;
   } else if (t.id.includes('02') || t.id.includes('yc') || t.id.includes('trace')) {
-    // 2. YC Submission Manifest & 3-Project Suite Card
+    // 2. AgentTrace Launch, Audience (300+ X / 150+ Waitlist) & YC W27
     return `
       <div class="artifact-graph-sheet">
         <div class="washi-tape-strip" aria-hidden="true"></div>
         <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
-          Y COMBINATOR // APPLICATION MANIFEST
+          AGENTTRACE // LAUNCH &amp; YC W27 MANIFEST
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 100px;">01. AGENTTRACE:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 80%;"></div></div>
-          <span>80%</span>
+          <span style="min-width: 110px;">YC W27 APPS:</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 85%;"></div></div>
+          <span>ORBIT + TRACE</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 100px;">02. LUMEN SPEC:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 60%;"></div></div>
-          <span>60%</span>
+          <span style="min-width: 110px;">X REACH (300+):</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 45%;"></div></div>
+          <span>135 / 300</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 100px;">03. JARVIS AGENT:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 50%;"></div></div>
-          <span>50%</span>
+          <span style="min-width: 110px;">WAITLIST (150+):</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 35%;"></div></div>
+          <span>52 / 150</span>
         </div>
         <span style="font-family: 'Caveat', cursive; font-size: 1.15rem; color: #2e5c38; display: block; margin-top: 10px;">
-          * AgentTrace submitted to YC! Demo video + metrics locked in.
+          * Full marketing sprint active: live telemetry &amp; trace replays on X!
         </span>
       </div>
     `;
-  } else if (t.id.includes('03') || t.id.includes('fin') || t.id.includes('plant')) {
-    // 3. Industry Plant Agency Cashflow Ledger & Workstation Reinvestment
+  } else if (t.id.includes('03') || t.id.includes('reddit') || t.id.includes('earn') || t.id.includes('40k')) {
+    // 3. Crack Reddit Code (200+ Karma) & Earn ₹40,000 Personally
     return `
       <div class="artifact-qa-sheet">
         <svg class="binder-clip-graphic" viewBox="0 0 40 50" fill="none" aria-hidden="true">
@@ -144,38 +144,38 @@ function renderTactileArtifact(t, idx) {
         </svg>
 
         <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
-          INDUSTRY PLANT // CASHFLOW LEDGER
+          DISTRIBUTION &bull; PERSONAL CASHFLOW
         </div>
         <div style="font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.6; color: #333;">
-          &bull; Target Earnings: <strong>₹3,00,000/- MIN</strong><br>
-          &bull; Monthly Net Profit: <strong>₹1,00,000+/mo PERSONAL</strong><br>
-          &bull; Agency Scope: <strong>MANAGE BUDGET &rarr; EXPAND CAPACITY</strong><br>
-          &bull; Reinvestment: <strong>NEW PHONE + LAPTOP WORKSTATION</strong>
+          &bull; Reddit Code: <strong>0 &rarr; 200+ KARMA</strong> (High Signal)<br>
+          &bull; October Income: <strong>₹40,000 PERSONAL NET</strong><br>
+          &bull; Distribution: <strong>RAW TECH DISSECTIONS &bull; NO SPAM</strong><br>
+          &bull; Funnel: <strong>REDDIT &rarr; AGENTTRACE &amp; CLIENT PIPELINE</strong>
         </div>
-        <div class="qa-stamp-circle">[FINANCIAL DISCIPLINE // APPROVED]</div>
+        <div class="qa-stamp-circle">[OCTOBER DISCIPLINE // ₹40K RUNWAY]</div>
       </div>
     `;
-  } else if (t.id.includes('04') || t.id.includes('self')) {
-    // 4. Identity Transformation: Fitness, Observational Mindset, Style & Bike
+  } else if (t.id.includes('04') || t.id.includes('self') || t.id.includes('flow') || t.id.includes('run')) {
+    // 4. Daily Running, Stretching, Flow State & New Schedule
     return `
       <div class="artifact-cassette-card">
         <div class="cassette-body">
           <div class="cassette-label-strip">
-            IDENTITY EVOLUTION // PROTOCOL 1.0
+            DAILY FLOW &bull; ATHLETIC PROTOCOL
           </div>
           <div class="cassette-spools">
             <div class="spool-hole"></div>
-            <span style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 2px;">DISCIPLINE</span>
+            <span style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 2px;">FLOW STATE</span>
             <div class="spool-hole"></div>
           </div>
           <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #bbb; text-align: center; line-height: 1.5;">
-            Daily Fitness Workouts &bull; Calm Deduction &bull; New Wardrobe &bull; Bike Mastery
+            Daily Run &bull; Daily Stretch &bull; New Schedule &bull; Calmer, Sharper Version of Me
           </div>
         </div>
       </div>
     `;
   } else {
-    // 5. Cinema Script, New Language, Cardistry & Polymath Study
+    // 5. Cinema Screenplay Sprints & Read 3 Books
     return `
       <div class="artifact-spiral-sheet">
         <div class="spiral-holes" aria-hidden="true">
@@ -185,20 +185,20 @@ function renderTactileArtifact(t, idx) {
           <div class="spiral-ring"></div>
           <div class="spiral-ring"></div>
         </div>
-        <div class="artifact-spiral-title">CREATIVE DEXTERITY // SCRIPT &bull; LANGUAGE &bull; CRAFT</div>
+        <div class="artifact-spiral-title">CREATIVE SPRINT // SCRIPT &bull; 3 BOOKS</div>
         <div class="spiral-tier-block">
-          <span class="spiral-tier-label">FEATURE SCREENPLAY:</span>
-          Full movie script draft from beat outline to final page.
+          <span class="spiral-tier-label">FEATURE MOVIE SCRIPT:</span>
+          Active writing sprints &bull; Scene outlines &bull; Character dialogue.
         </div>
         <div class="spiral-tier-block">
-          <span class="spiral-tier-label">LANGUAGE ACQUISITION:</span>
-          Daily immersion drills in new language (grammar, vocabulary, listening).
+          <span class="spiral-tier-label">READ 3 BOOKS:</span>
+          Systems thinking, narrative craft, and polymath knowledge absorption.
         </div>
         <div class="spiral-tier-block">
-          <span class="spiral-tier-label">CARDISTRY MASTERY:</span>
-          Precision tactile mechanics, one-handed cuts, and card manipulation sleights.
+          <span class="spiral-tier-label">FLOW &amp; KNOWLEDGE:</span>
+          Entering deep effortless flow &bull; Broadening intellect horizons.
         </div>
-        <span class="spiral-hand-note">* Broad curiosity: cross-pollinating systems, cinema, and polymath knowledge.</span>
+        <span class="spiral-hand-note">* Screenplay architecture + book synthesis notes.</span>
       </div>
     `;
   }
