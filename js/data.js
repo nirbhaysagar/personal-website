@@ -245,43 +245,57 @@ export const initialData = {
     },
     {
       year: "2027",
-      headline: "Scale & Deep Autonomy",
-      focus: "Scale Orbit and product ecosystem; deepen software and AI engineering capabilities.",
+      headline: "Independent SaaS & Creative Genesis",
+      focus: "Scale own flagship SaaS to min. $15,000/mo, retire parents, release debut mixtape and 1st short film, expand to San Francisco & international travels, and launch a 2nd profitable venture.",
       progress: 0,
       milestones: [
-        { text: "Scale products to meaningful commercial traction & revenue", done: false },
-        { text: "Deploy functional second-brain AI memory system into personal daily use", done: false },
-        { text: "Expand technical breadth across distributed systems, AI agents, and RAG", done: false }
+        { text: "Scale own flagship SaaS to min. $15,000/month profit with strong retention", done: false },
+        { text: "Retire parents & secure lifelong family financial peace", done: false },
+        { text: "Release debut music mixtape with signature sound and creative autonomy", done: false },
+        { text: "Direct and release 1st cinematic short film", done: false },
+        { text: "Travel internationally (San Francisco tech ecosystem and global creative hubs)", done: false },
+        { text: "Launch 2nd software project/venture and scale it to strong independent profit", done: false },
+        { text: "Deploy functional second-brain AI memory system into personal daily use", done: false }
       ]
     },
     {
       year: "2028",
-      headline: "Systems & Studio R&D",
-      focus: "Transition from solo execution into building higher-leverage systems, products, and research.",
+      headline: "The $1M/Month Horizon & Cinematic Craft",
+      focus: "Scale venture and personal income to $1 Million/month, master financial markets & trading, release 2nd music project & 2 short films, enroll in international filmmaking school abroad, and compound polymathic knowledge.",
       progress: 0,
       milestones: [
-        { text: "Launch high-impact software tool or intelligence infrastructure", done: false },
-        { text: "Deepen polymathic knowledge across AI, business, and capital allocation", done: false }
+        { text: "Scale income run-rate to $1 Million/month ($1M/mo)", done: false },
+        { text: "Master financial markets, macroeconomic trading, and capital allocation", done: false },
+        { text: "Enroll in and complete professional filmmaking course outside India", done: false },
+        { text: "Direct and release 2 new cinematic short films", done: false },
+        { text: "Release second music project / EP with elevated multidisciplinary production", done: false },
+        { text: "Attain deeper polymathic knowledge better than ever across AI, cinema, and systems", done: false },
+        { text: "Expand global travels, cultural exploration, and international founder networks", done: false }
       ]
     },
     {
       year: "2029",
-      headline: "Leverage & Impact",
-      focus: "Compound independent product revenue, invest in ambitious peers, and build enduring assets.",
+      headline: "The Feature Film & $20M Liquid Sovereign",
+      focus: "Direct and produce 1st full-length feature movie, 5–10x software venture leverage, accumulate min. $20 Million cash liquid reserve, and achieve total cross-sector sovereignty.",
       progress: 0,
       milestones: [
-        { text: "Achieve complete financial and geographic sovereignty", done: false },
-        { text: "Back and mentor early-stage ambitious builders", done: false }
+        { text: "Work on and produce 1st full-length feature movie", done: false },
+        { text: "5–10x software engineering leverage and automated venture ecosystems", done: false },
+        { text: "Accumulate min. $20 Million cash liquid capital reserves", done: false },
+        { text: "Master high-level knowledge across all core and adjacent tech & creative sectors", done: false },
+        { text: "Compound independent product revenue and back exceptional early-stage builders", done: false }
       ]
     },
     {
       year: "2030-2031",
-      headline: "Decade Horizon (Mastery)",
-      focus: "Long-term compounding: enduring technologies, intellectual depth, and lifelong freedom.",
+      headline: "Enduring Sovereignty & Infinite Side Quests",
+      focus: "Execute high-conviction side quests across art, technology, and philosophy; lifelong creative freedom and sovereign multi-decade compounding.",
       progress: 0,
       milestones: [
-        { text: "Build systems and companies that compound independently", done: false },
-        { text: "Master Japanese language and explore deep international residencies", done: false }
+        { text: "Undertake ambitious global side quests across creative, technical, and adventurous domains", done: false },
+        { text: "Build systems, creative franchises, and ventures that compound independently", done: false },
+        { text: "Master Japanese language and explore deep international residencies", done: false },
+        { text: "Operate with complete economic, creative, and temporal sovereignty", done: false }
       ]
     }
   ],
