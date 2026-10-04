@@ -984,9 +984,9 @@ function updateHeroCadenceGraphs() {
 
   // Text metrics
   if (monthDaysLeftEl) monthDaysLeftEl.textContent = `${monthDaysLeft}`;
-  if (monthPctLeftEl) monthPctLeftEl.textContent = `${monthPctRemaining}%`;
+  if (monthPctLeftEl) monthPctLeftEl.textContent = `${monthPctElapsed}%`;
   if (yearDaysLeftEl) yearDaysLeftEl.textContent = `${yearDaysLeft}`;
-  if (yearPctLeftEl) yearPctLeftEl.textContent = `${yearPctRemaining}%`;
+  if (yearPctLeftEl) yearPctLeftEl.textContent = `${yearPctElapsed}%`;
 
   const monthName = now.toLocaleString('en-US', { month: 'short' }).toUpperCase();
   if (dateStrEl) {

@@ -437,37 +437,45 @@ body {
    ========================================================================== */
 
 /* ==========================================================================
-   HERO CADENCE MONITOR (ARCHITECTURAL CHRONOMETER)
+   HERO CADENCE MONITOR (SOFT ARCHITECTURAL CHRONOMETER)
    ========================================================================== */
 
 .hero-cadence-aside {
-  width: 330px;
+  width: 324px;
   flex-shrink: 0;
-  border: 1px solid #1a1a1a;
-  background: #ffffff;
-  padding: 12px 16px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 13px 16px 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.05);
+  gap: 11px;
+  box-shadow: 0 4px 20px -3px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
   box-sizing: border-box;
-  border-radius: 2px;
+  border-radius: 8px;
   position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-cadence-aside:hover {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 .cadence-aside-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--rule-light);
-  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 8px;
   gap: 8px;
 }
 
 .cadence-badge-wrap {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
 }
 
 .cadence-live-dot {
@@ -475,9 +483,9 @@ body {
   height: 6px;
   border-radius: 50%;
   background: #2e9f5e;
-  box-shadow: 0 0 0 2px rgba(46, 159, 94, 0.2);
+  box-shadow: 0 0 0 3px rgba(46, 159, 94, 0.16);
   display: inline-block;
-  animation: cadencePulse 2s infinite ease-in-out;
+  animation: cadencePulse 2.4s infinite ease-in-out;
 }
 
 @keyframes cadencePulse {
@@ -486,26 +494,26 @@ body {
     opacity: 1;
   }
   50% {
-    transform: scale(1.25);
-    opacity: 0.6;
+    transform: scale(1.2);
+    opacity: 0.65;
   }
 }
 
 .cadence-aside-badge {
   font-family: var(--font-heading);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--ink-primary);
+  color: var(--ink-secondary);
   white-space: nowrap;
 }
 
 .cadence-aside-sub {
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  color: var(--ink-secondary);
+  color: var(--ink-muted);
   white-space: nowrap;
 }
 
@@ -524,16 +532,16 @@ body {
 
 .channel-label {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--ink-primary);
+  letter-spacing: 0.05em;
+  color: var(--ink-secondary);
 }
 
 .channel-stat {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
-  color: var(--ink-secondary);
+  font-size: 0.74rem;
+  color: var(--ink-muted);
 }
 
 .channel-stat strong {
@@ -544,15 +552,15 @@ body {
 .cadence-gauge-wrap {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .cadence-gauge-track {
   width: 100%;
-  height: 7px;
-  background: #f0f0ed;
-  border: 1px solid #1a1a1a;
-  border-radius: 1px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 999px;
   position: relative;
   overflow: visible;
   box-sizing: border-box;
@@ -560,21 +568,22 @@ body {
 
 .cadence-gauge-fill {
   height: 100%;
-  background: #1a1a1a;
-  border-radius: 0;
+  background: #2a2a2a;
+  border-radius: 999px;
   transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cadence-gauge-pin {
   position: absolute;
   top: -2px;
-  width: 2px;
-  height: 11px;
+  width: 4px;
+  height: 10px;
   background: #fa7a25;
-  box-shadow: 0 0 2px rgba(250, 122, 37, 0.6);
+  box-shadow: 0 1px 4px rgba(250, 122, 37, 0.4);
   transform: translateX(-50%);
-  border-radius: 0.5px;
+  border-radius: 2px;
   pointer-events: none;
+  transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cadence-gauge-scale {
@@ -582,7 +591,7 @@ body {
   justify-content: space-between;
   font-family: var(--font-mono);
   font-size: 8px;
-  color: var(--ink-muted);
+  color: rgba(0, 0, 0, 0.35);
   padding: 0 1px;
   line-height: 1;
 }
@@ -2924,40 +2933,55 @@ html[data-theme="dark"] .stat-item span {
 
 /* Hero Cadence Monitor in Dark Mode */
 html[data-theme="dark"] .hero-cadence-aside {
-  background: #141720;
-  border-color: #384357;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+  background: rgba(20, 24, 33, 0.78);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .hero-cadence-aside:hover {
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 html[data-theme="dark"] .cadence-aside-header {
-  border-bottom-color: #222a38;
+  border-bottom-color: rgba(255, 255, 255, 0.07);
 }
 
 html[data-theme="dark"] .cadence-aside-badge {
-  color: #f2f5fa;
+  color: #c9d1d9;
 }
 
-html[data-theme="dark"] .cadence-channel-header {
-  color: #a7b4c9;
+html[data-theme="dark"] .cadence-aside-sub {
+  color: #8b949e;
+}
+
+html[data-theme="dark"] .channel-label {
+  color: #e6edf3;
+}
+
+html[data-theme="dark"] .channel-stat {
+  color: #8b949e;
+}
+
+html[data-theme="dark"] .channel-stat strong {
+  color: #f0f6fc;
 }
 
 html[data-theme="dark"] .cadence-gauge-track {
-  background: #1c222e;
-  border-color: #384357;
+  background: rgba(255, 255, 255, 0.07);
+  border: none;
 }
 
 html[data-theme="dark"] .cadence-gauge-fill {
-  background: #f2f5fa;
+  background: linear-gradient(90deg, #bbbbbb, #f0f6fc);
+}
+
+html[data-theme="dark"] .cadence-gauge-pin {
+  background: #fa7a25;
+  box-shadow: 0 0 6px rgba(250, 122, 37, 0.7);
 }
 
 html[data-theme="dark"] .cadence-gauge-scale {
-  color: #728198;
-}
-
-html[data-theme="dark"] .cadence-stat-chip {
-  background: #1c222e;
-  border-color: #384357;
-  color: #a7b4c9;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /* Sketchbook / Ideation Centerpiece in Dark Mode */
