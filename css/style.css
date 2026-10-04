@@ -2070,8 +2070,73 @@ body {
 }
 
 /* ==========================================================================
-   BUCKET LIST (CLEAN CHECKLIST)
+   LAST 3 MONTHS ROADMAP // OCT • NOV • DEC 2026 (Q4 MASTER BOARD)
    ========================================================================== */
+
+.q4-ribbon-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: var(--bg-paper);
+  border: 1px solid var(--rule-light);
+  border-left: 3px solid #1a1a1a;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+}
+
+.q4-badge-tag {
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--ink-primary);
+  letter-spacing: 0.04em;
+  margin-right: 8px;
+}
+
+.q4-subtext {
+  font-size: 0.74rem;
+  color: var(--ink-secondary);
+}
+
+.q4-ribbon-months {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.q4-month-pill {
+  padding: 2px 8px;
+  border-radius: 2px;
+  border: 1px solid var(--rule-light);
+  color: var(--ink-secondary);
+  background: transparent;
+}
+
+.q4-month-pill.active {
+  background: #1a1a1a;
+  color: #ffffff;
+  border-color: #1a1a1a;
+}
+
+.q4-month-sep {
+  color: var(--ink-muted);
+}
+
+html[data-theme="dark"] .q4-ribbon-card {
+  background: #141414;
+  border-color: #262626;
+  border-left-color: #f0f0f0;
+}
+
+html[data-theme="dark"] .q4-month-pill.active {
+  background: #f0f0f0;
+  color: #111111;
+  border-color: #f0f0f0;
+}
 
 .bucket-summary {
   font-size: 0.88rem;

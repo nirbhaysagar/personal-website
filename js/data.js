@@ -283,19 +283,26 @@ export const initialData = {
     }
   ],
 
-  bucketList: [
-    { id: "bl-01", category: "VENTURES", text: "Submit and get funded by Y Combinator (YC) with AgentTrace", completed: false },
-    { id: "bl-02", category: "REVENUE", text: "Scale Orbit from $0 to $10,000+ MRR through organic marketing loops", completed: false },
-    { id: "bl-03", category: "FINANCES", text: "Earn min. ₹3,00,000/- independently with ₹1,00,000+/mo net profit from Industry Plant Agency", completed: false },
-    { id: "bl-04", category: "PRODUCT", text: "Ship 3 landmark AI projects: AgentTrace, Lumen (AI Memory), and Jarvis (Autonomous Assistant)", completed: false },
-    { id: "bl-05", category: "CINEMA", text: "Complete feature movie script and advance into production", completed: false },
-    { id: "bl-06", category: "LIFE SKILL", text: "Learn to ride a bike with complete control and road confidence", completed: false },
-    { id: "bl-07", category: "LANGUAGE", text: "Master a new language (Japanese) and spend 3+ months living and building in Tokyo", completed: false },
-    { id: "bl-08", category: "CRAFT", text: "Master cardistry flourishes and sleight-of-hand card cuts", completed: false },
-    { id: "bl-09", category: "HARDWARE", text: "Fund and buy a brand-new high-performance phone and laptop workstation from personal profits", completed: false },
-    { id: "bl-10", category: "MASTERY", text: "Become a recognized polymath across AI, software engineering, marketing, and business", completed: false },
-    { id: "bl-11", category: "SOVEREIGNTY", text: "Achieve 100% time, location, and financial sovereignty", completed: false }
+  q4Goals: [
+    { id: "q4-01", category: "VENTURES", text: "Submit AgentTrace project to Y Combinator (YC)", completed: false },
+    { id: "q4-02", category: "REVENUE", text: "Orbit marketing done right: systematically scale from $0 to $10,000 MRR", completed: false },
+    { id: "q4-03", category: "SOFTWARE", text: "Complete 3 landmark projects: AgentTrace, Lumen, and Jarvis", completed: false },
+    { id: "q4-04", category: "LANGUAGE", text: "Start learning another language (daily grammar, vocabulary & listening drills)", completed: false },
+    { id: "q4-05", category: "FINANCES", text: "Earn min. ₹1,00,000/- net profit per month personally", completed: false },
+    { id: "q4-06", category: "AGENCY", text: "Industry Plant Agency: manage personal budget now, expand capacity if things work well", completed: false },
+    { id: "q4-07", category: "PHYSICAL", text: "Become a better version of myself: physically fit with daily exercises (running & mobility stretching)", completed: false },
+    { id: "q4-08", category: "MINDSET", text: "Observational & deductive mindset: calm under pressure, observant, sharp at analyzing situations", completed: false },
+    { id: "q4-09", category: "STYLE & IMAGE", text: "Elevate personal image: curate new wardrobe of clothes, updated style, confident presence", completed: false },
+    { id: "q4-10", category: "CAPITAL", text: "Total personal earnings: ₹3,00,000/- INR minimum accumulated across Q4", completed: false },
+    { id: "q4-11", category: "LIFE SKILL", text: "Learn to ride a bike with complete control, technical balance, and road confidence", completed: false },
+    { id: "q4-12", category: "CINEMA", text: "Complete the full feature movie script from beat outline to final draft", completed: false },
+    { id: "q4-13", category: "HARDWARE", text: "Buy a brand-new high-performance phone and laptop workstation from personal profits", completed: false },
+    { id: "q4-14", category: "INTELLECT", text: "Absorb broader sets of multidisciplinary knowledge that spark deep interest (systems, cinema, science)", completed: false },
+    { id: "q4-15", category: "CRAFT", text: "Learn and master cardistry tricks, sleight-of-hand card cuts, and tactile flourishes", completed: false }
   ],
+  get bucketList() {
+    return this.q4Goals;
+  },
 
   dailyLogs: [
     {

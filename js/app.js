@@ -7,9 +7,24 @@ import { renderCrossStitchSVG } from './stitch-font.js';
 
 const STORAGE_KEYS = {
   DAILY_LOGS: 'bold_daily_logs_v3',
-  BUCKET_LIST: 'bold_bucket_list_v3',
+  Q4_GOALS: 'bold_q4_goals_v1',
+  BUCKET_LIST: 'bold_q4_goals_v1',
   TARGET_MILESTONES: 'bold_target_milestones_v1'
 };
+
+function initQ4Goals() {
+  const source = initialData.q4Goals || initialData.bucketList || [];
+  const saved = loadStored(STORAGE_KEYS.Q4_GOALS, null);
+  if (!saved || !Array.isArray(saved)) return source;
+  const savedMap = {};
+  saved.forEach(item => {
+    if (item && item.id) savedMap[item.id] = item.completed;
+  });
+  return source.map(item => ({
+    ...item,
+    completed: savedMap[item.id] !== undefined ? savedMap[item.id] : item.completed
+  }));
+}
 
 // Initialize milestone states from localStorage if previously stored
 const savedMilestones = loadStored(STORAGE_KEYS.TARGET_MILESTONES, {});
@@ -44,6 +59,8 @@ function normalizeDailyLogs(logs) {
   });
 }
 
+const q4GoalsList = initQ4Goals();
+
 let state = {
   profile: initialData.profile,
   projects: initialData.projects,
@@ -51,7 +68,8 @@ let state = {
   octoberTargets: targetsSource,
   get septemberTargets() { return this.targets; },
   fiveYearHorizon: initialData.fiveYearHorizon,
-  bucketList: loadStored(STORAGE_KEYS.BUCKET_LIST, initialData.bucketList),
+  bucketList: q4GoalsList,
+  q4Goals: q4GoalsList,
   dailyLogs: normalizeDailyLogs(loadStored(STORAGE_KEYS.DAILY_LOGS, initialData.dailyLogs)),
   activeLogTag: 'ALL'
 };
@@ -565,16 +583,17 @@ function renderBucketList() {
   const countBadge = document.getElementById('bucket-count-badge');
   if (!container) return;
 
-  const total = state.bucketList.length;
-  const completed = state.bucketList.filter(b => b.completed).length;
-  const percent = Math.round((completed / total) * 100);
+  const list = state.q4Goals || state.bucketList || [];
+  const total = list.length;
+  const completed = list.filter(b => b.completed).length;
+  const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   if (countBadge) {
-    countBadge.textContent = `[${completed}/${total} COMPLETED &mdash; ${percent}%]`;
+    countBadge.textContent = `[${completed}/${total} COMPLETED • ${percent}%]`;
   }
 
-  container.innerHTML = state.bucketList.map(item => `
-    <div class="bucket-item-row ${item.completed ? 'completed' : ''}" data-id="${item.id}">
+  container.innerHTML = list.map(item => `
+    <div class="bucket-item-row ${item.completed ? 'completed' : ''}" data-id="${item.id}" role="checkbox" aria-checked="${item.completed}">
       <span class="bucket-box">${item.completed ? '✓' : ''}</span>
       <span class="bucket-cat">${item.category}</span>
       <span class="bucket-text">${item.text}</span>
@@ -584,10 +603,11 @@ function renderBucketList() {
   container.querySelectorAll('.bucket-item-row').forEach(row => {
     row.addEventListener('click', () => {
       const id = row.getAttribute('data-id');
-      const item = state.bucketList.find(b => b.id === id);
+      const item = list.find(b => b.id === id);
       if (item) {
         item.completed = !item.completed;
-        saveStored(STORAGE_KEYS.BUCKET_LIST, state.bucketList);
+        saveStored(STORAGE_KEYS.Q4_GOALS, list);
+        saveStored(STORAGE_KEYS.BUCKET_LIST, list);
         renderBucketList();
       }
     });
