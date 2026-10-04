@@ -81,47 +81,20 @@ function saveStored(key, value) {
 // ----------------------------------------------------------------------------
 
 function renderTactileArtifact(t, idx) {
-  if (t.id.includes('05') || t.id.includes('lum')) {
-    // 1. Lumen AI Memory: Cobalt Blue Spiral Notebook Sheet (Reference 4)
-    return `
-      <div class="artifact-spiral-sheet">
-        <div class="spiral-holes" aria-hidden="true">
-          <div class="spiral-ring"></div>
-          <div class="spiral-ring"></div>
-          <div class="spiral-ring"></div>
-          <div class="spiral-ring"></div>
-          <div class="spiral-ring"></div>
-        </div>
-        <div class="artifact-spiral-title">LUMEN // 3-TIER MEMORY SPEC</div>
-        <div class="spiral-tier-block">
-          <span class="spiral-tier-label">TIER 1 // RAW EVENT STREAM:</span>
-          Append-only chronological log of conversation turns, user inputs, and episodic context.
-        </div>
-        <div class="spiral-tier-block">
-          <span class="spiral-tier-label">TIER 2 // CANONICAL SYNTHESIS:</span>
-          Offline consolidation worker clustering entities, beliefs, and core persona state into structured JSON.
-        </div>
-        <div class="spiral-tier-block">
-          <span class="spiral-tier-label">TIER 3 // VECTOR RETRIEVAL:</span>
-          PostgreSQL + pgvector with HNSW index. Sub-18ms vector recall on 100k embeddings.
-        </div>
-        <span class="spiral-hand-note">* HNSW recall 99.2% on 100k test memory vectors &bull; latency &lt; 20ms</span>
-      </div>
-    `;
-  } else if (t.id.includes('01') || t.id.includes('orb-01')) {
-    // 2. Orbit User Acquisition: Lanyard ID Badge & Barcode (Reference 4)
+  if (t.id.includes('01') || t.id.includes('orb')) {
+    // 1. Orbit $10K MRR Lanyard Badge & Growth Engine Card
     return `
       <div class="artifact-badge-card">
         <div class="lanyard-slot" aria-hidden="true"></div>
         <div class="badge-header">
-          <span class="badge-org">ORBIT // GTM</span>
-          <span class="spec-status-stamp">[VERIFIED]</span>
+          <span class="badge-org">ORBIT // REVENUE ENGINE</span>
+          <span class="spec-status-stamp">[SCALING]</span>
         </div>
         <div class="badge-barcode">||| | |||| || ||| |||||</div>
         <div class="badge-details">
-          <div><strong>OPERATOR:</strong> BOLD (CMO)</div>
-          <div><strong>MISSION:</strong> 500 ACTIVE D2C STORES</div>
-          <div><strong>CHANNEL:</strong> SHOPIFY PLUS + FOUNDER OUTREACH</div>
+          <div><strong>MISSION:</strong> $0 &rarr; $10,000 MRR</div>
+          <div><strong>CHANNELS:</strong> FOUNDER OUTREACH &bull; D2C</div>
+          <div><strong>CONVERSION:</strong> 5.0% TARGET &bull; 45s AHA MOMENT</div>
         </div>
         <svg class="badge-runner-doodle" viewBox="0 0 80 45" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round">
           <circle cx="20" cy="12" r="5"/>
@@ -131,60 +104,36 @@ function renderTactileArtifact(t, idx) {
         </svg>
       </div>
     `;
-  } else if (t.id.includes('02') || t.id.includes('orb-02')) {
-    // 3. Orbit Conversion: Graph Paper Memo & Funnel Sketch (Reference 2)
+  } else if (t.id.includes('02') || t.id.includes('yc') || t.id.includes('trace')) {
+    // 2. YC Submission Manifest & 3-Project Suite Card
     return `
       <div class="artifact-graph-sheet">
         <div class="washi-tape-strip" aria-hidden="true"></div>
-        <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 12px; color: #1a1a1a; letter-spacing: 0.04em;">
-          ONBOARDING DROP-OFF AUDIT
+        <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
+          Y COMBINATOR // APPLICATION MANIFEST
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 90px;">01. LANDING:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 100%;"></div></div>
-          <span>100%</span>
+          <span style="min-width: 100px;">01. AGENTTRACE:</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 80%;"></div></div>
+          <span>80%</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 90px;">02. DEMO SANDBOX:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 74%;"></div></div>
-          <span>74%</span>
+          <span style="min-width: 100px;">02. LUMEN SPEC:</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 60%;"></div></div>
+          <span>60%</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 90px;">03. STORE CONNECT:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 52%;"></div></div>
-          <span>52%</span>
-        </div>
-        <div class="funnel-bar-item">
-          <span style="min-width: 90px;">04. ACTIVE REPORT:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 35%;"></div></div>
-          <span>35%</span>
+          <span style="min-width: 100px;">03. JARVIS AGENT:</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 50%;"></div></div>
+          <span>50%</span>
         </div>
         <span style="font-family: 'Caveat', cursive; font-size: 1.15rem; color: #2e5c38; display: block; margin-top: 10px;">
-          * Interactive demo sandbox raised signup intent to 3.5%! Pushing for 5.0%.
+          * AgentTrace submitted to YC! Demo video + metrics locked in.
         </span>
       </div>
     `;
-  } else if (t.id.includes('03') || t.id.includes('dist')) {
-    // 4. Distribution: Cassette Tape Card (Reference 1)
-    return `
-      <div class="artifact-cassette-card">
-        <div class="cassette-body">
-          <div class="cassette-label-strip">
-            Technical build logs // AI systems
-          </div>
-          <div class="cassette-spools">
-            <div class="spool-hole"></div>
-            <span style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 2px;">SIDE A</span>
-            <div class="spool-hole"></div>
-          </div>
-          <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #bbb; text-align: center;">
-            4x Weekly Architecture Breakdowns &bull; Target: 500+ Technical Builders
-          </div>
-        </div>
-      </div>
-    `;
-  } else {
-    // 5. Merchant QA: Inspection Matrix Ticket with Binder Clip (Reference 1 & 3)
+  } else if (t.id.includes('03') || t.id.includes('fin') || t.id.includes('plant')) {
+    // 3. Industry Plant Agency Cashflow Ledger & Workstation Reinvestment
     return `
       <div class="artifact-qa-sheet">
         <svg class="binder-clip-graphic" viewBox="0 0 40 50" fill="none" aria-hidden="true">
@@ -195,15 +144,61 @@ function renderTactileArtifact(t, idx) {
         </svg>
 
         <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
-          CHECKOUT QA AUDIT TICKET
+          INDUSTRY PLANT // CASHFLOW LEDGER
         </div>
         <div style="font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.6; color: #333;">
-          &bull; Multi-currency checkout precision: <strong>PASS (100%)</strong><br>
-          &bull; Idempotency deduplication ledger: <strong>ACTIVE (0 dupes)</strong><br>
-          &bull; 500-order concurrent burst test: <strong>PASS</strong><br>
-          &bull; 48-hour continuous sync soak: <strong>RUNNING</strong>
+          &bull; Target Earnings: <strong>₹3,00,000/- MIN</strong><br>
+          &bull; Monthly Net Profit: <strong>₹1,00,000+/mo PERSONAL</strong><br>
+          &bull; Agency Scope: <strong>MANAGE BUDGET &rarr; EXPAND CAPACITY</strong><br>
+          &bull; Reinvestment: <strong>NEW PHONE + LAPTOP WORKSTATION</strong>
         </div>
-        <div class="qa-stamp-circle">[QA INSPECTION // APPROVED]</div>
+        <div class="qa-stamp-circle">[FINANCIAL DISCIPLINE // APPROVED]</div>
+      </div>
+    `;
+  } else if (t.id.includes('04') || t.id.includes('self')) {
+    // 4. Identity Transformation: Fitness, Observational Mindset, Style & Bike
+    return `
+      <div class="artifact-cassette-card">
+        <div class="cassette-body">
+          <div class="cassette-label-strip">
+            IDENTITY EVOLUTION // PROTOCOL 1.0
+          </div>
+          <div class="cassette-spools">
+            <div class="spool-hole"></div>
+            <span style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 2px;">DISCIPLINE</span>
+            <div class="spool-hole"></div>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #bbb; text-align: center; line-height: 1.5;">
+            Daily Fitness Workouts &bull; Calm Deduction &bull; New Wardrobe &bull; Bike Mastery
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    // 5. Cinema Script, New Language, Cardistry & Polymath Study
+    return `
+      <div class="artifact-spiral-sheet">
+        <div class="spiral-holes" aria-hidden="true">
+          <div class="spiral-ring"></div>
+          <div class="spiral-ring"></div>
+          <div class="spiral-ring"></div>
+          <div class="spiral-ring"></div>
+          <div class="spiral-ring"></div>
+        </div>
+        <div class="artifact-spiral-title">CREATIVE DEXTERITY // SCRIPT &bull; LANGUAGE &bull; CRAFT</div>
+        <div class="spiral-tier-block">
+          <span class="spiral-tier-label">FEATURE SCREENPLAY:</span>
+          Full movie script draft from beat outline to final page.
+        </div>
+        <div class="spiral-tier-block">
+          <span class="spiral-tier-label">LANGUAGE ACQUISITION:</span>
+          Daily immersion drills in new language (grammar, vocabulary, listening).
+        </div>
+        <div class="spiral-tier-block">
+          <span class="spiral-tier-label">CARDISTRY MASTERY:</span>
+          Precision tactile mechanics, one-handed cuts, and card manipulation sleights.
+        </div>
+        <span class="spiral-hand-note">* Broad curiosity: cross-pollinating systems, cinema, and polymath knowledge.</span>
       </div>
     `;
   }
@@ -762,11 +757,11 @@ function renderDailyLogs(highlightId = null) {
 // ----------------------------------------------------------------------------
 
 function setupFolderTabs() {
-  const tabs = document.querySelectorAll('.folder-tab');
+  const tabs = document.querySelectorAll('.folder-tabs-header .folder-tab');
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       tabs.forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.folder-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.folders-container .folder-pane').forEach(p => p.classList.remove('active'));
 
       tab.classList.add('active');
       const targetId = tab.getAttribute('data-tab');

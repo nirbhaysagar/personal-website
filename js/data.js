@@ -29,170 +29,196 @@ export const initialData = {
     {
       id: "proj-orbit",
       title: "Orbit",
-      tagline: "E-commerce growth & merchant intelligence platform",
-      category: "GROWTH & PRODUCT",
-      status: "ACTIVE — BUILDING",
-      progress: 72,
+      tagline: "E-commerce growth & marketing engine ($0 → $10,000 MRR)",
+      category: "GROWTH & REVENUE",
+      status: "ACTIVE — SCALING",
+      progress: 68,
       role: "CMO / Marketing & Growth",
-      tech: ["GTM", "Product Positioning", "User Acquisition", "Content", "E-commerce Integration"],
-      description: "Leading marketing, growth, and positioning for Orbit. Conducting user research, merchant journey testing, and driving user acquisition toward October targets.",
+      tech: ["GTM Loops", "Founder Outreach", "D2C Marketing", "Funnel CRO", "E-commerce Integration"],
+      description: "Executing structured marketing for Orbit to transition from $0 to $10,000 MRR. Conducting founder outreach across 250+ D2C stores, optimizing checkout drop-off, and turning pilot merchants into paid recurring accounts.",
       link: "#",
-      metrics: "Target: 500 Users — 5% Conversion Goal"
+      metrics: "Target: $10,000 MRR Milestone • 5% Visitor-to-Paid"
+    },
+    {
+      id: "proj-agenttrace",
+      title: "AgentTrace",
+      tagline: "Autonomous AI agent observability & execution tracing (YC Candidate)",
+      category: "AI & INFRASTRUCTURE",
+      status: "IN SPRINT — YC READY",
+      progress: 75,
+      role: "Founder & Lead Architect",
+      tech: ["Agent Telemetry", "Execution Graphs", "TypeScript", "Observability", "LLM Tracing"],
+      description: "Building production observability for autonomous AI agent swarms and multi-step reasoning trajectories. Packaging live demos, benchmarks, and submitting to Y Combinator (YC).",
+      link: "#",
+      metrics: "YC Application Sprint • Full Telemetry & Tracing Pipeline"
     },
     {
       id: "proj-lumen",
       title: "Lumen / Sheldon",
-      tagline: "AI memory engine & personal second-brain architecture",
-      category: "AI & RESEARCH",
+      tagline: "Hierarchical AI memory engine & personal second-brain architecture",
+      category: "AI & SYSTEMS",
       status: "ARCHITECTURE — PROTOTYPE",
-      progress: 48,
+      progress: 60,
       role: "Creator & Systems Architect",
-      tech: ["AI Memory", "RAG", "PostgreSQL", "pgvector", "Supabase", "Prisma", "TypeScript"],
-      description: "Researching and prototyping an AI memory system with hierarchical storage: raw journal streams, canonical memory, and abstract knowledge retrieval for autonomous agents.",
+      tech: ["AI Memory", "pgvector", "PostgreSQL", "HNSW Indexing", "TypeScript SDK"],
+      description: "Researching and prototyping an AI memory system with hierarchical storage: raw journal streams, canonical entity memory, and sub-18ms HNSW vector retrieval for autonomous agents.",
       link: "#",
-      metrics: "Architecture Prototype Phase — Vector Retrieval Pipeline"
+      metrics: "Sub-18ms Vector Retrieval • 99.2% Recall on 100k Vectors"
+    },
+    {
+      id: "proj-jarvis",
+      title: "Jarvis",
+      tagline: "Personal autonomous executive assistant agent",
+      category: "AUTONOMOUS AGENTS",
+      status: "DEVELOPMENT",
+      progress: 45,
+      role: "Architect & Builder",
+      tech: ["Autonomous Workflows", "Task Orchestration", "Local LLM Tooling", "Cron Automation"],
+      description: "Crafting a personal executive assistant agent to automate daily research digests, calendar scheduling, outreach pipelines, and systems monitoring with local-first security.",
+      link: "#",
+      metrics: "Autonomous Daily Digest • Task Scheduling Engine"
     }
   ],
 
   octoberTargets: [
     {
       id: "target-oct-01",
-      code: "SPEC // ORB-01",
+      code: "SPEC // ORB-REV",
       theme: "folder-manila",
       tabPos: 1,
-      tabTitle: "[01] ORBIT ACQUISITION",
-      title: "Orbit User Acquisition & Merchant Scale",
-      category: "ACQUISITION & GTM",
-      targetValue: 500,
-      currentValue: 240,
-      unit: "users",
-      status: "IN PROGRESS",
+      tabTitle: "[01] ORBIT $10K MRR",
+      title: "Orbit Marketing Engine: $0 → $10,000 MRR",
+      category: "GROWTH & REVENUE",
+      targetValue: 10000,
+      currentValue: 1200,
+      unit: "USD MRR",
+      status: "SCALING",
       deadline: "2026-10-31",
-      notes: "Push toward the 500 active merchant store milestone through direct brand onboarding and ecosystem distribution.",
-      mission: "Systematically scale Orbit's merchant base across Shopify and WooCommerce stores. Establish repeatable founder-to-founder distribution channels and high-converting acquisition loops in US & India.",
+      notes: "Engineer high-converting marketing loops, founder-to-founder outreach, and transition Orbit from $0 to $10,000 monthly recurring revenue.",
+      mission: "Execute structured, high-signal marketing for Orbit. Establish automated merchant onboarding, launch viral checkout case study breakdowns, and systematically climb from early paid pilot cohorts to the $10,000 MRR milestone.",
       milestones: [
-        { id: "m-orb01-1", text: "Curate verified outreach ledger of 250 high-growth Shopify Plus store operators", completed: true },
-        { id: "m-orb01-2", text: "Deploy self-serve merchant onboarding v2 with zero-friction store connection", completed: true },
-        { id: "m-orb01-3", text: "Conduct 20 white-glove onboarding and retention interviews with store founders", completed: false },
-        { id: "m-orb01-4", text: "Launch merchant referral flywheel offering analytics upgrades for store invites", completed: false }
+        { id: "m-orb-1", text: "Execute Orbit marketing sprint: direct founder outreach across 250+ high-GMV D2C brands", completed: true },
+        { id: "m-orb-2", text: "Launch high-converting landing page with interactive checkout leak demo sandbox", completed: true },
+        { id: "m-orb-3", text: "Convert pilot merchants to paid recurring tier & cross the initial $1,000 MRR mark", completed: true },
+        { id: "m-orb-4", text: "Scale referral loops and affiliate distribution to compound toward $10,000 MRR", completed: false }
       ],
-      tactileMemo: "Direct merchant outreach via Twitter/X and LinkedIn is converting at ~24%. Focus on high-GMV apparel and D2C brands!",
+      tactileMemo: "Orbit marketing works best when showing exact checkout drop-off teardowns. Real revenue leaks convert merchants instantly.",
       techDetails: {
-        focus: "Storefront API, Automated Ingestion & Growth Loops",
-        metrics: "500 Active Merchant Stores • < 2 min Store Connection",
-        deliverable: "Automated merchant ingestion queue & live referral ledger"
+        focus: "Founder Outreach, Conversion Funnels, MRR Compounding",
+        metrics: "$0 → $10,000 MRR Target • 5% Visitor-to-Paid",
+        deliverable: "Predictable merchant acquisition engine & MRR dashboard"
       }
     },
     {
       id: "target-oct-02",
-      code: "SPEC // ORB-02",
+      code: "SPEC // TRACE-YC",
       theme: "folder-sage",
       tabPos: 2,
-      tabTitle: "[02] CONVERSION FUNNEL",
-      title: "Orbit Conversion Funnel & Retention Engine",
-      category: "GROWTH & CRO",
-      targetValue: 5.0,
-      currentValue: 3.5,
+      tabTitle: "[02] 3 PROJECTS & YC",
+      title: "Complete 3 Projects (AgentTrace, Lumen, Jarvis) & Submit to YC",
+      category: "SOFTWARE & VENTURES",
+      targetValue: 100,
+      currentValue: 65,
       unit: "%",
-      status: "OPTIMIZING",
+      status: "IN SPRINT",
       deadline: "2026-10-31",
-      notes: "Targeting 5% visitor-to-active conversion via streamlined merchant setup and live demo sandbox.",
-      mission: "Eliminate drop-off across the onboarding funnel. Ensure every merchant reaches their first 'aha moment' (discovering actionable checkout drop-off insights) within 90 seconds of connection.",
+      notes: "Finalize production builds for AgentTrace, Lumen, and Jarvis; prepare and submit the AgentTrace application for Y Combinator.",
+      mission: "Deliver three foundational AI software systems: 1) AgentTrace (agent execution graph tracer and debugger), 2) Lumen (3-tier hierarchical agent memory engine), and 3) Jarvis (personal task agent). Package AgentTrace with demo benchmarks and submit to YC.",
       milestones: [
-        { id: "m-orb02-1", text: "Map PostHog funnel analytics across every step from landing to first report", completed: true },
-        { id: "m-orb02-2", text: "Deploy interactive demo sandbox with sample store data on homepage", completed: true },
-        { id: "m-orb02-3", text: "Automate daily intelligence digest via WhatsApp and email for store owners", completed: false },
-        { id: "m-orb02-4", text: "A/B test pricing copy: 'Revenue Intelligence' vs 'Checkout Recovery'", completed: false }
+        { id: "m-yc-1", text: "Complete AgentTrace: end-to-end agent tracing, telemetry, and debugging dashboard", completed: true },
+        { id: "m-yc-2", text: "Complete Lumen: hierarchical second-brain memory engine prototype with HNSW recall", completed: true },
+        { id: "m-yc-3", text: "Complete Jarvis: autonomous personal executive assistant for daily task orchestration", completed: false },
+        { id: "m-yc-4", text: "Prepare founder video, product demo, traction metrics, and submit AgentTrace to YC", completed: false }
       ],
-      tactileMemo: "Interactive sandbox demo increased signup intent by 18% in early user tests. Make it the hero CTA!",
+      tactileMemo: "YC cares about technical depth and demonstrable execution speed. A running AgentTrace live demo is our strongest asset.",
       techDetails: {
-        focus: "PostHog Funnel Tracking & Instant Demo Sandbox",
-        metrics: "5.0% Conversion Target (Current: 3.5%) • 45s Time-to-Value",
-        deliverable: "High-converting 3-step onboarding flow with real-time feedback"
+        focus: "Agent Observability, Memory Graphs & YC Application",
+        metrics: "3 Shipped Projects • 100% YC Submission Readiness",
+        deliverable: "AgentTrace repo + live demo + submitted YC application"
       }
     },
     {
       id: "target-oct-03",
-      code: "SPEC // DIST-01",
+      code: "SPEC // FIN-AGY",
       theme: "folder-lavender",
       tabPos: 3,
-      tabTitle: "[03] X / DISTRIBUTION",
-      title: "Technical Thought Leadership & Audience Growth",
-      category: "DISTRIBUTION",
-      targetValue: 500,
-      currentValue: 260,
-      unit: "followers",
+      tabTitle: "[03] ₹3L / INDUSTRY PLANT",
+      title: "Industry Plant Agency & Financial Goal (₹3,00,000 Target / ₹1L+ Profit)",
+      category: "AGENCY & CAPITAL",
+      targetValue: 300000,
+      currentValue: 115000,
+      unit: "INR",
       status: "ACTIVE",
       deadline: "2026-10-31",
-      notes: "Scaling from 114 to 500+ builders; publishing breakdowns on AI memory, systems, and growth engineering.",
-      mission: "Establish a high-signal technical presence around AI memory systems, distributed architecture, and startup growth. Attract ambitious founders, engineers, and collaborators.",
+      notes: "Run Industry Plant Agency to fund personal operating budget and reinvestment (new phone and laptop); achieve min. ₹1 Lakh/month profit toward ₹3 Lakhs total.",
+      mission: "Establish Industry Plant Agency as a focused, high-margin cashflow vehicle to secure personal runway. If systems scale smoothly, expand capacity; achieve minimum ₹1,00,000/month net personal profit, earn ₹3,00,000/- total, and upgrade to a new phone and laptop workstation.",
       milestones: [
-        { id: "m-dist01-1", text: "Lock in consistent 4x weekly publishing schedule on engineering breakthroughs", completed: true },
-        { id: "m-dist01-2", text: "Publish deep architectural breakdown on 3-tier second-brain AI memory engines", completed: true },
-        { id: "m-dist01-3", text: "Release open-source interactive canvas playground for ecommerce journey modeling", completed: false },
-        { id: "m-dist01-4", text: "Host technical discussion on agent memory indexing and retrieval benchmarks", completed: false }
+        { id: "m-fin-1", text: "Launch Industry Plant Agency service offering and client acquisition pipeline", completed: true },
+        { id: "m-fin-2", text: "Close initial client retainers to achieve min. ₹1,00,000/- monthly personal net profit", completed: true },
+        { id: "m-fin-3", text: "Hit cumulative ₹3,00,000/- personal earnings target across Q4 operating window", completed: false },
+        { id: "m-fin-4", text: "Reinvest earnings into high-performance workstation upgrade: buy new phone and laptop", completed: false }
       ],
-      tactileMemo: "Audience grows fastest when sharing exact schema models, benchmarks, and production edge cases. Authenticity wins.",
+      tactileMemo: "Industry Plant Agency gives immediate financial leverage. Lock in ₹1 Lakh/month profit first to manage budget, then expand.",
       techDetails: {
-        focus: "Long-form Systems Essays & Interactive Architecture Diagrams",
-        metrics: "500 Engaged Technical Followers • 20+ Reposts per Deep Thread",
-        deliverable: "4 High-signal architectural essays with custom blueprint visuals"
+        focus: "B2B Agency Growth, High-Ticket Retainers, Profit Compounding",
+        metrics: "₹3,00,000 Total Target • Min ₹1,00,000/mo Net Profit",
+        deliverable: "Active client contracts, cashflow ledger & workstation upgrade"
       }
     },
     {
       id: "target-oct-04",
-      code: "SPEC // QA-01",
+      code: "SPEC // SELF-01",
       theme: "folder-ochre",
       tabPos: 4,
-      tabTitle: "[04] MERCHANT QA",
-      title: "Orbit Real-Time Webhooks & Multi-Currency Engine QA",
-      category: "PRODUCT QA",
+      tabTitle: "[04] SELF & PRESENCE",
+      title: "Identity Transformation: Fitness, Observational Mindset & Style",
+      category: "SELF-MASTERY",
       targetValue: 100,
-      currentValue: 85,
+      currentValue: 60,
       unit: "%",
-      status: "TESTING",
+      status: "ACTIVE",
       deadline: "2026-10-31",
-      notes: "Verify zero discrepancy in order totals, discount code apportioning, and high-frequency webhook sync across the 31-day October cycle.",
-      mission: "Guarantee rock-solid data integrity between merchant ecommerce stores and Orbit's analytics pipeline. Handle high-volume sales events with zero dropped webhooks or calculation discrepancies.",
+      notes: "Daily physical workouts, calm analytical observation, elevated wardrobe, new self-image, and learning to ride a bike.",
+      mission: "Become version 1.0 of the elevated self: physically strong and disciplined through daily exercises, emotionally composed and calm, sharp at deductive analysis, paired with a refreshed wardrobe style, new confident personal image, and the practical mastery of learning to ride a bike.",
       milestones: [
-        { id: "m-qa01-1", text: "Build automated test suite for multi-currency currency conversions and tax rates", completed: true },
-        { id: "m-qa01-2", text: "Audit complex discount edge cases (stacked coupon codes and tiered cart thresholds)", completed: true },
-        { id: "m-qa01-3", text: "Implement idempotency key tracking to eliminate duplicate webhook ingestion", completed: true },
-        { id: "m-qa01-4", text: "Run 48-hour continuous stress test simulating 500 concurrent order events", completed: false }
+        { id: "m-self-1", text: "Daily physical exercise regimen: build functional athletic fitness and daily discipline", completed: true },
+        { id: "m-self-2", text: "Mental composure: practice calm presence, razor-sharp observation, and deductive analysis", completed: true },
+        { id: "m-self-3", text: "Complete wardrobe overhaul: curate new minimalist clothing style and elevated personal image", completed: false },
+        { id: "m-self-4", text: "Learn to ride a bike with complete control, technical balance, and road confidence", completed: false }
       ],
-      tactileMemo: "Idempotency ledger completely eliminated duplicate order records during webhook retries. 0 error rate!",
+      tactileMemo: "Physical discipline grounds the mind. Observation before reaction; calm deduction over emotional impulse.",
       techDetails: {
-        focus: "Webhook Replay Harness & Discrepancy Auditor",
-        metrics: "100% Test Suite Coverage • 0 Discrepancy Tolerance",
-        deliverable: "Automated regression runner for merchant cart & order sync"
+        focus: "Daily Athletic Training, Deductive Observation, Style Upgrade",
+        metrics: "31 Days of Daily Workouts • Wardrobe Refresh • Bike Mastery",
+        deliverable: "Transformed daily physical routine & confident personal presence"
       }
     },
     {
       id: "target-oct-05",
-      code: "SPEC // LUM-01",
+      code: "SPEC // CRAFT-01",
       theme: "folder-slate",
       tabPos: 5,
-      tabTitle: "[05] LUMEN AI SPEC",
-      title: "Lumen AI Memory Prototype & TypeScript SDK",
-      category: "AI & SYSTEMS",
+      tabTitle: "[05] CINEMA & CRAFT",
+      title: "Creative & Polymath Track: Movie Script, New Language & Cardistry",
+      category: "INTELLECT & CRAFT",
       targetValue: 100,
-      currentValue: 60,
+      currentValue: 45,
       unit: "%",
-      status: "PROTOTYPING",
+      status: "IN PROGRESS",
       deadline: "2026-10-31",
-      notes: "Deploy functional prototype of 3-tier memory engine with sub-30ms vector recall for personal agent use.",
-      mission: "Build and benchmark the working prototype of Lumen (Sheldon): an autonomous second-brain memory engine that combines episodic chronological streams, canonical profile synthesis, and HNSW vector search.",
+      notes: "Complete feature movie script, initiate new language acquisition, broaden polymath knowledge, and master cardistry flourishes.",
+      mission: "Expand intellectual and creative horizons through dedicated craft: complete the full draft of the movie script, initiate foundational fluency in a new language, broaden knowledge across interdisciplinary curiosities, and develop physical finger dexterity with cardistry cuts and flourishes.",
       milestones: [
-        { id: "m-lum01-1", text: "Formalize 3-tier memory schema in PostgreSQL with pgvector extension", completed: true },
-        { id: "m-lum01-2", text: "Benchmark HNSW indexing: achieved 18ms latency with 99.2% recall on 100k vectors", completed: true },
-        { id: "m-lum01-3", text: "Prototype consolidation worker that extracts recurring beliefs and preferences", completed: true },
-        { id: "m-lum01-4", text: "Publish TypeScript SDK and interactive browser visualizer for memory graphs", completed: false }
+        { id: "m-craft-1", text: "Complete the full feature movie script: finish screenplay draft from outline to page 110", completed: false },
+        { id: "m-craft-2", text: "Start learning another language (daily grammar, vocabulary, and listening drills)", completed: true },
+        { id: "m-craft-3", text: "Daily intellectual study across broad interdisciplinary curiosities (systems, cinema, science)", completed: true },
+        { id: "m-craft-4", text: "Master core cardistry flourishes, one-handed cuts, and card manipulation tricks", completed: false }
       ],
-      tactileMemo: "HNSW index gives ~18ms lookup at 99% recall vs IVFFlat's 34ms! Perfect for real-time conversation agents.",
+      tactileMemo: "Cardistry teaches tactile patience; screenplay writing disciplines narrative structure. Polymath depth requires cross-training.",
       techDetails: {
-        focus: "Hierarchical RAG, PostgreSQL / pgvector, TypeScript SDK",
-        metrics: "Sub-30ms Vector Retrieval • 3-Tier Storage Hierarchy",
-        deliverable: "Functional memory prototype + interactive memory playground"
+        focus: "Screenwriting, Language Acquisition, Cardistry Sleights",
+        metrics: "110-Page Movie Script • 30m Daily Language • 5 Cardistry Cuts",
+        deliverable: "Finished screenplay PDF, language logbook & cardistry mechanics"
       }
     }
   ],
@@ -205,13 +231,13 @@ export const initialData = {
     {
       year: "2026",
       headline: "The Foundation & Traction Year",
-      focus: "Scale Orbit to initial customer milestone, prototype Lumen AI memory architecture, and establish deep software foundations.",
-      progress: 60,
+      focus: "Scale Orbit to $10,000 MRR, ship AgentTrace to YC, prototype Lumen AI memory & Jarvis, launch Industry Plant Agency, and achieve complete personal transformation.",
+      progress: 65,
       milestones: [
-        { text: "Reach 300–500 active Orbit users with 5% conversion", done: false },
-        { text: "Grow X presence from 114 to 1,000+ builders", done: false },
-        { text: "Complete core architecture prototype for Lumen memory engine", done: false },
-        { text: "Establish consistent 6–8h daily deep work and study cadence", done: true }
+        { text: "Scale Orbit from $0 to $10,000 MRR via founder acquisition loops", done: false },
+        { text: "Complete 3 software systems (AgentTrace, Lumen, Jarvis) & submit AgentTrace to YC", done: false },
+        { text: "Earn min. ₹3,00,000/- with ₹1,00,000+/mo profit from Industry Plant Agency", done: false },
+        { text: "Achieve physical fitness, wardrobe transformation, learn to ride a bike, and complete movie script", done: false }
       ]
     },
     {
@@ -258,14 +284,17 @@ export const initialData = {
   ],
 
   bucketList: [
-    { id: "bl-01", category: "COMPANY", text: "Build a bootstrapped or backed technology company to sustainable profitability", completed: false },
-    { id: "bl-02", category: "PRODUCT", text: "Ship an AI product or developer infrastructure used by over 100,000 people", completed: false },
-    { id: "bl-03", category: "MASTERY", text: "Become a recognized polymath across AI, software engineering, marketing, and business", completed: false },
-    { id: "bl-04", category: "LANGUAGE", text: "Master Japanese and spend 3+ months living and building in Tokyo", completed: false },
-    { id: "bl-05", category: "INTELLECT", text: "Publish a landmark book or essay collection on AI memory, systems, and cognition", completed: false },
-    { id: "bl-06", category: "STAGE", text: "Deliver a high-impact keynote or talk on product growth and AI architecture", completed: false },
-    { id: "bl-07", category: "SOVEREIGNTY", text: "Achieve 100% time, location, and financial sovereignty", completed: false },
-    { id: "bl-08", category: "MENTORSHIP", text: "Fund and mentor 10 promising early-career builders on ambitious projects", completed: false }
+    { id: "bl-01", category: "VENTURES", text: "Submit and get funded by Y Combinator (YC) with AgentTrace", completed: false },
+    { id: "bl-02", category: "REVENUE", text: "Scale Orbit from $0 to $10,000+ MRR through organic marketing loops", completed: false },
+    { id: "bl-03", category: "FINANCES", text: "Earn min. ₹3,00,000/- independently with ₹1,00,000+/mo net profit from Industry Plant Agency", completed: false },
+    { id: "bl-04", category: "PRODUCT", text: "Ship 3 landmark AI projects: AgentTrace, Lumen (AI Memory), and Jarvis (Autonomous Assistant)", completed: false },
+    { id: "bl-05", category: "CINEMA", text: "Complete feature movie script and advance into production", completed: false },
+    { id: "bl-06", category: "LIFE SKILL", text: "Learn to ride a bike with complete control and road confidence", completed: false },
+    { id: "bl-07", category: "LANGUAGE", text: "Master a new language (Japanese) and spend 3+ months living and building in Tokyo", completed: false },
+    { id: "bl-08", category: "CRAFT", text: "Master cardistry flourishes and sleight-of-hand card cuts", completed: false },
+    { id: "bl-09", category: "HARDWARE", text: "Fund and buy a brand-new high-performance phone and laptop workstation from personal profits", completed: false },
+    { id: "bl-10", category: "MASTERY", text: "Become a recognized polymath across AI, software engineering, marketing, and business", completed: false },
+    { id: "bl-11", category: "SOVEREIGNTY", text: "Achieve 100% time, location, and financial sovereignty", completed: false }
   ],
 
   dailyLogs: [
