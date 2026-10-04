@@ -11,6 +11,7 @@
   --bg-canvas: #ffffff;
   --bg-paper: #faf9f6;
   --bg-subtle: #f5f5f3;
+  --grid-line: rgba(17, 17, 17, 0.032);
   --ink-primary: #111111;
   --ink-secondary: #444444;
   --ink-muted: #777777;
@@ -44,6 +45,11 @@ html {
 body {
   font-family: var(--font-mono);
   background-color: var(--bg-canvas);
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: -1px -1px;
   color: var(--ink-primary);
   line-height: 1.65;
   padding: 40px 24px 100px;
@@ -596,26 +602,91 @@ body {
   line-height: 1;
 }
 
-/* Navigation links */
+/* Navigation links (Sticky Architectural Capsule Strip) */
 .nav-strip {
   display: flex;
-  gap: 16px;
-  margin-top: 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 28px 0 36px;
   flex-wrap: wrap;
+  position: sticky;
+  top: 12px;
+  z-index: 90;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 8px 14px;
+  border: 1px solid var(--rule-light);
+  border-radius: 999px;
+  box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-item {
-  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
   font-weight: 600;
-  color: var(--ink-primary);
+  letter-spacing: 0.02em;
+  color: var(--ink-secondary);
   text-decoration: none;
-  border-bottom: 1.5px solid transparent;
-  padding-bottom: 2px;
-  transition: border-color 0.15s ease;
+  border-radius: 999px;
+  padding: 5px 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-item .nav-code {
+  font-size: 0.68rem;
+  font-weight: 700;
+  opacity: 0.55;
+  transition: all 0.18s ease;
 }
 
 .nav-item:hover {
-  border-bottom-color: var(--ink-primary);
+  color: var(--ink-primary);
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateY(-0.5px);
+}
+
+.nav-item.active {
+  color: var(--ink-primary);
+  background: rgba(0, 0, 0, 0.08);
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16);
+}
+
+.nav-item.active .nav-code {
+  opacity: 1;
+  color: var(--tape-red);
+}
+
+html[data-theme="dark"] .nav-strip {
+  background: rgba(14, 18, 25, 0.88);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 24px -2px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="dark"] .nav-item {
+  color: #94a3b8;
+}
+
+html[data-theme="dark"] .nav-item:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] .nav-item.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+}
+
+html[data-theme="dark"] .nav-item.active .nav-code {
+  color: #ff6b6b;
 }
 
 /* ==========================================================================
@@ -970,6 +1041,7 @@ body {
 }
 
 .day-cell {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -977,11 +1049,11 @@ body {
   padding: 5px 1px;
   background: var(--bg-canvas);
   border: 1px solid var(--rule-light);
-  border-radius: 1px;
+  border-radius: 2px;
   font-family: var(--font-mono);
   text-align: center;
-  cursor: default;
-  transition: all 0.15s ease;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
 }
 
@@ -1050,7 +1122,86 @@ body {
 
 .day-cell:hover {
   border-color: var(--rule-strong);
-  z-index: 3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+}
+
+/* 31-Day Timeline Micro-Hover Tooltip */
+.day-cell[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #11141a;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 4px 9px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1), transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.day-cell[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  border-width: 5px 5px 0 5px;
+  border-style: solid;
+  border-color: #11141a transparent transparent transparent;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1), transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 101;
+}
+
+.day-cell:hover[data-tooltip]::after,
+.day-cell:hover[data-tooltip]::before,
+.day-cell:focus[data-tooltip]::after,
+.day-cell:focus[data-tooltip]::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Boundary edge clamps for first 3 and last 3 days */
+.day-cell:nth-child(-n+3)[data-tooltip]::after {
+  left: 0;
+  transform: translateX(0) translateY(4px);
+}
+.day-cell:nth-child(-n+3):hover[data-tooltip]::after,
+.day-cell:nth-child(-n+3):focus[data-tooltip]::after {
+  transform: translateX(0) translateY(0);
+}
+.day-cell:nth-child(-n+3)[data-tooltip]::before {
+  left: 10px;
+}
+
+.day-cell:nth-last-child(-n+3)[data-tooltip]::after {
+  left: auto;
+  right: 0;
+  transform: translateX(0) translateY(4px);
+}
+.day-cell:nth-last-child(-n+3):hover[data-tooltip]::after,
+.day-cell:nth-last-child(-n+3):focus[data-tooltip]::after {
+  transform: translateX(0) translateY(0);
+}
+.day-cell:nth-last-child(-n+3)[data-tooltip]::before {
+  left: auto;
+  right: 10px;
 }
 
 /* ==========================================================================
@@ -1554,24 +1705,242 @@ body {
   flex-grow: 1;
 }
 
+/* Architectural Capsule Subtarget Chips */
 .dossier-subtarget-group {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.64rem;
   font-weight: 700;
-  color: var(--ink-secondary);
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1px 5px;
-  border-radius: 2px;
-  letter-spacing: 0.04em;
+  color: var(--ink-primary);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
   width: fit-content;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
+/* Category-specific capsule tinting */
+.dossier-subtarget-group[data-group*="REVENUE"],
+.dossier-subtarget-group[data-group*="CASHFLOW"] {
+  color: #0d6832;
+  background: rgba(46, 159, 94, 0.09);
+  border-color: rgba(46, 159, 94, 0.28);
+}
+
+.dossier-subtarget-group[data-group*="YC"] {
+  color: #c2410c;
+  background: rgba(249, 115, 22, 0.09);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+.dossier-subtarget-group[data-group*="ACQUISITION"],
+.dossier-subtarget-group[data-group*="WAITLIST"],
+.dossier-subtarget-group[data-group*="X AUDIENCE"],
+.dossier-subtarget-group[data-group*="ENTERPRISE"] {
+  color: #1e40af;
+  background: rgba(30, 64, 175, 0.08);
+  border-color: rgba(30, 64, 175, 0.25);
+}
+
+.dossier-subtarget-group[data-group*="SCREENPLAY"],
+.dossier-subtarget-group[data-group*="BOOK"],
+.dossier-subtarget-group[data-group*="KNOWLEDGE"] {
+  color: #6b21a8;
+  background: rgba(138, 92, 246, 0.09);
+  border-color: rgba(138, 92, 246, 0.28);
+}
+
+.dossier-subtarget-group[data-group*="FLOW"],
+.dossier-subtarget-group[data-group*="CARDIO"],
+.dossier-subtarget-group[data-group*="MOBILITY"],
+.dossier-subtarget-group[data-group*="BETTER ME"],
+.dossier-subtarget-group[data-group*="SCHEDULE"] {
+  color: #92400e;
+  background: rgba(245, 158, 11, 0.09);
+  border-color: rgba(245, 158, 11, 0.28);
+}
+
+.dossier-subtarget-group[data-group*="REDDIT"] {
+  color: #d9381e;
+  background: rgba(255, 69, 0, 0.08);
+  border-color: rgba(255, 69, 0, 0.25);
+}
+
+/* Hover highlights */
+.dossier-check-item:hover .dossier-subtarget-group {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  filter: brightness(1.05);
+}
+
+/* Dark mode subtarget palette */
 html[data-theme="dark"] .dossier-subtarget-group {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.15);
-  color: var(--ink-secondary);
+  color: #e2e8f0;
+}
+
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="REVENUE"],
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="CASHFLOW"] {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.12);
+  border-color: rgba(74, 222, 128, 0.35);
+}
+
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="YC"] {
+  color: #fb923c;
+  background: rgba(251, 146, 60, 0.14);
+  border-color: rgba(251, 146, 60, 0.35);
+}
+
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="ACQUISITION"],
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="WAITLIST"],
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="X AUDIENCE"],
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="ENTERPRISE"] {
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.12);
+  border-color: rgba(96, 165, 250, 0.35);
+}
+
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="SCREENPLAY"],
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="BOOK"],
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="KNOWLEDGE"] {
+  color: #c084fc;
+  background: rgba(192, 132, 252, 0.12);
+  border-color: rgba(192, 132, 252, 0.35);
+}
+
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="FLOW"],
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="CARDIO"],
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="MOBILITY"],
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="BETTER ME"],
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="SCHEDULE"] {
+  color: #fde047;
+  background: rgba(253, 224, 71, 0.12);
+  border-color: rgba(253, 224, 71, 0.35);
+}
+
+html[data-theme="dark"] .dossier-subtarget-group[data-group*="REDDIT"] {
+  color: #ff7a59;
+  background: rgba(255, 122, 89, 0.12);
+  border-color: rgba(255, 122, 89, 0.35);
+}
+
+/* ==========================================================================
+   DYNAMIC PHYSICAL [CLEARED] RUBBER STAMP
+   ========================================================================== */
+
+.dossier-cleared-stamp {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  pointer-events: none;
+  z-index: 25;
+  animation: stampSlam 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+  transform-origin: center center;
+}
+
+@keyframes stampSlam {
+  0% {
+    opacity: 0;
+    transform: scale(2.4) rotate(-24deg);
+    filter: blur(4px);
+  }
+  65% {
+    opacity: 0.98;
+    transform: scale(0.95) rotate(-9deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0.92;
+    transform: scale(1) rotate(-11deg);
+    filter: blur(0);
+  }
+}
+
+.stamp-seal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border: 2.5px solid #c92a2a;
+  border-radius: 6px;
+  outline: 1.5px dashed #c92a2a;
+  outline-offset: -5px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #c92a2a;
+  font-family: var(--font-mono);
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(201, 42, 42, 0.2);
+  user-select: none;
+}
+
+.stamp-seal-badge {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.stamp-seal-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  margin: 2px 0;
+  text-transform: uppercase;
+}
+
+.stamp-seal-sub {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-top: 1px solid rgba(201, 42, 42, 0.4);
+  padding-top: 2px;
+  margin-top: 2px;
+  width: 100%;
+}
+
+/* Dark Mode Cleared Stamp */
+html[data-theme="dark"] .stamp-seal {
+  background: rgba(18, 22, 30, 0.94);
+  border-color: #10b981;
+  outline-color: #10b981;
+  color: #10b981;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.25);
+}
+
+html[data-theme="dark"] .stamp-seal-sub {
+  border-top-color: rgba(16, 185, 129, 0.4);
+}
+
+/* Collapsed Folder Lip Cleared Pill */
+.folder-cleared-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #c92a2a;
+  border: 1.5px solid #c92a2a;
+  background: rgba(201, 42, 42, 0.08);
+  padding: 1px 7px;
+  border-radius: 3px;
+  margin-left: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+html[data-theme="dark"] .folder-cleared-pill {
+  color: #10b981;
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
 }
 
 .dossier-check-text {
@@ -2863,6 +3232,7 @@ html[data-theme="dark"] {
   --bg-canvas: #0c0e12;
   --bg-paper: #141720;
   --bg-subtle: #1c222e;
+  --grid-line: rgba(255, 255, 255, 0.026);
   --ink-primary: #f2f5fa;
   --ink-secondary: #a7b4c9;
   --ink-muted: #728198;

@@ -270,20 +270,18 @@ function renderOctoberTargets() {
         ${daysArray.map(d => {
           let statusClass = 'day-future';
           let marker = '&middot;';
-          let label = `Oct ${String(d).padStart(2, '0')}, 2026`;
+          let tooltip = `Oct ${String(d).padStart(2, '0')} — Upcoming Sprint Runway`;
           if (d < currentDay) {
             statusClass = 'day-past';
             marker = '&#10003;';
-            label += ' (Completed)';
+            tooltip = `Oct ${String(d).padStart(2, '0')} — Completed Sprint ✓`;
           } else if (d === currentDay) {
             statusClass = 'day-current';
             marker = '&#9679;';
-            label += ' (TODAY - ACTIVE SPRINT)';
-          } else {
-            label += ' (Upcoming)';
+            tooltip = `Day ${String(d).padStart(2, '0')} — Active Sprint Today (${daysLeft}d remaining)`;
           }
           return `
-            <div class="day-cell ${statusClass}" title="${label}" data-day="${d}">
+            <div class="day-cell ${statusClass}" data-tooltip="${tooltip}" data-day="${d}" tabindex="0" role="button" aria-label="${tooltip}">
               <span class="day-num">${String(d).padStart(2, '0')}</span>
               <span class="day-marker">${marker}</span>
             </div>
@@ -319,15 +317,20 @@ function renderOctoberTargets() {
     // Milestones checklist items
     const milestones = t.milestones || [];
     const completedCount = milestones.filter(m => m.completed).length;
-    const milestonesHtml = milestones.map(m => `
-      <li class="dossier-check-item ${m.completed ? 'completed' : ''}" data-target-id="${t.id}" data-milestone-id="${m.id}">
-        <span class="dossier-check-box">${m.completed ? '✓' : ''}</span>
-        <div class="dossier-check-content">
-          ${m.group ? `<span class="dossier-subtarget-group">[${m.group}]</span>` : ''}
-          <span class="dossier-check-text">${m.text}</span>
-        </div>
-      </li>
-    `).join('');
+    const isDossierCleared = (milestones.length > 0 && completedCount === milestones.length) || pct === 100;
+
+    const milestonesHtml = milestones.map(m => {
+      const groupTag = m.group ? m.group.trim().toUpperCase() : '';
+      return `
+        <li class="dossier-check-item ${m.completed ? 'completed' : ''}" data-target-id="${t.id}" data-milestone-id="${m.id}">
+          <span class="dossier-check-box">${m.completed ? '✓' : ''}</span>
+          <div class="dossier-check-content">
+            ${groupTag ? `<span class="dossier-subtarget-group" data-group="${groupTag}">[${groupTag}]</span>` : ''}
+            <span class="dossier-check-text">${m.text}</span>
+          </div>
+        </li>
+      `;
+    }).join('');
 
     return `
       <article class="folder-item ${t.theme || 'folder-manila'} ${isPulled ? 'pulled-out' : ''}" data-id="${t.id}">
@@ -336,7 +339,7 @@ function renderOctoberTargets() {
           <div class="folder-tab" data-folder-trigger="${t.id}" title="Click to pull out folder">
             <span class="folder-tab-num">0${idx + 1}</span>
             <span class="folder-tab-title">${t.tabTitle || t.code}</span>
-            <span class="folder-tab-status">${isPulled ? '[OPEN]' : '[PULL]'}</span>
+            <span class="folder-tab-status">${isPulled ? '[OPEN]' : (isDossierCleared ? '[CLEARED ✓]' : '[PULL]')}</span>
           </div>
         </div>
 
@@ -346,6 +349,7 @@ function renderOctoberTargets() {
             <span class="folder-code-badge">${t.code}</span>
             <h3 class="folder-lip-title">${t.title}</h3>
             <span class="folder-lip-cat">&bull; ${t.category}</span>
+            ${isDossierCleared ? `<span class="folder-cleared-pill">[CLEARED ✓]</span>` : ''}
           </div>
           <div class="folder-lip-right">
             <div class="folder-mini-meter">
@@ -365,6 +369,15 @@ function renderOctoberTargets() {
         <div class="folder-dossier" aria-hidden="${!isPulled}">
           <div class="dossier-paper-sheet-inner">
             <div class="dossier-paper-sheet">
+              ${isDossierCleared ? `
+                <div class="dossier-cleared-stamp" aria-label="Dossier Complete Stamp">
+                  <div class="stamp-seal">
+                    <span class="stamp-seal-badge">CLEARED // COMPLETE</span>
+                    <span class="stamp-seal-title">OCT 2026 DOSSIER</span>
+                    <span class="stamp-seal-sub">ALL SUBTARGETS VERIFIED &#10003;</span>
+                  </div>
+                </div>
+              ` : ''}
               <!-- Header Bar -->
               <div class="dossier-header-bar">
                 <div class="dossier-header-left">
@@ -1041,6 +1054,75 @@ function renderSeptemberTargets() {
 }
 
 // ----------------------------------------------------------------------------
+// SCROLL-SPY NAVIGATION TRACKER
+// ----------------------------------------------------------------------------
+
+function setupScrollSpy() {
+  const navItems = document.querySelectorAll('.nav-strip .nav-item');
+  if (!navItems.length) return;
+
+  const sectionIds = Array.from(navItems).map(item => {
+    const href = item.getAttribute('href');
+    return href && href.startsWith('#') ? href.substring(1) : null;
+  }).filter(Boolean);
+
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  if (!sections.length) return;
+
+  let isTicking = false;
+
+  function updateActiveNav() {
+    const scrollPos = window.scrollY + 140; // buffer for sticky nav & header
+    let currentSectionId = '';
+
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentSectionId = section.id;
+        break;
+      }
+    }
+
+    // Edge case: if near bottom of page, activate last section
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 60)) {
+      currentSectionId = sections[sections.length - 1].id;
+    }
+
+    navItems.forEach(item => {
+      const href = item.getAttribute('href');
+      if (currentSectionId && href === `#${currentSectionId}`) {
+        item.classList.add('active');
+        item.setAttribute('aria-current', 'true');
+      } else {
+        item.classList.remove('active');
+        item.removeAttribute('aria-current');
+      }
+    });
+
+    isTicking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(updateActiveNav);
+      isTicking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    if (!isTicking) {
+      window.requestAnimationFrame(updateActiveNav);
+      isTicking = true;
+    }
+  }, { passive: true });
+
+  // Initial trigger
+  updateActiveNav();
+}
+
+// ----------------------------------------------------------------------------
 // INITIAL BOOTSTRAP
 // ----------------------------------------------------------------------------
 
@@ -1055,6 +1137,7 @@ function initApp() {
   renderTagFilterBar();
   renderDailyLogs();
   setupEventListeners();
+  setupScrollSpy();
 }
 
 if (document.readyState === 'loading') {
