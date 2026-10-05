@@ -2607,7 +2607,7 @@ html[data-theme="dark"] .q4-month-pill.active {
 }
 
 /* ==========================================================================
-   SECTION 07: INTELLECTUAL INTAKE RADAR // THE POLYMATH MATRIX
+   SECTION 07: INTELLECTUAL INTAKE RADAR · THE POLYMATH MATRIX
    ========================================================================== */
 
 .radar-section-wrap {
@@ -2618,12 +2618,11 @@ html[data-theme="dark"] .q4-month-pill.active {
 .radar-controller-card {
   background: var(--bg-paper);
   border: 1px solid var(--rule-light);
-  border-left: 3px solid #fa7a25;
   padding: 16px 20px;
   border-radius: 6px;
   margin-top: 18px;
   margin-bottom: 20px;
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
 .radar-controller-top {
@@ -2660,18 +2659,18 @@ html[data-theme="dark"] .q4-month-pill.active {
   font-family: var(--font-mono);
   font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   color: var(--ink-primary);
 }
 
 .radar-archetype-pill {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: #fa7a25;
-  background: rgba(250, 122, 37, 0.08);
-  border: 1px solid rgba(250, 122, 37, 0.25);
-  padding: 2px 8px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  background: var(--bg-canvas);
+  border: 1px solid var(--rule-light);
+  padding: 2px 9px;
   border-radius: 999px;
   letter-spacing: 0.03em;
 }
@@ -2703,37 +2702,38 @@ html[data-theme="dark"] .q4-month-pill.active {
   font-size: 0.72rem;
   font-weight: 700;
   padding: 4px 8px;
-  border: 1px solid var(--rule-strong);
+  border: 1px solid var(--rule-light);
   background: var(--bg-canvas);
   color: var(--ink-primary);
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
   outline: none;
 }
 
 .radar-btn {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.02em;
-  padding: 4px 10px;
-  border-radius: 3px;
+  padding: 5px 12px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s ease;
-  border: 1px solid var(--rule-strong);
+  border: 1px solid var(--rule-light);
   background: var(--bg-canvas);
-  color: var(--ink-primary);
+  color: var(--ink-secondary);
 }
 
 .radar-btn:hover {
   background: #111111;
   color: #ffffff;
+  border-color: #111111;
   transform: translateY(-0.5px);
 }
 
 .radar-btn-ai {
-  background: rgba(249, 115, 22, 0.08);
-  border-color: rgba(249, 115, 22, 0.35);
+  background: rgba(249, 115, 22, 0.06);
+  border-color: rgba(249, 115, 22, 0.25);
   color: #c2410c;
 }
 
@@ -2830,27 +2830,19 @@ html[data-theme="dark"] .q4-month-pill.active {
   justify-content: space-between;
   background: var(--bg-paper);
   border: 1px solid var(--rule-light);
-  border-top: 3px solid #111111;
-  border-radius: 4px;
-  padding: 16px;
+  border-radius: 6px;
+  padding: 18px 20px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   position: relative;
 }
 
-.radar-card-video { border-top-color: #e53935; }
-.radar-card-essay { border-top-color: #2563eb; }
-.radar-card-book { border-top-color: #8b5cf6; }
-
 .radar-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.05);
   border-color: var(--rule-strong);
 }
 
 .radar-card-header {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
   margin-bottom: 12px;
 }
 
@@ -2864,37 +2856,26 @@ html[data-theme="dark"] .q4-month-pill.active {
 
 .radar-format-badge {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-primary);
 }
-
-.format-video { color: #d32f2f; }
-.format-essay { color: #1d4ed8; }
-.format-book { color: #6d28d9; }
 
 .radar-meta-badge {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 700;
+  font-size: 0.65rem;
+  font-weight: 600;
   color: var(--ink-muted);
   background: var(--bg-canvas);
   border: 1px solid var(--rule-light);
-  padding: 1px 6px;
-  border-radius: 2px;
-}
-
-.radar-archetype-tag {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: #fa7a25;
-  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 999px;
 }
 
 .radar-card-title {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 700;
   color: var(--ink-primary);
   line-height: 1.35;
@@ -2905,27 +2886,38 @@ html[data-theme="dark"] .q4-month-pill.active {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   color: var(--ink-muted);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.radar-creator-line strong {
+  color: var(--ink-secondary);
+  font-weight: 600;
 }
 
 .radar-takeaway {
-  font-size: 0.82rem;
-  color: var(--ink-secondary);
-  line-height: 1.5;
   background: var(--bg-canvas);
-  border-left: 2px solid var(--rule-strong);
-  padding: 8px 10px;
-  border-radius: 0 3px 3px 0;
+  border: 1px solid var(--rule-light);
+  border-radius: 5px;
+  padding: 10px 12px;
   margin-bottom: 14px;
 }
 
-.radar-takeaway strong {
-  color: var(--ink-primary);
-  font-size: 0.7rem;
-  font-family: var(--font-mono);
-  letter-spacing: 0.04em;
+.radar-takeaway .takeaway-label {
   display: block;
-  margin-bottom: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 4px;
+}
+
+.radar-takeaway .takeaway-text {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--ink-secondary);
+  margin: 0;
 }
 
 .radar-card-footer {
@@ -2934,22 +2926,22 @@ html[data-theme="dark"] .q4-month-pill.active {
   align-items: center;
   gap: 8px;
   margin-top: auto;
-  padding-top: 10px;
+  padding-top: 12px;
   border-top: 1px dashed var(--rule-light);
 }
 
 .radar-link-btn {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink-primary);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 8px;
-  border-radius: 3px;
-  border: 1px solid var(--rule-strong);
+  padding: 4px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--rule-light);
   background: var(--bg-canvas);
   transition: all 0.15s ease;
 }
@@ -2957,36 +2949,34 @@ html[data-theme="dark"] .q4-month-pill.active {
 .radar-link-btn:hover {
   background: #111111;
   color: #ffffff;
+  border-color: #111111;
 }
 
 .radar-book-pill {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: #6d28d9;
-  background: rgba(139, 92, 246, 0.08);
-  padding: 4px 8px;
-  border-radius: 3px;
-  border: 1px solid rgba(139, 92, 246, 0.25);
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  padding: 4px 6px;
 }
 
 .radar-extract-btn {
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  font-weight: 700;
-  color: #fa7a25;
-  background: rgba(250, 122, 37, 0.06);
-  border: 1px solid rgba(250, 122, 37, 0.3);
-  padding: 4px 8px;
-  border-radius: 3px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  background: transparent;
+  border: 1px solid var(--rule-light);
+  padding: 4px 9px;
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .radar-extract-btn:hover {
-  background: #fa7a25;
-  color: #ffffff;
-  border-color: #fa7a25;
+  color: var(--ink-primary);
+  border-color: var(--rule-strong);
+  background: var(--bg-canvas);
   transform: translateY(-0.5px);
 }
 
@@ -3154,30 +3144,36 @@ html[data-theme="dark"] .radar-meta-badge {
 
 html[data-theme="dark"] .radar-takeaway {
   background: #0c0e12;
-  border-left-color: #384357;
+  border-color: #222a38;
   color: #a7b4c9;
 }
 
 html[data-theme="dark"] .radar-link-btn {
   background: #0c0e12;
-  border-color: #384357;
+  border-color: #2a3344;
   color: #f2f5fa;
 }
 
 html[data-theme="dark"] .radar-link-btn:hover {
   background: #ffffff;
   color: #0c0e12;
+  border-color: #ffffff;
+}
+
+html[data-theme="dark"] .radar-extract-btn {
+  border-color: #2a3344;
+  color: #a7b4c9;
+}
+
+html[data-theme="dark"] .radar-extract-btn:hover {
+  border-color: #384357;
+  color: #ffffff;
+  background: #141720;
 }
 
 html[data-theme="dark"] .radar-book-pill {
-  background: rgba(192, 132, 252, 0.12);
-  border-color: rgba(192, 132, 252, 0.35);
-  color: #c084fc;
+  color: #728198;
 }
-
-html[data-theme="dark"] .format-video { color: #f87171; }
-html[data-theme="dark"] .format-essay { color: #60a5fa; }
-html[data-theme="dark"] .format-book { color: #c084fc; }
 
 html[data-theme="dark"] .radar-ai-drawer {
   background: #141720;

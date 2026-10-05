@@ -344,7 +344,7 @@ export const initialData = {
               creator: "Everyday Astronaut / Starbase",
               duration: "24m",
               url: "https://www.youtube.com/watch?v=t705r8ICkRw",
-              badge: "YOUTUBE // 24m",
+              badge: "YouTube · 24m",
               takeaway: "Deconstruct every problem to fundamental physical truths instead of reasoning by analogy. Make requirements less dumb and delete parts relentlessly."
             },
             article: {
@@ -352,7 +352,7 @@ export const initialData = {
               author: "Casey Handmer",
               readTime: "9m read",
               url: "https://caseyhandmer.wordpress.com/",
-              badge: "SUBSTACK // 9m READ",
+              badge: "Substack · 9m",
               takeaway: "Radical mechanical simplicity and vertical iteration speed create compounding moats that capital alone cannot buy."
             },
             book: {
@@ -360,7 +360,7 @@ export const initialData = {
               author: "Walter Isaacson",
               chapter: "Chapter 31: The Five Commandments of Production",
               pages: "pp. 284–298",
-              badge: "BOOK // CH. 31",
+              badge: "Book · Ch. 31",
               takeaway: "The factory is the product. Delete any requirement that does not come from a specific human who takes personal responsibility."
             }
           },
@@ -373,7 +373,7 @@ export const initialData = {
               creator: "Joe Navarro (Former FBI Behavioral Analyst)",
               duration: "21m",
               url: "https://www.youtube.com/watch?v=4jwUXV4QaTw",
-              badge: "YOUTUBE // 21m",
+              badge: "YouTube · 21m",
               takeaway: "Establish an environmental baseline within 60 seconds. Notice lip compression, torso leaning, and shoe direction before speaking."
             },
             article: {
@@ -381,7 +381,7 @@ export const initialData = {
               author: "Maria Konnikova / FS",
               readTime: "11m read",
               url: "https://fs.blog/brain-attic/",
-              badge: "ESSAY // 11m READ",
+              badge: "Essay · 11m",
               takeaway: "Most people merely see, but they do not observe. Guard what enters your mental attic to preserve acute deductive agility."
             },
             book: {
@@ -389,7 +389,7 @@ export const initialData = {
               author: "Maria Konnikova",
               chapter: "Chapter 3: Stocking the Brain Attic (Attentional Mindfulness)",
               pages: "pp. 57–82",
-              badge: "BOOK // CH. 03",
+              badge: "Book · Ch. 03",
               takeaway: "Observe 3 subtle environmental micro-discrepancies in every conversation today before engaging."
             }
           },
@@ -402,7 +402,7 @@ export const initialData = {
               creator: "Sam Altman (Stanford CS183B)",
               duration: "48m",
               url: "https://www.youtube.com/watch?v=0lJKucu6HJc",
-              badge: "YOUTUBE // 48m",
+              badge: "YouTube · 48m",
               takeaway: "The single most predictive metric of 100x founders is internal clock rate: the speed of decisions, code deploys, and customer calls."
             },
             article: {
@@ -410,7 +410,7 @@ export const initialData = {
               author: "Lenny Rachitsky (Lenny's Newsletter)",
               readTime: "14m read",
               url: "https://www.lennysnewsletter.com/",
-              badge: "SUBSTACK // 14m READ",
+              badge: "Substack · 14m",
               takeaway: "Founder outbound loops, authentic high-value Reddit breakdowns (0% spam), and closing design partner agencies."
             },
             book: {
@@ -418,7 +418,7 @@ export const initialData = {
               author: "Peter Thiel",
               chapter: "Chapter 8: Secrets (The Distribution Advantage)",
               pages: "pp. 93–108",
-              badge: "BOOK // CH. 08",
+              badge: "Book · Ch. 08",
               takeaway: "Superior sales and distribution can create a monopoly even with no product differentiation, but superior product without distribution fails."
             }
           },
@@ -431,7 +431,7 @@ export const initialData = {
               creator: "Michael Arndt (Oscar Winner — Toy Story 3)",
               duration: "32m",
               url: "https://www.youtube.com/watch?v=1u4b9K_n2hY",
-              badge: "YOUTUBE // 32m",
+              badge: "YouTube · 32m",
               takeaway: "The midpoint shift: transitioning the protagonist from reactive self-preservation into proactive attack."
             },
             article: {
@@ -439,7 +439,7 @@ export const initialData = {
               author: "Every Frame a Painting",
               readTime: "8m read",
               url: "https://everyframeapainting.tumblr.com/",
-              badge: "ESSAY // 8m READ",
+              badge: "Essay · 8m",
               takeaway: "Every frame must convey emotional power balances and hidden subtext through spatial depth and character triangle blocking."
             },
             book: {
@@ -447,7 +447,7 @@ export const initialData = {
               author: "Robert McKee",
               chapter: "Chapter 9: Act Design & Turning Points",
               pages: "pp. 181–207",
-              badge: "BOOK // CH. 09",
+              badge: "Book · Ch. 09",
               takeaway: "A scene turning point occurs when an action produces an unexpected reaction, opening a gap between expectation and reality."
             }
           },
@@ -460,7 +460,7 @@ export const initialData = {
               creator: "Andrej Karpathy & Harrison Chase",
               duration: "42m",
               url: "https://www.youtube.com/watch?v=sal78ACtGTc",
-              badge: "YOUTUBE // 42m",
+              badge: "YouTube · 42m",
               takeaway: "How memory reflection, vector indexing, and tool execution graphs bridge local AI agents to real-world capability."
             },
             article: {
@@ -468,7 +468,7 @@ export const initialData = {
               author: "Eugene Yan",
               readTime: "12m read",
               url: "https://eugeneyan.com/writing/llm-patterns/",
-              badge: "TECHNICAL // 12m READ",
+              badge: "Technical · 12m",
               takeaway: "Combining lexical exact-match BM25 with dense semantic vector embeddings for sub-20ms second-brain memory retrieval."
             },
             book: {
@@ -476,7 +476,7 @@ export const initialData = {
               author: "Martin Kleppmann",
               chapter: "Chapter 3: Storage and Retrieval Engines",
               pages: "pp. 69–110",
-              badge: "BOOK // CH. 03",
+              badge: "Book · Ch. 03",
               takeaway: "Evaluate append-only segment logs, B-Trees, and LSM storage engines for maximum throughput in persistent memory stores."
             }
           },
@@ -489,7 +489,7 @@ export const initialData = {
               creator: "Bloomberg Wealth / Oxford Union",
               duration: "38m",
               url: "https://www.youtube.com/watch?v=6m-qKq6f688",
-              badge: "YOUTUBE // 38m",
+              badge: "YouTube · 38m",
               takeaway: "It is not whether you are right or wrong, but how much money you make when you are right and how little you lose when you are wrong."
             },
             article: {
@@ -497,7 +497,7 @@ export const initialData = {
               author: "Alfonso Peccatiello (The Macro Compass)",
               readTime: "10m read",
               url: "https://themacrocompass.substack.com/",
-              badge: "SUBSTACK // 10m READ",
+              badge: "Substack · 10m",
               takeaway: "Central bank balance sheet liquidity and credit expansion dictate multi-month macro swings far beyond micro earnings reports."
             },
             book: {
@@ -505,7 +505,7 @@ export const initialData = {
               author: "Edwin Lefèvre",
               chapter: "Chapter 8: The Tape Doesn't Lie (Patience & Timing)",
               pages: "pp. 82–104",
-              badge: "BOOK // CH. 08",
+              badge: "Book · Ch. 08",
               takeaway: "Never fight the primary trend. The big money is not made in the individual fluctuations, but in sitting tight during the main swing."
             }
           }
@@ -524,7 +524,7 @@ export const initialData = {
               creator: "MIT OpenCourseWare / Innovation Archives",
               duration: "28m",
               url: "https://www.youtube.com/watch?v=KzK8dCcm7pQ",
-              badge: "YOUTUBE // 28m",
+              badge: "YouTube · 28m",
               takeaway: "Tesla tested every part for wear inside his mental simulation engine before manufacturing physical prototypes."
             },
             article: {
@@ -532,7 +532,7 @@ export const initialData = {
               author: "Paul Graham",
               readTime: "8m read",
               url: "http://paulgraham.com/",
-              badge: "ESSAY // 8m READ",
+              badge: "Essay · 8m",
               takeaway: "Major breakthroughs require long stretches of uninterrupted mental incubation away from conversational consensus."
             },
             book: {
@@ -540,7 +540,7 @@ export const initialData = {
               author: "Nikola Tesla",
               chapter: "Chapter 2: The Mental Visualization Method",
               pages: "pp. 21–39",
-              badge: "BOOK // CH. 02",
+              badge: "Book · Ch. 02",
               takeaway: "Close your eyes: mentally simulate the entire architecture of a system in real-time before writing code."
             }
           },
@@ -553,7 +553,7 @@ export const initialData = {
               creator: "Systems Analysis / Narrative Engineering",
               duration: "18m",
               url: "https://www.youtube.com/watch?v=eE7O2F3J99Q",
-              badge: "YOUTUBE // 18m",
+              badge: "YouTube · 18m",
               takeaway: "Low latent inhibition allows high-leverage thinkers to see latent utility in overlooked everyday constraints and protocols."
             },
             article: {
@@ -561,7 +561,7 @@ export const initialData = {
               author: "Cedric Chin (Commoncog)",
               readTime: "13m read",
               url: "https://commoncog.com/blog/",
-              badge: "SUBSTACK // 13m READ",
+              badge: "Substack · 13m",
               takeaway: "Developing fast, non-verbal situational awareness in complex engineering architectures and negotiations."
             },
             book: {
@@ -569,7 +569,7 @@ export const initialData = {
               author: "Joe Navarro",
               chapter: "Chapter 5: Torso, Arms & Limbic Defense Signals",
               pages: "pp. 95–132",
-              badge: "BOOK // CH. 05",
+              badge: "Book · Ch. 05",
               takeaway: "Detect subconscious defensiveness before words are spoken by reading torso orientation and arm barricades."
             }
           },
@@ -582,7 +582,7 @@ export const initialData = {
               creator: "Y Combinator",
               duration: "26m",
               url: "https://www.youtube.com/watch?v=z1iF1c8w5Lg",
-              badge: "YOUTUBE // 26m",
+              badge: "YouTube · 26m",
               takeaway: "Never ask users what feature they want; ask them what workflow cost them money and sleep this past Tuesday."
             },
             article: {
@@ -590,7 +590,7 @@ export const initialData = {
               author: "Paul Graham",
               readTime: "10m read",
               url: "http://paulgraham.com/ds.html",
-              badge: "ESSAY // 10m READ",
+              badge: "Essay · 10m",
               takeaway: "Recruiting users manually one by one is how Stripe and Airbnb ignited their early compounding moats."
             },
             book: {
@@ -598,7 +598,7 @@ export const initialData = {
               author: "Gabriel Weinberg",
               chapter: "Chapter 6: Unconventional PR & Community Gravity",
               pages: "pp. 71–94",
-              badge: "BOOK // CH. 06",
+              badge: "Book · Ch. 06",
               takeaway: "Identify 19 different acquisition channels and run micro-tests to find the single channel with asymmetric ROI."
             }
           }
@@ -617,7 +617,7 @@ export const initialData = {
               creator: "Lex Fridman Podcast",
               duration: "45m",
               url: "https://www.youtube.com/watch?v=Nb2tebYAaOA",
-              badge: "YOUTUBE // 45m",
+              badge: "YouTube · 45m",
               takeaway: "Strip away organizational cruft: legendary chips and software come from small teams working directly from physics."
             },
             article: {
@@ -625,7 +625,7 @@ export const initialData = {
               author: "Byrne Hobart (The Diff)",
               readTime: "11m read",
               url: "https://www.thediff.co/",
-              badge: "SUBSTACK // 11m READ",
+              badge: "Substack · 11m",
               takeaway: "Vertically integrated technical ventures capture 10x the margin of pure-software wrappers."
             },
             book: {
@@ -633,7 +633,7 @@ export const initialData = {
               author: "J.E. Gordon",
               chapter: "Chapter 4: Tensile Strength & Mechanical Redundancy",
               pages: "pp. 53–78",
-              badge: "BOOK // CH. 04",
+              badge: "Book · Ch. 04",
               takeaway: "Engineering safety margins: how natural and synthetic structures withstand catastrophic load shifts."
             }
           },
@@ -646,7 +646,7 @@ export const initialData = {
               creator: "Psychology & Illusion Lecture Series",
               duration: "30m",
               url: "https://www.youtube.com/watch?v=F0p67W5-x9A",
-              badge: "YOUTUBE // 30m",
+              badge: "YouTube · 30m",
               takeaway: "Pacing, leading, and strategic silence dismantle skepticism and reveal deep hidden motivations."
             },
             article: {
@@ -654,7 +654,7 @@ export const initialData = {
               author: "Ribbonfarm",
               readTime: "12m read",
               url: "https://ribbonfarm.com/",
-              badge: "ESSAY // 12m READ",
+              badge: "Essay · 12m",
               takeaway: "Building transformative leverage quietly in the background before the competitive landscape realizes you hold the cards."
             },
             book: {
@@ -662,7 +662,7 @@ export const initialData = {
               author: "Sun Tzu (Translated by Thomas Cleary)",
               chapter: "Chapter 6: Emptiness and Fullness",
               pages: "pp. 45–62",
-              badge: "BOOK // CH. 06",
+              badge: "Book · Ch. 06",
               takeaway: "Avoid strength, strike void; create asymmetric leverage through strategic positioning."
             }
           }

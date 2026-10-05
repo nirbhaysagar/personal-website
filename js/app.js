@@ -682,7 +682,7 @@ function renderBucketList() {
 }
 
 // ----------------------------------------------------------------------------
-// RENDER INTELLECTUAL RADAR // POLYMATH INTAKE ENGINE
+// RENDER INTELLECTUAL RADAR · POLYMATH INTAKE ENGINE
 // ----------------------------------------------------------------------------
 
 let currentRadarTriad = null;
@@ -694,8 +694,8 @@ function extractToIntakeDailyLog(title, creator, takeaway, type) {
   const dailySection = document.getElementById('section-daily');
 
   if (titleInput && textInput) {
-    titleInput.value = `Synthesis // ${title}`;
-    textInput.value = `[INTEL EXTRACTION // ${type.toUpperCase()}]\nSource: ${creator}\n\nCore Mental Model & Extraction:\n${takeaway}\n\nImmediate Action & Synthesis in Orbit / Script / AI Engineering:\n`;
+    titleInput.value = `Synthesis: ${title}`;
+    textInput.value = `[INTEL EXTRACTION · ${type.toUpperCase()}]\nSource: ${creator}\n\nCore Mental Model & Extraction:\n${takeaway}\n\nImmediate Action & Synthesis in Orbit, Script, and Engineering:\n`;
     if (tagsInput) {
       tagsInput.value = `polymath, intake, ${type}`;
     }
@@ -723,7 +723,7 @@ function renderRadarSection() {
 
   if (subtitleEl) {
     subtitleEl.innerHTML = `
-      <span class="focus-lbl">ACTIVE FOCUS SYLLABUS:</span>
+      <span class="focus-lbl">ACTIVE FOCUS:</span>
       <span class="focus-txt">${monthData.focusSummary}</span>
     `;
   }
@@ -767,25 +767,25 @@ function renderRadarSection() {
     <article class="radar-card radar-card-video">
       <div class="radar-card-header">
         <div class="radar-card-badge-row">
-          <span class="radar-format-badge format-video">[01 // VIDEO INTEL]</span>
+          <span class="radar-format-badge format-video">01 · Video</span>
           <span class="radar-meta-badge">${currentRadarTriad.video.badge}</span>
         </div>
-        <span class="radar-archetype-tag">${currentRadarTriad.video.archetype || currentRadarTriad.archetype}</span>
       </div>
       <div class="radar-card-body">
         <h4 class="radar-card-title">${currentRadarTriad.video.title}</h4>
-        <div class="radar-creator-line">&bull; Creator: <strong>${currentRadarTriad.video.creator}</strong></div>
-        <p class="radar-takeaway">
-          <strong>CORE EXTRACTION:</strong> ${currentRadarTriad.video.takeaway}
-        </p>
+        <div class="radar-creator-line">Source: <strong>${currentRadarTriad.video.creator}</strong></div>
+        <div class="radar-takeaway">
+          <span class="takeaway-label">Core Insight</span>
+          <p class="takeaway-text">${currentRadarTriad.video.takeaway}</p>
+        </div>
       </div>
       <div class="radar-card-footer">
         <a href="${currentRadarTriad.video.url}" target="_blank" rel="noopener noreferrer" class="radar-link-btn" title="Open video in new tab">
-          <span>WATCH VIDEO</span>
+          <span>Watch Video</span>
           <span class="btn-arrow">&nearr;</span>
         </a>
         <button type="button" class="radar-extract-btn" data-type="video" data-title="${encodeURIComponent(currentRadarTriad.video.title)}" data-creator="${encodeURIComponent(currentRadarTriad.video.creator)}" data-takeaway="${encodeURIComponent(currentRadarTriad.video.takeaway)}">
-          <span>LOG TO #08</span>
+          <span>Log to Daily &rarr;</span>
         </button>
       </div>
     </article>
@@ -794,25 +794,25 @@ function renderRadarSection() {
     <article class="radar-card radar-card-essay">
       <div class="radar-card-header">
         <div class="radar-card-badge-row">
-          <span class="radar-format-badge format-essay">[02 // SUBSTACK ESSAY]</span>
+          <span class="radar-format-badge format-essay">02 · Essay</span>
           <span class="radar-meta-badge">${currentRadarTriad.article.badge}</span>
         </div>
-        <span class="radar-archetype-tag">${currentRadarTriad.article.archetype || currentRadarTriad.archetype}</span>
       </div>
       <div class="radar-card-body">
         <h4 class="radar-card-title">${currentRadarTriad.article.title}</h4>
-        <div class="radar-creator-line">&bull; Author: <strong>${currentRadarTriad.article.author}</strong></div>
-        <p class="radar-takeaway">
-          <strong>CORE EXTRACTION:</strong> ${currentRadarTriad.article.takeaway}
-        </p>
+        <div class="radar-creator-line">Author: <strong>${currentRadarTriad.article.author}</strong></div>
+        <div class="radar-takeaway">
+          <span class="takeaway-label">Core Insight</span>
+          <p class="takeaway-text">${currentRadarTriad.article.takeaway}</p>
+        </div>
       </div>
       <div class="radar-card-footer">
         <a href="${currentRadarTriad.article.url}" target="_blank" rel="noopener noreferrer" class="radar-link-btn" title="Open article in new tab">
-          <span>READ ESSAY</span>
+          <span>Read Essay</span>
           <span class="btn-arrow">&nearr;</span>
         </a>
         <button type="button" class="radar-extract-btn" data-type="essay" data-title="${encodeURIComponent(currentRadarTriad.article.title)}" data-creator="${encodeURIComponent(currentRadarTriad.article.author)}" data-takeaway="${encodeURIComponent(currentRadarTriad.article.takeaway)}">
-          <span>LOG TO #08</span>
+          <span>Log to Daily &rarr;</span>
         </button>
       </div>
     </article>
@@ -821,22 +821,22 @@ function renderRadarSection() {
     <article class="radar-card radar-card-book">
       <div class="radar-card-header">
         <div class="radar-card-badge-row">
-          <span class="radar-format-badge format-book">[03 // BOOK CHAPTER]</span>
+          <span class="radar-format-badge format-book">03 · Book</span>
           <span class="radar-meta-badge">${currentRadarTriad.book.badge}</span>
         </div>
-        <span class="radar-archetype-tag">${currentRadarTriad.book.archetype || currentRadarTriad.archetype}</span>
       </div>
       <div class="radar-card-body">
         <h4 class="radar-card-title">${currentRadarTriad.book.title}</h4>
-        <div class="radar-creator-line">&bull; Author: <strong>${currentRadarTriad.book.author}</strong> &bull; <em>${currentRadarTriad.book.chapter}</em> (${currentRadarTriad.book.pages})</div>
-        <p class="radar-takeaway">
-          <strong>DRILL / APPLICATION:</strong> ${currentRadarTriad.book.takeaway}
-        </p>
+        <div class="radar-creator-line">Author: <strong>${currentRadarTriad.book.author}</strong> &bull; <em>${currentRadarTriad.book.chapter}</em> (${currentRadarTriad.book.pages})</div>
+        <div class="radar-takeaway">
+          <span class="takeaway-label">Application</span>
+          <p class="takeaway-text">${currentRadarTriad.book.takeaway}</p>
+        </div>
       </div>
       <div class="radar-card-footer">
-        <span class="radar-book-pill">DISSECT CHAPTER</span>
+        <span class="radar-book-pill">Reading Track</span>
         <button type="button" class="radar-extract-btn" data-type="book" data-title="${encodeURIComponent(currentRadarTriad.book.title + ' — ' + currentRadarTriad.book.chapter)}" data-creator="${encodeURIComponent(currentRadarTriad.book.author)}" data-takeaway="${encodeURIComponent(currentRadarTriad.book.takeaway)}">
-          <span>LOG TO #08</span>
+          <span>Log to Daily &rarr;</span>
         </button>
       </div>
     </article>
@@ -958,7 +958,7 @@ Return ONLY a valid JSON object (no markdown formatting, no code blocks) matchin
     "creator": "Speaker or Channel",
     "duration": "Duration (e.g. 28m)",
     "url": "https://www.youtube.com/results?search_query=...",
-    "badge": "YOUTUBE // 28m",
+    "badge": "YouTube · 28m",
     "takeaway": "Specific core extraction and first-principles mental model."
   },
   "article": {
@@ -966,7 +966,7 @@ Return ONLY a valid JSON object (no markdown formatting, no code blocks) matchin
     "author": "Author or Publication",
     "readTime": "Reading time (e.g. 10m read)",
     "url": "https://substack.com",
-    "badge": "SUBSTACK // 10m READ",
+    "badge": "Substack · 10m",
     "takeaway": "Key thesis and strategic takeaway."
   },
   "book": {
@@ -974,7 +974,7 @@ Return ONLY a valid JSON object (no markdown formatting, no code blocks) matchin
     "author": "Author",
     "chapter": "Chapter number & title",
     "pages": "Pages or section",
-    "badge": "BOOK // CH. XX",
+    "badge": "Book · Ch. XX",
     "takeaway": "Actionable daily drill or mental model application."
   }
 }`;
