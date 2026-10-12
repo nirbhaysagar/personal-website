@@ -315,7 +315,11 @@ export const initialData = {
     { id: "q4-12", category: "CINEMA", text: "Complete the full feature movie script from beat outline to final draft", completed: false },
     { id: "q4-13", category: "HARDWARE", text: "Buy a brand-new high-performance phone and laptop workstation from personal profits", completed: false },
     { id: "q4-14", category: "INTELLECT", text: "Absorb broader sets of multidisciplinary knowledge that spark deep interest (systems, cinema, science)", completed: false },
-    { id: "q4-15", category: "CRAFT", text: "Learn and master cardistry tricks, sleight-of-hand card cuts, and tactile flourishes", completed: false }
+    { id: "q4-15", category: "CRAFT", text: "Learn and master cardistry tricks, sleight-of-hand card cuts, and tactile flourishes", completed: false },
+    { id: "q4-16", category: "STUDY: DEVOPS", text: "Master DevOps & Production Infrastructure: Linux internals, Docker containerization, CI/CD pipelines, reverse proxies (Nginx/Caddy), zero-downtime deployments, and telemetry logging", completed: false },
+    { id: "q4-17", category: "STUDY: AI BUILDING", text: "Master AI Internals & Agent Building: Transformer attention mechanisms, local LLM quantization, tool/function calling graphs, evals & prompt engineering, and deterministic state machines", completed: false },
+    { id: "q4-18", category: "STUDY: SELLING & GTM", text: "Master High-Ticket Selling & Distribution: B2B consultative sales, cold outbound loops, objection handling, founder-to-founder demos, agency retainer closing, and value-based pricing", completed: false },
+    { id: "q4-19", category: "STUDY: 3 SYSTEMS", text: "Deep Technical Mastery for 3 Projects: Agent observability & execution DAGs (AgentTrace), Hierarchical pgvector/HNSW & sub-18ms retrieval (Lumen), and autonomous tool-execution runtimes (Jarvis)", completed: false }
   ],
   get bucketList() {
     return this.q4Goals;
@@ -664,6 +668,93 @@ export const initialData = {
               pages: "pp. 45–62",
               badge: "Book · Ch. 06",
               takeaway: "Avoid strength, strike void; create asymmetric leverage through strategic positioning."
+            }
+          },
+          {
+            trackId: "ai_architectures",
+            trackName: "AI Working & Building",
+            archetype: "Agent Runtimes, Local LLMs & The 3 Systems",
+            video: {
+              title: "Andrej Karpathy: Building LLMs from Scratch & Agentic Runtime Systems",
+              creator: "Andrej Karpathy (YouTube)",
+              duration: "2h 15m",
+              url: "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+              badge: "YouTube · 2h",
+              takeaway: "Understand every token generation pass, KV-cache management, attention heads, and how tool calling parses structured JSON outputs."
+            },
+            article: {
+              title: "Building Production Multi-Agent Systems: Observability, Memory & Evals",
+              author: "Chip Huyen",
+              readTime: "18m read",
+              url: "https://huyenchip.com/blog/",
+              badge: "Technical · 18m",
+              takeaway: "System architecture for the 3 projects: telemetry DAGs for AgentTrace, sub-18ms HNSW retrieval for Lumen, and stateful tool dispatch for Jarvis."
+            },
+            book: {
+              title: "Building LLM Applications & Multi-Agent Architectures",
+              author: "O'Reilly Engineering Series",
+              chapter: "Chapter 5: Agent State Machines, Memory Hierarchy & Tool APIs",
+              pages: "pp. 112–158",
+              badge: "Book · Ch. 05",
+              takeaway: "Decouple planning from execution loops; enforce deterministic confirmation gates for mutations while caching read trajectories."
+            }
+          },
+          {
+            trackId: "saas_venture",
+            trackName: "Selling & High-Ticket GTM",
+            archetype: "B2B Sales, Outbound & Retainers",
+            video: {
+              title: "Chris Voss: Never Split the Difference — High-Stakes Negotiation & B2B Sales",
+              creator: "Talks at Google",
+              duration: "48m",
+              url: "https://www.youtube.com/watch?v=guZa7mQV1l0",
+              badge: "YouTube · 48m",
+              takeaway: "Calibrated open-ended questions ('How am I supposed to do that?'), tactical empathy, mirroring, and labeling latent client fears."
+            },
+            article: {
+              title: "The B2B SaaS Outbound Playbook: Cold Email That Converts at 14%",
+              author: "Patrick Dang",
+              readTime: "11m read",
+              url: "https://patrickdang.com/",
+              badge: "Substack · 11m",
+              takeaway: "Lead with the specific operational bleeding wound, offer live proof of work teardowns, and sell the high-ticket solution."
+            },
+            book: {
+              title: "The Mom Test",
+              author: "Rob Fitzpatrick",
+              chapter: "Chapter 1: The Mom Test (How to Talk to Customers When Everyone Lying)",
+              pages: "pp. 11–38",
+              badge: "Book · Ch. 01",
+              takeaway: "Talk about their life and past workflows instead of your idea. Ask about specific past costs, not future opinions."
+            }
+          },
+          {
+            trackId: "first_principles",
+            trackName: "DevOps & Infrastructure",
+            archetype: "Linux Internals, Docker & Cloud Deployment",
+            video: {
+              title: "DevOps from First Principles: Linux Networking, Docker Containers & CI/CD",
+              creator: "NetworkChuck / Traversy Media",
+              duration: "52m",
+              url: "https://www.youtube.com/watch?v=pg19Z8LLKh4",
+              badge: "YouTube · 52m",
+              takeaway: "Master Linux cgroups, namespaces, reverse proxies (Nginx/Caddy SSL), Docker multi-stage builds, and automated GitHub Actions deployment."
+            },
+            article: {
+              title: "Production Engineering for Solo Founders: Robust Zero-Downtime Stacks",
+              author: "Gergely Orosz (The Pragmatic Engineer)",
+              readTime: "14m read",
+              url: "https://blog.pragmaticengineer.com/",
+              badge: "Essay · 14m",
+              takeaway: "Keep production infrastructure simple: single-node VPS with automated backups, healthchecks, and telemetry beats Kubernetes overkill."
+            },
+            book: {
+              title: "Site Reliability Engineering (SRE)",
+              author: "Betsy Beyer et al. (Google)",
+              chapter: "Chapter 3: Embracing Risk & Service Level Objectives",
+              pages: "pp. 31–54",
+              badge: "Book · Ch. 03",
+              takeaway: "Automate routine operations relentlessly; eliminate toil so engineering hours stay focused on system capability."
             }
           }
         ]
