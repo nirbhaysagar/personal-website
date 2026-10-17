@@ -935,7 +935,6 @@ function generateWeeklyReviewDraft() {
 // ----------------------------------------------------------------------------
 function renderStrategicCyclesSection() {
   const container = document.getElementById('active-cycle-container');
-  const horizonContainer = document.getElementById('horizon-list');
   if (!container) return;
 
   const cycle = (state.strategicCycles || [])[0];
@@ -988,22 +987,48 @@ function renderStrategicCyclesSection() {
       </div>
     </div>
   `;
+}
 
-  // Render 5-year horizon preserved
-  if (horizonContainer) {
-    horizonContainer.innerHTML = (state.fiveYearHorizon || []).map(h => `
-      <div class="horizon-row" style="background: var(--bg-paper); border: 1px solid var(--rule-strong); padding: 16px; margin-bottom: 12px;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
-          <strong style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--ink-primary);">${escapeHtml(h.year)} &bull; ${escapeHtml(h.headline)}</strong>
-          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted);">${h.progress}% Complete</span>
+// ----------------------------------------------------------------------------
+// 10. 5-YEAR STRATEGIC HORIZON (ARCHITECTURAL TIMELINE SPINE)
+// ----------------------------------------------------------------------------
+function renderFiveYearHorizon() {
+  const container = document.getElementById('horizon-list');
+  if (!container) return;
+
+  const horizonData = state.fiveYearHorizon || [];
+  container.innerHTML = horizonData.map(h => {
+    const isCurrent = h.year === '2026';
+    const displayYear = escapeHtml(h.year).replace('-', ' &ndash; ');
+
+    return `
+      <div class="timeline-entry ${isCurrent ? 'current-phase' : ''}">
+        <div class="timeline-node-col" aria-hidden="true">
+          <div class="timeline-node"></div>
         </div>
-        <p style="font-family: var(--font-sans); font-size: 0.88rem; color: var(--ink-secondary); margin-bottom: 8px;">${escapeHtml(h.focus)}</p>
-        <ul style="list-style: square; padding-left: 20px; font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-secondary);">
-          ${(h.milestones || []).map(m => `<li>${escapeHtml(m.text)}</li>`).join('')}
-        </ul>
+        <div class="timeline-body">
+          <div class="timeline-overview">
+            <div class="timeline-year-row">
+              <span class="timeline-year">${displayYear}</span>
+              ${isCurrent ? '<span class="timeline-current-badge">[CURRENT // ACTIVE]</span>' : ''}
+            </div>
+            <h4 class="timeline-headline">${escapeHtml(h.headline)}</h4>
+            <p class="timeline-focus">${escapeHtml(h.focus)}</p>
+          </div>
+          <div class="timeline-milestones-col">
+            <ul class="timeline-milestone-list">
+              ${(h.milestones || []).map(m => `
+                <li class="milestone-item ${m.done ? 'is-done' : ''}">
+                  <span class="milestone-marker">${m.done ? '[✓]' : '[·]'}</span>
+                  <span class="milestone-text">${escapeHtml(m.text)}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        </div>
       </div>
-    `).join('');
-  }
+    `;
+  }).join('');
 }
 
 // ----------------------------------------------------------------------------
@@ -1668,6 +1693,7 @@ function renderAll() {
   renderCareerSection();
   renderWeeklyReviewSection();
   renderStrategicCyclesSection();
+  renderFiveYearHorizon();
 }
 
 // Bootstrapping
