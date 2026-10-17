@@ -41,6 +41,36 @@ targetsSource.forEach(t => {
   }
 });
 
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function detectDisciplineFromContent(tags, text) {
+  const combined = ((tags || []).join(' ') + ' ' + (text || '')).toLowerCase();
+  if (combined.includes('ai') || combined.includes('memory') || combined.includes('embedding') || combined.includes('hnsw') || combined.includes('vector') || combined.includes('llm') || combined.includes('agent')) {
+    return 'ai-cognition';
+  }
+  if (combined.includes('devops') || combined.includes('system') || combined.includes('docker') || combined.includes('envoy') || combined.includes('redis') || combined.includes('linux') || combined.includes('queue') || combined.includes('postgres')) {
+    return 'systems-devops';
+  }
+  if (combined.includes('gtm') || combined.includes('sales') || combined.includes('growth') || combined.includes('orbit') || combined.includes('marketing') || combined.includes('conversion') || combined.includes('merchant')) {
+    return 'gtm-growth';
+  }
+  if (combined.includes('cinema') || combined.includes('film') || combined.includes('lighting') || combined.includes('narrative') || combined.includes('script') || combined.includes('story') || combined.includes('shot')) {
+    return 'cinema-narrative';
+  }
+  if (combined.includes('first-principles') || combined.includes('cadence') || combined.includes('focus') || combined.includes('greene') || combined.includes('doctrine') || combined.includes('feynman') || combined.includes('psychology')) {
+    return 'first-principles';
+  }
+  return 'software-craft';
+}
+
 function normalizeDailyLogs(logs) {
   return (logs || []).map(l => {
     let tags = [];
@@ -51,12 +81,25 @@ function normalizeDailyLogs(logs) {
     } else if (l.category) {
       tags = [l.category.trim().toLowerCase().replace(/\s+/g, '-')];
     }
+    const cleanTags = tags.length > 0 ? tags : ['general'];
+    const title = l.title || '';
+    const learned = l.learned || '';
+    const discipline = l.discipline || detectDisciplineFromContent(cleanTags, title + ' ' + learned);
+
     return {
       id: l.id || 'log-' + Date.now(),
       date: l.date || new Date().toISOString().split('T')[0],
-      title: l.title || '',
-      learned: l.learned || '',
-      tags: tags.length > 0 ? tags : ['general']
+      title: title,
+      discipline: discipline,
+      learned: learned,
+      implementation: l.implementation || '',
+      crossDomain: l.crossDomain || '',
+      mastery: {
+        explainable: l.mastery?.explainable ?? true,
+        implemented: l.mastery?.implemented ?? Boolean(l.implementation),
+        edgeTested: l.mastery?.edgeTested ?? false
+      },
+      tags: cleanTags
     };
   });
 }
@@ -77,7 +120,9 @@ let state = {
   selectedRadarTrack: 'all',
   activeRadarTriadIdx: 0,
   dailyLogs: normalizeDailyLogs(loadStored(STORAGE_KEYS.DAILY_LOGS, initialData.dailyLogs)),
-  activeLogTag: 'ALL'
+  activeLogTag: 'ALL',
+  activeDisciplineFilter: 'ALL',
+  logSearchQuery: ''
 };
 
 let activePulledFolderId = targetsSource.find(t => t.id.includes('05'))?.id || targetsSource[0]?.id; // Lumen AI memory spec opened by default
@@ -690,18 +735,53 @@ let currentRadarTriad = null;
 function extractToIntakeDailyLog(title, creator, takeaway, type) {
   const titleInput = document.getElementById('log-title-input');
   const textInput = document.getElementById('log-text-input');
+  const disciplineSelect = document.getElementById('log-discipline-select');
   const tagsInput = document.getElementById('log-tags-input');
+  const crossInput = document.getElementById('log-crossdomain-input');
   const dailySection = document.getElementById('section-daily');
+  const deepBtn = document.getElementById('mode-deep-btn');
 
   if (titleInput && textInput) {
     titleInput.value = `Synthesis: ${title}`;
-    textInput.value = `[INTEL EXTRACTION · ${type.toUpperCase()}]\nSource: ${creator}\n\nCore Mental Model & Extraction:\n${takeaway}\n\nImmediate Action & Synthesis in Orbit, Script, and Engineering:\n`;
-    if (tagsInput) {
-      tagsInput.value = `polymath, intake, ${type}`;
+    textInput.value = `Source: ${creator}\n\nCore Mental Model & Extraction:\n${takeaway}\n\nImmediate Action & Synthesis in Orbit, Script, and Engineering:\n`;
+    
+    // Auto detect discipline
+    let disc = 'first-principles';
+    const combo = (title + ' ' + creator + ' ' + takeaway).toLowerCase();
+    if (combo.includes('ai') || combo.includes('llm') || combo.includes('memory') || combo.includes('neural') || combo.includes('karpathy') || combo.includes('hassabis')) {
+      disc = 'ai-cognition';
+    } else if (combo.includes('devops') || combo.includes('system') || combo.includes('linux') || combo.includes('docker') || combo.includes('torvalds')) {
+      disc = 'systems-devops';
+    } else if (combo.includes('sales') || combo.includes('gtm') || combo.includes('orbit') || combo.includes('hormozi') || combo.includes('market')) {
+      disc = 'gtm-growth';
+    } else if (combo.includes('cinema') || combo.includes('film') || combo.includes('director') || combo.includes('nolan') || combo.includes('script')) {
+      disc = 'cinema-narrative';
+    } else if (combo.includes('code') || combo.includes('software') || combo.includes('debug') || combo.includes('typescript')) {
+      disc = 'software-craft';
     }
+    if (disciplineSelect) disciplineSelect.value = disc;
+
+    if (crossInput) {
+      crossInput.value = `Connects ${creator}'s doctrine -> Practical compounding in Orbit and personal systems`;
+    }
+
+    if (tagsInput) {
+      tagsInput.value = `polymath, intake, ${type}, ${disc.split('-')[0]}`;
+    }
+
+    // Switch to deep extraction mode
+    if (deepBtn && !deepBtn.classList.contains('active')) {
+      deepBtn.click();
+    }
+
     if (dailySection) {
       dailySection.scrollIntoView({ behavior: 'smooth' });
       textInput.focus();
+      const composerCard = document.querySelector('.polymath-composer-card');
+      if (composerCard) {
+        composerCard.classList.add('is-new');
+        setTimeout(() => composerCard.classList.remove('is-new'), 2000);
+      }
     }
   }
 }
@@ -1017,8 +1097,117 @@ Return ONLY a valid JSON object (no markdown formatting, no code blocks) matchin
     statusEl.className = 'radar-ai-status-msg error';
   }
 }
-// RENDER DAILY LOGS (MINIMAL & DYNAMIC USER TAG SYSTEM)
 // ----------------------------------------------------------------------------
+// RENDER DAILY LOGS · POLYMATH & INTELLECTUAL MAXXING ENGINE
+// ----------------------------------------------------------------------------
+
+const POLY_DISCIPLINES = {
+  'ai-cognition': { name: 'AI & Cognition', icon: '🧠', color: '#8b5cf6', class: 'ai-cognition', desc: 'Agent runtimes, memory graphs, LLMs, prompt evals' },
+  'systems-devops': { name: 'Systems & DevOps', icon: '⚙️', color: '#06b6d4', class: 'systems-devops', desc: 'Distributed infra, low-latency queues, Envoy, Docker, Linux' },
+  'gtm-growth': { name: 'GTM & Growth', icon: '📈', color: '#f59e0b', class: 'gtm-growth', desc: 'Consultative sales, offer crafting, distribution loops' },
+  'software-craft': { name: 'Software Craft', icon: '🔨', color: '#10b981', class: 'software-craft', desc: 'AgentTrace, Lumen, Jarvis, full-stack pipelines, QA' },
+  'cinema-narrative': { name: 'Cinema & Narrative', icon: '🎬', color: '#ec4899', class: 'cinema-narrative', desc: 'Screenwriting, visual subtext, chiaroscuro, pacing' },
+  'first-principles': { name: 'First Principles', icon: '⚡', color: '#111111', class: 'first-principles', desc: 'Mental models, mathematical derivation, urgency compression' }
+};
+
+const POLYMATH_SPARK_PROMPTS = [
+  "How can an Envoy graceful connection drain concept solve context switching and mental fatigue?",
+  "How does Patrick Jane's mentalist cold-reading apply to high-converting B2B discovery calls for Orbit?",
+  "How does Nolan's non-linear narrative cross-cutting apply to designing hierarchical graph memory in Lumen?",
+  "How can database atomic idempotency locks be translated into personal non-negotiable boundaries?",
+  "What would Richard Feynman strip away from your current AI architecture to make it explainable in 60 seconds?",
+  "How can distributed consensus protocols (e.g. Raft) clarify multi-agent delegation in AgentTrace?",
+  "How does biological muscle hypertrophy periodization apply to software shipping sprint cadences?",
+  "How can cinematography motivated lighting guide spatial hierarchy in minimalist dashboard design?",
+  "What is the single highest-leverage first-principles truth you learned today that breaks consensus?",
+  "How does Robert Greene's Death-Ground doctrine compress execution time in your current 90-day cycle?"
+];
+
+let sparkPromptIndex = 0;
+
+function renderPolymathStats() {
+  const totalLogs = state.dailyLogs.length;
+  const totalEl = document.getElementById('metric-total-logs');
+  const countBadge = document.getElementById('polymath-count-val');
+  const masteryEl = document.getElementById('metric-mastery-rate');
+  const activeDiscEl = document.getElementById('metric-active-disciplines');
+  const codeProofsEl = document.getElementById('metric-code-proofs');
+  const segBar = document.getElementById('polymath-segmented-bar');
+  const balanceWrap = document.querySelector('.polymath-balance-wrap');
+
+  if (totalEl) totalEl.textContent = totalLogs;
+  if (countBadge) countBadge.textContent = totalLogs;
+
+  // Calculate deep mastery rate (logs with all 3 checkmarks)
+  const fullyMastered = state.dailyLogs.filter(l => 
+    l.mastery?.explainable && l.mastery?.implemented && l.mastery?.edgeTested
+  ).length;
+  const masteryRate = totalLogs > 0 ? Math.round((fullyMastered / totalLogs) * 100) : 0;
+  if (masteryEl) masteryEl.textContent = `${masteryRate}%`;
+
+  // Count code proofs
+  const codeProofs = state.dailyLogs.filter(l => (l.implementation || '').trim().length > 0).length;
+  if (codeProofsEl) codeProofsEl.textContent = codeProofs;
+
+  // Calculate discipline counts
+  const disciplineCounts = {};
+  Object.keys(POLY_DISCIPLINES).forEach(k => { disciplineCounts[k] = 0; });
+  state.dailyLogs.forEach(l => {
+    const d = l.discipline || 'software-craft';
+    disciplineCounts[d] = (disciplineCounts[d] || 0) + 1;
+  });
+
+  const activeCount = Object.values(disciplineCounts).filter(c => c > 0).length;
+  if (activeDiscEl) activeDiscEl.textContent = `${activeCount}/6`;
+
+  // Render segmented balance bar
+  if (segBar && totalLogs > 0) {
+    segBar.innerHTML = Object.entries(disciplineCounts).map(([key, count]) => {
+      const pct = Math.round((count / totalLogs) * 100);
+      if (pct === 0) return '';
+      const disc = POLY_DISCIPLINES[key] || { name: key, color: '#999' };
+      const shortClass = key.replace('-', '');
+      return `<div class="bar-segment ${shortClass}" style="width: ${pct}%; background: ${disc.color};" title="${disc.name}: ${count} insights (${pct}%)"></div>`;
+    }).join('');
+
+    // Append legend if not present
+    let legend = balanceWrap?.querySelector('.polymath-balance-legend');
+    if (!legend && balanceWrap) {
+      legend = document.createElement('div');
+      legend.className = 'polymath-balance-legend';
+      balanceWrap.appendChild(legend);
+    }
+    if (legend) {
+      legend.innerHTML = Object.entries(disciplineCounts).map(([key, count]) => {
+        const disc = POLY_DISCIPLINES[key] || { name: key, color: '#999' };
+        const shortClass = key.replace('-', '');
+        return `
+          <div class="legend-item" title="${disc.desc}">
+            <span class="legend-dot ${shortClass}" style="background: ${disc.color};"></span>
+            <span>${disc.icon} ${disc.name} (${count})</span>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+}
+
+function renderDisciplineFilterBar() {
+  const container = document.getElementById('discipline-filter-pills');
+  if (!container) return;
+
+  container.querySelectorAll('.discipline-pill').forEach(btn => {
+    const disc = btn.getAttribute('data-discipline');
+    const isActive = (state.activeDisciplineFilter || 'ALL') === disc;
+    btn.classList.toggle('active', isActive);
+
+    btn.onclick = () => {
+      state.activeDisciplineFilter = disc;
+      renderDisciplineFilterBar();
+      renderDailyLogs();
+    };
+  });
+}
 
 function getAllUniqueTags() {
   const tagCounts = {};
@@ -1043,7 +1232,7 @@ function renderTagFilterBar() {
 
   let html = `
     <button type="button" class="filter-tag-link ${currentTag === 'all' ? 'active' : ''}" data-tag="ALL">
-      all (${state.dailyLogs.length})
+      all tags (${state.dailyLogs.length})
     </button>
   `;
 
@@ -1052,7 +1241,7 @@ function renderTagFilterBar() {
     html += `
       <span class="filter-tag-sep">/</span>
       <button type="button" class="filter-tag-link ${isActive}" data-tag="${tag}">
-        #${tag}
+        #${tag} (${tagCounts[tag]})
       </button>
     `;
   });
@@ -1068,30 +1257,59 @@ function renderTagFilterBar() {
   });
 }
 
-
-
 function renderDailyLogs(highlightId = null) {
   const feed = document.getElementById('log-feed');
   if (!feed) return;
 
+  renderPolymathStats();
+
   const activeTag = (state.activeLogTag || 'ALL').toLowerCase();
+  const activeDisc = state.activeDisciplineFilter || 'ALL';
+  const query = (state.logSearchQuery || '').trim().toLowerCase();
+
   const filtered = state.dailyLogs.filter(log => {
-    if (activeTag === 'all') return true;
-    const logTags = (log.tags || []).map(t => t.toLowerCase());
-    return logTags.includes(activeTag);
+    // 1. Tag Filter
+    if (activeTag !== 'all') {
+      const logTags = (log.tags || []).map(t => t.toLowerCase());
+      if (!logTags.includes(activeTag)) return false;
+    }
+    // 2. Discipline Filter
+    if (activeDisc !== 'ALL') {
+      const logDisc = log.discipline || 'software-craft';
+      if (logDisc !== activeDisc) return false;
+    }
+    // 3. Search Query Filter
+    if (query) {
+      const searchable = [
+        log.title,
+        log.learned,
+        log.implementation,
+        log.crossDomain,
+        (log.tags || []).join(' ')
+      ].join(' ').toLowerCase();
+      if (!searchable.includes(query)) return false;
+    }
+    return true;
   });
 
   if (filtered.length === 0) {
     feed.innerHTML = `
       <div class="empty-logs-notice">
-        No entries found tagged #${activeTag}.
-        <button type="button" class="btn-clear-filter" id="clear-tag-filter">Show all</button>
+        No polymath insights found matching the current filters.
+        <button type="button" class="btn-clear-filter" id="clear-all-filters-btn">Reset Filters</button>
       </div>
     `;
-    const clearBtn = document.getElementById('clear-tag-filter');
+    const clearBtn = document.getElementById('clear-all-filters-btn');
     if (clearBtn) {
       clearBtn.addEventListener('click', () => {
         state.activeLogTag = 'ALL';
+        state.activeDisciplineFilter = 'ALL';
+        state.logSearchQuery = '';
+        const searchInput = document.getElementById('polymath-search-input');
+        if (searchInput) searchInput.value = '';
+        const clearSearch = document.getElementById('clear-search-btn');
+        if (clearSearch) clearSearch.style.display = 'none';
+        renderDisciplineFilterBar();
         renderTagFilterBar();
         renderDailyLogs();
       });
@@ -1102,30 +1320,68 @@ function renderDailyLogs(highlightId = null) {
   feed.innerHTML = filtered.map(log => {
     const isNew = highlightId && log.id === highlightId ? 'is-new' : '';
     const tags = Array.isArray(log.tags) ? log.tags : [];
+    const discKey = log.discipline || 'software-craft';
+    const discInfo = POLY_DISCIPLINES[discKey] || { name: 'Polymath', icon: '⚡', color: '#111', class: 'software-craft' };
+    const wordCount = (log.learned || '').split(/\s+/).length;
+    const readTime = Math.max(1, Math.round(wordCount / 120));
 
     return `
-      <article class="minimal-log-item ${isNew}" data-id="${log.id}">
-        <div class="minimal-log-meta">
-          <div class="minimal-log-meta-left">
-            <span class="minimal-log-date">${log.date}</span>
-            <div class="minimal-log-tags">
-              ${tags.map(t => `<button type="button" class="minimal-tag-item" data-filter-to="${t}">#${t}</button>`).join('')}
+      <article class="polymath-log-card ${isNew}" data-id="${log.id}">
+        <div class="polymath-card-top">
+          <div class="polymath-meta-left">
+            <span class="discipline-badge ${discInfo.class}">
+              ${discInfo.icon} ${discInfo.name}
+            </span>
+            <span class="log-date-badge">${escapeHtml(log.date)} &bull; ${readTime} MIN READ</span>
+            
+            <div class="polymath-mastery-pills">
+              <span class="mastery-pill ${log.mastery?.explainable ? 'verified' : ''}" title="${log.mastery?.explainable ? 'Can explain simply in 60s without notes' : 'Pending simple explanation test'}">
+                ${log.mastery?.explainable ? '[✓ EXPLAIN]' : '[· EXPLAIN]'}
+              </span>
+              <span class="mastery-pill ${log.mastery?.implemented ? 'verified' : ''}" title="${log.mastery?.implemented ? 'Verified in working code or real experiment' : 'Concept only - not yet tested in code'}">
+                ${log.mastery?.implemented ? '[✓ CODE]' : '[· CODE]'}
+              </span>
+              <span class="mastery-pill ${log.mastery?.edgeTested ? 'verified' : ''}" title="${log.mastery?.edgeTested ? 'Failure modes and boundary conditions mapped' : 'Edge cases not yet stress-tested'}">
+                ${log.mastery?.edgeTested ? '[✓ EDGES]' : '[· EDGES]'}
+              </span>
             </div>
           </div>
-          <div class="minimal-log-actions">
-            <button type="button" class="minimal-action-btn" data-copy-id="${log.id}" title="Copy markdown">copy</button>
-            <button type="button" class="minimal-action-btn minimal-delete-btn" data-delete-id="${log.id}" title="Delete entry">&times;</button>
+
+          <div class="polymath-card-actions">
+            <button type="button" class="polymath-action-btn" data-copy-id="${log.id}" title="Copy formatted Markdown">copy md</button>
+            <button type="button" class="polymath-action-btn polymath-delete-btn" data-delete-id="${log.id}" title="Delete entry">&times;</button>
           </div>
         </div>
 
-        <h3 class="minimal-log-title">${log.title}</h3>
-        <p class="minimal-log-body">${log.learned}</p>
+        <h3 class="polymath-log-title">${escapeHtml(log.title)}</h3>
+        <p class="polymath-log-body">${escapeHtml(log.learned).replace(/\n/g, '<br>')}</p>
+
+        ${log.implementation ? `
+          <div class="polymath-code-box">
+            <div class="polymath-code-header">
+              <span>[VERIFIABLE CODE / IMPLEMENTATION PROOF]</span>
+              <button type="button" class="btn-copy-code" data-code="${encodeURIComponent(log.implementation)}">copy code</button>
+            </div>
+            <pre class="polymath-code-pre"><code>${escapeHtml(log.implementation)}</code></pre>
+          </div>
+        ` : ''}
+
+        ${log.crossDomain ? `
+          <div class="polymath-cross-strip">
+            <span class="cross-badge">[POLYMATH BRIDGE]</span>
+            <span>${escapeHtml(log.crossDomain)}</span>
+          </div>
+        ` : ''}
+
+        <div class="polymath-tags-row">
+          ${tags.map(t => `<button type="button" class="polymath-tag-pill" data-filter-to="${escapeHtml(t)}">#${escapeHtml(t)}</button>`).join('')}
+        </div>
       </article>
     `;
   }).join('');
 
   // Click on a tag pill in a card filters to that tag
-  feed.querySelectorAll('.minimal-tag-item').forEach(pill => {
+  feed.querySelectorAll('.polymath-tag-pill').forEach(pill => {
     pill.addEventListener('click', (e) => {
       e.stopPropagation();
       const targetTag = pill.getAttribute('data-filter-to');
@@ -1138,7 +1394,7 @@ function renderDailyLogs(highlightId = null) {
   });
 
   // Copy entry to clipboard
-  feed.querySelectorAll('.minimal-action-btn[data-copy-id]').forEach(btn => {
+  feed.querySelectorAll('.polymath-action-btn[data-copy-id]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const logId = btn.getAttribute('data-copy-id');
@@ -1146,7 +1402,14 @@ function renderDailyLogs(highlightId = null) {
       if (!item) return;
 
       const tagsStr = (item.tags || []).map(t => `#${t}`).join(' ');
-      const snippet = `### [${item.date}] ${item.title} ${tagsStr}\n${item.learned}`;
+      let snippet = `### [${item.date}] [${(item.discipline || 'polymath').toUpperCase()}] ${item.title} ${tagsStr}\n\n${item.learned}`;
+      if (item.implementation) {
+        snippet += `\n\n\`\`\`\n${item.implementation}\n\`\`\``;
+      }
+      if (item.crossDomain) {
+        snippet += `\n\n> **Polymath Bridge:** ${item.crossDomain}`;
+      }
+
       navigator.clipboard.writeText(snippet).then(() => {
         const orig = btn.textContent;
         btn.textContent = 'copied!';
@@ -1159,12 +1422,26 @@ function renderDailyLogs(highlightId = null) {
     });
   });
 
+  // Copy code snippet
+  feed.querySelectorAll('.btn-copy-code').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const code = decodeURIComponent(btn.getAttribute('data-code') || '');
+      if (!code) return;
+      navigator.clipboard.writeText(code).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'copied!';
+        setTimeout(() => { btn.textContent = orig; }, 1500);
+      });
+    });
+  });
+
   // Delete entry
-  feed.querySelectorAll('.minimal-delete-btn').forEach(btn => {
+  feed.querySelectorAll('.polymath-delete-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const logId = btn.getAttribute('data-delete-id');
-      if (confirm('Delete this entry?')) {
+      if (confirm('Delete this polymath insight from your vault?')) {
         state.dailyLogs = state.dailyLogs.filter(l => l.id !== logId);
         saveStored(STORAGE_KEYS.DAILY_LOGS, state.dailyLogs);
         renderTagFilterBar();
@@ -1172,6 +1449,70 @@ function renderDailyLogs(highlightId = null) {
       }
     });
   });
+}
+
+function setupPolymathComposer() {
+  const quickBtn = document.getElementById('mode-quick-btn');
+  const deepBtn = document.getElementById('mode-deep-btn');
+  const deepContainer = document.getElementById('deep-fields-container');
+  const sparkBtn = document.getElementById('btn-spark-prompt');
+  const searchInput = document.getElementById('polymath-search-input');
+  const clearSearchBtn = document.getElementById('clear-search-btn');
+
+  // Mode tabs
+  if (quickBtn && deepBtn && deepContainer) {
+    quickBtn.onclick = () => {
+      quickBtn.classList.add('active');
+      deepBtn.classList.remove('active');
+      deepContainer.style.display = 'none';
+    };
+    deepBtn.onclick = () => {
+      deepBtn.classList.add('active');
+      quickBtn.classList.remove('active');
+      deepContainer.style.display = 'flex';
+    };
+  }
+
+  // Spark prompt button
+  if (sparkBtn) {
+    sparkBtn.onclick = () => {
+      const prompt = POLYMATH_SPARK_PROMPTS[sparkPromptIndex % POLYMATH_SPARK_PROMPTS.length];
+      sparkPromptIndex++;
+      const crossInput = document.getElementById('log-crossdomain-input');
+      const textInput = document.getElementById('log-text-input');
+      if (deepBtn && !deepBtn.classList.contains('active')) {
+        deepBtn.click();
+      }
+      if (crossInput) {
+        crossInput.value = prompt;
+        crossInput.focus();
+      } else if (textInput) {
+        textInput.value = textInput.value ? `${textInput.value}\n\n[POLYMATH PROMPT]: ${prompt}` : `[POLYMATH PROMPT]: ${prompt}\n\nSynthesis:\n`;
+        textInput.focus();
+      }
+    };
+  }
+
+  // Search input
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      state.logSearchQuery = e.target.value;
+      if (clearSearchBtn) {
+        clearSearchBtn.style.display = e.target.value.trim().length > 0 ? 'inline-block' : 'none';
+      }
+      renderDailyLogs();
+    });
+  }
+
+  if (clearSearchBtn && searchInput) {
+    clearSearchBtn.onclick = () => {
+      searchInput.value = '';
+      state.logSearchQuery = '';
+      clearSearchBtn.style.display = 'none';
+      renderDailyLogs();
+      searchInput.focus();
+    };
+  }
 }
 
 // ----------------------------------------------------------------------------
@@ -1206,14 +1547,24 @@ function setupEventListeners() {
       e.preventDefault();
       const titleInput = document.getElementById('log-title-input');
       const textInput = document.getElementById('log-text-input');
+      const disciplineSelect = document.getElementById('log-discipline-select');
+      const implementationInput = document.getElementById('log-implementation-input');
+      const crossdomainInput = document.getElementById('log-crossdomain-input');
       const tagsInput = document.getElementById('log-tags-input');
+
+      const checkExplain = document.getElementById('check-explain');
+      const checkImplement = document.getElementById('check-implement');
+      const checkEdge = document.getElementById('check-edge');
 
       const title = titleInput ? titleInput.value.trim() : '';
       const text = textInput ? textInput.value.trim() : '';
+      const discipline = disciplineSelect ? disciplineSelect.value : 'software-craft';
+      const implementation = implementationInput ? implementationInput.value.trim() : '';
+      const crossDomain = crossdomainInput ? crossdomainInput.value.trim() : '';
       const rawTags = tagsInput ? tagsInput.value.trim() : '';
 
       if (!title || !text) {
-        alert('Please provide a title and what you learned.');
+        alert('Please provide a core thesis and what you learned.');
         return;
       }
 
@@ -1224,7 +1575,7 @@ function setupEventListeners() {
           .filter(Boolean);
       }
       if (tags.length === 0) {
-        tags = ['general'];
+        tags = [discipline.split('-')[0]];
       }
 
       const today = new Date().toISOString().split('T')[0];
@@ -1232,7 +1583,15 @@ function setupEventListeners() {
         id: 'log-' + Date.now(),
         date: today,
         title: title,
+        discipline: discipline,
         learned: text,
+        implementation: implementation,
+        crossDomain: crossDomain,
+        mastery: {
+          explainable: checkExplain ? checkExplain.checked : true,
+          implemented: checkImplement ? checkImplement.checked : Boolean(implementation),
+          edgeTested: checkEdge ? checkEdge.checked : false
+        },
         tags: tags
       };
 
@@ -1240,29 +1599,89 @@ function setupEventListeners() {
       saveStored(STORAGE_KEYS.DAILY_LOGS, state.dailyLogs);
 
       state.activeLogTag = 'ALL';
+      state.activeDisciplineFilter = 'ALL';
+      state.logSearchQuery = '';
+      const searchInput = document.getElementById('polymath-search-input');
+      if (searchInput) searchInput.value = '';
+
+      renderDisciplineFilterBar();
       renderTagFilterBar();
       renderDailyLogs(newEntry.id);
 
       if (titleInput) titleInput.value = '';
       if (textInput) textInput.value = '';
+      if (implementationInput) implementationInput.value = '';
+      if (crossdomainInput) crossdomainInput.value = '';
       if (tagsInput) tagsInput.value = '';
+
+      // Switch back to quick mode after saving
+      const quickBtn = document.getElementById('mode-quick-btn');
+      if (quickBtn) quickBtn.click();
     });
   }
 
   const exportBtn = document.getElementById('export-logs-btn');
   if (exportBtn) {
     exportBtn.addEventListener('click', () => {
-      let md = `# WHAT I LEARNED TODAY — BOLD\n\n`;
+      const today = new Date().toISOString().split('T')[0];
+      let md = `---
+title: Polymath Knowledge Vault
+author: BOLD Ocean
+vault: Intellectual Operating System
+exported_at: ${today}
+total_laws: ${state.dailyLogs.length}
+---
+
+# WHAT I LEARNED — POLYMATH KNOWLEDGE VAULT
+
+> "What I cannot create, I do not understand." — Richard Feynman
+
+---
+
+`;
+      // Group by discipline
+      const groups = {};
+      Object.keys(POLY_DISCIPLINES).forEach(d => { groups[d] = []; });
       state.dailyLogs.forEach(l => {
-        const tagLine = (l.tags || []).map(t => `#${t}`).join(' ');
-        md += `## [${l.date}] ${l.title} ${tagLine ? `(${tagLine})` : ''}\n`;
-        md += `${l.learned}\n\n---\n\n`;
+        const d = l.discipline || 'software-craft';
+        if (!groups[d]) groups[d] = [];
+        groups[d].push(l);
       });
+
+      Object.entries(groups).forEach(([discKey, logs]) => {
+        if (logs.length === 0) return;
+        const disc = POLY_DISCIPLINES[discKey] || { name: discKey, icon: '⚡' };
+        md += `\n## ${disc.icon} ${disc.name.toUpperCase()} (${logs.length})\n\n`;
+
+        logs.forEach(l => {
+          const tagsLine = (l.tags || []).map(t => `#${t}`).join(' ');
+          const masteryBadges = [
+            l.mastery?.explainable ? 'Explainable' : null,
+            l.mastery?.implemented ? 'Code Verified' : null,
+            l.mastery?.edgeTested ? 'Edge Tested' : null
+          ].filter(Boolean).join(' | ');
+
+          md += `### [${l.date}] ${l.title}\n`;
+          if (tagsLine) md += `**Tags:** ${tagsLine} ${masteryBadges ? `• **Mastery:** [${masteryBadges}]` : ''}\n\n`;
+          md += `${l.learned}\n\n`;
+
+          if (l.implementation) {
+            md += `#### Implementation / Code Proof:\n\`\`\`\n${l.implementation}\n\`\`\`\n\n`;
+          }
+
+          if (l.crossDomain) {
+            md += `> **Polymath Bridge:** ${l.crossDomain}\n\n`;
+          }
+
+          md += `---\n\n`;
+        });
+      });
+
       const blob = new Blob([md], { type: 'text/markdown' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `what-i-learned-${new Date().toISOString().split('T')[0]}.md`;
+      a.download = `polymath-knowledge-vault-${today}.md`;
       a.click();
       URL.revokeObjectURL(url);
     });
@@ -1475,8 +1894,11 @@ function initApp() {
   renderBucketList();
   renderRadarSection();
   setupRadarControls();
+  renderPolymathStats();
+  renderDisciplineFilterBar();
   renderTagFilterBar();
   renderDailyLogs();
+  setupPolymathComposer();
   setupEventListeners();
   setupScrollSpy();
 }

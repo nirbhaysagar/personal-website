@@ -3451,61 +3451,423 @@ html[data-theme="dark"] .field-category {
   margin-bottom: 56px;
 }
 
-/* Ultra-Minimal Inline Quick Composer */
-.minimal-composer {
-  border-bottom: 1px solid var(--rule-light, #e5e5e5);
-  padding-bottom: 18px;
-  margin-top: 14px;
+/* ==========================================================================
+   POLYMATH & INTELLECTUAL MAXXING ENGINE (SECTION 08)
+   ========================================================================== */
+
+.daily-section-wrap {
+  margin-top: 56px;
+  margin-bottom: 64px;
+}
+
+/* 1. Polymath Compounding Intelligence Banner */
+.polymath-dashboard-card {
+  border: 1.5px solid var(--rule-strong, #111111);
+  background: var(--bg-paper, #fbfbfa);
+  padding: 24px;
+  margin-top: 20px;
+  margin-bottom: 24px;
+  box-shadow: 3px 3px 0px var(--rule-strong, #111111);
+  box-sizing: border-box;
+}
+
+.polymath-dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed var(--rule-light, #e5e5e5);
+  padding-bottom: 14px;
+}
+
+.polymath-dash-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.polymath-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  display: inline-block;
+  animation: pulse-live 2s infinite;
+}
+
+@keyframes pulse-live {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.polymath-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--ink-primary, #111111);
+  text-transform: uppercase;
+}
+
+.polymath-subtag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--tape-red, #e11d48);
+  border: 1px solid var(--tape-red, #e11d48);
+  padding: 1px 6px;
+  background: rgba(225, 29, 72, 0.04);
+}
+
+.polymath-streak-badge {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--ink-primary, #111111);
+  background: var(--bg-canvas, #ffffff);
+  border: 1px solid var(--rule-strong, #111111);
+  padding: 4px 10px;
+  box-shadow: 1.5px 1.5px 0px var(--rule-strong, #111111);
+}
+
+.polymath-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
   margin-bottom: 22px;
+}
+
+.polymath-metric {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+  background: var(--bg-canvas, #ffffff);
+  border: 1px solid var(--rule-light, #e5e5e5);
+}
+
+.polymath-metric .metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted, #71717a);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.polymath-metric .metric-val {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--ink-primary, #111111);
+  line-height: 1.1;
+}
+
+.polymath-metric .metric-hint {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-secondary, #4b5563);
+  margin-top: 4px;
+}
+
+/* Polymath Segmented Balance Bar */
+.polymath-balance-wrap {
+  margin-top: 10px;
+}
+
+.balance-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--ink-secondary, #4b5563);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.polymath-segmented-bar {
+  display: flex;
+  height: 10px;
+  background: var(--rule-light, #e5e5e5);
+  border-radius: 2px;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.bar-segment {
+  height: 100%;
+  transition: width 0.4s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.bar-segment.ai { background: #8b5cf6; }
+.bar-segment.systems { background: #06b6d4; }
+.bar-segment.gtm { background: #f59e0b; }
+.bar-segment.software { background: #10b981; }
+.bar-segment.cinema { background: #ec4899; }
+.bar-segment.firstprinciples { background: #111111; }
+
+.polymath-balance-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-secondary, #4b5563);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.legend-dot.ai { background: #8b5cf6; }
+.legend-dot.systems { background: #06b6d4; }
+.legend-dot.gtm { background: #f59e0b; }
+.legend-dot.software { background: #10b981; }
+.legend-dot.cinema { background: #ec4899; }
+.legend-dot.firstprinciples { background: #111111; }
+
+/* 2. Feynman Intellectual Maxxing Composer Card */
+.polymath-composer-card {
+  border: 1.5px solid var(--rule-strong, #111111);
+  background: var(--bg-paper, #fbfbfa);
+  padding: 22px;
+  margin-bottom: 28px;
+  box-shadow: 2px 2px 0px var(--rule-strong, #111111);
+  box-sizing: border-box;
+}
+
+.composer-mode-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--rule-light, #e5e5e5);
+  padding-bottom: 12px;
+}
+
+.mode-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.mode-tab-btn {
+  background: var(--bg-canvas, #ffffff);
+  border: 1px solid var(--rule-strong, #111111);
+  padding: 5px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--ink-secondary, #4b5563);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mode-tab-btn.active {
+  background: var(--ink-primary, #111111);
+  color: #ffffff;
+  box-shadow: 1.5px 1.5px 0px var(--rule-strong, #111111);
+}
+
+.btn-spark-prompt {
+  background: transparent;
+  border: 1px dashed var(--rule-strong, #111111);
+  padding: 5px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--tape-red, #e11d48);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-spark-prompt:hover {
+  background: rgba(225, 29, 72, 0.08);
+}
+
+.polymath-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.composer-top-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.flex-2 { flex: 2; min-width: 280px; }
+.flex-1 { flex: 1; min-width: 180px; }
+
+.composer-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.composer-field-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--ink-primary, #111111);
+  text-transform: uppercase;
+}
+
+.label-with-hint {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.field-hint {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--ink-muted, #71717a);
 }
 
 .composer-title-input {
   width: 100%;
   box-sizing: border-box;
-  border: none;
-  background: transparent;
+  border: 1px solid var(--rule-strong, #111111);
+  background: var(--bg-canvas, #ffffff);
   font-family: var(--font-sans);
-  font-size: 1.05rem;
+  font-size: 0.96rem;
   font-weight: 600;
   color: var(--ink-primary, #111111);
-  padding: 6px 0;
+  padding: 8px 12px;
   outline: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.15s ease;
-}
-
-.composer-title-input::placeholder {
-  color: #a1a1aa;
-  font-weight: 400;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .composer-title-input:focus {
-  border-bottom-color: #111111;
+  box-shadow: 0 0 0 2px var(--rule-strong, #111111);
+}
+
+.composer-select {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--rule-strong, #111111);
+  background: var(--bg-canvas, #ffffff);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink-primary, #111111);
+  padding: 8px 10px;
+  outline: none;
+  cursor: pointer;
 }
 
 .composer-body-input {
   width: 100%;
   box-sizing: border-box;
-  border: none;
-  background: transparent;
+  border: 1px solid var(--rule-strong, #111111);
+  background: var(--bg-canvas, #ffffff);
   font-family: var(--font-sans);
   font-size: 0.92rem;
-  color: #374151;
+  color: var(--ink-primary, #111111);
   line-height: 1.6;
-  min-height: 60px;
-  resize: vertical;
-  padding: 8px 0;
+  padding: 10px 12px;
   outline: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.15s ease;
-}
-
-.composer-body-input::placeholder {
-  color: #a1a1aa;
+  resize: vertical;
+  min-height: 75px;
 }
 
 .composer-body-input:focus {
-  border-bottom-color: #111111;
+  box-shadow: 0 0 0 2px var(--rule-strong, #111111);
+}
+
+/* Deep extraction fields */
+.deep-fields-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px dashed var(--rule-light, #e5e5e5);
+  padding-top: 16px;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.composer-code-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--rule-strong, #111111);
+  background: #18181b;
+  color: #38bdf8;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  padding: 10px 12px;
+  outline: none;
+  resize: vertical;
+  min-height: 90px;
+}
+
+.composer-cross-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--rule-strong, #111111);
+  background: var(--bg-canvas, #ffffff);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--ink-primary, #111111);
+  padding: 8px 12px;
+  outline: none;
+}
+
+.feynman-checklist-group {
+  background: var(--bg-canvas, #ffffff);
+  border: 1px solid var(--rule-light, #e5e5e5);
+  padding: 12px 14px;
+}
+
+.feynman-checks-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.feynman-check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink-secondary, #4b5563);
+  cursor: pointer;
+  user-select: none;
+}
+
+.feynman-check-item input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: var(--ink-primary, #111111);
 }
 
 .composer-bottom-bar {
@@ -3513,7 +3875,7 @@ html[data-theme="dark"] .field-category {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-top: 10px;
+  margin-top: 6px;
   flex-wrap: wrap;
 }
 
@@ -3525,12 +3887,15 @@ html[data-theme="dark"] .field-category {
   font-size: 0.8rem;
   color: #9ca3af;
   flex: 1;
-  min-width: 180px;
+  min-width: 200px;
+  border: 1px solid var(--rule-strong, #111111);
+  background: var(--bg-canvas, #ffffff);
+  padding: 6px 10px;
 }
 
 .composer-hash {
-  color: #6b7280;
-  font-weight: 700;
+  color: var(--tape-red, #e11d48);
+  font-weight: 800;
   user-select: none;
 }
 
@@ -3539,13 +3904,9 @@ html[data-theme="dark"] .field-category {
   background: transparent;
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: #4b5563;
+  color: var(--ink-primary, #111111);
   width: 100%;
   outline: none;
-}
-
-.composer-tags-input::placeholder {
-  color: #9ca3af;
 }
 
 .composer-actions {
@@ -3555,72 +3916,144 @@ html[data-theme="dark"] .field-category {
 }
 
 .composer-export-btn {
-  background: transparent;
-  border: none;
-  color: #6b7280;
+  background: var(--bg-canvas, #ffffff);
+  border: 1px solid var(--rule-strong, #111111);
+  color: var(--ink-primary, #111111);
   font-family: var(--font-mono);
   font-size: 0.76rem;
+  font-weight: 700;
   cursor: pointer;
-  padding: 4px 6px;
-  transition: color 0.15s ease;
+  padding: 7px 12px;
+  transition: all 0.15s ease;
 }
 
 .composer-export-btn:hover {
-  color: #111111;
+  background: var(--rule-light, #e5e5e5);
 }
 
 .composer-submit-btn {
-  background: #111111;
+  background: var(--ink-primary, #111111);
   color: #ffffff;
-  border: 1px solid #111111;
+  border: 1px solid var(--ink-primary, #111111);
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 5px 14px;
+  letter-spacing: 0.05em;
+  padding: 7px 18px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.composer-submit-btn:hover {
+  background: #27272a;
+}
+
+/* 3. Search & Polymath Filter Navigation Strip */
+.polymath-filter-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.polymath-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--rule-strong, #111111);
+  background: var(--bg-canvas, #ffffff);
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+.search-icon {
+  font-size: 0.85rem;
+  user-select: none;
+}
+
+.polymath-search-input {
+  border: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--ink-primary, #111111);
+  width: 100%;
+  outline: none;
+}
+
+.clear-search-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.discipline-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.discipline-pill {
+  background: var(--bg-canvas, #ffffff);
+  border: 1px solid var(--rule-strong, #111111);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-secondary, #4b5563);
+  padding: 4px 10px;
   cursor: pointer;
   transition: all 0.15s ease;
   user-select: none;
 }
 
-.composer-submit-btn:hover {
-  background: #333333;
+.discipline-pill:hover {
+  color: var(--ink-primary, #111111);
 }
 
-/* Quiet Minimal Tag Filter Line */
+.discipline-pill.active {
+  background: var(--ink-primary, #111111);
+  color: #ffffff;
+  box-shadow: 1.5px 1.5px 0px rgba(0, 0, 0, 0.2);
+}
+
 .minimal-tag-filter {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
-  margin-bottom: 24px;
   font-family: var(--font-mono);
-  font-size: 0.76rem;
-  color: #9ca3af;
+  font-size: 0.74rem;
+  color: var(--ink-muted, #71717a);
+  padding-top: 4px;
 }
 
 .filter-tag-link {
   background: none;
   border: none;
   font-family: var(--font-mono);
-  font-size: 0.76rem;
-  color: #6b7280;
+  font-size: 0.74rem;
+  color: var(--ink-secondary, #4b5563);
   cursor: pointer;
-  padding: 2px 0;
+  padding: 1px 0;
   transition: color 0.15s ease;
   user-select: none;
-  text-decoration: none;
 }
 
 .filter-tag-link:hover {
-  color: #111111;
+  color: var(--ink-primary, #111111);
 }
 
 .filter-tag-link.active {
-  color: #111111;
+  color: var(--tape-red, #e11d48);
   font-weight: 700;
-  border-bottom: 1.5px solid #111111;
+  border-bottom: 1.5px solid var(--tape-red, #e11d48);
 }
 
 .filter-tag-sep {
@@ -3628,127 +4061,308 @@ html[data-theme="dark"] .field-category {
   user-select: none;
 }
 
-/* Minimal Log Feed */
+/* 4. Rich Polymath Log Feed */
 .minimal-log-feed {
   display: flex;
   flex-direction: column;
   gap: 22px;
 }
 
-.minimal-log-item {
-  border-bottom: 1px solid #f0f0ee;
-  padding-bottom: 20px;
+.polymath-log-card {
+  border: 1.5px solid var(--rule-strong, #111111);
+  background: var(--bg-canvas, #ffffff);
+  padding: 22px;
+  box-shadow: 2.5px 2.5px 0px var(--rule-strong, #111111);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
 }
 
-.minimal-log-meta {
+.polymath-log-card.is-new {
+  animation: highlightNew 2s ease;
+}
+
+@keyframes highlightNew {
+  0% { box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.5); }
+  100% { box-shadow: 2.5px 2.5px 0px var(--rule-strong, #111111); }
+}
+
+.polymath-card-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: #9ca3af;
-  margin-bottom: 6px;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed var(--rule-light, #e5e5e5);
+  padding-bottom: 8px;
 }
 
-.minimal-log-meta-left {
+.polymath-meta-left {
   display: flex;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.minimal-log-date {
-  color: #6b7280;
-}
-
-.minimal-log-tags {
-  display: inline-flex;
-  gap: 8px;
-}
-
-.minimal-tag-item {
-  color: #4b5563;
-  background: none;
-  border: none;
+.discipline-badge {
   font-family: var(--font-mono);
-  font-size: 0.74rem;
-  cursor: pointer;
-  padding: 0;
-  transition: color 0.15s ease;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  border: 1px solid currentColor;
+  text-transform: uppercase;
 }
 
-.minimal-tag-item:hover {
-  color: #111111;
-  text-decoration: underline;
+.discipline-badge.ai-cognition { color: #8b5cf6; border-color: #8b5cf6; background: rgba(139, 92, 246, 0.08); }
+.discipline-badge.systems-devops { color: #06b6d4; border-color: #06b6d4; background: rgba(6, 182, 212, 0.08); }
+.discipline-badge.gtm-growth { color: #d97706; border-color: #d97706; background: rgba(217, 119, 6, 0.08); }
+.discipline-badge.software-craft { color: #059669; border-color: #059669; background: rgba(5, 150, 105, 0.08); }
+.discipline-badge.cinema-narrative { color: #db2777; border-color: #db2777; background: rgba(219, 39, 119, 0.08); }
+.discipline-badge.first-principles { color: #111111; border-color: #111111; background: rgba(0, 0, 0, 0.06); }
+
+.log-date-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-muted, #71717a);
 }
 
-.minimal-log-actions {
+.polymath-mastery-pills {
+  display: flex;
+  gap: 6px;
+}
+
+.mastery-pill {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border: 1px solid var(--rule-light, #e5e5e5);
+  color: var(--ink-muted, #9ca3af);
+  background: var(--bg-paper, #fbfbfa);
+}
+
+.mastery-pill.verified {
+  color: #10b981;
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.polymath-card-actions {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.minimal-action-btn {
+.polymath-action-btn {
   background: none;
   border: none;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: #9ca3af;
+  color: var(--ink-muted, #71717a);
   cursor: pointer;
   padding: 0 4px;
   transition: color 0.15s ease;
   user-select: none;
 }
 
-.minimal-action-btn:hover {
-  color: #111111;
+.polymath-action-btn:hover {
+  color: var(--ink-primary, #111111);
 }
 
-.minimal-action-btn.copied {
+.polymath-action-btn.copied {
   color: #10b981;
+  font-weight: 700;
 }
 
-.minimal-delete-btn:hover {
+.polymath-delete-btn:hover {
   color: #ef4444;
 }
 
-.minimal-log-title {
-  font-family: var(--font-sans);
-  font-size: 1.08rem;
-  font-weight: 700;
-  color: #111111;
-  margin: 0 0 6px;
-  line-height: 1.4;
+.polymath-log-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--ink-primary, #111111);
+  margin: 0 0 8px;
+  line-height: 1.35;
   letter-spacing: -0.01em;
 }
 
-.minimal-log-body {
+.polymath-log-body {
   font-family: var(--font-sans);
   font-size: 0.92rem;
-  color: #374151;
+  color: var(--ink-secondary, #374151);
   line-height: 1.65;
+  margin: 0 0 14px;
+}
+
+/* Code Implementation Evidence Box */
+.polymath-code-box {
+  background: #18181b;
+  border: 1px solid var(--rule-strong, #111111);
+  margin: 12px 0 14px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.polymath-code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #27272a;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #a1a1aa;
+  text-transform: uppercase;
+}
+
+.btn-copy-code {
+  background: none;
+  border: none;
+  color: #38bdf8;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-copy-code:hover {
+  text-decoration: underline;
+}
+
+.polymath-code-pre {
   margin: 0;
+  padding: 10px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #e4e4e7;
+}
+
+/* Cross Domain Bridge Strip */
+.polymath-cross-strip {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  background: var(--bg-paper, #fbfbfa);
+  border-left: 3px solid var(--tape-red, #e11d48);
+  padding: 8px 12px;
+  margin: 12px 0;
+  font-size: 0.85rem;
+  color: var(--ink-primary, #111111);
+  line-height: 1.5;
+}
+
+.cross-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--tape-red, #e11d48);
+  white-space: nowrap;
+}
+
+.polymath-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--rule-light, #e5e5e5);
+}
+
+.polymath-tag-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-secondary, #4b5563);
+  background: var(--bg-paper, #fbfbfa);
+  border: 1px solid var(--rule-light, #e5e5e5);
+  padding: 1px 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.polymath-tag-pill:hover {
+  color: var(--ink-primary, #111111);
+  border-color: var(--rule-strong, #111111);
 }
 
 .empty-logs-notice {
-  padding: 24px 0;
+  padding: 32px 20px;
+  text-align: center;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: #6b7280;
+  font-size: 0.82rem;
+  color: var(--ink-muted, #6b7280);
+  background: var(--bg-paper, #fbfbfa);
+  border: 1px dashed var(--rule-light, #e5e5e5);
 }
 
 .btn-clear-filter {
   margin-left: 8px;
   background: transparent;
   border: none;
-  color: #111111;
+  color: var(--tape-red, #e11d48);
   text-decoration: underline;
   cursor: pointer;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  padding: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Dark Theme Adjustments for Section 08 */
+html[data-theme="dark"] .polymath-dashboard-card,
+html[data-theme="dark"] .polymath-composer-card,
+html[data-theme="dark"] .polymath-log-card {
+  background: var(--bg-paper);
+  border-color: var(--rule-strong);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .polymath-metric,
+html[data-theme="dark"] .composer-tags-wrapper,
+html[data-theme="dark"] .polymath-search-box,
+html[data-theme="dark"] .feynman-checklist-group,
+html[data-theme="dark"] .composer-title-input,
+html[data-theme="dark"] .composer-select,
+html[data-theme="dark"] .composer-body-input,
+html[data-theme="dark"] .composer-cross-input,
+html[data-theme="dark"] .composer-export-btn,
+html[data-theme="dark"] .mode-tab-btn,
+html[data-theme="dark"] .discipline-pill {
+  background: var(--bg-canvas);
+  border-color: var(--rule-strong);
+  color: var(--ink-primary);
+}
+
+html[data-theme="dark"] .mode-tab-btn.active,
+html[data-theme="dark"] .discipline-pill.active {
+  background: var(--tape-red);
+  border-color: var(--tape-red);
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .composer-submit-btn {
+  background: var(--tape-red);
+  border-color: var(--tape-red);
+}
+
+html[data-theme="dark"] .polymath-cross-strip {
+  background: var(--bg-canvas);
+}
+
+html[data-theme="dark"] .bar-segment.firstprinciples,
+html[data-theme="dark"] .legend-dot.firstprinciples {
+  background: #f4f4f5;
+}
+
+html[data-theme="dark"] .discipline-badge.first-principles {
+  color: #f4f4f5;
+  border-color: #f4f4f5;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* ==========================================================================

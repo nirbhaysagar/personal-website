@@ -226,7 +226,7 @@
       <a href="#section-horizon" class="nav-item" data-section="section-horizon"><span class="nav-code">[05]</span> Horizon</a>
       <a href="#section-bucket" class="nav-item" data-section="section-bucket"><span class="nav-code">[06]</span> Q4 Goals</a>
       <a href="#section-radar" class="nav-item" data-section="section-radar"><span class="nav-code">[07]</span> Radar</a>
-      <a href="#section-daily" class="nav-item" data-section="section-daily"><span class="nav-code">[08]</span> Daily</a>
+      <a href="#section-daily" class="nav-item" data-section="section-daily"><span class="nav-code">[08]</span> Intellectual</a>
       <a href="#section-inspirations" class="nav-item" data-section="section-inspirations"><span class="nav-code">[09]</span> Archive</a>
     </nav>
   </header>
@@ -748,39 +748,192 @@
     </div>
   </section>
 
-  <!-- 08: WHAT I LEARNED TODAY (ULTRA-MINIMAL LOG) -->
+  <!-- 08: INTELLECTUAL MAXXING ENGINE & POLYMATH KNOWLEDGE VAULT -->
   <section id="section-daily" class="daily-section-wrap">
     <div class="editorial-heading">
-      <span>What I Learned Today</span>
+      <span>Intellectual Maxxing Engine &bull; Polymath Daily Log</span>
       <span class="heading-num">[08]</span>
     </div>
 
-    <!-- Ultra-Minimal Quick Composer -->
-    <div class="minimal-composer">
-      <form id="daily-log-form">
-        <input type="text" id="log-title-input" class="composer-title-input" placeholder="Title or core takeaway..." required>
-        <textarea id="log-text-input" class="composer-body-input" placeholder="What did you learn today? Notes, test results, or shift in thinking..." required></textarea>
-        
+    <!-- Polymath Compounding Intelligence Banner -->
+    <div class="polymath-dashboard-card">
+      <div class="polymath-dash-header">
+        <div class="polymath-dash-badge-group">
+          <span class="polymath-live-dot" aria-hidden="true"></span>
+          <span class="polymath-tag">COGNITIVE COMPOUNDING</span>
+          <span class="polymath-subtag">FEYNMAN EXTRACTION PROTOCOL</span>
+        </div>
+        <div class="polymath-streak-badge" id="polymath-streak-badge">
+          <span class="streak-fire">⚡</span> <strong id="polymath-count-val">0</strong> INSIGHTS EXTRACTED
+        </div>
+      </div>
+
+      <!-- Compounding Metrics Strip -->
+      <div class="polymath-metrics-row">
+        <div class="polymath-metric">
+          <span class="metric-label">TOTAL CAPITAL</span>
+          <span class="metric-val" id="metric-total-logs">0</span>
+          <span class="metric-hint">Recorded Laws</span>
+        </div>
+        <div class="polymath-metric">
+          <span class="metric-label">DEEP MASTERY</span>
+          <span class="metric-val" id="metric-mastery-rate">0%</span>
+          <span class="metric-hint">Feynman Verified</span>
+        </div>
+        <div class="polymath-metric">
+          <span class="metric-label">DISCIPLINES</span>
+          <span class="metric-val" id="metric-active-disciplines">6/6</span>
+          <span class="metric-hint">Active Tracks</span>
+        </div>
+        <div class="polymath-metric">
+          <span class="metric-label">CODE PROOFS</span>
+          <span class="metric-val" id="metric-code-proofs">0</span>
+          <span class="metric-hint">Executed Snippets</span>
+        </div>
+      </div>
+
+      <!-- Segmented Polymath Balance Bar -->
+      <div class="polymath-balance-wrap">
+        <div class="balance-bar-header">
+          <span class="balance-title">POLYMATH DISCIPLINE DISTRIBUTION</span>
+          <span class="balance-meta" id="balance-meta-text">Cross-domain equilibrium</span>
+        </div>
+        <div class="polymath-segmented-bar" id="polymath-segmented-bar" aria-label="Visual breakdown of insights by polymath domain">
+          <!-- Injected dynamically by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Intellectual Maxxing Composer Card -->
+    <div class="polymath-composer-card">
+      <!-- Mode Tabs: Quick Spark vs Deep Polymath Extraction -->
+      <div class="composer-mode-bar">
+        <div class="mode-tabs">
+          <button type="button" class="mode-tab-btn active" data-mode="quick" id="mode-quick-btn">
+            <span>⚡ Quick Spark</span>
+          </button>
+          <button type="button" class="mode-tab-btn" data-mode="deep" id="mode-deep-btn">
+            <span>🔬 Deep Polymath Extraction</span>
+          </button>
+        </div>
+        <div class="composer-prompt-actions">
+          <button type="button" class="btn-spark-prompt" id="btn-spark-prompt" title="Insert a cross-domain creative provocation prompt">
+            <span>🎲 Polymath Spark Prompt</span>
+          </button>
+        </div>
+      </div>
+
+      <form id="daily-log-form" class="polymath-form">
+        <!-- Row 1: Title & Discipline Selector -->
+        <div class="composer-top-row">
+          <div class="composer-input-group flex-2">
+            <label for="log-title-input" class="composer-field-label">CORE THESIS / GOVERNING PRINCIPLE:</label>
+            <input type="text" id="log-title-input" class="composer-title-input" placeholder="e.g. HNSW graph clustering: sub-18ms vector retrieval latency" required>
+          </div>
+          <div class="composer-input-group flex-1">
+            <label for="log-discipline-select" class="composer-field-label">PRIMARY DISCIPLINE:</label>
+            <select id="log-discipline-select" class="composer-select" required>
+              <option value="ai-cognition">🧠 AI &amp; Cognition</option>
+              <option value="systems-devops">⚙️ Systems &amp; DevOps</option>
+              <option value="gtm-growth">📈 GTM &amp; Growth</option>
+              <option value="software-craft">🔨 Software Craft</option>
+              <option value="cinema-narrative">🎬 Cinema &amp; Narrative</option>
+              <option value="first-principles">⚡ First Principles</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 2: Core Insight & Mental Model Shift -->
+        <div class="composer-input-group">
+          <label for="log-text-input" class="composer-field-label">CORE EXTRACTION &amp; FIRST-PRINCIPLES DERIVATION:</label>
+          <textarea id="log-text-input" class="composer-body-input" rows="3" placeholder="What fundamental law or shift in thinking did you derive today? Why does it work at the root level?" required></textarea>
+        </div>
+
+        <!-- Deep Extraction Fields (Collapsible / Toggleable) -->
+        <div class="deep-fields-container" id="deep-fields-container" style="display: none;">
+          <!-- Working Implementation / Code Evidence -->
+          <div class="composer-input-group">
+            <div class="label-with-hint">
+              <label for="log-implementation-input" class="composer-field-label">WORKING CODE / TERMINAL PROOF / BENCHMARK:</label>
+              <span class="field-hint">Monospace code block or verifiable command</span>
+            </div>
+            <textarea id="log-implementation-input" class="composer-code-input" rows="4" placeholder="// Paste executable TypeScript, Python, SQL, Dockerfile, or terminal benchmark..."></textarea>
+          </div>
+
+          <!-- Cross-Domain Polymath Bridge -->
+          <div class="composer-input-group">
+            <div class="label-with-hint">
+              <label for="log-crossdomain-input" class="composer-field-label">CROSS-DOMAIN BRIDGE (POLYMATH CONNECTION):</label>
+              <span class="field-hint">How does this principle apply to a completely unrelated field?</span>
+            </div>
+            <input type="text" id="log-crossdomain-input" class="composer-cross-input" placeholder="e.g. Connects database connection draining &rarr; Psychological cognitive cooldown between deep sprints">
+          </div>
+
+          <!-- Feynman Proof of Mastery Checklist -->
+          <div class="feynman-checklist-group">
+            <span class="composer-field-label">FEYNMAN PROOF OF MASTERY (COGNITIVE STRESS-TEST):</span>
+            <div class="feynman-checks-grid">
+              <label class="feynman-check-item">
+                <input type="checkbox" id="check-explain" checked>
+                <span>Can explain simply in 60s without notes</span>
+              </label>
+              <label class="feynman-check-item">
+                <input type="checkbox" id="check-implement" checked>
+                <span>Implemented or verified in real experiment</span>
+              </label>
+              <label class="feynman-check-item">
+                <input type="checkbox" id="check-edge" checked>
+                <span>Mapped failure modes &amp; boundary limits</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row Bottom: Tags + Actions -->
         <div class="composer-bottom-bar">
           <div class="composer-tags-wrapper">
             <span class="composer-hash">#</span>
-            <input type="text" id="log-tags-input" class="composer-tags-input" placeholder="tags (e.g. ai, memory, gtm)">
+            <input type="text" id="log-tags-input" class="composer-tags-input" placeholder="tags (e.g. ai, memory, postgres, gtm)">
           </div>
 
           <div class="composer-actions">
-            <button type="button" id="export-logs-btn" class="composer-export-btn" title="Export all logs as Markdown">Export .md</button>
-            <button type="submit" class="composer-submit-btn">Save</button>
+            <button type="button" id="export-logs-btn" class="composer-export-btn" title="Export entire knowledge vault as Obsidian-ready Markdown">
+              <span>Export Vault (.md)</span>
+            </button>
+            <button type="submit" class="composer-submit-btn">
+              <span>Save Insight</span>
+            </button>
           </div>
         </div>
       </form>
     </div>
 
-    <!-- Quiet Minimal Tag Filter Line -->
-    <div class="minimal-tag-filter" id="tag-filter-bar" role="tablist" aria-label="Filter entries by tag">
-      <!-- Populated dynamically: Filter: All · #ai · #gtm · #systems -->
+    <!-- Search & Polymath Filter Navigation -->
+    <div class="polymath-filter-strip">
+      <div class="polymath-search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="polymath-search-input" class="polymath-search-input" placeholder="Search insights, code proofs, mental models, tags...">
+        <button type="button" id="clear-search-btn" class="clear-search-btn" style="display: none;" title="Clear search">&times;</button>
+      </div>
+
+      <!-- Discipline Filter Pills -->
+      <div class="discipline-filter-pills" id="discipline-filter-pills" role="tablist" aria-label="Filter by polymath discipline">
+        <button type="button" class="discipline-pill active" data-discipline="ALL">All Disciplines</button>
+        <button type="button" class="discipline-pill" data-discipline="ai-cognition">🧠 AI &amp; Cognition</button>
+        <button type="button" class="discipline-pill" data-discipline="systems-devops">⚙️ Systems &amp; DevOps</button>
+        <button type="button" class="discipline-pill" data-discipline="gtm-growth">📈 GTM &amp; Growth</button>
+        <button type="button" class="discipline-pill" data-discipline="software-craft">🔨 Software Craft</button>
+        <button type="button" class="discipline-pill" data-discipline="cinema-narrative">🎬 Cinema &amp; Narrative</button>
+        <button type="button" class="discipline-pill" data-discipline="first-principles">⚡ First Principles</button>
+      </div>
+
+      <!-- Tag Filter Bar (Sub-Filter) -->
+      <div class="minimal-tag-filter" id="tag-filter-bar" role="tablist" aria-label="Filter entries by tag">
+        <!-- Populated dynamically: Filter: All · #ai · #gtm · #systems -->
+      </div>
     </div>
 
-    <!-- Minimal Log Feed -->
+    <!-- Rich Polymath Log Feed -->
     <div class="minimal-log-feed" id="log-feed" role="feed" aria-label="Archived learning logs">
       <!-- Populated by JavaScript -->
     </div>

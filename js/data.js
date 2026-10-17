@@ -764,53 +764,114 @@ export const initialData = {
 
   dailyLogs: [
     {
+      id: "log-108",
+      date: "2026-10-05",
+      discipline: "systems-devops",
+      title: "Blue-Green zero-downtime deploys with Envoy proxy & live drain checks",
+      learned: "A naive container restart drops active WebSocket sessions and webhook retries. By deploying the new release to an isolated green upstream pool, warming up vector indexes before routing traffic, and setting a 60-second graceful connection drain in Envoy proxy, deployments achieve true zero dropped packets.",
+      implementation: `# Envoy Weighted Cluster Traffic Shift with 60s Drain
+clusters:
+  - name: service_blue
+    weight: 0
+  - name: service_green
+    weight: 100
+# Graceful connection termination window:
+drain_time: 60s`,
+      crossDomain: "Connects graceful connection draining -> Cognitive task switching: giving the brain a 5-minute cool-down between deep work blocks prevents cognitive residue.",
+      mastery: { explainable: true, implemented: true, edgeTested: true },
+      tags: ["systems", "devops", "envoy", "resilience"]
+    },
+    {
       id: "log-107",
       date: "2026-10-04",
+      discipline: "first-principles",
       title: "Calibrating 31-day October sprints: velocity vs sustainable compounding",
       learned: "A 31-day cycle gives enough room for three 10-day focused milestone blocks with a 24h buffer. Pacing daily progress against the 31-day timeline prevents end-of-cycle rush and ensures software quality remains uncompromising.",
-      tags: ["systems", "cadence", "focus"]
+      implementation: `// Sprint Cadence Mathematical Formula
+const SPRINT_DAYS = 31;
+const BLOCKS = 3; // 10 days each
+const BUFFER_HOURS = 24;
+const dailyVelocityTarget = Math.ceil(totalMilestones / (SPRINT_DAYS - 1));`,
+      crossDomain: "Connects agile software pacing -> Biological hypertrophy periodization: peak output blocks followed by deload days yield exponential long-term growth.",
+      mastery: { explainable: true, implemented: true, edgeTested: true },
+      tags: ["systems", "cadence", "focus", "first-principles"]
     },
     {
       id: "log-106",
       date: "2026-10-03",
+      discipline: "ai-cognition",
       title: "HNSW index vector clustering: sub-18ms retrieval benchmarks",
       learned: "Tuning HNSW M=16 and efConstruction=64 in pgvector gives 99.2% recall with only 18ms latency across 100,000 vector embeddings. This unlocks conversational agent speed without sacrificing episodic retrieval accuracy.",
-      tags: ["ai", "memory", "benchmarks"]
+      implementation: `-- PostgreSQL HNSW Index Configuration for Sub-20ms Vector Lookups
+CREATE INDEX ON document_embeddings
+USING hnsw (embedding vector_cosine_ops)
+WITH (m = 16, ef_construction = 64);
+SET hnsw.ef_search = 40; -- Balanced recall vs latency`,
+      crossDomain: "Connects approximate nearest neighbor vector clustering -> Human associative memory: the subconscious mind prunes 99% of neural pathways to recall relevant memories in milliseconds.",
+      mastery: { explainable: true, implemented: true, edgeTested: true },
+      tags: ["ai", "memory", "benchmarks", "pgvector"]
     },
     {
       id: "log-105",
       date: "2026-10-02",
+      discipline: "software-craft",
       title: "Idempotency ledgers in high-concurrency ecommerce webhooks",
       learned: "Network retries from Shopify/WooCommerce can flood ingestion queues during peak traffic. Hashing incoming event IDs into a Redis atomic ledger with a 48h TTL drops duplicate processing to exactly 0 without blocking pipeline throughput.",
-      tags: ["product", "qa", "systems"]
+      implementation: `// Atomic Redis Idempotency Lock
+async function processWebhook(eventId, payload) {
+  const acquired = await redis.set(\`webhook:lock:\${eventId}\`, 'processing', 'NX', 'EX', 172800);
+  if (!acquired) return { status: 'duplicate_skipped' };
+  return await dispatchToPipeline(payload);
+}`,
+      crossDomain: "Connects idempotent transaction processing -> Psychological boundary setting: once a decision is made and recorded, refuse to spend cognitive energy re-litigating it.",
+      mastery: { explainable: true, implemented: true, edgeTested: true },
+      tags: ["product", "qa", "systems", "redis"]
     },
     {
       id: "log-104",
       date: "2026-10-01",
+      discipline: "ai-cognition",
       title: "Transitioning from heuristic search to hierarchical graph memory",
       learned: "Flat vector retrieval falls apart when context exceeds 50 sessions. By clustering episodic logs into canonical knowledge nodes at ingestion time, recall accuracy jumps from 72% to 94% with half the token overhead.",
-      tags: ["ai", "memory", "systems"]
-    },
-    {
-      id: "log-101",
-      date: "2026-09-21",
-      title: "Three-tier AI memory: Raw Log vs Canonical vs Abstract Knowledge",
-      learned: "A second-brain agent cannot rely solely on raw vector search over raw logs. You need a 3-tier structure: 1) Raw episodic stream, 2) Canonical entity summaries, and 3) Abstract generalized knowledge. This reduces hallucination and preserves cross-session coherence.",
-      tags: ["ai", "memory", "architecture"]
+      implementation: `// Graph Memory Ingestion Pipeline
+interface KnowledgeGraphNode {
+  canonicalId: string;
+  entityType: 'concept' | 'decision' | 'artifact';
+  episodes: string[]; // references to raw log IDs
+  abstractSummary: string;
+}`,
+      crossDomain: "Connects knowledge graph node synthesis -> First principles chunking: mastery is collapsing 50 disparate facts into one universal governing principle.",
+      mastery: { explainable: true, implemented: true, edgeTested: false },
+      tags: ["ai", "memory", "graph", "architecture"]
     },
     {
       id: "log-102",
       date: "2026-09-20",
+      discipline: "gtm-growth",
       title: "Distribution loops must be engineered into product onboarding",
       learned: "In e-commerce SaaS, merchants care about revenue velocity, not feature lists. Positioning Orbit around speed-to-checkout and order recovery converts significantly better than generic analytics messaging.",
-      tags: ["orbit", "gtm", "growth"]
+      implementation: `// Orbit Value Proposition Conversion Matrix
+const gtmAngles = {
+  featureBased: "Conversational BI analytics for Shopify stores", // 3.2% conversion
+  outcomeBased: "Recover abandoned orders in 90 seconds without logging into Looker" // 14.8% conversion
+};`,
+      crossDomain: "Connects product onboarding velocity -> Patrick Jane's mentalist cold reading: meet the subject where their acute pain lives, not where your technical pride resides.",
+      mastery: { explainable: true, implemented: true, edgeTested: true },
+      tags: ["orbit", "gtm", "growth", "sales"]
     },
     {
-      id: "log-103",
-      date: "2026-09-19",
-      title: "Testing edge cases in e-commerce cart synchronizations",
-      learned: "Edge case failures in cart total recalculation during coupon application cause 80% of merchant trust degradation. Deep edge-case QA is actually a high-leverage marketing strategy.",
-      tags: ["product", "qa", "systems"]
+      id: "log-109",
+      date: "2026-09-15",
+      discipline: "cinema-narrative",
+      title: "Suspense modulation & subtextual lighting in cinematic direction",
+      learned: "Direct dialogue explains; cinematography reveals. In visual storytelling, withholding visual clarity (motivated chiaroscuro shadows, slow push-ins) forces the viewer's subconscious to lean forward and co-author the scene.",
+      implementation: `// Visual Language Blueprint for Short Film Scene 02
+Camera: 35mm Anamorphic, f/2.0, Low-angle push-in (0.5m/s)
+Lighting: Key light 2700K 10% through Venetian blinds, zero fill
+Sound: Ambient HVAC drone at 45Hz with sudden cut on eye contact`,
+      crossDomain: "Connects visual narrative subtext -> UI UX design: what you deliberately omit from a minimalist dashboard creates room for what truly matters to stand out.",
+      mastery: { explainable: true, implemented: false, edgeTested: false },
+      tags: ["cinema", "narrative", "lighting", "visuals"]
     }
   ]
 };
