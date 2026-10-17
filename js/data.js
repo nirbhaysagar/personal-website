@@ -1,6 +1,7 @@
 /* ============================================================================
-   SYSTEM DATA STORE: BOLD — PERSONAL BLUEPRINT & LIFE MAP
-   Real data baseline for Bold (CMO at Orbit, AI Memory Builder).
+   MAXXING // PERSONAL OPERATING SYSTEM DATA STORE
+   One primary growth focus. A few supporting habits. Everything else deliberately deprioritized.
+   Real data baseline for Bold (CMO at Orbit, AI Builder & Systems Thinker).
    ============================================================================ */
 
 export const initialData = {
@@ -10,75 +11,704 @@ export const initialData = {
     age: 23,
     role: "CMO — Marketing & Growth at Orbit",
     location: "INDIA",
-    status: "BUILDING_ORBIT",
+    status: "ACTIVE_FLAGSHIP_SPRINT",
     dob: "2002-10-04",
     bio: [
       "Building at the intersection of AI, products, growth, and technology.",
-      "Currently CMO at Orbit (GTM, user acquisition, product positioning).",
-      "Exploring AI memory architectures, second-brain systems, and knowledge retrieval (Lumen / Sheldon).",
+      "Currently CMO at Orbit: user acquisition, GTM, and merchant revenue loops.",
+      "Exploring AI memory architectures, second-brain systems, and knowledge retrieval (Lumen).",
       "Learning by building, experimenting, and documenting the raw process."
     ],
+    northStar: "Building enduring independence through technical competence, AI software leverage, rigorous thinking, and uncompromising physical capability.",
+    vision: "Sovereign builder and entrepreneur compounding AI software ventures, cinematic craft, and physical mastery.",
+    current90DayObjective: "Scale Orbit toward $10,000 MRR, maintain consistent athletic training, and master core AI agent & memory architectures.",
     currentFocus: {
-      headline: "Scaling Orbit user acquisition and architecting AI memory systems (Lumen).",
-      details: "Focusing daily execution on Orbit's October growth push (GTM, content, product validation, e-commerce positioning), while studying systems engineering and AI memory models.",
-      activeCadence: "Orbit Marketing & GTM → Merchant Journey Testing → Lumen Architecture → Technical Study & Systems Review"
+      projectId: "proj-orbit",
+      headline: "Scale Orbit from $0 to $10,000 MRR via high-signal merchant acquisition",
+      whyItMatters: "Direct customer validation and revenue generation establish financial runway and prove market demand before scaling.",
+      phase: "Building & Validation",
+      nextAction: "Execute cold video audit teardowns for 20 high-volume Shopify stores",
+      nextMilestone: "Convert first 10 paid pilot merchants on recurring tier",
+      targetDate: "2026-10-31"
     }
   },
+
+  priorities: {
+    primary: {
+      id: "p-project",
+      name: "Project Maxxing (Orbit)",
+      type: "PRIMARY_GROWTH_FOCUS",
+      badge: "PRIMARY FOCUS",
+      details: "Orbit GTM & revenue loops ($0 → $10k MRR). All peak morning creative energy reserved here."
+    },
+    supporting: [
+      {
+        id: "p-physical",
+        name: "Physical Maxxing",
+        type: "SUPPORTING_HABIT",
+        badge: "SUPPORTING HABIT",
+        details: "Athletic body recomposition, 4x/week lifting + daily mobility/running. Non-negotiable energy anchor."
+      },
+      {
+        id: "p-intellectual",
+        name: "Intellectual Maxxing",
+        type: "INTEGRATED_LEARNING",
+        badge: "INTEGRATED LEARNING",
+        details: "Applied knowledge: study AI memory, systems internals, and sales directly through project execution."
+      }
+    ]
+  },
+
+  todayActions: [
+    {
+      id: "act-01",
+      title: "Deliver 5 personalized Loom video checkout audits to Shopify store founders",
+      category: "ORBIT GTM",
+      projectId: "proj-orbit",
+      isMustDo: true,
+      status: "pending",
+      dueDate: "Today",
+      notes: "Highlight checkout drop-off and demonstrate live conversational BI recovery."
+    },
+    {
+      id: "act-02",
+      title: "Upper Body Hypertrophy workout: Incline DB Press, Weighted Pull-Ups & Arms",
+      category: "PHYSICAL",
+      projectId: "physical",
+      isMustDo: true,
+      status: "completed",
+      dueDate: "Today",
+      notes: "Target 26kg DBs on incline press with 3-second eccentric control."
+    },
+    {
+      id: "act-03",
+      title: "Synthesize note on Idempotent Webhook Hashing in Redis for e-commerce pipelines",
+      category: "INTELLECT",
+      projectId: "proj-orbit",
+      isMustDo: false,
+      status: "pending",
+      dueDate: "Today",
+      notes: "Connect to Orbit payment webhook edge cases."
+    },
+    {
+      id: "act-04",
+      title: "Draft X breakdown thread on Conversational BI vs 14-Tab Static Dashboards",
+      category: "X / PUBLIC",
+      projectId: "proj-orbit",
+      isMustDo: false,
+      status: "pending",
+      dueDate: "Tomorrow",
+      notes: "Position as builder-in-progress solving real DTC merchant pain."
+    },
+    {
+      id: "act-05",
+      title: "Weekly balance review: Track October runway against ₹40,000 cashflow milestone",
+      category: "CAREER / CASHFLOW",
+      projectId: "career",
+      isMustDo: false,
+      status: "pending",
+      dueDate: "Sunday",
+      notes: "Audit client retainers and allocate hardware upgrade budget."
+    }
+  ],
 
   projects: [
     {
       id: "proj-orbit",
       title: "Orbit",
+      isFlagship: true,
       tagline: "E-commerce growth & marketing engine ($0 → $10,000 MRR)",
       category: "GROWTH & REVENUE",
       status: "ACTIVE — SCALING",
+      phase: "Building",
+      phasesList: ["Idea", "Research", "Validation", "Building", "Testing", "Launch", "Iteration", "Paused", "Completed"],
       progress: 68,
       role: "CMO / Marketing & Growth",
+      problem: "E-commerce and D2C merchants suffer high checkout drop-offs and fragmented analytics without conversational clarity.",
+      intendedUsers: "Founders, D2C brand operators, e-commerce marketers",
+      whyChosen: "Direct path to cashflow, scalable SaaS economics, high leverage for outbound marketing mastery.",
+      nextMilestone: "Convert first 10 paid pilot merchants on recurring tier ($500+ MRR)",
+      nextAction: "Execute cold video audit teardowns for 20 high-volume Shopify stores",
+      startDate: "2026-09-01",
+      targetDate: "2026-10-31",
+      demoUrl: "https://whatboldoceanisdoing.vercel.app/",
+      repoUrl: "https://github.com/nirbhaysagar/personal-website",
+      evidence: {
+        status: "VERIFIED_DELIVERABLE",
+        description: "Live merchant onboarding flow with checkout recovery and 2 pilot brand integrations.",
+        url: "https://whatboldoceanisdoing.vercel.app/"
+      },
+      evaluation: {
+        interest: 9,
+        learning: 8,
+        feasibility: 9,
+        timeToResult: 8,
+        customerDemand: 9,
+        strategicAlignment: 10,
+        reasoning: "Highest commercial alignment; immediately exercises B2B sales and SaaS growth loops while delivering runway."
+      },
+      retrospectives: [
+        {
+          id: "retro-orb-01",
+          date: "2026-10-04",
+          milestone: "Onboarding v1 & Merchant Outreach",
+          intended: "Achieve 10 merchant signups via email outreach.",
+          actual: "Obtained 2 active pilots; discovered cold email response was low without custom video proof.",
+          worked: "Direct screen recording audits of merchant stores had an 80% response rate.",
+          failed: "Generic text pitches and feature lists generated zero conversions.",
+          learned: "Merchants care about order recovery and revenue velocity, not feature dashboards.",
+          changes: "Shifted outbound strategy entirely to tailored Loom audit teardowns.",
+          next: "Produce 20 personalized video audits for verified Shopify store owners."
+        }
+      ],
       tech: ["GTM Loops", "Founder Outreach", "D2C Marketing", "Funnel CRO", "E-commerce Integration"],
-      description: "Executing structured marketing for Orbit to transition from $0 to $10,000 MRR. Conducting founder outreach across 250+ D2C stores, optimizing checkout drop-off, and turning pilot merchants into paid recurring accounts.",
-      link: "#",
-      metrics: "Target: $10,000 MRR Milestone • 5% Visitor-to-Paid"
+      description: "Executing structured marketing for Orbit to transition from $0 to $10,000 MRR. Conducting founder outreach across 250+ D2C stores, optimizing checkout drop-off, and turning pilot merchants into paid recurring accounts."
     },
     {
       id: "proj-agenttrace",
       title: "AgentTrace",
+      isFlagship: false,
       tagline: "Autonomous AI agent observability & execution tracing (YC Candidate)",
       category: "AI & INFRASTRUCTURE",
       status: "IN SPRINT — YC READY",
+      phase: "Testing",
       progress: 75,
       role: "Founder & Lead Architect",
+      problem: "Developers building autonomous multi-agent systems lack granular execution tracing for tool failures and reasoning loops.",
+      intendedUsers: "AI engineers, agentic system architects, LLM application builders",
+      whyChosen: "Critical infrastructure void in the agentic ecosystem; massive venture upside and YC candidate potential.",
+      nextMilestone: "Complete interactive telemetry trace replay & submit YC W27 application",
+      nextAction: "Record 3-minute interactive trace replay demo with LangChain/CrewAI sample swarms",
+      startDate: "2026-09-15",
+      targetDate: "2026-10-25",
+      demoUrl: "#",
+      repoUrl: "#",
+      evidence: {
+        status: "PROTOTYPE_FUNCTIONAL",
+        description: "Local trace ingestion engine benchmarking tool-call latencies and DAG graph rendering.",
+        url: "#"
+      },
+      evaluation: {
+        interest: 10,
+        learning: 10,
+        feasibility: 7,
+        timeToResult: 6,
+        customerDemand: 8,
+        strategicAlignment: 9,
+        reasoning: "Deep technical moat; directly builds AI systems credibility and positions for Y Combinator."
+      },
+      retrospectives: [],
       tech: ["Agent Telemetry", "Execution Graphs", "TypeScript", "Observability", "LLM Tracing"],
-      description: "Building production observability for autonomous AI agent swarms and multi-step reasoning trajectories. Packaging live demos, benchmarks, and submitting to Y Combinator (YC).",
-      link: "#",
-      metrics: "YC Application Sprint • Full Telemetry & Tracing Pipeline"
+      description: "Building production observability for autonomous AI agent swarms and multi-step reasoning trajectories. Packaging live demos, benchmarks, and submitting to Y Combinator (YC)."
     },
     {
       id: "proj-lumen",
       title: "Lumen / Sheldon",
+      isFlagship: false,
       tagline: "Hierarchical AI memory engine & personal second-brain architecture",
       category: "AI & SYSTEMS",
       status: "ARCHITECTURE — PROTOTYPE",
+      phase: "Research",
       progress: 60,
       role: "Creator & Systems Architect",
+      problem: "Long-term AI agents forget episodic nuance across multi-session trajectories, leading to hallucination and context drift.",
+      intendedUsers: "Solo developers, autonomous research agents, personal second-brain systems",
+      whyChosen: "Solves personal second-brain need while gaining rigorous proficiency in vector indexing (pgvector/HNSW).",
+      nextMilestone: "Sub-18ms HNSW retrieval across 100,000 episodic embeddings",
+      nextAction: "Benchmark cosine distance vs inner product with M=16 in pgvector",
+      startDate: "2026-09-10",
+      targetDate: "2026-11-15",
+      demoUrl: "#",
+      repoUrl: "#",
+      evidence: {
+        status: "BENCHMARKED",
+        description: "Benchmark test script yielding 18ms latency on 100k test embeddings.",
+        url: "#"
+      },
+      evaluation: {
+        interest: 10,
+        learning: 10,
+        feasibility: 7,
+        timeToResult: 6,
+        customerDemand: 7,
+        strategicAlignment: 8,
+        reasoning: "Compounding intellectual investment; provides deep foundational mastery of vector mathematics and memory graphs."
+      },
+      retrospectives: [],
       tech: ["AI Memory", "pgvector", "PostgreSQL", "HNSW Indexing", "TypeScript SDK"],
-      description: "Researching and prototyping an AI memory system with hierarchical storage: raw journal streams, canonical entity memory, and sub-18ms HNSW vector retrieval for autonomous agents.",
-      link: "#",
-      metrics: "Sub-18ms Vector Retrieval • 99.2% Recall on 100k Vectors"
+      description: "Researching and prototyping an AI memory system with hierarchical storage: raw journal streams, canonical entity memory, and sub-18ms HNSW vector retrieval for autonomous agents."
     },
     {
       id: "proj-jarvis",
       title: "Jarvis",
+      isFlagship: false,
       tagline: "Personal autonomous executive assistant agent",
       category: "AUTONOMOUS AGENTS",
       status: "DEVELOPMENT",
+      phase: "Building",
       progress: 45,
       role: "Architect & Builder",
+      problem: "Routine founder operations (daily literature digests, calendar scheduling, lead scraping) cause cognitive friction.",
+      intendedUsers: "Personal founder operations",
+      whyChosen: "Automates personal operating tasks while exploring deterministic state machines for agent tool calling.",
+      nextMilestone: "Autonomous morning digest sent via Telegram bot at 07:00 AM",
+      nextAction: "Connect local cron trigger to arXiv and Twitter API digest script",
+      startDate: "2026-09-25",
+      targetDate: "2026-11-01",
+      demoUrl: "#",
+      repoUrl: "#",
+      evidence: {
+        status: "IN_DEVELOPMENT",
+        description: "Local Python worker parsing RSS and social streams into formatted markdown daily notes.",
+        url: "#"
+      },
+      evaluation: {
+        interest: 8,
+        learning: 8,
+        feasibility: 9,
+        timeToResult: 8,
+        customerDemand: 5,
+        strategicAlignment: 7,
+        reasoning: "High immediate daily utility; eliminates repetitive operational drag."
+      },
+      retrospectives: [],
       tech: ["Autonomous Workflows", "Task Orchestration", "Local LLM Tooling", "Cron Automation"],
-      description: "Crafting a personal executive assistant agent to automate daily research digests, calendar scheduling, outreach pipelines, and systems monitoring with local-first security.",
-      link: "#",
-      metrics: "Autonomous Daily Digest • Task Scheduling Engine"
+      description: "Crafting a personal executive assistant agent to automate daily research digests, calendar scheduling, outreach pipelines, and systems monitoring with local-first security."
     }
   ],
+
+  physical: {
+    profile: {
+      weight: 71.4,
+      unit: "kg",
+      height: 178,
+      heightUnit: "cm",
+      goalWeight: 75.0,
+      targetBodyFat: "12-14%",
+      objective: "Develop a lean, athletic, visibly muscular physique with functional strength and mobility.",
+      trainingSplit: "Upper / Lower / Rest / Push / Pull / Legs"
+    },
+    supportingHabits: {
+      sleepHoursTarget: 8,
+      sleepAverage: 7.5,
+      proteinTarget: 140,
+      proteinUnit: "g",
+      recoveryScore: "High",
+      stepsDailyTarget: 8000
+    },
+    workoutLogs: [
+      {
+        id: "w-04",
+        date: "2026-10-17",
+        type: "Upper Body & Chest Hypertrophy",
+        completed: true,
+        exercises: [
+          { name: "Incline Dumbbell Press", sets: 4, reps: "10, 10, 8, 8", weight: "26 kg" },
+          { name: "Flat Barbell Bench", sets: 3, reps: "8, 8, 6", weight: "70 kg" },
+          { name: "Weighted Pull-Ups", sets: 4, reps: "6, 6, 5, 5", weight: "+10 kg" },
+          { name: "Cable Chest Flyes", sets: 3, reps: "12, 12, 12", weight: "15 kg" },
+          { name: "Overhead Triceps Rope Extension", sets: 3, reps: "12, 10, 10", weight: "22 kg" }
+        ],
+        notes: "Solid chest contraction. Progressive overload achieved on incline dumbbell press with strict 3s eccentric tempo."
+      },
+      {
+        id: "w-03",
+        date: "2026-10-15",
+        type: "Pull & Posterior Chain",
+        completed: true,
+        exercises: [
+          { name: "Chest-Supported T-Bar Row", sets: 4, reps: "10, 10, 8, 8", weight: "55 kg" },
+          { name: "Lat Pulldown (Neutral Grip)", sets: 3, reps: "10, 10, 8", weight: "65 kg" },
+          { name: "Face Pulls", sets: 3, reps: "15, 15, 15", weight: "20 kg" },
+          { name: "Incline DB Bicep Curls", sets: 3, reps: "10, 10, 8", weight: "14 kg" }
+        ],
+        notes: "Back engaged throughout. Focused on scapular retraction at peak contraction."
+      },
+      {
+        id: "w-02",
+        date: "2026-10-13",
+        type: "Legs & Core Stability",
+        completed: true,
+        exercises: [
+          { name: "Barbell Back Squat", sets: 4, reps: "8, 8, 8, 6", weight: "85 kg" },
+          { name: "Romanian Deadlift (RDL)", sets: 3, reps: "10, 10, 10", weight: "80 kg" },
+          { name: "Walking Dumbbell Lunges", sets: 3, reps: "12 steps/leg", weight: "18 kg" },
+          { name: "Hanging Leg Raises", sets: 3, reps: "15, 12, 12", weight: "Bodyweight" }
+        ],
+        notes: "Deep controlled stretch on RDLs. Core stayed braced."
+      },
+      {
+        id: "w-01",
+        date: "2026-10-11",
+        type: "Cardio & Full-Body Mobility",
+        completed: true,
+        exercises: [
+          { name: "Zone 2 Outdoor Road Run", sets: 1, reps: "32 mins", weight: "4.5 km" },
+          { name: "Hip Opener & Thoracic Spine Mobility", sets: 1, reps: "20 mins", weight: "Bodyweight" }
+        ],
+        notes: "Steady nasal breathing maintained. Joint stiffness dissolved."
+      }
+    ],
+    weightHistory: [
+      { date: "2026-09-20", weight: 70.2 },
+      { date: "2026-09-27", weight: 70.8 },
+      { date: "2026-10-04", weight: 71.1 },
+      { date: "2026-10-11", weight: 71.4 }
+    ]
+  },
+
+  intellectualNotes: [
+    {
+      id: "note-107",
+      date: "2026-10-04",
+      topic: "Strategic Cadence",
+      concept: "Calibrating 31-Day Sprints: Velocity vs Sustainable Compounding",
+      explanation: "A 31-day cycle gives enough room for three 10-day focused milestone blocks with a 24h buffer. Pacing daily progress against the 31-day timeline prevents end-of-cycle rush and ensures software quality remains uncompromising.",
+      whyItMatters: "Prevents burnout and keeps execution focused on the single flagship deliverable.",
+      practicalExample: "Breaking October Orbit targets into Days 1–10 (Outbound audits), Days 11–20 (Pilot onboarding), Days 21–30 (Paid conversion).",
+      appliedProjectId: "proj-orbit",
+      questions: "How to automate the transition between milestone blocks without losing momentum?",
+      references: "Robert Greene (The 33 Strategies of War), Andy Grove (High Output Management)",
+      tags: ["systems", "cadence", "focus"],
+      understanding: {
+        canExplainWithoutNotes: true,
+        canImplement: true,
+        knowsLimitations: true
+      }
+    },
+    {
+      id: "note-106",
+      date: "2026-10-03",
+      topic: "Vector Search & Embeddings",
+      concept: "HNSW Index Tuning for Sub-18ms Episodic Memory Retrieval",
+      explanation: "Tuning HNSW M=16 and efConstruction=64 in pgvector gives 99.2% recall with only 18ms latency across 100,000 vector embeddings. This unlocks conversational agent speed without sacrificing episodic retrieval accuracy.",
+      whyItMatters: "Conversational agents feel snappy when context retrieval latency is below 30ms.",
+      practicalExample: "Configuring postgres with CREATE INDEX ON embeddings USING hnsw (embedding vector_cosine_ops) WITH (m = 16, ef_construction = 64);",
+      appliedProjectId: "proj-lumen",
+      questions: "What is the memory trade-off when scaling from 100k to 10M vectors on a single instance?",
+      references: "Malkov & Yashunin (2018) HNSW paper, pgvector documentation",
+      tags: ["ai", "memory", "benchmarks", "pgvector"],
+      understanding: {
+        canExplainWithoutNotes: true,
+        canImplement: true,
+        knowsLimitations: true
+      }
+    },
+    {
+      id: "note-105",
+      date: "2026-10-02",
+      topic: "Distributed Systems & E-Commerce",
+      concept: "Idempotency Ledgers in High-Concurrency Webhook Ingestion",
+      explanation: "Network retries from Shopify/WooCommerce can flood ingestion queues during peak traffic. Hashing incoming event IDs into a Redis atomic ledger with a 48h TTL drops duplicate processing to exactly 0 without blocking pipeline throughput.",
+      whyItMatters: "Prevents double-charging or duplicate alert dispatch in production e-commerce stacks.",
+      practicalExample: "Redis SET webhook:evt_{id} 1 EX 172800 NX returns null if already processed.",
+      appliedProjectId: "proj-orbit",
+      questions: "How to handle out-of-order webhook delivery for state updates?",
+      references: "Stripe API Webhook Idempotency Architecture",
+      tags: ["product", "qa", "systems", "ecommerce"],
+      understanding: {
+        canExplainWithoutNotes: true,
+        canImplement: true,
+        knowsLimitations: true
+      }
+    },
+    {
+      id: "note-104",
+      date: "2026-10-01",
+      topic: "Agent Knowledge Architectures",
+      concept: "Hierarchical Graph Memory vs Flat Vector Retrieval",
+      explanation: "Flat vector retrieval falls apart when context exceeds 50 sessions. By clustering episodic logs into canonical knowledge nodes at ingestion time, recall accuracy jumps from 72% to 94% with half the token overhead.",
+      whyItMatters: "Enables long-horizon multi-agent agents to synthesize patterns over months without drowning in prompt context.",
+      practicalExample: "Summarizing 10 daily conversation logs into a single canonical entity card before generating vectors.",
+      appliedProjectId: "proj-lumen",
+      questions: "When does graph clustering introduce summarization bias?",
+      references: "MemGPT paper, Generative Agents (Park et al.)",
+      tags: ["ai", "memory", "systems"],
+      understanding: {
+        canExplainWithoutNotes: true,
+        canImplement: true,
+        knowsLimitations: true
+      }
+    },
+    {
+      id: "note-101",
+      date: "2026-09-21",
+      topic: "Cognitive AI Systems",
+      concept: "Three-Tier Memory Schema: Episodic Log → Canonical Node → Abstract Heuristic",
+      explanation: "A second-brain agent cannot rely solely on raw vector search over raw logs. You need a 3-tier structure: 1) Raw episodic stream, 2) Canonical entity summaries, and 3) Abstract generalized knowledge. This reduces hallucination and preserves cross-session coherence.",
+      whyItMatters: "Foundational architecture for personal second-brain systems and persistent autonomous agents.",
+      practicalExample: "Logging daily workouts in raw tier, updating 1RM estimates in canonical tier, deriving recovery rules in abstract tier.",
+      appliedProjectId: "proj-lumen",
+      questions: "How frequently should the abstraction worker run?",
+      references: "Cognitive Architectures (Soar/ACT-R) & Modern LLM Memory Systems",
+      tags: ["ai", "memory", "architecture"],
+      understanding: {
+        canExplainWithoutNotes: true,
+        canImplement: true,
+        knowsLimitations: true
+      }
+    },
+    {
+      id: "note-102",
+      date: "2026-09-20",
+      topic: "B2B SaaS Growth",
+      concept: "Distribution Loops Embedded into Core Product Onboarding",
+      explanation: "In e-commerce SaaS, merchants care about revenue velocity, not feature lists. Positioning Orbit around speed-to-checkout and order recovery converts significantly better than generic analytics messaging.",
+      whyItMatters: "Lowers CAC and aligns product telemetry directly with customer economic incentives.",
+      practicalExample: "Providing store owners an instant one-click audit report showing abandoned orders recoverable today.",
+      appliedProjectId: "proj-orbit",
+      questions: "What is the best trigger point for white-glove onboarding outreach?",
+      references: "Gabriel Weinberg (Traction), Rob Fitzpatrick (The Mom Test)",
+      tags: ["orbit", "gtm", "growth"],
+      understanding: {
+        canExplainWithoutNotes: true,
+        canImplement: true,
+        knowsLimitations: true
+      }
+    }
+  ],
+
+  contentPipeline: [
+    {
+      id: "x-01",
+      title: "Why 14-Tab Static Dashboards Are Dying (Conversational BI)",
+      draft: "Most founders spend 40 mins every Monday staring at Looker, GA4, and Shopify charts without knowing what actually broke.\n\nConversational agents that query Postgres directly and explain why checkout conversion dipped in plain English will replace 80% of passive dashboards.\n\nHere's how we're building it at Orbit.",
+      category: "Building in Public",
+      status: "Ready",
+      platform: "X",
+      projectId: "proj-orbit",
+      publishedUrl: "",
+      metrics: {
+        impressions: 0,
+        likes: 0,
+        reposts: 0,
+        isManual: true,
+        verificationNote: "Pending release scheduled for tomorrow morning"
+      }
+    },
+    {
+      id: "x-02",
+      title: "Sub-18ms Vector Retrieval with pgvector HNSW",
+      draft: "Benchmark results from today: 100,000 embeddings with 1536 dims on pgvector.\n\nWith HNSW M=16 and ef_construction=64, average query latency dropped to 18ms with 99.2% recall accuracy.\n\nYou probably don't need a standalone managed vector DB for your agent memory.",
+      category: "Ideas & Insights",
+      status: "Draft",
+      platform: "X",
+      projectId: "proj-lumen",
+      publishedUrl: "",
+      metrics: {
+        impressions: 0,
+        likes: 0,
+        reposts: 0,
+        isManual: true,
+        verificationNote: "Drafting code snippet screenshot"
+      }
+    },
+    {
+      id: "x-03",
+      title: "The 23-Year-Old Founder Cadence: Physical Anchor + 1 Flagship",
+      draft: "The easiest trap in your twenties is pursuing 7 projects simultaneously with mediocre velocity.\n\nThe real unlock: One flagship project (Orbit). One supporting physical routine (4x gym + daily run). Everything else ruthlessly backlogged.",
+      category: "Personal Journey",
+      status: "Idea",
+      platform: "X",
+      projectId: "proj-orbit",
+      publishedUrl: "",
+      metrics: {
+        impressions: 0,
+        likes: 0,
+        reposts: 0,
+        isManual: true,
+        verificationNote: "Outline in notes"
+      }
+    },
+    {
+      id: "x-04",
+      title: "Architectural Teardown: Autonomous Multi-Agent Telemetry DAGs",
+      draft: "Published breakdown on how AgentTrace tracks multi-step tool calling cycles and detects infinite reasoning loops before they burn API credits.",
+      category: "Building in Public",
+      status: "Published",
+      platform: "X",
+      projectId: "proj-agenttrace",
+      publishedUrl: "https://x.com/whatboldoceanisdoing/status/1791000",
+      metrics: {
+        impressions: 1420,
+        likes: 86,
+        reposts: 14,
+        isManual: true,
+        verificationNote: "Manually entered from X Analytics dashboard"
+      }
+    }
+  ],
+
+  career: {
+    currentRole: "CMO & Growth Lead at Orbit",
+    responsibilities: [
+      "Leading outbound GTM strategy and direct founder acquisition loops.",
+      "Optimizing merchant checkout drop-off and conversion rate architecture.",
+      "Partnering with marketing/tech agencies to deploy Orbit as their AI automation stack.",
+      "Packaging traction deck and product metrics for YC W27 application."
+    ],
+    skillsToDevelop: [
+      {
+        name: "DevOps & Production Infrastructure",
+        status: "IN_PROGRESS",
+        progress: 45,
+        details: "Linux cgroups, Docker containerization, CI/CD pipelines, Nginx/Caddy reverse proxies, zero-downtime deploys."
+      },
+      {
+        name: "AI Internals & Agent Architecture",
+        status: "IN_PROGRESS",
+        progress: 60,
+        details: "Attention mechanisms, local LLM quantization, tool/function calling graphs, evaluation benchmarks, pgvector."
+      },
+      {
+        name: "High-Ticket B2B Sales & Consultative Closing",
+        status: "IN_PROGRESS",
+        progress: 50,
+        details: "Founder-to-founder video teardowns, objection handling, agency retainer negotiations, value-based pricing."
+      },
+      {
+        name: "Full-Stack TypeScript & Systems Design",
+        status: "IN_PROGRESS",
+        progress: 75,
+        details: "Node/Bun runtimes, PostgreSQL schema design, Redis idempotency caching, responsive UI engineering."
+      }
+    ],
+    incomeExperiments: [
+      {
+        id: "exp-orbit",
+        name: "Orbit SaaS Revenue Share",
+        status: "ACTIVE_FLAGSHIP",
+        targetIncome: "$10,000 MRR Milestone",
+        currentIncome: "$0 MRR (In Pilot Phase)",
+        notes: "Long-term compounding equity and recurring subscription cashflow."
+      },
+      {
+        id: "exp-agency",
+        name: "Industry Plant Agency Retainers",
+        status: "ACTIVE",
+        targetIncome: "₹1,00,000 / month",
+        currentIncome: "₹40,000 (October Runway Target)",
+        notes: "High-signal technical marketing and distribution for select e-commerce and AI founders."
+      },
+      {
+        id: "exp-devtool",
+        name: "Independent AI Developer Telemetry SaaS",
+        status: "RESEARCH",
+        targetIncome: "$1,500 / month",
+        currentIncome: "$0",
+        notes: "Potential spin-out of AgentTrace tracing SDK into paid developer tier."
+      }
+    ],
+    monthlyLedger: {
+      month: "October 2026",
+      targetNet: 40000,
+      currency: "INR",
+      verifiedCurrent: 0,
+      notes: "Strict financial discipline: allocate surplus profits toward workstation hardware fund."
+    }
+  },
+
+  weeklyReviews: [
+    {
+      id: "rev-2026-w41",
+      weekStarting: "2026-10-12",
+      answers: {
+        shippedWork: "Delivered Orbit self-serve merchant onboarding flow; benchmarked pgvector HNSW indexing (18ms latency on 100k vectors).",
+        deepLearnings: "Idempotency hashing in Redis is essential for e-commerce webhook ingestion; personalized video audits outperform cold emails 5x.",
+        flagshipProgress: "Onboarded 2 pilot Shopify merchants on Orbit; refined value proposition around automated checkout order recovery.",
+        physicalTraining: "Completed 4 workouts (Chest, Back, Legs, Run & Mobility); hit 26kg DBs on incline press with clean form.",
+        mostValue: "Creating personalized Loom video audits for store owners rather than mass cold pitching.",
+        wastedTime: "Spending too much time tweaking CSS styling details on secondary side projects instead of outbound outreach.",
+        avoided: "Direct telephone follow-ups with cold e-commerce leads.",
+        obstacle: "Finding qualified D2C stores doing over $20k/mo GMV who are actively feeling checkout drop-off pain.",
+        nextWeekOutcome: "Deliver 20 personalized video checkout teardowns and convert first 3 paid pilot accounts for Orbit.",
+        stopDoing: "Stop checking social analytics midday; confine social activity to evening review blocks."
+      },
+      generatedSummary: "High technical and physical momentum achieved this week with 4 logged workouts and benchmarked pgvector indexing. Flagship focus on Orbit must remain 100% outbound-oriented: double down on custom Loom video audits and eliminate distraction on secondary tools.",
+      isFinalized: true
+    }
+  ],
+
+  strategicCycles: [
+    {
+      id: "cycle-q4-2026",
+      name: "Q4 2026 Strategic Cycle: Orbit Traction & Personal Foundation",
+      isCurrent: true,
+      startDate: "2026-10-01",
+      endDate: "2026-12-31",
+      theme: "FOUNDATION, CASHFLOW & FLAGSHIP CONVICTION",
+      primaryOutcome: "Scale Orbit from $0 to $10,000 MRR through validated merchant acquisition loops and YC W27 submission.",
+      supportingOutcomes: [
+        "Maintain 4x/week physical training and build toward a lean, athletic 75 kg frame.",
+        "Deepen applied mastery of DevOps, AI agent runtimes, and high-ticket B2B sales."
+      ],
+      hierarchy: [
+        {
+          label: "TARGET",
+          description: "Validate customer demand and achieve commercial product-market fit for Orbit.",
+          example: "Prove merchants will pay recurring subscriptions for conversational order recovery."
+        },
+        {
+          label: "ACTIVITY",
+          description: "Conduct daily high-signal founder outreach and diagnostic store audits.",
+          example: "Record and deliver tailored Loom video checkout audits to 100 Shopify/WooCommerce store owners."
+        },
+        {
+          label: "OUTPUT",
+          description: "Complete 100 video audits, onboard 20 pilot stores, submit YC W27 application.",
+          example: "20 active merchant dashboards running Orbit live on store checkout."
+        },
+        {
+          label: "OUTCOME",
+          description: "Convert 10+ paid recurring merchants generating sustainable monthly revenue.",
+          example: "$10,000 MRR contracted run-rate with high net merchant retention."
+        }
+      ],
+      successCriteria: [
+        { id: "sc-1", type: "outcome", text: "10+ active paid Shopify/WooCommerce merchants generating recurring revenue on Orbit", completed: false },
+        { id: "sc-2", type: "output", text: "50 personalized video checkout teardowns delivered to qualified brand operators", completed: false },
+        { id: "sc-3", type: "target", text: "Reach ₹1,00,000/mo personal net cashflow via agency retainers and Orbit", completed: false },
+        { id: "sc-4", type: "activity", text: "4 structured gym workouts logged per week with progressive overload tracking", completed: true },
+        { id: "sc-5", type: "output", text: "Package and submit both Orbit and AgentTrace into Y Combinator W27", completed: false }
+      ],
+      constraints: [
+        "Strict focus on 1 flagship (Orbit); zero time allocated to launching unvetted secondary products during core work blocks.",
+        "All study and learning notes must directly connect to active project implementation."
+      ],
+      risks: [
+        "Diffusion of attention across too many interesting side pursuits instead of relentless sales outbound.",
+        "Under-recovering physically from training or neglecting sleep leading to midday cognitive fog."
+      ],
+      cycleReview: null
+    }
+  ],
+
+  settings: {
+    northStar: "Building enduring independence through technical competence, AI software leverage, rigorous thinking, and uncompromising physical capability.",
+    flagshipProjectId: "proj-orbit",
+    preferredUnits: {
+      weight: "kg",
+      height: "cm",
+      currency: "INR"
+    },
+    theme: "auto",
+    trackingFields: {
+      trackSleep: true,
+      trackProtein: true,
+      trackRecovery: true,
+      trackWalking: true
+    }
+  },
+
+  get dailyLogs() {
+    return this.intellectualNotes.map(n => ({
+      id: n.id,
+      date: n.date,
+      title: n.concept,
+      learned: n.explanation,
+      tags: n.tags
+    }));
+  },
 
   octoberTargets: [
     {
@@ -225,7 +855,7 @@ export const initialData = {
       }
     }
   ],
-  // Backwards compatibility alias
+
   get septemberTargets() {
     return this.octoberTargets;
   },
@@ -321,9 +951,11 @@ export const initialData = {
     { id: "q4-18", category: "STUDY: SELLING & GTM", text: "Master High-Ticket Selling & Distribution: B2B consultative sales, cold outbound loops, objection handling, founder-to-founder demos, agency retainer closing, and value-based pricing", completed: false },
     { id: "q4-19", category: "STUDY: 3 SYSTEMS", text: "Deep Technical Mastery for 3 Projects: Agent observability & execution DAGs (AgentTrace), Hierarchical pgvector/HNSW & sub-18ms retrieval (Lumen), and autonomous tool-execution runtimes (Jarvis)", completed: false }
   ],
+
   get bucketList() {
     return this.q4Goals;
   },
+
   radarCurriculum: {
     tracks: [
       { id: "all", name: "All Synthesis", badge: "DA VINCI × MUSK × JANE × SCOFIELD × TESLA × ALTMAN" },
@@ -349,23 +981,23 @@ export const initialData = {
               duration: "24m",
               url: "https://www.youtube.com/watch?v=t705r8ICkRw",
               badge: "YouTube · 24m",
-              takeaway: "Deconstruct every problem to fundamental physical truths instead of reasoning by analogy. Make requirements less dumb and delete parts relentlessly."
+              takeaway: "Make requirements less dumb; delete parts or process steps; simplify or optimize; accelerate cycle time; automate."
             },
             article: {
-              title: "The Industrial First Principles: Why Physics Always Beats Marketing",
-              author: "Casey Handmer",
-              readTime: "9m read",
-              url: "https://caseyhandmer.wordpress.com/",
-              badge: "Substack · 9m",
-              takeaway: "Radical mechanical simplicity and vertical iteration speed create compounding moats that capital alone cannot buy."
+              title: "Nikola Tesla's Colorado Springs Notes & High-Frequency Power Resonance",
+              author: "Nikola Tesla Archive",
+              readTime: "12m read",
+              url: "https://teslacollection.com/",
+              badge: "Archival · 12m",
+              takeaway: "Master resonant frequency tuning; eliminate parasitic inductance; ground return impedance must approach zero."
             },
             book: {
-              title: "Elon Musk",
-              author: "Walter Isaacson",
-              chapter: "Chapter 31: The Five Commandments of Production",
-              pages: "pp. 284–298",
-              badge: "Book · Ch. 31",
-              takeaway: "The factory is the product. Delete any requirement that does not come from a specific human who takes personal responsibility."
+              title: "Six Easy Pieces: Essentials of Physics Explained by Its Most Brilliant Teacher",
+              author: "Richard P. Feynman",
+              chapter: "Chapter 1: Atoms in Motion",
+              pages: "pp. 1–22",
+              badge: "Book · Ch. 01",
+              takeaway: "All things are made of atoms — little particles that move around in perpetual motion, attracting each other when close, but repelling upon being squeezed together."
             }
           },
           {
@@ -373,28 +1005,28 @@ export const initialData = {
             trackName: "Deduction & Strategy",
             archetype: "Patrick Jane & Michael Scofield",
             video: {
-              title: "The Science of Deduction: Micro-Expressions, Baselines & Behavioral Tells",
-              creator: "Joe Navarro (Former FBI Behavioral Analyst)",
-              duration: "21m",
-              url: "https://www.youtube.com/watch?v=4jwUXV4QaTw",
-              badge: "YouTube · 21m",
-              takeaway: "Establish an environmental baseline within 60 seconds. Notice lip compression, torso leaning, and shoe direction before speaking."
+              title: "Patrick Jane: Cold Reading, Micro-Expressions & Situational Awareness Masterclass",
+              creator: "Charisma on Command / Analysis",
+              duration: "18m",
+              url: "https://www.youtube.com/watch?v=kYJdJjY-LwM",
+              badge: "YouTube · 18m",
+              takeaway: "Notice baseline micro-tensions, vocal pitch fluctuations, and asymmetric shoulder posture before forming deductions."
             },
             article: {
-              title: "The Brain Attic: Organizing Perception & Eliminating Mental Noise",
-              author: "Maria Konnikova / FS",
-              readTime: "11m read",
-              url: "https://fs.blog/brain-attic/",
-              badge: "Essay · 11m",
-              takeaway: "Most people merely see, but they do not observe. Guard what enters your mental attic to preserve acute deductive agility."
+              title: "The Architecture of Infiltration: Structural Analysis of Complex Closed Systems",
+              author: "Systems Security & Blueprint Review",
+              readTime: "15m read",
+              url: "https://fs.blog/mental-models/",
+              badge: "Essay · 15m",
+              takeaway: "Break complex security structures into plumbing, HVAC, electrical grids, and personnel shift patterns."
             },
             book: {
               title: "Mastermind: How to Think Like Sherlock Holmes",
               author: "Maria Konnikova",
-              chapter: "Chapter 3: Stocking the Brain Attic (Attentional Mindfulness)",
-              pages: "pp. 57–82",
-              badge: "Book · Ch. 03",
-              takeaway: "Observe 3 subtle environmental micro-discrepancies in every conversation today before engaging."
+              chapter: "Chapter 2: The Brain Attic (What's in There and How It's Stored)",
+              pages: "pp. 27–54",
+              badge: "Book · Ch. 02",
+              takeaway: "A mindful approach to perception: passive seeing is not active observing. System 2 deliberate reflection prevents cognitive biases."
             }
           },
           {
@@ -402,415 +1034,32 @@ export const initialData = {
             trackName: "SaaS Scale & YC",
             archetype: "Sam Altman & Y Combinator",
             video: {
-              title: "How to Succeed with a Startup: Compounding Advantage & Founder Velocity",
-              creator: "Sam Altman (Stanford CS183B)",
+              title: "Sam Altman: How to Succeed with a Startup & Build Compounding Monopolies",
+              creator: "Stanford University / CS183B",
               duration: "48m",
               url: "https://www.youtube.com/watch?v=0lJKucu6HJc",
               badge: "YouTube · 48m",
-              takeaway: "The single most predictive metric of 100x founders is internal clock rate: the speed of decisions, code deploys, and customer calls."
+              takeaway: "Build something 100 people love rather than 1,000,000 who kind of like it. High-velocity iteration beats elaborate business plans."
             },
             article: {
-              title: "How to Get Your First 100 SaaS Customers & Scale to $10K MRR",
-              author: "Lenny Rachitsky (Lenny's Newsletter)",
-              readTime: "14m read",
-              url: "https://www.lennysnewsletter.com/",
-              badge: "Substack · 14m",
-              takeaway: "Founder outbound loops, authentic high-value Reddit breakdowns (0% spam), and closing design partner agencies."
+              title: "Do Things That Don't Scale: The Founder-Led Onboarding Playbook",
+              author: "Paul Graham",
+              readTime: "9m read",
+              url: "https://paulgraham.com/ds.html",
+              badge: "Essay · 9m",
+              takeaway: "Manually recruit your initial 100 users. Build custom onboarding, sit next to them, and resolve bugs live in front of them."
             },
             book: {
-              title: "Zero to One",
+              title: "Zero to One: Notes on Startups, or How to Build the Future",
               author: "Peter Thiel",
-              chapter: "Chapter 8: Secrets (The Distribution Advantage)",
-              pages: "pp. 93–108",
-              badge: "Book · Ch. 08",
-              takeaway: "Superior sales and distribution can create a monopoly even with no product differentiation, but superior product without distribution fails."
-            }
-          },
-          {
-            trackId: "cinema_story",
-            trackName: "Cinema & Narrative",
-            archetype: "Leonardo da Vinci & Visual Cinema",
-            video: {
-              title: "The Screenwriting Masterclass: Midpoints & Scene Tension Mechanics",
-              creator: "Michael Arndt (Oscar Winner — Toy Story 3)",
-              duration: "32m",
-              url: "https://www.youtube.com/watch?v=1u4b9K_n2hY",
-              badge: "YouTube · 32m",
-              takeaway: "The midpoint shift: transitioning the protagonist from reactive self-preservation into proactive attack."
-            },
-            article: {
-              title: "Visual Geometry in Cinema: How Kurosawa and Fincher Block Scenes",
-              author: "Every Frame a Painting",
-              readTime: "8m read",
-              url: "https://everyframeapainting.tumblr.com/",
-              badge: "Essay · 8m",
-              takeaway: "Every frame must convey emotional power balances and hidden subtext through spatial depth and character triangle blocking."
-            },
-            book: {
-              title: "Story: Substance, Structure, Style and Principles of Screenwriting",
-              author: "Robert McKee",
-              chapter: "Chapter 9: Act Design & Turning Points",
-              pages: "pp. 181–207",
-              badge: "Book · Ch. 09",
-              takeaway: "A scene turning point occurs when an action produces an unexpected reaction, opening a gap between expectation and reality."
-            }
-          },
-          {
-            trackId: "ai_architectures",
-            trackName: "AI Memory & Agents",
-            archetype: "AgentTrace & Lumen Architecture",
-            video: {
-              title: "State of AI Agents: Autonomous Tool Use, Memory & Reflection Loops",
-              creator: "Andrej Karpathy & Harrison Chase",
-              duration: "42m",
-              url: "https://www.youtube.com/watch?v=sal78ACtGTc",
-              badge: "YouTube · 42m",
-              takeaway: "How memory reflection, vector indexing, and tool execution graphs bridge local AI agents to real-world capability."
-            },
-            article: {
-              title: "Patterns for Building LLM Systems: Hybrid BM25 + Vector Retrieval",
-              author: "Eugene Yan",
-              readTime: "12m read",
-              url: "https://eugeneyan.com/writing/llm-patterns/",
-              badge: "Technical · 12m",
-              takeaway: "Combining lexical exact-match BM25 with dense semantic vector embeddings for sub-20ms second-brain memory retrieval."
-            },
-            book: {
-              title: "Designing Data-Intensive Applications",
-              author: "Martin Kleppmann",
-              chapter: "Chapter 3: Storage and Retrieval Engines",
-              pages: "pp. 69–110",
-              badge: "Book · Ch. 03",
-              takeaway: "Evaluate append-only segment logs, B-Trees, and LSM storage engines for maximum throughput in persistent memory stores."
-            }
-          },
-          {
-            trackId: "markets_capital",
-            trackName: "Markets & Capital",
-            archetype: "Macro Trading & $20M Liquid Moat",
-            video: {
-              title: "Stanley Druckenmiller: The Lost Art of Macro Trading & Asymmetric Bets",
-              creator: "Bloomberg Wealth / Oxford Union",
-              duration: "38m",
-              url: "https://www.youtube.com/watch?v=6m-qKq6f688",
-              badge: "YouTube · 38m",
-              takeaway: "It is not whether you are right or wrong, but how much money you make when you are right and how little you lose when you are wrong."
-            },
-            article: {
-              title: "The Monetary Plumbing: How Global Liquidity Drives All Asset Prices",
-              author: "Alfonso Peccatiello (The Macro Compass)",
-              readTime: "10m read",
-              url: "https://themacrocompass.substack.com/",
-              badge: "Substack · 10m",
-              takeaway: "Central bank balance sheet liquidity and credit expansion dictate multi-month macro swings far beyond micro earnings reports."
-            },
-            book: {
-              title: "Reminiscences of a Stock Operator",
-              author: "Edwin Lefèvre",
-              chapter: "Chapter 8: The Tape Doesn't Lie (Patience & Timing)",
-              pages: "pp. 82–104",
-              badge: "Book · Ch. 08",
-              takeaway: "Never fight the primary trend. The big money is not made in the individual fluctuations, but in sitting tight during the main swing."
-            }
-          }
-        ]
-      },
-      "2026-11": {
-        monthName: "November 2026",
-        focusSummary: "Orbit Scaling to 1,500 Users • AgentTrace YC Submission • Script 2nd Act • Cardistry & Markets",
-        triads: [
-          {
-            trackId: "first_principles",
-            trackName: "Hard Tech & Physics",
-            archetype: "Nikola Tesla & Elon Musk",
-            video: {
-              title: "Nikola Tesla's Visual Thinking: Simulating Machines Entirely in the Mind",
-              creator: "MIT OpenCourseWare / Innovation Archives",
-              duration: "28m",
-              url: "https://www.youtube.com/watch?v=KzK8dCcm7pQ",
-              badge: "YouTube · 28m",
-              takeaway: "Tesla tested every part for wear inside his mental simulation engine before manufacturing physical prototypes."
-            },
-            article: {
-              title: "The Art of Doing Deep Technical Work in Complete Solitude",
-              author: "Paul Graham",
-              readTime: "8m read",
-              url: "http://paulgraham.com/",
-              badge: "Essay · 8m",
-              takeaway: "Major breakthroughs require long stretches of uninterrupted mental incubation away from conversational consensus."
-            },
-            book: {
-              title: "My Inventions",
-              author: "Nikola Tesla",
-              chapter: "Chapter 2: The Mental Visualization Method",
-              pages: "pp. 21–39",
-              badge: "Book · Ch. 02",
-              takeaway: "Close your eyes: mentally simulate the entire architecture of a system in real-time before writing code."
-            }
-          },
-          {
-            trackId: "deduction_systems",
-            trackName: "Deduction & Strategy",
-            archetype: "Michael Scofield & Patrick Jane",
-            video: {
-              title: "Michael Scofield's Strategy: Blueprint Decomposition & Contingency Trees",
-              creator: "Systems Analysis / Narrative Engineering",
-              duration: "18m",
-              url: "https://www.youtube.com/watch?v=eE7O2F3J99Q",
-              badge: "YouTube · 18m",
-              takeaway: "Low latent inhibition allows high-leverage thinkers to see latent utility in overlooked everyday constraints and protocols."
-            },
-            article: {
-              title: "Tacit Knowledge: Diagnosing Hidden System Failures Instantly",
-              author: "Cedric Chin (Commoncog)",
-              readTime: "13m read",
-              url: "https://commoncog.com/blog/",
-              badge: "Substack · 13m",
-              takeaway: "Developing fast, non-verbal situational awareness in complex engineering architectures and negotiations."
-            },
-            book: {
-              title: "What Every BODY Is Saying",
-              author: "Joe Navarro",
-              chapter: "Chapter 5: Torso, Arms & Limbic Defense Signals",
-              pages: "pp. 95–132",
+              chapter: "Chapter 5: The Last Mover Advantage",
+              pages: "pp. 43–62",
               badge: "Book · Ch. 05",
-              takeaway: "Detect subconscious defensiveness before words are spoken by reading torso orientation and arm barricades."
-            }
-          },
-          {
-            trackId: "saas_venture",
-            trackName: "SaaS Scale & YC",
-            archetype: "Sam Altman & Y Combinator",
-            video: {
-              title: "Michael Seibel (YC): How to Talk to Early B2B Customers",
-              creator: "Y Combinator",
-              duration: "26m",
-              url: "https://www.youtube.com/watch?v=z1iF1c8w5Lg",
-              badge: "YouTube · 26m",
-              takeaway: "Never ask users what feature they want; ask them what workflow cost them money and sleep this past Tuesday."
-            },
-            article: {
-              title: "Do Things That Don't Scale (The Relentless Hands-On Acquisition Engine)",
-              author: "Paul Graham",
-              readTime: "10m read",
-              url: "http://paulgraham.com/ds.html",
-              badge: "Essay · 10m",
-              takeaway: "Recruiting users manually one by one is how Stripe and Airbnb ignited their early compounding moats."
-            },
-            book: {
-              title: "Traction: How Any Startup Can Achieve Explosive Growth",
-              author: "Gabriel Weinberg",
-              chapter: "Chapter 6: Unconventional PR & Community Gravity",
-              pages: "pp. 71–94",
-              badge: "Book · Ch. 06",
-              takeaway: "Identify 19 different acquisition channels and run micro-tests to find the single channel with asymmetric ROI."
-            }
-          }
-        ]
-      },
-      "2026-12": {
-        monthName: "December 2026",
-        focusSummary: "Orbit Harvest & $10k MRR • YC Interview Readiness • Script Polish • Q4 Goal Completion",
-        triads: [
-          {
-            trackId: "first_principles",
-            trackName: "Hard Tech & Physics",
-            archetype: "Jim Keller & Elon Musk",
-            video: {
-              title: "Jim Keller: The Art of CPU Architecture & First-Principles Computing",
-              creator: "Lex Fridman Podcast",
-              duration: "45m",
-              url: "https://www.youtube.com/watch?v=Nb2tebYAaOA",
-              badge: "YouTube · 45m",
-              takeaway: "Strip away organizational cruft: legendary chips and software come from small teams working directly from physics."
-            },
-            article: {
-              title: "The Thermodynamics of Compounding Industrial Empires",
-              author: "Byrne Hobart (The Diff)",
-              readTime: "11m read",
-              url: "https://www.thediff.co/",
-              badge: "Substack · 11m",
-              takeaway: "Vertically integrated technical ventures capture 10x the margin of pure-software wrappers."
-            },
-            book: {
-              title: "Structures: Or Why Things Don't Fall Down",
-              author: "J.E. Gordon",
-              chapter: "Chapter 4: Tensile Strength & Mechanical Redundancy",
-              pages: "pp. 53–78",
-              badge: "Book · Ch. 04",
-              takeaway: "Engineering safety margins: how natural and synthetic structures withstand catastrophic load shifts."
-            }
-          },
-          {
-            trackId: "deduction_systems",
-            trackName: "Deduction & Strategy",
-            archetype: "Patrick Jane & Michael Scofield",
-            video: {
-              title: "Derren Brown: Conversational Hypnosis & Inconspicuous Influence",
-              creator: "Psychology & Illusion Lecture Series",
-              duration: "30m",
-              url: "https://www.youtube.com/watch?v=F0p67W5-x9A",
-              badge: "YouTube · 30m",
-              takeaway: "Pacing, leading, and strategic silence dismantle skepticism and reveal deep hidden motivations."
-            },
-            article: {
-              title: "Structural Invisibility: How Masterminds Operate Without Drawing Friction",
-              author: "Ribbonfarm",
-              readTime: "12m read",
-              url: "https://ribbonfarm.com/",
-              badge: "Essay · 12m",
-              takeaway: "Building transformative leverage quietly in the background before the competitive landscape realizes you hold the cards."
-            },
-            book: {
-              title: "The Art of War",
-              author: "Sun Tzu (Translated by Thomas Cleary)",
-              chapter: "Chapter 6: Emptiness and Fullness",
-              pages: "pp. 45–62",
-              badge: "Book · Ch. 06",
-              takeaway: "Avoid strength, strike void; create asymmetric leverage through strategic positioning."
-            }
-          },
-          {
-            trackId: "ai_architectures",
-            trackName: "AI Working & Building",
-            archetype: "Agent Runtimes, Local LLMs & The 3 Systems",
-            video: {
-              title: "Andrej Karpathy: Building LLMs from Scratch & Agentic Runtime Systems",
-              creator: "Andrej Karpathy (YouTube)",
-              duration: "2h 15m",
-              url: "https://www.youtube.com/watch?v=kCc8FmEb1nY",
-              badge: "YouTube · 2h",
-              takeaway: "Understand every token generation pass, KV-cache management, attention heads, and how tool calling parses structured JSON outputs."
-            },
-            article: {
-              title: "Building Production Multi-Agent Systems: Observability, Memory & Evals",
-              author: "Chip Huyen",
-              readTime: "18m read",
-              url: "https://huyenchip.com/blog/",
-              badge: "Technical · 18m",
-              takeaway: "System architecture for the 3 projects: telemetry DAGs for AgentTrace, sub-18ms HNSW retrieval for Lumen, and stateful tool dispatch for Jarvis."
-            },
-            book: {
-              title: "Building LLM Applications & Multi-Agent Architectures",
-              author: "O'Reilly Engineering Series",
-              chapter: "Chapter 5: Agent State Machines, Memory Hierarchy & Tool APIs",
-              pages: "pp. 112–158",
-              badge: "Book · Ch. 05",
-              takeaway: "Decouple planning from execution loops; enforce deterministic confirmation gates for mutations while caching read trajectories."
-            }
-          },
-          {
-            trackId: "saas_venture",
-            trackName: "Selling & High-Ticket GTM",
-            archetype: "B2B Sales, Outbound & Retainers",
-            video: {
-              title: "Chris Voss: Never Split the Difference — High-Stakes Negotiation & B2B Sales",
-              creator: "Talks at Google",
-              duration: "48m",
-              url: "https://www.youtube.com/watch?v=guZa7mQV1l0",
-              badge: "YouTube · 48m",
-              takeaway: "Calibrated open-ended questions ('How am I supposed to do that?'), tactical empathy, mirroring, and labeling latent client fears."
-            },
-            article: {
-              title: "The B2B SaaS Outbound Playbook: Cold Email That Converts at 14%",
-              author: "Patrick Dang",
-              readTime: "11m read",
-              url: "https://patrickdang.com/",
-              badge: "Substack · 11m",
-              takeaway: "Lead with the specific operational bleeding wound, offer live proof of work teardowns, and sell the high-ticket solution."
-            },
-            book: {
-              title: "The Mom Test",
-              author: "Rob Fitzpatrick",
-              chapter: "Chapter 1: The Mom Test (How to Talk to Customers When Everyone Lying)",
-              pages: "pp. 11–38",
-              badge: "Book · Ch. 01",
-              takeaway: "Talk about their life and past workflows instead of your idea. Ask about specific past costs, not future opinions."
-            }
-          },
-          {
-            trackId: "first_principles",
-            trackName: "DevOps & Infrastructure",
-            archetype: "Linux Internals, Docker & Cloud Deployment",
-            video: {
-              title: "DevOps from First Principles: Linux Networking, Docker Containers & CI/CD",
-              creator: "NetworkChuck / Traversy Media",
-              duration: "52m",
-              url: "https://www.youtube.com/watch?v=pg19Z8LLKh4",
-              badge: "YouTube · 52m",
-              takeaway: "Master Linux cgroups, namespaces, reverse proxies (Nginx/Caddy SSL), Docker multi-stage builds, and automated GitHub Actions deployment."
-            },
-            article: {
-              title: "Production Engineering for Solo Founders: Robust Zero-Downtime Stacks",
-              author: "Gergely Orosz (The Pragmatic Engineer)",
-              readTime: "14m read",
-              url: "https://blog.pragmaticengineer.com/",
-              badge: "Essay · 14m",
-              takeaway: "Keep production infrastructure simple: single-node VPS with automated backups, healthchecks, and telemetry beats Kubernetes overkill."
-            },
-            book: {
-              title: "Site Reliability Engineering (SRE)",
-              author: "Betsy Beyer et al. (Google)",
-              chapter: "Chapter 3: Embracing Risk & Service Level Objectives",
-              pages: "pp. 31–54",
-              badge: "Book · Ch. 03",
-              takeaway: "Automate routine operations relentlessly; eliminate toil so engineering hours stay focused on system capability."
+              takeaway: "Proprietary technology must be at least 10x better than its closest substitute. Network effects, economies of scale, and branding create durability."
             }
           }
         ]
       }
     }
-  },
-
-  dailyLogs: [
-    {
-      id: "log-107",
-      date: "2026-10-04",
-      title: "Calibrating 31-day October sprints: velocity vs sustainable compounding",
-      learned: "A 31-day cycle gives enough room for three 10-day focused milestone blocks with a 24h buffer. Pacing daily progress against the 31-day timeline prevents end-of-cycle rush and ensures software quality remains uncompromising.",
-      tags: ["systems", "cadence", "focus"]
-    },
-    {
-      id: "log-106",
-      date: "2026-10-03",
-      title: "HNSW index vector clustering: sub-18ms retrieval benchmarks",
-      learned: "Tuning HNSW M=16 and efConstruction=64 in pgvector gives 99.2% recall with only 18ms latency across 100,000 vector embeddings. This unlocks conversational agent speed without sacrificing episodic retrieval accuracy.",
-      tags: ["ai", "memory", "benchmarks"]
-    },
-    {
-      id: "log-105",
-      date: "2026-10-02",
-      title: "Idempotency ledgers in high-concurrency ecommerce webhooks",
-      learned: "Network retries from Shopify/WooCommerce can flood ingestion queues during peak traffic. Hashing incoming event IDs into a Redis atomic ledger with a 48h TTL drops duplicate processing to exactly 0 without blocking pipeline throughput.",
-      tags: ["product", "qa", "systems"]
-    },
-    {
-      id: "log-104",
-      date: "2026-10-01",
-      title: "Transitioning from heuristic search to hierarchical graph memory",
-      learned: "Flat vector retrieval falls apart when context exceeds 50 sessions. By clustering episodic logs into canonical knowledge nodes at ingestion time, recall accuracy jumps from 72% to 94% with half the token overhead.",
-      tags: ["ai", "memory", "systems"]
-    },
-    {
-      id: "log-101",
-      date: "2026-09-21",
-      title: "Three-tier AI memory: Raw Log vs Canonical vs Abstract Knowledge",
-      learned: "A second-brain agent cannot rely solely on raw vector search over raw logs. You need a 3-tier structure: 1) Raw episodic stream, 2) Canonical entity summaries, and 3) Abstract generalized knowledge. This reduces hallucination and preserves cross-session coherence.",
-      tags: ["ai", "memory", "architecture"]
-    },
-    {
-      id: "log-102",
-      date: "2026-09-20",
-      title: "Distribution loops must be engineered into product onboarding",
-      learned: "In e-commerce SaaS, merchants care about revenue velocity, not feature lists. Positioning Orbit around speed-to-checkout and order recovery converts significantly better than generic analytics messaging.",
-      tags: ["orbit", "gtm", "growth"]
-    },
-    {
-      id: "log-103",
-      date: "2026-09-19",
-      title: "Testing edge cases in e-commerce cart synchronizations",
-      learned: "Edge case failures in cart total recalculation during coupon application cause 80% of merchant trust degradation. Deep edge-case QA is actually a high-leverage marketing strategy.",
-      tags: ["product", "qa", "systems"]
-    }
-  ]
+  }
 };

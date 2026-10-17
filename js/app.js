@@ -2,92 +2,25 @@ import { initialData } from './data.js';
 import { renderCrossStitchSVG } from './stitch-font.js';
 
 // ============================================================================
-// APP LOGIC: BOLD EDITORIAL BLUEPRINT & LOCAL DATA CONTROLLER
+// MAXXING // PERSONAL OPERATING SYSTEM CONTROLLER
+// One primary growth focus. A few supporting habits. Everything else deliberately deprioritized.
 // ============================================================================
 
-const STORAGE_KEYS = {
+const STORAGE_KEY = 'maxxing_system_state_v1';
+
+// Legacy keys for automatic backward compatibility migration
+const LEGACY_KEYS = {
   DAILY_LOGS: 'bold_daily_logs_v3',
   Q4_GOALS: 'bold_q4_goals_v1',
-  BUCKET_LIST: 'bold_q4_goals_v1',
-  TARGET_MILESTONES: 'bold_october_milestones_v4'
+  OCT_MILESTONES: 'bold_october_milestones_v4'
 };
-
-function initQ4Goals() {
-  const source = initialData.q4Goals || initialData.bucketList || [];
-  const saved = loadStored(STORAGE_KEYS.Q4_GOALS, null);
-  if (!saved || !Array.isArray(saved)) return source;
-  const savedMap = {};
-  saved.forEach(item => {
-    if (item && item.id) savedMap[item.id] = item.completed;
-  });
-  return source.map(item => ({
-    ...item,
-    completed: savedMap[item.id] !== undefined ? savedMap[item.id] : item.completed
-  }));
-}
-
-// Initialize milestone states from localStorage if previously stored
-const savedMilestones = loadStored(STORAGE_KEYS.TARGET_MILESTONES, {});
-const targetsSource = initialData.octoberTargets || initialData.septemberTargets || [];
-targetsSource.forEach(t => {
-  if (t.milestones) {
-    t.milestones.forEach(m => {
-      if (savedMilestones[m.id] !== undefined) {
-        m.completed = savedMilestones[m.id];
-      }
-    });
-    const completedCount = t.milestones.filter(m => m.completed).length;
-    t.currentValue = t.milestones.length > 0 ? Math.round((completedCount / t.milestones.length) * t.targetValue) : 0;
-  }
-});
-
-function normalizeDailyLogs(logs) {
-  return (logs || []).map(l => {
-    let tags = [];
-    if (Array.isArray(l.tags) && l.tags.length > 0) {
-      tags = l.tags;
-    } else if (l.tag) {
-      tags = l.tag.split(/[,/&]+/).map(s => s.trim().toLowerCase().replace(/\s+/g, '-')).filter(Boolean);
-    } else if (l.category) {
-      tags = [l.category.trim().toLowerCase().replace(/\s+/g, '-')];
-    }
-    return {
-      id: l.id || 'log-' + Date.now(),
-      date: l.date || new Date().toISOString().split('T')[0],
-      title: l.title || '',
-      learned: l.learned || '',
-      tags: tags.length > 0 ? tags : ['general']
-    };
-  });
-}
-
-const q4GoalsList = initQ4Goals();
-
-let state = {
-  profile: initialData.profile,
-  projects: initialData.projects,
-  targets: targetsSource,
-  octoberTargets: targetsSource,
-  get septemberTargets() { return this.targets; },
-  fiveYearHorizon: initialData.fiveYearHorizon,
-  bucketList: q4GoalsList,
-  q4Goals: q4GoalsList,
-  radarCurriculum: initialData.radarCurriculum,
-  selectedRadarMonth: '2026-10',
-  selectedRadarTrack: 'all',
-  activeRadarTriadIdx: 0,
-  dailyLogs: normalizeDailyLogs(loadStored(STORAGE_KEYS.DAILY_LOGS, initialData.dailyLogs)),
-  activeLogTag: 'ALL'
-};
-
-let activePulledFolderId = targetsSource.find(t => t.id.includes('05'))?.id || targetsSource[0]?.id; // Lumen AI memory spec opened by default
 
 function loadStored(key, fallback) {
   try {
     const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : fallback;
   } catch (e) {
-    console.warn('Storage read failed:', e);
+    console.warn('Storage read failed for', key, e);
     return fallback;
   }
 }
@@ -96,1393 +29,1657 @@ function saveStored(key, value) {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (e) {
-    console.warn('Storage write failed:', e);
+    console.warn('Storage write failed for', key, e);
   }
 }
 
 // ----------------------------------------------------------------------------
-// RENDER TARGETS: TACTILE FILING FOLDER DECK WITH POP-OUT DOSSIERS
+// STATE INITIALIZATION & MIGRATION
 // ----------------------------------------------------------------------------
+function initState() {
+  const saved = loadStored(STORAGE_KEY, null);
 
-function renderTactileArtifact(t, idx) {
-  if (t.id.includes('01') || t.id.includes('orb')) {
-    // 1. Orbit Marketing Engine (500+ Users, 30+ Paid, 2 Agencies & YC W27)
-    return `
-      <div class="artifact-badge-card">
-        <div class="lanyard-slot" aria-hidden="true"></div>
-        <div class="badge-header">
-          <span class="badge-org">ORBIT // OCTOBER SPRINT</span>
-          <span class="spec-status-stamp">[IN SPRINT (0%)]</span>
-        </div>
-        <div class="badge-barcode">||| | |||| || ||| |||||</div>
-        <div class="badge-details">
-          <div><strong>USERS:</strong> 0 / 500+ TOTAL USERS</div>
-          <div><strong>PAID:</strong> 0 / 30+ PAID SUBSCRIBERS</div>
-          <div><strong>ENTERPRISE:</strong> 0 / 2 AGENCIES ON CORE AI ENGINE</div>
-          <div><strong>YC BATCH:</strong> PITCH &amp; DECK SPRINT &bull; YC W27</div>
-        </div>
-        <svg class="badge-runner-doodle" viewBox="0 0 80 45" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round">
-          <circle cx="20" cy="12" r="5"/>
-          <path d="M 20 17 L 22 28 L 32 32 M 22 28 L 14 38 M 20 20 L 10 24 M 20 20 L 30 18"/>
-          <circle cx="60" cy="12" r="5"/>
-          <path d="M 60 17 L 58 28 L 48 32 M 58 28 L 66 38 M 60 20 L 70 24 M 60 20 L 50 18"/>
-        </svg>
-      </div>
-    `;
-  } else if (t.id.includes('02') || t.id.includes('yc') || t.id.includes('trace') || t.id.includes('dist')) {
-    // 2. AgentTrace Launch, Audience & YC W27
-    return `
-      <div class="artifact-graph-sheet">
-        <div class="washi-tape-strip" aria-hidden="true"></div>
-        <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
-          AGENTTRACE // LAUNCH &amp; YC W27 MANIFEST
-        </div>
-        <div class="funnel-bar-item">
-          <span style="min-width: 110px;">YC W27 APPS:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 2 SUBMITTED</span>
-        </div>
-        <div class="funnel-bar-item">
-          <span style="min-width: 110px;">X REACH (300+):</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 300</span>
-        </div>
-        <div class="funnel-bar-item">
-          <span style="min-width: 110px;">WAITLIST (150+):</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 150</span>
-        </div>
-        <div class="funnel-bar-item">
-          <span style="min-width: 110px;">REDDIT KARMA:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 200+</span>
-        </div>
-        <span style="font-family: 'Caveat', cursive; font-size: 1.15rem; color: #2e5c38; display: block; margin-top: 8px;">
-          * Full marketing sprint active: live telemetry &amp; trace replays on X!
-        </span>
-      </div>
-    `;
-  } else if (t.id.includes('03') || t.id.includes('fin') || t.id.includes('40k')) {
-    // 3. Personal Income (₹40,000 Milestone)
-    return `
-      <div class="artifact-qa-sheet">
-        <svg class="binder-clip-graphic" viewBox="0 0 40 50" fill="none" aria-hidden="true">
-          <path d="M 12 18 C 12 6, 28 6, 28 18" stroke="#888888" stroke-width="2.5" fill="none"/>
-          <path d="M 16 18 C 16 10, 24 10, 24 18" stroke="#aaaaaa" stroke-width="1.8" fill="none"/>
-          <polygon points="6,18 34,18 30,42 10,42" fill="#1a1a1a"/>
-          <line x1="8" y1="20" x2="32" y2="20" stroke="#444" stroke-width="1.5"/>
-        </svg>
-
-        <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
-          PERSONAL CASHFLOW // OCTOBER SPRINT
-        </div>
-        <div style="font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.6; color: #333;">
-          &bull; October Income: <strong>₹0 / ₹40,000 PERSONAL NET</strong><br>
-          &bull; Pipeline: <strong>CLIENT &amp; FREELANCE SERVICES</strong><br>
-          &bull; Budget Status: <strong>STRICT ZERO-BURN DISCIPLINE</strong><br>
-          &bull; Target Runway: <strong>0% PROGRESS (CYCLE INITIATED)</strong>
-        </div>
-        <div class="qa-stamp-circle">[RUNWAY DISCIPLINE // ₹40K TARGET]</div>
-      </div>
-    `;
-  } else if (t.id.includes('04') || t.id.includes('self') || t.id.includes('flow') || t.id.includes('run')) {
-    // 4. Daily Running, Stretching, Flow State & New Schedule
-    return `
-      <div class="artifact-cassette-card">
-        <div class="cassette-body">
-          <div class="cassette-label-strip">
-            DAILY FLOW &bull; ATHLETIC PROTOCOL
-          </div>
-          <div class="cassette-spools">
-            <div class="spool-hole"></div>
-            <span style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 2px;">FLOW STATE</span>
-            <div class="spool-hole"></div>
-          </div>
-          <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #bbb; text-align: center; line-height: 1.5;">
-            Daily Run &bull; Daily Stretch &bull; New Schedule &bull; Calmer, Sharper Version of Me<br>
-            <span style="color: #ffbe1a; font-weight: 700;">[DAY 04 / 31 ACTIVE &bull; 0% LOGGED]</span>
-          </div>
-        </div>
-      </div>
-    `;
-  } else {
-    // 5. Cinema Screenplay Sprints & Read 3 Books
-    return `
-      <div class="artifact-spiral-sheet">
-        <div class="spiral-holes" aria-hidden="true">
-          <div class="spiral-ring"></div>
-          <div class="spiral-ring"></div>
-          <div class="spiral-ring"></div>
-          <div class="spiral-ring"></div>
-          <div class="spiral-ring"></div>
-        </div>
-        <div class="artifact-spiral-title">CREATIVE SPRINT // SCRIPT &bull; 3 BOOKS</div>
-        <div class="spiral-tier-block">
-          <span class="spiral-tier-label">FEATURE MOVIE SCRIPT:</span>
-          Active writing sprints &bull; Scene outlines &bull; Character dialogue.
-        </div>
-        <div class="spiral-tier-block">
-          <span class="spiral-tier-label">READ 3 BOOKS:</span>
-          0 of 3 Books Completed [Systems &bull; Narrative &bull; Compounding].
-        </div>
-        <div class="spiral-tier-block">
-          <span class="spiral-tier-label">FLOW &amp; KNOWLEDGE:</span>
-          Entering deep effortless flow &bull; Broadening intellect horizons.
-        </div>
-        <span class="spiral-hand-note">* Screenplay architecture + book synthesis notes [0% Complete].</span>
-      </div>
-    `;
+  // If previous unified state exists, merge with fallback
+  if (saved && typeof saved === 'object') {
+    return {
+      profile: { ...initialData.profile, ...(saved.profile || {}) },
+      priorities: { ...initialData.priorities, ...(saved.priorities || {}) },
+      todayActions: Array.isArray(saved.todayActions) ? saved.todayActions : initialData.todayActions,
+      projects: Array.isArray(saved.projects) && saved.projects.length > 0 ? saved.projects : initialData.projects,
+      physical: {
+        profile: { ...initialData.physical.profile, ...(saved.physical?.profile || {}) },
+        supportingHabits: { ...initialData.physical.supportingHabits, ...(saved.physical?.supportingHabits || {}) },
+        workoutLogs: Array.isArray(saved.physical?.workoutLogs) ? saved.physical.workoutLogs : initialData.physical.workoutLogs,
+        weightHistory: Array.isArray(saved.physical?.weightHistory) ? saved.physical.weightHistory : initialData.physical.weightHistory
+      },
+      intellectualNotes: Array.isArray(saved.intellectualNotes) && saved.intellectualNotes.length > 0 ? saved.intellectualNotes : initialData.intellectualNotes,
+      contentPipeline: Array.isArray(saved.contentPipeline) ? saved.contentPipeline : initialData.contentPipeline,
+      career: { ...initialData.career, ...(saved.career || {}) },
+      weeklyReviews: Array.isArray(saved.weeklyReviews) ? saved.weeklyReviews : initialData.weeklyReviews,
+      strategicCycles: Array.isArray(saved.strategicCycles) ? saved.strategicCycles : initialData.strategicCycles,
+      settings: { ...initialData.settings, ...(saved.settings || {}) },
+      fiveYearHorizon: initialData.fiveYearHorizon,
+      radarCurriculum: initialData.radarCurriculum,
+      selectedRadarMonth: '2026-10',
+      activeRadarTriadIdx: 0,
+      activeLogTag: 'ALL',
+      activeActionFilter: 'all',
+      searchQueryNotes: ''
+    };
   }
+
+  // Check legacy stores for migration
+  const legacyLogs = loadStored(LEGACY_KEYS.DAILY_LOGS, null);
+  let migratedNotes = [...initialData.intellectualNotes];
+  if (Array.isArray(legacyLogs) && legacyLogs.length > 0) {
+    const existingIds = new Set(migratedNotes.map(n => n.id));
+    legacyLogs.forEach(l => {
+      if (!existingIds.has(l.id)) {
+        migratedNotes.push({
+          id: l.id || 'note-' + Date.now(),
+          date: l.date || new Date().toISOString().split('T')[0],
+          topic: (l.tags && l.tags[0]) || 'General',
+          concept: l.title || 'Migrated Insight',
+          explanation: l.learned || '',
+          whyItMatters: 'Preserved from daily log archive.',
+          practicalExample: '',
+          appliedProjectId: 'general',
+          questions: '',
+          references: '',
+          tags: Array.isArray(l.tags) ? l.tags : ['general'],
+          understanding: {
+            canExplainWithoutNotes: true,
+            canImplement: true,
+            knowsLimitations: true
+          }
+        });
+      }
+    });
+  }
+
+  return {
+    profile: initialData.profile,
+    priorities: initialData.priorities,
+    todayActions: initialData.todayActions,
+    projects: initialData.projects,
+    physical: initialData.physical,
+    intellectualNotes: migratedNotes,
+    contentPipeline: initialData.contentPipeline,
+    career: initialData.career,
+    weeklyReviews: initialData.weeklyReviews,
+    strategicCycles: initialData.strategicCycles,
+    settings: initialData.settings,
+    fiveYearHorizon: initialData.fiveYearHorizon,
+    radarCurriculum: initialData.radarCurriculum,
+    selectedRadarMonth: '2026-10',
+    activeRadarTriadIdx: 0,
+    activeLogTag: 'ALL',
+    activeActionFilter: 'all',
+    searchQueryNotes: ''
+  };
 }
 
-function renderOctoberTargets() {
-  const container = document.getElementById('targets-list');
-  const daysLeftEl = document.getElementById('oct-days-left') || document.getElementById('sep-days-left') || document.getElementById('target-days-left');
-  const monthElapsedEl = document.getElementById('oct-month-elapsed') || document.getElementById('sep-month-elapsed') || document.getElementById('target-month-elapsed');
-  const avgProgressEl = document.getElementById('oct-avg-progress') || document.getElementById('sep-avg-progress') || document.getElementById('target-avg-progress');
-  const ribbonEl = document.getElementById('october-days-ribbon');
+let state = initState();
 
+function persistState() {
+  saveStored(STORAGE_KEY, {
+    profile: state.profile,
+    priorities: state.priorities,
+    todayActions: state.todayActions,
+    projects: state.projects,
+    physical: state.physical,
+    intellectualNotes: state.intellectualNotes,
+    contentPipeline: state.contentPipeline,
+    career: state.career,
+    weeklyReviews: state.weeklyReviews,
+    strategicCycles: state.strategicCycles,
+    settings: state.settings
+  });
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function showToast(message) {
+  let toast = document.getElementById('maxxing-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'maxxing-toast';
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--ink-primary);
+      color: var(--bg-canvas);
+      border: 1.5px solid var(--rule-strong);
+      padding: 10px 18px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      box-shadow: 4px 4px 0px var(--rule-strong);
+      z-index: 9999;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      opacity: 0;
+      transform: translateY(10px);
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateY(0)';
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+  }, 2200);
+}
+
+// ----------------------------------------------------------------------------
+// 1. PRECISION TIME CADENCE MONITOR
+// ----------------------------------------------------------------------------
+function updateTimeCadence() {
   const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
-  const daysInMonth = new Date(year, month + 1, 0).getDate(); // 31 for October
-  const currentDay = Math.min(Math.max(now.getDate(), 1), daysInMonth);
-  const daysLeft = Math.max(0, daysInMonth - currentDay);
-  const elapsedPercent = Math.round((currentDay / daysInMonth) * 100);
-
-  const targets = state.octoberTargets || state.targets || state.septemberTargets || [];
-
-  const totalProg = targets.reduce((acc, t) => {
-    const pct = Math.min(100, Math.round((t.currentValue / t.targetValue) * 100));
-    return acc + pct;
-  }, 0);
-  const avgProgress = targets.length > 0 ? Math.round(totalProg / targets.length) : 0;
-
-  if (daysLeftEl) daysLeftEl.textContent = `${daysLeft}`;
-  if (monthElapsedEl) monthElapsedEl.textContent = `${elapsedPercent}%`;
-  if (avgProgressEl) avgProgressEl.textContent = `${avgProgress}%`;
-
-  // Render 31-Day October Sprint Ribbon
-  if (ribbonEl) {
-    const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-    ribbonEl.innerHTML = `
-      <div class="ribbon-header">
-        <span class="ribbon-title">31-DAY OCTOBER SPRINT TIMELINE &bull; OCT 01 &rarr; OCT 31</span>
-        <span class="ribbon-status">[DAY ${String(currentDay).padStart(2, '0')} / 31 ACTIVE &bull; ${daysLeft} DAYS REMAINING]</span>
-      </div>
-      <div class="ribbon-grid" role="region" aria-label="October 31-day progress ribbon">
-        ${daysArray.map(d => {
-          let statusClass = 'day-future';
-          let marker = '&middot;';
-          let tooltip = `Oct ${String(d).padStart(2, '0')} — Upcoming Sprint Runway`;
-          if (d < currentDay) {
-            statusClass = 'day-past';
-            marker = '&#10003;';
-            tooltip = `Oct ${String(d).padStart(2, '0')} — Completed Sprint ✓`;
-          } else if (d === currentDay) {
-            statusClass = 'day-current';
-            marker = '&#9679;';
-            tooltip = `Day ${String(d).padStart(2, '0')} — Active Sprint Today (${daysLeft}d remaining)`;
-          }
-          return `
-            <div class="day-cell ${statusClass}" data-tooltip="${tooltip}" data-day="${d}" tabindex="0" role="button" aria-label="${tooltip}">
-              <span class="day-num">${String(d).padStart(2, '0')}</span>
-              <span class="day-marker">${marker}</span>
-            </div>
-          `;
-        }).join('')}
-      </div>
-    `;
+  const timeEl = document.getElementById('live-time-display');
+  if (timeEl) {
+    const pad = n => String(n).padStart(2, '0');
+    timeEl.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
   }
 
-  if (!container) return;
+  // Reference year 2026 October sprint cadence
+  const year = 2026;
+  const monthIdx = 9; // October (0-indexed)
+  const totalDaysInMonth = 31;
+  const currentDay = Math.min(Math.max(now.getDate(), 1), 31);
+  const daysLeftInMonth = Math.max(0, totalDaysInMonth - currentDay);
+  const monthPct = Math.round((currentDay / totalDaysInMonth) * 100);
 
-  const tabOffsets = [
-    '16px',
-    'calc(16px + 18%)',
-    'calc(16px + 36%)',
-    'calc(16px + 54%)',
-    'calc(16px + 72%)'
-  ];
+  const monthFill = document.getElementById('hero-month-fill');
+  const monthDaysLeft = document.getElementById('hero-month-days-left');
+  const monthPctLeft = document.getElementById('hero-month-pct-left');
+  const dateStr = document.getElementById('cadence-date-str');
 
-  container.innerHTML = targets.map((t, idx) => {
-    const pct = Math.min(100, Math.round((t.currentValue / t.targetValue) * 100));
-    const formattedDeadline = t.deadline ? t.deadline.replace('2026-10-', 'Oct ').replace('2026-09-', 'Sep ') : 'Oct 31';
-    const isPulled = activePulledFolderId === t.id;
-    const tabOffset = tabOffsets[idx] || '16px';
+  if (monthFill) monthFill.style.width = `${monthPct}%`;
+  if (monthDaysLeft) monthDaysLeft.textContent = daysLeftInMonth;
+  if (monthPctLeft) monthPctLeft.textContent = `${monthPct}%`;
+  if (dateStr) dateStr.textContent = `OCT 2026 • DAY ${String(currentDay).padStart(2, '0')} / 31`;
 
-    // 20-segment architectural precision gauge
-    const totalBlocks = 20;
-    const filledBlocks = Math.round((pct / 100) * totalBlocks);
-    const meterBlocks = Array.from({ length: totalBlocks }, (_, i) => 
-      `<span class="spec-tick ${i < filledBlocks ? 'filled' : ''}"></span>`
-    ).join('');
+  // Quarter progress (Q4: Oct, Nov, Dec = 92 days)
+  const daysElapsedQ4 = (currentDay - 1);
+  const totalDaysQ4 = 92;
+  const daysLeftQ4 = Math.max(0, totalDaysQ4 - daysElapsedQ4);
+  const q4Pct = Math.round((daysElapsedQ4 / totalDaysQ4) * 100);
 
-    // Milestones checklist items
-    const milestones = t.milestones || [];
-    const completedCount = milestones.filter(m => m.completed).length;
-    const isDossierCleared = (milestones.length > 0 && completedCount === milestones.length) || pct === 100;
+  const yearFill = document.getElementById('hero-year-fill');
+  const yearDaysLeft = document.getElementById('hero-year-days-left');
+  const yearPctLeft = document.getElementById('hero-year-pct-left');
 
-    const milestonesHtml = milestones.map(m => {
-      const groupTag = m.group ? m.group.trim().toUpperCase() : '';
-      return `
-        <li class="dossier-check-item ${m.completed ? 'completed' : ''}" data-target-id="${t.id}" data-milestone-id="${m.id}">
-          <span class="dossier-check-box">${m.completed ? '✓' : ''}</span>
-          <div class="dossier-check-content">
-            ${groupTag ? `<span class="dossier-subtarget-group" data-group="${groupTag}">[${groupTag}]</span>` : ''}
-            <span class="dossier-check-text">${m.text}</span>
-          </div>
-        </li>
-      `;
-    }).join('');
-
-    return `
-      <article class="folder-item ${t.theme || 'folder-manila'} ${isPulled ? 'pulled-out' : ''}" data-id="${t.id}">
-        <!-- Staggered Folder Tab -->
-        <div class="folder-tab-strip" style="--tab-offset: ${tabOffset};">
-          <div class="folder-tab" data-folder-trigger="${t.id}" title="Click to pull out folder">
-            <span class="folder-tab-num">0${idx + 1}</span>
-            <span class="folder-tab-title">${t.tabTitle || t.code}</span>
-            <span class="folder-tab-status">${isPulled ? '[OPEN]' : (isDossierCleared ? '[CLEARED ✓]' : '[PULL]')}</span>
-          </div>
-        </div>
-
-        <!-- Folder Lip (Collapsed summary bar) -->
-        <div class="folder-lip" data-folder-trigger="${t.id}">
-          <div class="folder-lip-left">
-            <span class="folder-code-badge">${t.code}</span>
-            <h3 class="folder-lip-title">${t.title}</h3>
-            <span class="folder-lip-cat">&bull; ${t.category}</span>
-            ${isDossierCleared ? `<span class="folder-cleared-pill">[CLEARED ✓]</span>` : ''}
-          </div>
-          <div class="folder-lip-right">
-            <div class="folder-mini-meter">
-              <div class="folder-mini-track">
-                <div class="folder-mini-fill" style="width: ${pct}%;"></div>
-              </div>
-              <span class="folder-mini-pct">${pct}%</span>
-            </div>
-            <button class="folder-pull-btn" type="button" aria-expanded="${isPulled}">
-              <span class="pull-btn-icon">${isPulled ? '−' : '+'}</span>
-              <span class="pull-btn-label">${isPulled ? 'TUCK IN' : 'PULL OUT'}</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Interior Dossier (Expanded when pulled out) -->
-        <div class="folder-dossier" aria-hidden="${!isPulled}">
-          <div class="dossier-paper-sheet-inner">
-            <div class="dossier-paper-sheet">
-              ${isDossierCleared ? `
-                <div class="dossier-cleared-stamp" aria-label="Dossier Complete Stamp">
-                  <div class="stamp-seal">
-                    <span class="stamp-seal-badge">CLEARED // COMPLETE</span>
-                    <span class="stamp-seal-title">OCT 2026 DOSSIER</span>
-                    <span class="stamp-seal-sub">ALL SUBTARGETS VERIFIED &#10003;</span>
-                  </div>
-                </div>
-              ` : ''}
-              <!-- Header Bar -->
-              <div class="dossier-header-bar">
-                <div class="dossier-header-left">
-                  <span class="dossier-stamp-code">${t.code}</span>
-                  <span class="dossier-stamp-cat">${t.category}</span>
-                  <span class="dossier-stamp-status">[${t.status || 'ACTIVE'}]</span>
-                </div>
-                <div class="dossier-header-right">
-                  <span class="dossier-deadline">TARGET DATE: <strong>${formattedDeadline}</strong></span>
-                </div>
-              </div>
-
-              <!-- Title & Mission Objective -->
-              <div class="dossier-title-block">
-                <h3 class="dossier-title">${t.title}</h3>
-                <p class="dossier-mission"><strong>MISSION OBJECTIVE:</strong> ${t.mission || t.notes}</p>
-              </div>
-
-              <!-- Body Grid: Tasks + Tactile Artifact -->
-              <div class="dossier-body-grid">
-                
-                <!-- Left: Milestones & Calibration Deck -->
-                <div class="dossier-col-tasks">
-                  <div class="dossier-section-title">
-                    <span>ACTION MILESTONES</span>
-                    <span class="dossier-count-badge" id="count-${t.id}">[${completedCount}/${milestones.length} COMPLETED]</span>
-                  </div>
-
-                  <ul class="dossier-checklist">
-                    ${milestonesHtml}
-                  </ul>
-
-                  <!-- Precision Metric Deck -->
-                  <div class="dossier-metric-deck">
-                    <div class="dossier-metric-row">
-                      <div>
-                        <span class="dossier-metric-label">RECORDED PROGRESS</span>
-                        <div class="dossier-metric-val"><strong>${t.currentValue}</strong> / ${t.targetValue} ${t.unit}</div>
-                      </div>
-                      <div class="dossier-pct-large">${pct}%</div>
-                    </div>
-                    <div class="spec-meter-track" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100">
-                      ${meterBlocks}
-                    </div>
-                    <div class="spec-meter-scale" aria-hidden="true">
-                      <span>0%</span>
-                      <span>25%</span>
-                      <span>50%</span>
-                      <span>75%</span>
-                      <span>100%</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Right: Tactile Studio Artifact -->
-                <div class="dossier-col-artifact">
-                  ${renderTactileArtifact(t, idx)}
-                </div>
-
-              </div>
-
-              <!-- Dossier Footer -->
-              <div class="dossier-footer">
-                <div class="dossier-memo">
-                  <svg class="dossier-pen-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 20h9"></path>
-                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                  </svg>
-                  <span class="dossier-memo-text">"${t.tactileMemo || t.notes}"</span>
-                </div>
-                <button class="dossier-return-btn" data-folder-close="${t.id}" type="button">
-                  &larr; TUCK BACK INTO DECK
-                </button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join('');
-
-  // Setup In-Place Smooth Event Listeners (Zero DOM destruction)
-  function toggleFolder(folderId) {
-    const allFolders = container.querySelectorAll('.folder-item');
-    const targetFolder = container.querySelector(`.folder-item[data-id="${folderId}"]`);
-    if (!targetFolder) return;
-
-    const isCurrentlyPulled = targetFolder.classList.contains('pulled-out');
-
-    // Smoothly close all folders
-    allFolders.forEach(folder => {
-      folder.classList.remove('pulled-out');
-      const dossier = folder.querySelector('.folder-dossier');
-      if (dossier) dossier.setAttribute('aria-hidden', 'true');
-      const pullBtn = folder.querySelector('.folder-pull-btn');
-      if (pullBtn) {
-        pullBtn.setAttribute('aria-expanded', 'false');
-        const icon = pullBtn.querySelector('.pull-btn-icon');
-        const label = pullBtn.querySelector('.pull-btn-label');
-        if (icon) icon.textContent = '+';
-        if (label) label.textContent = 'PULL OUT';
-      }
-      const tabStatus = folder.querySelector('.folder-tab-status');
-      if (tabStatus) tabStatus.textContent = '[PULL]';
-    });
-
-    if (!isCurrentlyPulled) {
-      // Pull out the selected folder smoothly
-      targetFolder.classList.add('pulled-out');
-      const dossier = targetFolder.querySelector('.folder-dossier');
-      if (dossier) dossier.setAttribute('aria-hidden', 'false');
-      const pullBtn = targetFolder.querySelector('.folder-pull-btn');
-      if (pullBtn) {
-        pullBtn.setAttribute('aria-expanded', 'true');
-        const icon = pullBtn.querySelector('.pull-btn-icon');
-        const label = pullBtn.querySelector('.pull-btn-label');
-        if (icon) icon.textContent = '−';
-        if (label) label.textContent = 'TUCK IN';
-      }
-      const tabStatus = targetFolder.querySelector('.folder-tab-status');
-      if (tabStatus) tabStatus.textContent = '[OPEN]';
-      activePulledFolderId = folderId;
-    } else {
-      activePulledFolderId = null;
-    }
-  }
-
-  container.querySelectorAll('[data-folder-trigger]').forEach(trigger => {
-    trigger.addEventListener('click', (e) => {
-      if (e.target.closest('.dossier-check-item') || e.target.closest('.dossier-return-btn')) return;
-      const folderId = trigger.getAttribute('data-folder-trigger');
-      toggleFolder(folderId);
-    });
-  });
-
-  container.querySelectorAll('[data-folder-close]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const folderId = btn.getAttribute('data-folder-close');
-      toggleFolder(folderId);
-    });
-  });
-
-  // Smooth In-Place Checklist Toggle
-  container.querySelectorAll('.dossier-check-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const targetId = item.getAttribute('data-target-id');
-      const milestoneId = item.getAttribute('data-milestone-id');
-      const targets = state.octoberTargets || state.targets || state.septemberTargets || [];
-      const target = targets.find(t => t.id === targetId);
-      if (target && target.milestones) {
-        const milestone = target.milestones.find(m => m.id === milestoneId);
-        if (milestone) {
-          milestone.completed = !milestone.completed;
-
-          // Update this item in place
-          item.classList.toggle('completed', milestone.completed);
-          const box = item.querySelector('.dossier-check-box');
-          if (box) box.textContent = milestone.completed ? '✓' : '';
-
-          // Update count badge in place
-          const completedCount = target.milestones.filter(m => m.completed).length;
-          const countBadge = document.getElementById(`count-${targetId}`);
-          if (countBadge) {
-            countBadge.textContent = `[${completedCount}/${target.milestones.length} COMPLETED]`;
-          }
-
-          // Recalculate target progress dynamically
-          const targetPct = target.milestones.length > 0 ? Math.round((completedCount / target.milestones.length) * 100) : 0;
-          target.currentValue = Math.round((completedCount / target.milestones.length) * target.targetValue);
-
-          // Update folder lip mini meter
-          const folderEl = container.querySelector(`.folder-item[data-id="${targetId}"]`);
-          if (folderEl) {
-            const miniFill = folderEl.querySelector('.folder-mini-fill');
-            const miniPct = folderEl.querySelector('.folder-mini-pct');
-            if (miniFill) miniFill.style.width = `${targetPct}%`;
-            if (miniPct) miniPct.textContent = `${targetPct}%`;
-
-            // Update dossier metric deck
-            const largePct = folderEl.querySelector('.dossier-pct-large');
-            const metricVal = folderEl.querySelector('.dossier-metric-val');
-            const meterTrack = folderEl.querySelector('.spec-meter-track');
-            if (largePct) largePct.textContent = `${targetPct}%`;
-            if (metricVal) metricVal.innerHTML = `<strong>${target.currentValue}</strong> / ${target.targetValue} ${target.unit}`;
-            if (meterTrack) {
-              const totalBlocks = 20;
-              const filled = Math.round((targetPct / 100) * totalBlocks);
-              meterTrack.innerHTML = Array.from({ length: totalBlocks }, (_, i) => 
-                `<span class="spec-tick ${i < filled ? 'filled' : ''}"></span>`
-              ).join('');
-            }
-          }
-
-          // Update overall aggregate pace in diagnostic ruler
-          const totalP = targets.reduce((acc, tg) => {
-            const p = tg.milestones && tg.milestones.length > 0 
-              ? Math.round((tg.milestones.filter(m => m.completed).length / tg.milestones.length) * 100)
-              : 0;
-            return acc + p;
-          }, 0);
-          const avgP = targets.length > 0 ? Math.round(totalP / targets.length) : 0;
-          const avgProgressEl = document.getElementById('oct-avg-progress') || document.getElementById('target-avg-progress');
-          if (avgProgressEl) avgProgressEl.textContent = `${avgP}%`;
-
-          // Persist to localStorage
-          const saved = loadStored(STORAGE_KEYS.TARGET_MILESTONES, {});
-          saved[milestone.id] = milestone.completed;
-          saveStored(STORAGE_KEYS.TARGET_MILESTONES, saved);
-        }
-      }
-    });
-  });
+  if (yearFill) yearFill.style.width = `${Math.max(q4Pct, 5)}%`;
+  if (yearDaysLeft) yearDaysLeft.textContent = daysLeftQ4;
+  if (yearPctLeft) yearPctLeft.textContent = `${q4Pct}%`;
 }
 
 // ----------------------------------------------------------------------------
-// RENDER 5-YEAR HORIZON
+// 2. COMMAND CENTER
 // ----------------------------------------------------------------------------
-
-function renderFiveYearHorizon() {
-  const container = document.getElementById('horizon-list');
-  if (!container) return;
-
-  container.innerHTML = state.fiveYearHorizon.map(h => {
-    const isCurrent = h.year === '2026';
-    const displayYear = h.year.replace('-', ' &ndash; ');
-
-    return `
-      <div class="timeline-entry ${isCurrent ? 'current-phase' : ''}">
-        <div class="timeline-node-col" aria-hidden="true">
-          <div class="timeline-node"></div>
-        </div>
-        <div class="timeline-body">
-          <div class="timeline-overview">
-            <div class="timeline-year-row">
-              <span class="timeline-year">${displayYear}</span>
-              ${isCurrent ? '<span class="timeline-current-badge">[CURRENT // ACTIVE]</span>' : ''}
-            </div>
-            <h4 class="timeline-headline">${h.headline}</h4>
-            <p class="timeline-focus">${h.focus}</p>
-          </div>
-          <div class="timeline-milestones-col">
-            <ul class="timeline-milestone-list">
-              ${h.milestones.map(m => `
-                <li class="milestone-item ${m.done ? 'is-done' : ''}">
-                  <span class="milestone-marker">${m.done ? '[✓]' : '[·]'}</span>
-                  <span class="milestone-text">${m.text}</span>
-                </li>
-              `).join('')}
-            </ul>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
+function getFlagshipProject() {
+  const flagship = state.projects.find(p => p.id === state.settings.flagshipProjectId) ||
+                   state.projects.find(p => p.isFlagship) ||
+                   state.projects[0];
+  return flagship;
 }
 
-// ----------------------------------------------------------------------------
-// RENDER BUCKET LIST
-// ----------------------------------------------------------------------------
+function renderCommandCenter() {
+  // 1. North Star & 90-Day Objective
+  const northStarEl = document.getElementById('display-north-star');
+  const cycleObjEl = document.getElementById('display-cycle-objective');
+  if (northStarEl) northStarEl.textContent = state.profile.northStar || initialData.profile.northStar;
+  if (cycleObjEl) cycleObjEl.textContent = state.profile.current90DayObjective || initialData.profile.current90DayObjective;
 
-function renderBucketList() {
-  const container = document.getElementById('bucket-list-container');
-  const countBadge = document.getElementById('bucket-count-badge');
-  if (!container) return;
+  // 2. Current Focus (Flagship Spotlight)
+  const flagship = getFlagshipProject();
+  if (flagship) {
+    const titleEl = document.getElementById('focus-project-title');
+    const phaseEl = document.getElementById('focus-phase-display');
+    const headlineEl = document.getElementById('focus-headline-text');
+    const rationaleEl = document.getElementById('focus-rationale-text');
+    const actionEl = document.getElementById('focus-next-action-text');
+    const milestoneEl = document.getElementById('focus-next-milestone');
+    const evidencePill = document.getElementById('focus-evidence-pill');
+    const quickStatFlagship = document.getElementById('quick-stat-flagship');
 
-  const list = state.q4Goals || state.bucketList || [];
-  const total = list.length;
-  const completed = list.filter(b => b.completed).length;
-  const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+    if (titleEl) titleEl.textContent = flagship.title;
+    if (phaseEl) phaseEl.textContent = (flagship.phase || 'BUILDING').toUpperCase();
+    if (headlineEl) headlineEl.textContent = flagship.tagline || flagship.problem;
+    if (rationaleEl) rationaleEl.textContent = flagship.whyChosen || flagship.description;
+    if (actionEl) actionEl.textContent = flagship.nextAction || 'Continue core deliverable execution';
+    if (milestoneEl) milestoneEl.textContent = flagship.nextMilestone || 'Next sprint release';
+    if (quickStatFlagship) quickStatFlagship.textContent = `${flagship.title} (${flagship.progress}%)`;
 
-  if (countBadge) {
-    countBadge.textContent = `[${completed}/${total} COMPLETED • ${percent}%]`;
-  }
-
-  container.innerHTML = list.map(item => `
-    <div class="bucket-item-row ${item.completed ? 'completed' : ''}" data-id="${item.id}" role="checkbox" aria-checked="${item.completed}">
-      <span class="bucket-box">${item.completed ? '✓' : ''}</span>
-      <span class="bucket-cat">${item.category}</span>
-      <span class="bucket-text">${item.text}</span>
-    </div>
-  `).join('');
-
-  container.querySelectorAll('.bucket-item-row').forEach(row => {
-    row.addEventListener('click', () => {
-      const id = row.getAttribute('data-id');
-      const item = list.find(b => b.id === id);
-      if (item) {
-        item.completed = !item.completed;
-        saveStored(STORAGE_KEYS.Q4_GOALS, list);
-        saveStored(STORAGE_KEYS.BUCKET_LIST, list);
-        renderBucketList();
-      }
-    });
-  });
-}
-
-// ----------------------------------------------------------------------------
-// RENDER INTELLECTUAL RADAR · POLYMATH INTAKE ENGINE
-// ----------------------------------------------------------------------------
-
-let currentRadarTriad = null;
-
-function extractToIntakeDailyLog(title, creator, takeaway, type) {
-  const titleInput = document.getElementById('log-title-input');
-  const textInput = document.getElementById('log-text-input');
-  const tagsInput = document.getElementById('log-tags-input');
-  const dailySection = document.getElementById('section-daily');
-
-  if (titleInput && textInput) {
-    titleInput.value = `Synthesis: ${title}`;
-    textInput.value = `[INTEL EXTRACTION · ${type.toUpperCase()}]\nSource: ${creator}\n\nCore Mental Model & Extraction:\n${takeaway}\n\nImmediate Action & Synthesis in Orbit, Script, and Engineering:\n`;
-    if (tagsInput) {
-      tagsInput.value = `polymath, intake, ${type}`;
-    }
-    if (dailySection) {
-      dailySection.scrollIntoView({ behavior: 'smooth' });
-      textInput.focus();
-    }
-  }
-}
-
-function renderRadarSection() {
-  const container = document.getElementById('radar-triad-container');
-  const trackBar = document.getElementById('radar-track-bar');
-  const subtitleEl = document.getElementById('radar-focus-subtitle');
-  const monthSelect = document.getElementById('radar-month-select');
-  if (!container || !state.radarCurriculum) return;
-
-  const currentMonthKey = state.selectedRadarMonth || '2026-10';
-  if (monthSelect && monthSelect.value !== currentMonthKey) {
-    monthSelect.value = currentMonthKey;
-  }
-
-  const monthData = state.radarCurriculum.months[currentMonthKey] || state.radarCurriculum.months['2026-10'];
-  if (!monthData) return;
-
-  if (subtitleEl) {
-    subtitleEl.innerHTML = `
-      <span class="focus-lbl">ACTIVE FOCUS:</span>
-      <span class="focus-txt">${monthData.focusSummary}</span>
-    `;
-  }
-
-  // Render Track Pills
-  if (trackBar) {
-    const tracks = state.radarCurriculum.tracks || [];
-    trackBar.innerHTML = tracks.map(t => {
-      const isActive = (state.selectedRadarTrack || 'all') === t.id;
-      return `
-        <button type="button" class="radar-track-pill ${isActive ? 'active' : ''}" data-track-id="${t.id}" role="tab" aria-selected="${isActive}">
-          <span class="pill-dot"></span>
-          <span class="pill-name">${t.name}</span>
-        </button>
-      `;
-    }).join('');
-
-    trackBar.querySelectorAll('.radar-track-pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        state.selectedRadarTrack = btn.getAttribute('data-track-id');
-        state.activeRadarTriadIdx = 0;
-        renderRadarSection();
-      });
-    });
-  }
-
-  // Filter triads by track
-  const availableTriads = (state.selectedRadarTrack && state.selectedRadarTrack !== 'all')
-    ? monthData.triads.filter(t => t.trackId === state.selectedRadarTrack)
-    : monthData.triads;
-
-  const triadsToChooseFrom = availableTriads.length > 0 ? availableTriads : monthData.triads;
-  const triadIdx = (state.activeRadarTriadIdx || 0) % triadsToChooseFrom.length;
-  currentRadarTriad = triadsToChooseFrom[triadIdx];
-
-  if (!currentRadarTriad) return;
-
-  // Render the 3 Triad Cards: Video Intel, Substack Essay, Book Chapter
-  container.innerHTML = `
-    <!-- 01: Video Intel -->
-    <article class="radar-card radar-card-video">
-      <div class="radar-card-header">
-        <div class="radar-card-badge-row">
-          <span class="radar-format-badge format-video">01 · Video</span>
-          <span class="radar-meta-badge">${currentRadarTriad.video.badge}</span>
-        </div>
-      </div>
-      <div class="radar-card-body">
-        <h4 class="radar-card-title">${currentRadarTriad.video.title}</h4>
-        <div class="radar-creator-line">Source: <strong>${currentRadarTriad.video.creator}</strong></div>
-        <div class="radar-takeaway">
-          <span class="takeaway-label">Core Insight</span>
-          <p class="takeaway-text">${currentRadarTriad.video.takeaway}</p>
-        </div>
-      </div>
-      <div class="radar-card-footer">
-        <a href="${currentRadarTriad.video.url}" target="_blank" rel="noopener noreferrer" class="radar-link-btn" title="Open video in new tab">
-          <span>Watch Video</span>
-          <span class="btn-arrow">&nearr;</span>
-        </a>
-        <button type="button" class="radar-extract-btn" data-type="video" data-title="${encodeURIComponent(currentRadarTriad.video.title)}" data-creator="${encodeURIComponent(currentRadarTriad.video.creator)}" data-takeaway="${encodeURIComponent(currentRadarTriad.video.takeaway)}">
-          <span>Log to Daily &rarr;</span>
-        </button>
-      </div>
-    </article>
-
-    <!-- 02: Substack / Longform Essay -->
-    <article class="radar-card radar-card-essay">
-      <div class="radar-card-header">
-        <div class="radar-card-badge-row">
-          <span class="radar-format-badge format-essay">02 · Essay</span>
-          <span class="radar-meta-badge">${currentRadarTriad.article.badge}</span>
-        </div>
-      </div>
-      <div class="radar-card-body">
-        <h4 class="radar-card-title">${currentRadarTriad.article.title}</h4>
-        <div class="radar-creator-line">Author: <strong>${currentRadarTriad.article.author}</strong></div>
-        <div class="radar-takeaway">
-          <span class="takeaway-label">Core Insight</span>
-          <p class="takeaway-text">${currentRadarTriad.article.takeaway}</p>
-        </div>
-      </div>
-      <div class="radar-card-footer">
-        <a href="${currentRadarTriad.article.url}" target="_blank" rel="noopener noreferrer" class="radar-link-btn" title="Open article in new tab">
-          <span>Read Essay</span>
-          <span class="btn-arrow">&nearr;</span>
-        </a>
-        <button type="button" class="radar-extract-btn" data-type="essay" data-title="${encodeURIComponent(currentRadarTriad.article.title)}" data-creator="${encodeURIComponent(currentRadarTriad.article.author)}" data-takeaway="${encodeURIComponent(currentRadarTriad.article.takeaway)}">
-          <span>Log to Daily &rarr;</span>
-        </button>
-      </div>
-    </article>
-
-    <!-- 03: Book Chapter / Specific Drill -->
-    <article class="radar-card radar-card-book">
-      <div class="radar-card-header">
-        <div class="radar-card-badge-row">
-          <span class="radar-format-badge format-book">03 · Book</span>
-          <span class="radar-meta-badge">${currentRadarTriad.book.badge}</span>
-        </div>
-      </div>
-      <div class="radar-card-body">
-        <h4 class="radar-card-title">${currentRadarTriad.book.title}</h4>
-        <div class="radar-creator-line">Author: <strong>${currentRadarTriad.book.author}</strong> &bull; <em>${currentRadarTriad.book.chapter}</em> (${currentRadarTriad.book.pages})</div>
-        <div class="radar-takeaway">
-          <span class="takeaway-label">Application</span>
-          <p class="takeaway-text">${currentRadarTriad.book.takeaway}</p>
-        </div>
-      </div>
-      <div class="radar-card-footer">
-        <span class="radar-book-pill">Reading Track</span>
-        <button type="button" class="radar-extract-btn" data-type="book" data-title="${encodeURIComponent(currentRadarTriad.book.title + ' — ' + currentRadarTriad.book.chapter)}" data-creator="${encodeURIComponent(currentRadarTriad.book.author)}" data-takeaway="${encodeURIComponent(currentRadarTriad.book.takeaway)}">
-          <span>Log to Daily &rarr;</span>
-        </button>
-      </div>
-    </article>
-  `;
-
-  // Attach extraction listeners
-  container.querySelectorAll('.radar-extract-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const type = btn.getAttribute('data-type') || 'intake';
-      const title = decodeURIComponent(btn.getAttribute('data-title') || '');
-      const creator = decodeURIComponent(btn.getAttribute('data-creator') || '');
-      const takeaway = decodeURIComponent(btn.getAttribute('data-takeaway') || '');
-      extractToIntakeDailyLog(title, creator, takeaway, type);
-    });
-  });
-}
-
-function setupRadarControls() {
-  const monthSelect = document.getElementById('radar-month-select');
-  const shuffleBtn = document.getElementById('radar-shuffle-btn');
-  const aiToggleBtn = document.getElementById('radar-ai-toggle-btn');
-  const aiDrawer = document.getElementById('radar-ai-drawer');
-  const aiCloseBtn = document.getElementById('radar-ai-close-btn');
-  const apiKeyInput = document.getElementById('radar-api-key-input');
-  const saveKeyBtn = document.getElementById('radar-ai-save-btn');
-  const generateBtn = document.getElementById('radar-ai-generate-btn');
-  const statusEl = document.getElementById('radar-ai-status');
-
-  if (monthSelect) {
-    monthSelect.addEventListener('change', (e) => {
-      state.selectedRadarMonth = e.target.value;
-      state.activeRadarTriadIdx = 0;
-      renderRadarSection();
-    });
-  }
-
-  if (shuffleBtn) {
-    shuffleBtn.addEventListener('click', () => {
-      state.activeRadarTriadIdx = (state.activeRadarTriadIdx || 0) + 1;
-      renderRadarSection();
-      const container = document.getElementById('radar-triad-container');
-      if (container) {
-        container.classList.add('triad-shuffle-pulse');
-        setTimeout(() => container.classList.remove('triad-shuffle-pulse'), 300);
-      }
-    });
-  }
-
-  // AI Drawer toggling
-  if (aiToggleBtn && aiDrawer) {
-    aiToggleBtn.addEventListener('click', () => {
-      const isVisible = aiDrawer.style.display !== 'none';
-      aiDrawer.style.display = isVisible ? 'none' : 'block';
-      if (!isVisible && apiKeyInput) {
-        apiKeyInput.value = localStorage.getItem('gemini_api_key') || '';
-      }
-    });
-  }
-
-  if (aiCloseBtn && aiDrawer) {
-    aiCloseBtn.addEventListener('click', () => {
-      aiDrawer.style.display = 'none';
-    });
-  }
-
-  if (saveKeyBtn && apiKeyInput && statusEl) {
-    saveKeyBtn.addEventListener('click', () => {
-      const key = apiKeyInput.value.trim();
-      if (key) {
-        localStorage.setItem('gemini_api_key', key);
-        statusEl.textContent = '✓ Gemini API key saved to browser storage.';
-        statusEl.className = 'radar-ai-status-msg success';
+    if (evidencePill) {
+      if (flagship.evidence?.status === 'VERIFIED_DELIVERABLE' || flagship.evidence?.url) {
+        evidencePill.className = 'evidence-status-pill verified';
+        evidencePill.textContent = 'VERIFIED PROOF';
       } else {
-        localStorage.removeItem('gemini_api_key');
-        statusEl.textContent = 'Key removed from storage.';
-        statusEl.className = 'radar-ai-status-msg';
+        evidencePill.className = 'evidence-status-pill';
+        evidencePill.textContent = 'IN PROGRESS';
       }
-    });
-  }
-
-  if (generateBtn && apiKeyInput && statusEl) {
-    generateBtn.addEventListener('click', () => {
-      const key = apiKeyInput.value.trim() || localStorage.getItem('gemini_api_key');
-      if (!key) {
-        statusEl.textContent = 'Please paste a Gemini API key from Google AI Studio (free) to generate live custom briefs.';
-        statusEl.className = 'radar-ai-status-msg active';
-        apiKeyInput.focus();
-        return;
-      }
-      generateAiRadarBrief(key);
-    });
-  }
-}
-
-async function generateAiRadarBrief(apiKey) {
-  const statusEl = document.getElementById('radar-ai-status');
-  if (!statusEl) return;
-  statusEl.textContent = 'Contacting Gemini Neural Engine... synthesizing polymath intake...';
-  statusEl.className = 'radar-ai-status-msg active';
-
-  const currentMonthKey = state.selectedRadarMonth || '2026-10';
-  const trackObj = (state.radarCurriculum.tracks || []).find(t => t.id === state.selectedRadarTrack) || { name: 'Polymath Synthesis', badge: 'DA VINCI × MUSK × JANE × SCOFIELD × TESLA × ALTMAN' };
-
-  const prompt = `You are an elite polymath mentor designing a daily intake triad for an ambitious builder in ${currentMonthKey}.
-The builder synthesizes:
-1. Leonardo da Vinci (polymathic sketching, visual narrative, anatomy)
-2. Elon Musk & Nikola Tesla (first-principles physics, extreme velocity, mental machine simulation)
-3. Patrick Jane & Michael Scofield (acute deduction, baseline deviation detection, low latent inhibition, architectural system reverse-engineering)
-4. Sam Altman (hyper-scaling SaaS, founder outbound, Y Combinator W27 momentum, $10k MRR to $1M/mo leverage)
-
-Active track: "${trackObj.name}" (${trackObj.badge}).
-Return ONLY a valid JSON object (no markdown formatting, no code blocks) matching this exact schema:
-{
-  "trackId": "${state.selectedRadarTrack || 'first_principles'}",
-  "trackName": "${trackObj.name}",
-  "archetype": "${trackObj.badge}",
-  "video": {
-    "title": "Title of high-signal YouTube video or talk",
-    "creator": "Speaker or Channel",
-    "duration": "Duration (e.g. 28m)",
-    "url": "https://www.youtube.com/results?search_query=...",
-    "badge": "YouTube · 28m",
-    "takeaway": "Specific core extraction and first-principles mental model."
-  },
-  "article": {
-    "title": "Title of Substack, blog post, or longform essay",
-    "author": "Author or Publication",
-    "readTime": "Reading time (e.g. 10m read)",
-    "url": "https://substack.com",
-    "badge": "Substack · 10m",
-    "takeaway": "Key thesis and strategic takeaway."
-  },
-  "book": {
-    "title": "Book Title",
-    "author": "Author",
-    "chapter": "Chapter number & title",
-    "pages": "Pages or section",
-    "badge": "Book · Ch. XX",
-    "takeaway": "Actionable daily drill or mental model application."
-  }
-}`;
-
-  try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1000 }
-      })
-    });
-
-    if (!res.ok) {
-      throw new Error(`API error: ${res.status} ${res.statusText}`);
     }
-
-    const data = await res.json();
-    const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    const cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
-    const parsedTriad = JSON.parse(cleanJson);
-
-    // Save into state
-    if (!state.radarCurriculum.months[currentMonthKey]) {
-      state.radarCurriculum.months[currentMonthKey] = {
-        monthName: currentMonthKey,
-        focusSummary: 'Autonomous AI Synthesis Cycle',
-        triads: []
-      };
-    }
-    state.radarCurriculum.months[currentMonthKey].triads.unshift(parsedTriad);
-    state.activeRadarTriadIdx = 0;
-    statusEl.textContent = '✓ Fresh AI triad synthesized and deployed into radar!';
-    statusEl.className = 'radar-ai-status-msg success';
-    renderRadarSection();
-  } catch (err) {
-    console.error('Gemini Radar generation failed:', err);
-    statusEl.textContent = `Synthesis notice: ${err.message}. Displaying pre-curated polymath curriculum.`;
-    statusEl.className = 'radar-ai-status-msg error';
   }
-}
-// RENDER DAILY LOGS (MINIMAL & DYNAMIC USER TAG SYSTEM)
-// ----------------------------------------------------------------------------
 
-function getAllUniqueTags() {
-  const tagCounts = {};
-  state.dailyLogs.forEach(log => {
-    (log.tags || []).forEach(t => {
-      const clean = t.trim().toLowerCase().replace(/^#+/, '');
-      if (clean) {
-        tagCounts[clean] = (tagCounts[clean] || 0) + 1;
-      }
-    });
-  });
-  return tagCounts;
+  // 3. Today's Actions List
+  renderTodayActions();
+
+  // 4. Progress Snapshot
+  renderSnapshotMetrics();
+
+  // 5. Recent Activity
+  renderRecentActivity();
 }
 
-function renderTagFilterBar() {
-  const filterBar = document.getElementById('tag-filter-bar');
-  if (!filterBar) return;
+function renderTodayActions() {
+  const container = document.getElementById('actions-list-container');
+  if (!container) return;
 
-  const tagCounts = getAllUniqueTags();
-  const allTags = Object.keys(tagCounts).sort();
-  const currentTag = (state.activeLogTag || 'ALL').toLowerCase();
+  let actions = state.todayActions;
+  if (state.activeActionFilter === 'must-do') {
+    actions = actions.filter(a => a.isMustDo);
+  } else if (state.activeActionFilter === 'completed') {
+    actions = actions.filter(a => a.status === 'completed');
+  }
 
-  let html = `
-    <button type="button" class="filter-tag-link ${currentTag === 'all' ? 'active' : ''}" data-tag="ALL">
-      all (${state.dailyLogs.length})
-    </button>
-  `;
-
-  allTags.forEach(tag => {
-    const isActive = currentTag === tag ? 'active' : '';
-    html += `
-      <span class="filter-tag-sep">/</span>
-      <button type="button" class="filter-tag-link ${isActive}" data-tag="${tag}">
-        #${tag}
-      </button>
-    `;
-  });
-
-  filterBar.innerHTML = html;
-
-  filterBar.querySelectorAll('.filter-tag-link').forEach(btn => {
-    btn.addEventListener('click', () => {
-      state.activeLogTag = btn.getAttribute('data-tag') || 'ALL';
-      renderTagFilterBar();
-      renderDailyLogs();
-    });
-  });
-}
-
-
-
-function renderDailyLogs(highlightId = null) {
-  const feed = document.getElementById('log-feed');
-  if (!feed) return;
-
-  const activeTag = (state.activeLogTag || 'ALL').toLowerCase();
-  const filtered = state.dailyLogs.filter(log => {
-    if (activeTag === 'all') return true;
-    const logTags = (log.tags || []).map(t => t.toLowerCase());
-    return logTags.includes(activeTag);
-  });
-
-  if (filtered.length === 0) {
-    feed.innerHTML = `
-      <div class="empty-logs-notice">
-        No entries found tagged #${activeTag}.
-        <button type="button" class="btn-clear-filter" id="clear-tag-filter">Show all</button>
+  if (actions.length === 0) {
+    container.innerHTML = `
+      <div style="padding: 24px; text-align: center; font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-muted); background: var(--bg-canvas); border: 1px dashed var(--rule-dashed);">
+        [NO ACTIONS IN THIS VIEW &bull; CLICK "+ ADD ACTION" TO RECORD A MUST-DO]
       </div>
     `;
-    const clearBtn = document.getElementById('clear-tag-filter');
-    if (clearBtn) {
-      clearBtn.addEventListener('click', () => {
-        state.activeLogTag = 'ALL';
-        renderTagFilterBar();
-        renderDailyLogs();
-      });
-    }
     return;
   }
 
-  feed.innerHTML = filtered.map(log => {
-    const isNew = highlightId && log.id === highlightId ? 'is-new' : '';
-    const tags = Array.isArray(log.tags) ? log.tags : [];
+  container.innerHTML = actions.map(action => {
+    const isCompleted = action.status === 'completed';
+    const tierClass = action.isMustDo ? 'must-do' : 'optional';
+    const tierLabel = action.isMustDo ? 'MUST-DO' : 'OPTIONAL';
 
     return `
-      <article class="minimal-log-item ${isNew}" data-id="${log.id}">
-        <div class="minimal-log-meta">
-          <div class="minimal-log-meta-left">
-            <span class="minimal-log-date">${log.date}</span>
-            <div class="minimal-log-tags">
-              ${tags.map(t => `<button type="button" class="minimal-tag-item" data-filter-to="${t}">#${t}</button>`).join('')}
-            </div>
+      <div class="action-item ${tierClass} ${isCompleted ? 'completed' : ''}" data-id="${action.id}">
+        <input type="checkbox" class="action-check-box" data-action="toggle-complete" ${isCompleted ? 'checked' : ''} aria-label="Toggle ${escapeHtml(action.title)}">
+        <div class="action-content">
+          <div class="action-title-row">
+            <span class="action-title">${escapeHtml(action.title)}</span>
+            <span class="action-tier-badge ${tierClass}">${tierLabel}</span>
+            <span class="action-proj-badge">${escapeHtml(action.category || '')}</span>
           </div>
-          <div class="minimal-log-actions">
-            <button type="button" class="minimal-action-btn" data-copy-id="${log.id}" title="Copy markdown">copy</button>
-            <button type="button" class="minimal-action-btn minimal-delete-btn" data-delete-id="${log.id}" title="Delete entry">&times;</button>
+          ${action.notes ? `<div class="action-notes-line">${escapeHtml(action.notes)}</div>` : ''}
+        </div>
+        <div class="action-controls">
+          ${!isCompleted ? `
+            <button class="mini-action-btn" data-action="postpone" title="Postpone to tomorrow">→ Tomorrow</button>
+          ` : ''}
+          <button class="mini-action-btn" data-action="delete" title="Delete action">&times;</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderSnapshotMetrics() {
+  const flagship = getFlagshipProject();
+  const metricFlagship = document.getElementById('metric-flagship-progress');
+  const metricFlagshipSub = document.getElementById('metric-flagship-sub');
+  if (metricFlagship && flagship) {
+    metricFlagship.textContent = `${flagship.progress}%`;
+    metricFlagshipSub.textContent = `${flagship.title}: ${flagship.nextMilestone.slice(0, 24)}...`;
+  }
+
+  const metricWorkout = document.getElementById('metric-workout-count');
+  if (metricWorkout) {
+    const workoutsThisWeek = (state.physical.workoutLogs || []).filter(w => w.completed).length;
+    metricWorkout.textContent = `${workoutsThisWeek} / 4`;
+  }
+
+  const metricNotes = document.getElementById('metric-notes-count');
+  if (metricNotes) {
+    metricNotes.textContent = String((state.intellectualNotes || []).length);
+  }
+
+  const metricContent = document.getElementById('metric-content-count');
+  if (metricContent) {
+    const readyCount = (state.contentPipeline || []).filter(c => c.status === 'Ready').length;
+    const pubCount = (state.contentPipeline || []).filter(c => c.status === 'Published').length;
+    metricContent.textContent = `${readyCount} READY • ${pubCount} PUB`;
+  }
+}
+
+function renderRecentActivity() {
+  const stream = document.getElementById('recent-activity-stream');
+  if (!stream) return;
+
+  const events = [];
+
+  // Completed actions
+  (state.todayActions || []).filter(a => a.status === 'completed').slice(0, 3).forEach(a => {
+    events.push({
+      time: 'TODAY',
+      tag: 'ACTION',
+      text: `Completed: "${a.title}"`
+    });
+  });
+
+  // Recent workouts
+  (state.physical.workoutLogs || []).slice(0, 2).forEach(w => {
+    events.push({
+      time: w.date.slice(5),
+      tag: 'TRAINING',
+      text: `Verified Workout: ${w.type} (${w.exercises.length} exercises logged)`
+    });
+  });
+
+  // Recent intellectual notes
+  (state.intellectualNotes || []).slice(0, 2).forEach(n => {
+    events.push({
+      time: n.date.slice(5),
+      tag: 'INTELLECT',
+      text: `Synthesized applied note: "${n.concept}" [${n.topic}]`
+    });
+  });
+
+  // Recent published/draft content
+  (state.contentPipeline || []).slice(0, 1).forEach(c => {
+    events.push({
+      time: 'RECENT',
+      tag: 'X PIPELINE',
+      text: `${c.status}: "${c.title}"`
+    });
+  });
+
+  if (events.length === 0) {
+    stream.innerHTML = `<div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-muted);">No activity recorded yet.</div>`;
+    return;
+  }
+
+  stream.innerHTML = events.slice(0, 6).map(e => `
+    <div class="activity-event-item">
+      <span class="activity-time">${escapeHtml(e.time)}</span>
+      <span class="activity-badge-tag">${escapeHtml(e.tag)}</span>
+      <span class="activity-text">${escapeHtml(e.text)}</span>
+    </div>
+  `).join('');
+}
+
+// ----------------------------------------------------------------------------
+// 3. PROJECT MAXXING SECTION
+// ----------------------------------------------------------------------------
+function renderProjectsSection() {
+  const flagshipContainer = document.getElementById('flagship-hero-container');
+  const backlogContainer = document.getElementById('secondary-backlog-grid');
+  const retrosContainer = document.getElementById('retros-feed');
+
+  const flagship = getFlagshipProject();
+  if (!flagship || !flagshipContainer) return;
+
+  const phases = ["Idea", "Research", "Validation", "Building", "Testing", "Launch", "Iteration", "Completed"];
+  const currentPhaseIdx = phases.indexOf(flagship.phase || 'Building');
+
+  flagshipContainer.innerHTML = `
+    <div class="flagship-top-badge">
+      <span class="flagship-crown-pill">★ DESIGNATED FLAGSHIP PROJECT</span>
+      <span class="flagship-role-pill">ROLE: ${escapeHtml(flagship.role)} &bull; ${escapeHtml(flagship.category)}</span>
+    </div>
+
+    <div class="flagship-title-row">
+      <h2 class="flagship-main-title">${escapeHtml(flagship.title)}</h2>
+      <span class="flagship-progress-badge">${flagship.progress}% PROGRESS</span>
+    </div>
+
+    <p class="flagship-tagline">${escapeHtml(flagship.tagline)}</p>
+
+    <!-- Phase Stepper -->
+    <div class="phase-stepper-wrap">
+      <span class="phase-stepper-label">LIFECYCLE PHASE PROGRESSION:</span>
+      <div class="phase-steps-bar">
+        ${phases.map((p, idx) => {
+          let cls = 'phase-step-pill';
+          if (idx === currentPhaseIdx) cls += ' active';
+          else if (idx < currentPhaseIdx) cls += ' completed';
+          return `<span class="${cls}">${escapeHtml(p)}</span>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- Flagship Details Grid -->
+    <div class="flagship-grid-details">
+      <div class="flagship-col">
+        <span class="fdetail-label">PROBLEM BEING SOLVED:</span>
+        <p class="fdetail-text">${escapeHtml(flagship.problem || flagship.description)}</p>
+        <span class="fdetail-label" style="margin-top: 10px;">INTENDED USERS:</span>
+        <p class="fdetail-text">${escapeHtml(flagship.intendedUsers || 'Founders & Operators')}</p>
+      </div>
+      <div class="flagship-col">
+        <span class="fdetail-label">WHY I CHOSE THIS:</span>
+        <p class="fdetail-text">${escapeHtml(flagship.whyChosen || 'High revenue potential & strategic leverage.')}</p>
+        <span class="fdetail-label" style="margin-top: 10px;">NEXT ACTION &amp; MILESTONE:</span>
+        <p class="fdetail-text"><strong>Action:</strong> ${escapeHtml(flagship.nextAction)}<br><strong>Milestone:</strong> ${escapeHtml(flagship.nextMilestone)}</p>
+      </div>
+    </div>
+
+    <!-- Delivery Evidence Box -->
+    <div class="evidence-box">
+      <div class="evidence-header">
+        <span class="evidence-title">VERIFIED DELIVERY EVIDENCE REQUIRED</span>
+        <span class="evidence-status-pill verified">${escapeHtml(flagship.evidence?.status || 'VERIFIED')}</span>
+      </div>
+      <p class="evidence-desc">
+        ${escapeHtml(flagship.evidence?.description || 'Active software deliverable.')}
+        ${flagship.evidence?.url && flagship.evidence.url !== '#' ? ` &bull; <a href="${escapeHtml(flagship.evidence.url)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-olive); font-weight: 700;">[View Live Demo / Evidence &rarr;]</a>` : ''}
+      </p>
+      <div class="evidence-rule-alert">
+        * Policy: A project cannot be designated as completed without verifiable evidence of delivery (working demo, repository, or validated customer transactions).
+      </div>
+    </div>
+
+    <!-- Actions Bar -->
+    <div class="flagship-actions-bar">
+      <button class="mini-tool-btn" id="open-eval-modal-btn">⚖ Evaluate Project</button>
+      <button class="mini-tool-btn" id="open-retro-modal-btn">📝 Record Milestone Retrospective</button>
+      <button class="mini-tool-btn" id="advance-phase-btn">Advance Lifecycle Phase &rarr;</button>
+    </div>
+  `;
+
+  // Retrospectives Feed
+  if (retrosContainer) {
+    const retros = flagship.retrospectives || [];
+    if (retros.length === 0) {
+      retrosContainer.innerHTML = `
+        <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-muted); padding: 12px; background: var(--bg-canvas); border: 1px dashed var(--rule-dashed);">
+          No retrospectives recorded yet for this flagship. Click "Record Milestone Retrospective" after shipping.
+        </div>
+      `;
+    } else {
+      retrosContainer.innerHTML = retros.map(r => `
+        <div class="retro-item-card">
+          <div class="retro-top-row">
+            <span class="retro-milestone-title">RETRO // ${escapeHtml(r.milestone)}</span>
+            <span class="retro-date">${escapeHtml(r.date)}</span>
+          </div>
+          <div class="retro-2col">
+            <div class="retro-point"><strong>Intended:</strong> ${escapeHtml(r.intended)}</div>
+            <div class="retro-point"><strong>Accomplished:</strong> ${escapeHtml(r.actual)}</div>
+            <div class="retro-point"><strong>What Worked:</strong> ${escapeHtml(r.worked)}</div>
+            <div class="retro-point"><strong>What Failed:</strong> ${escapeHtml(r.failed)}</div>
+          </div>
+          <div class="retro-learned-block">
+            <strong>Key Learning:</strong> ${escapeHtml(r.learned)}<br>
+            <strong>What Happens Next:</strong> ${escapeHtml(r.next)}
           </div>
         </div>
+      `).join('');
+    }
+  }
 
-        <h3 class="minimal-log-title">${log.title}</h3>
-        <p class="minimal-log-body">${log.learned}</p>
-      </article>
+  // Secondary Project Backlog
+  if (backlogContainer) {
+    const secondaryProjects = state.projects.filter(p => p.id !== flagship.id);
+    backlogContainer.innerHTML = secondaryProjects.map(p => `
+      <div class="backlog-card">
+        <div class="backlog-card-header">
+          <span class="backlog-phase-badge">${escapeHtml(p.phase || 'Backlog')}</span>
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;">${p.progress}%</span>
+        </div>
+        <h3 class="backlog-card-title">${escapeHtml(p.title)}</h3>
+        <p class="backlog-card-tagline">${escapeHtml(p.tagline || p.description)}</p>
+        <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted); margin-bottom: 8px;">
+          <strong>Next Action:</strong> ${escapeHtml(p.nextAction || 'In Backlog')}
+        </div>
+        <button class="backlog-promote-btn" data-action="promote-flagship" data-id="${p.id}">★ Promote to Flagship</button>
+      </div>
+    `).join('');
+  }
+}
+
+// ----------------------------------------------------------------------------
+// 4. PHYSICAL MAXXING SECTION
+// ----------------------------------------------------------------------------
+function renderPhysicalSection() {
+  const profile = state.physical.profile;
+  const habits = state.physical.supportingHabits;
+
+  const currentWeightEl = document.getElementById('pstat-current-weight');
+  const goalWeightEl = document.getElementById('pstat-goal-weight');
+  const heightEl = document.getElementById('pstat-height');
+  const bfEl = document.getElementById('pstat-bf');
+
+  if (currentWeightEl) currentWeightEl.textContent = `${profile.weight} ${profile.unit}`;
+  if (goalWeightEl) goalWeightEl.textContent = `${profile.goalWeight} ${profile.unit}`;
+  if (heightEl) heightEl.textContent = `${profile.height} ${profile.heightUnit}`;
+  if (bfEl) bfEl.textContent = profile.targetBodyFat || '12–14%';
+
+  // Habits
+  const sleepEl = document.getElementById('habit-sleep-val');
+  const proteinEl = document.getElementById('habit-protein-val');
+  const recoveryEl = document.getElementById('habit-recovery-val');
+  const stepsEl = document.getElementById('habit-steps-val');
+
+  if (sleepEl) sleepEl.textContent = `${habits.sleepAverage}h / ${habits.sleepHoursTarget}h`;
+  if (proteinEl) proteinEl.textContent = `${habits.proteinTarget}${habits.proteinUnit} Target`;
+  if (recoveryEl) recoveryEl.textContent = habits.recoveryScore || 'High';
+  if (stepsEl) stepsEl.textContent = `${habits.stepsDailyTarget.toLocaleString()} Target`;
+
+  // Workout History
+  const historyContainer = document.getElementById('workout-history-list');
+  const historyCount = document.getElementById('workout-history-count');
+  const logs = state.physical.workoutLogs || [];
+
+  if (historyCount) historyCount.textContent = `${logs.length} Sessions Logged`;
+
+  if (historyContainer) {
+    if (logs.length === 0) {
+      historyContainer.innerHTML = `
+        <div style="padding: 24px; text-align: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-muted); border: 1px dashed var(--rule-dashed);">
+          No workout sessions logged yet. Record your first session above.
+        </div>
+      `;
+      return;
+    }
+
+    historyContainer.innerHTML = logs.map(w => `
+      <div class="workout-session-card">
+        <div class="session-top-row">
+          <span class="session-type-title">${escapeHtml(w.type)}</span>
+          <span class="session-date-pill">${escapeHtml(w.date)} &bull; ${w.completed ? '✓ Completed' : 'Partial'}</span>
+        </div>
+        <table class="session-exercises-table">
+          <thead>
+            <tr>
+              <th>EXERCISE</th>
+              <th>SETS</th>
+              <th>REPS</th>
+              <th>WEIGHT</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${(w.exercises || []).map(ex => `
+              <tr>
+                <td><strong>${escapeHtml(ex.name)}</strong></td>
+                <td>${escapeHtml(String(ex.sets))}</td>
+                <td>${escapeHtml(String(ex.reps))}</td>
+                <td>${escapeHtml(String(ex.weight))}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        ${w.notes ? `<div class="session-notes-box"><strong>Notes & RPE:</strong> ${escapeHtml(w.notes)}</div>` : ''}
+      </div>
+    `).join('');
+  }
+}
+
+// ----------------------------------------------------------------------------
+// 5. INTELLECTUAL MAXXING SECTION
+// ----------------------------------------------------------------------------
+function renderIntellectualSection() {
+  const notesContainer = document.getElementById('knowledge-notes-feed');
+  const countBadge = document.getElementById('klibrary-count-badge');
+  const tagFilterBar = document.getElementById('knote-tag-filter-bar');
+
+  let notes = state.intellectualNotes || [];
+
+  // Extract all distinct tags
+  const tagsSet = new Set(['ALL']);
+  notes.forEach(n => {
+    (n.tags || []).forEach(t => tagsSet.add(t.toUpperCase()));
+  });
+
+  if (tagFilterBar) {
+    tagFilterBar.innerHTML = Array.from(tagsSet).map(tag => {
+      const isActive = state.activeLogTag === tag;
+      return `<button class="knote-tag-pill ${isActive ? 'active' : ''}" data-tag="${escapeHtml(tag)}">${tag === 'ALL' ? 'ALL NOTES' : '#' + escapeHtml(tag.toLowerCase())}</button>`;
+    }).join('');
+  }
+
+  // Filter by tag
+  if (state.activeLogTag && state.activeLogTag !== 'ALL') {
+    notes = notes.filter(n => (n.tags || []).some(t => t.toUpperCase() === state.activeLogTag));
+  }
+
+  // Filter by search query
+  if (state.searchQueryNotes) {
+    const q = state.searchQueryNotes.toLowerCase();
+    notes = notes.filter(n =>
+      (n.concept && n.concept.toLowerCase().includes(q)) ||
+      (n.explanation && n.explanation.toLowerCase().includes(q)) ||
+      (n.topic && n.topic.toLowerCase().includes(q)) ||
+      (n.tags && n.tags.some(t => t.toLowerCase().includes(q)))
+    );
+  }
+
+  if (countBadge) countBadge.textContent = `${notes.length} Notes Filtered`;
+
+  if (!notesContainer) return;
+
+  if (notes.length === 0) {
+    notesContainer.innerHTML = `
+      <div style="padding: 24px; text-align: center; font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-muted); border: 1px dashed var(--rule-dashed);">
+        No applied knowledge notes match your search or filter criteria.
+      </div>
+    `;
+    return;
+  }
+
+  notesContainer.innerHTML = notes.map(n => {
+    const proj = state.projects.find(p => p.id === n.appliedProjectId);
+    const projLabel = proj ? proj.title : 'General System';
+
+    return `
+      <div class="knote-card" data-id="${n.id}">
+        <div class="knote-header-row">
+          <h4 class="knote-concept-title">${escapeHtml(n.concept)}</h4>
+          <span class="knote-proj-pill">${escapeHtml(projLabel)}</span>
+        </div>
+        <p class="knote-own-words">${escapeHtml(n.explanation)}</p>
+        ${n.practicalExample ? `
+          <div class="knote-example-box">
+            <strong>Practical Implementation:</strong> ${escapeHtml(n.practicalExample)}
+          </div>
+        ` : ''}
+        ${n.questions ? `
+          <div style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-muted); margin-bottom: 8px;">
+            <strong>Open Questions &amp; Edge Cases:</strong> ${escapeHtml(n.questions)}
+          </div>
+        ` : ''}
+        <div class="knote-understanding-prompts">
+          <span class="prompts-title">UNDERSTANDING SELF-PROMPTS:</span>
+          <div class="prompts-list">
+            <label class="prompt-check-item">
+              <input type="checkbox" ${n.understanding?.canExplainWithoutNotes ? 'checked' : ''} data-check="explain" data-id="${n.id}">
+              <span>Can I explain this clearly without looking at notes?</span>
+            </label>
+            <label class="prompt-check-item">
+              <input type="checkbox" ${n.understanding?.canImplement ? 'checked' : ''} data-check="implement" data-id="${n.id}">
+              <span>Can I implement this in working code?</span>
+            </label>
+            <label class="prompt-check-item">
+              <input type="checkbox" ${n.understanding?.knowsLimitations ? 'checked' : ''} data-check="limitations" data-id="${n.id}">
+              <span>Do I understand its precise failure modes &amp; when NOT to use it?</span>
+            </label>
+          </div>
+        </div>
+        <div class="knote-footer-strip">
+          <span>Date: ${escapeHtml(n.date)} &bull; ${n.references ? `Ref: ${escapeHtml(n.references)}` : ''}</span>
+          <span>${(n.tags || []).map(t => `#${escapeHtml(t)}`).join(' ')}</span>
+        </div>
+      </div>
     `;
   }).join('');
 
-  // Click on a tag pill in a card filters to that tag
-  feed.querySelectorAll('.minimal-tag-item').forEach(pill => {
-    pill.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const targetTag = pill.getAttribute('data-filter-to');
-      if (targetTag) {
-        state.activeLogTag = targetTag;
-        renderTagFilterBar();
-        renderDailyLogs();
-      }
-    });
-  });
+  // Render intake radar triad
+  renderRadarTriad();
+}
 
-  // Copy entry to clipboard
-  feed.querySelectorAll('.minimal-action-btn[data-copy-id]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const logId = btn.getAttribute('data-copy-id');
-      const item = state.dailyLogs.find(l => l.id === logId);
-      if (!item) return;
+function renderRadarTriad() {
+  const triadContainer = document.getElementById('radar-triad-container');
+  if (!triadContainer) return;
 
-      const tagsStr = (item.tags || []).map(t => `#${t}`).join(' ');
-      const snippet = `### [${item.date}] ${item.title} ${tagsStr}\n${item.learned}`;
-      navigator.clipboard.writeText(snippet).then(() => {
-        const orig = btn.textContent;
-        btn.textContent = 'copied!';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = orig;
-          btn.classList.remove('copied');
-        }, 1500);
-      });
-    });
-  });
+  const curData = state.radarCurriculum?.months?.[state.selectedRadarMonth || '2026-10'];
+  if (!curData || !curData.triads || curData.triads.length === 0) return;
 
-  // Delete entry
-  feed.querySelectorAll('.minimal-delete-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const logId = btn.getAttribute('data-delete-id');
-      if (confirm('Delete this entry?')) {
-        state.dailyLogs = state.dailyLogs.filter(l => l.id !== logId);
-        saveStored(STORAGE_KEYS.DAILY_LOGS, state.dailyLogs);
-        renderTagFilterBar();
-        renderDailyLogs();
-      }
-    });
-  });
+  const triad = curData.triads[state.activeRadarTriadIdx % curData.triads.length];
+  if (!triad) return;
+
+  triadContainer.innerHTML = `
+    <!-- Video Intel Card -->
+    <div class="radar-card" style="background: var(--bg-canvas); border: 1.5px solid var(--rule-strong); padding: 18px; box-shadow: 2px 2px 0px var(--rule-strong);">
+      <div style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: var(--tape-red); margin-bottom: 4px;">${escapeHtml(triad.video.badge)}</div>
+      <h4 style="font-family: var(--font-sans); font-size: 0.95rem; font-weight: 700; color: var(--ink-primary); margin-bottom: 6px;">${escapeHtml(triad.video.title)}</h4>
+      <p style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-secondary); margin-bottom: 10px;">${escapeHtml(triad.video.takeaway)}</p>
+      <a href="${escapeHtml(triad.video.url)}" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-olive); font-weight: 700;">[Watch Video &rarr;]</a>
+    </div>
+
+    <!-- Article / Essay Card -->
+    <div class="radar-card" style="background: var(--bg-canvas); border: 1.5px solid var(--rule-strong); padding: 18px; box-shadow: 2px 2px 0px var(--rule-strong);">
+      <div style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #184890; margin-bottom: 4px;">${escapeHtml(triad.article.badge)}</div>
+      <h4 style="font-family: var(--font-sans); font-size: 0.95rem; font-weight: 700; color: var(--ink-primary); margin-bottom: 6px;">${escapeHtml(triad.article.title)}</h4>
+      <p style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-secondary); margin-bottom: 10px;">${escapeHtml(triad.article.takeaway)}</p>
+      <a href="${escapeHtml(triad.article.url)}" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-olive); font-weight: 700;">[Read Essay &rarr;]</a>
+    </div>
+
+    <!-- Book Chapter Card -->
+    <div class="radar-card" style="background: var(--bg-canvas); border: 1.5px solid var(--rule-strong); padding: 18px; box-shadow: 2px 2px 0px var(--rule-strong);">
+      <div style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: var(--accent-olive); margin-bottom: 4px;">${escapeHtml(triad.book.badge)}</div>
+      <h4 style="font-family: var(--font-sans); font-size: 0.95rem; font-weight: 700; color: var(--ink-primary); margin-bottom: 6px;">${escapeHtml(triad.book.title)} &bull; ${escapeHtml(triad.book.chapter)}</h4>
+      <p style="font-family: var(--font-mono); font-size: 0.74rem; color: var(--ink-secondary); margin-bottom: 10px;">${escapeHtml(triad.book.takeaway)}</p>
+      <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted);">${escapeHtml(triad.book.pages)}</span>
+    </div>
+  `;
 }
 
 // ----------------------------------------------------------------------------
-// TACTILE FOLDER TABS CONTROLLER
+// 6. X & PUBLIC PRESENCE
 // ----------------------------------------------------------------------------
+function renderXSection() {
+  const grid = document.getElementById('pipeline-stages-grid');
+  if (!grid) return;
 
-function setupFolderTabs() {
-  const tabs = document.querySelectorAll('.folder-tabs-header .folder-tab');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.folders-container .folder-pane').forEach(p => p.classList.remove('active'));
+  const stages = ['Idea', 'Draft', 'Ready', 'Published'];
+  const pipeline = state.contentPipeline || [];
 
-      tab.classList.add('active');
-      const targetId = tab.getAttribute('data-tab');
-      const targetPane = document.getElementById(targetId);
-      if (targetPane) {
-        targetPane.classList.add('active');
-      }
-    });
-  });
+  grid.innerHTML = stages.map(stage => {
+    const items = pipeline.filter(item => item.status === stage);
+
+    return `
+      <div class="pipeline-col">
+        <div class="pipeline-col-header">
+          <span class="col-stage-name">${escapeHtml(stage.toUpperCase())}</span>
+          <span class="col-count-badge">${items.length}</span>
+        </div>
+        <div class="pipeline-cards-list">
+          ${items.length === 0 ? `
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-muted); text-align: center; padding: 12px; border: 1px dashed var(--rule-dashed);">
+              Empty stage
+            </div>
+          ` : items.map(c => `
+            <div class="content-item-card" data-id="${c.id}">
+              <span class="content-cat-badge">${escapeHtml(c.category)}</span>
+              <h5 class="content-item-title">${escapeHtml(c.title)}</h5>
+              <div class="content-item-draft">${escapeHtml(c.draft)}</div>
+              ${c.metrics && c.status === 'Published' ? `
+                <div class="content-manual-metrics">
+                  [MANUAL LOG] ${c.metrics.impressions} Impr &bull; ${c.metrics.likes} Likes &bull; ${c.metrics.reposts} RTs
+                </div>
+              ` : ''}
+              <div class="content-card-actions">
+                <button class="stage-move-btn" data-action="copy-draft" data-id="${c.id}">Copy</button>
+                <button class="stage-move-btn" data-action="next-stage" data-id="${c.id}">Advance &rarr;</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 // ----------------------------------------------------------------------------
-// EVENT LISTENERS (NEW LOGS, TAG SYSTEM & EXPORT)
+// 7. CAREER & INCOME
 // ----------------------------------------------------------------------------
+function renderCareerSection() {
+  const roleEl = document.getElementById('career-role-title');
+  const respList = document.getElementById('career-responsibilities-ul');
+  const skillsGrid = document.getElementById('skills-matrix-grid');
+  const tbody = document.getElementById('income-experiments-tbody');
 
-function setupEventListeners() {
-  const logForm = document.getElementById('daily-log-form');
-  if (logForm) {
-    logForm.addEventListener('submit', (e) => {
+  if (roleEl) roleEl.textContent = state.career.currentRole;
+
+  if (respList && state.career.responsibilities) {
+    respList.innerHTML = state.career.responsibilities.map(r => `<li>${escapeHtml(r)}</li>`).join('');
+  }
+
+  if (skillsGrid && state.career.skillsToDevelop) {
+    skillsGrid.innerHTML = state.career.skillsToDevelop.map(s => `
+      <div class="skill-card">
+        <div class="skill-name-row">
+          <span class="skill-name">${escapeHtml(s.name)}</span>
+          <span class="skill-pct">${s.progress}%</span>
+        </div>
+        <div class="skill-meter-track">
+          <div class="skill-meter-fill" style="width: ${s.progress}%;"></div>
+        </div>
+        <p class="skill-details-text">${escapeHtml(s.details)}</p>
+      </div>
+    `).join('');
+  }
+
+  if (tbody && state.career.incomeExperiments) {
+    tbody.innerHTML = state.career.incomeExperiments.map(exp => `
+      <tr>
+        <td><strong>${escapeHtml(exp.name)}</strong></td>
+        <td><span class="exp-status-pill">${escapeHtml(exp.status)}</span></td>
+        <td><strong>${escapeHtml(exp.targetIncome)}</strong></td>
+        <td>${escapeHtml(exp.currentIncome)}</td>
+        <td style="color: var(--ink-secondary); font-size: 0.74rem;">${escapeHtml(exp.notes)}</td>
+      </tr>
+    `).join('');
+  }
+}
+
+// ----------------------------------------------------------------------------
+// 8. WEEKLY REVIEW ENGINE
+// ----------------------------------------------------------------------------
+function renderWeeklyReviewSection() {
+  const reviewsContainer = document.getElementById('past-reviews-list');
+  const countBadge = document.getElementById('reviews-count-badge');
+  const dateInput = document.getElementById('review-week-date');
+
+  const reviews = state.weeklyReviews || [];
+  if (countBadge) countBadge.textContent = `${reviews.length} Reviews Archived`;
+
+  if (dateInput && !dateInput.value) {
+    dateInput.value = new Date().toISOString().split('T')[0];
+  }
+
+  if (reviewsContainer) {
+    if (reviews.length === 0) {
+      reviewsContainer.innerHTML = `<div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-muted);">No reviews saved yet.</div>`;
+      return;
+    }
+
+    reviewsContainer.innerHTML = reviews.map(rev => `
+      <div class="past-review-item">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+          <strong style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--ink-primary);">WEEK OF ${escapeHtml(rev.weekStarting)}</strong>
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-olive); font-weight: 700;">FINALIZED REVIEW</span>
+        </div>
+        <div style="font-family: var(--font-sans); font-size: 0.86rem; font-weight: 600; color: var(--ink-primary); margin-bottom: 4px;">
+          Next Week Focus: "${escapeHtml(rev.answers?.nextWeekOutcome || '')}"
+        </div>
+        <div class="review-summary-quote">
+          ${escapeHtml(rev.generatedSummary || rev.answers?.shippedWork || '')}
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function generateWeeklyReviewDraft() {
+  // Aggregate recent accomplishments from the past 7 days
+  const completedActions = (state.todayActions || []).filter(a => a.status === 'completed');
+  const recentWorkouts = (state.physical.workoutLogs || []).filter(w => w.completed);
+  const recentNotes = (state.intellectualNotes || []).slice(0, 3);
+  const flagship = getFlagshipProject();
+
+  const shipped = completedActions.map(a => a.title).join('; ') || 'Continued flagship execution sprint.';
+  const learnings = recentNotes.map(n => `${n.concept} (${n.topic})`).join('; ') || 'Deepened systems thinking.';
+  const flagshipProg = flagship ? `${flagship.title} reached ${flagship.progress}% progress; next milestone: ${flagship.nextMilestone}` : '';
+  const training = `${recentWorkouts.length} workouts verified with progressive overload tracking.`;
+
+  const p1 = document.getElementById('review-prompt-1');
+  const p2 = document.getElementById('review-prompt-2');
+  const p3 = document.getElementById('review-prompt-3');
+  const p4 = document.getElementById('review-prompt-4');
+  const p5 = document.getElementById('review-prompt-5');
+  const p6 = document.getElementById('review-prompt-6');
+  const p7 = document.getElementById('review-prompt-7');
+  const p8 = document.getElementById('review-prompt-8');
+  const p9 = document.getElementById('review-prompt-9');
+  const p10 = document.getElementById('review-prompt-10');
+  const summaryBox = document.getElementById('review-summary-text');
+
+  if (p1) p1.value = shipped;
+  if (p2) p2.value = learnings;
+  if (p3) p3.value = flagshipProg;
+  if (p4) p4.value = training;
+  if (p5) p5.value = 'Direct customer and merchant outbound video audits.';
+  if (p6) p6.value = 'Spending too much time on non-flagship side projects.';
+  if (p7) p7.value = 'Cold outbound telephone follow-ups.';
+  if (p8) p8.value = 'Converting pilot e-commerce accounts to paid recurring subscribers.';
+  if (p9) p9.value = 'Convert 3 paid Shopify pilot accounts on Orbit recurring tier.';
+  if (p10) p10.value = 'Checking social analytics during morning execution blocks.';
+
+  if (summaryBox) {
+    summaryBox.value = `High-velocity week characterized by ${recentWorkouts.length} completed workouts and shipping ${completedActions.length} core tasks. Flagship priority remains locked on ${flagship ? flagship.title : 'Orbit'} outbound. Next week's single critical outcome: Convert 3 paid pilot merchants.`;
+  }
+
+  showToast('Weekly review draft generated from live records!');
+}
+
+// ----------------------------------------------------------------------------
+// 9. STRATEGIC CYCLES SECTION
+// ----------------------------------------------------------------------------
+function renderStrategicCyclesSection() {
+  const container = document.getElementById('active-cycle-container');
+  const horizonContainer = document.getElementById('horizon-list');
+  if (!container) return;
+
+  const cycle = (state.strategicCycles || [])[0];
+  if (!cycle) return;
+
+  container.innerHTML = `
+    <div class="cycle-card-top">
+      <div>
+        <span class="cycle-active-badge">ACTIVE 90-DAY STRATEGIC CYCLE</span>
+        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: var(--ink-primary); margin-top: 4px;">${escapeHtml(cycle.name)}</h3>
+      </div>
+      <span class="cycle-dates-badge">${escapeHtml(cycle.startDate)} &rarr; ${escapeHtml(cycle.endDate)}</span>
+    </div>
+
+    <!-- Primary Outcome -->
+    <div class="cycle-primary-outcome-box">
+      <span class="cycle-label-small">PRIMARY STRATEGIC OUTCOME (LINKED TO FLAGSHIP):</span>
+      <h4 class="cycle-outcome-title">${escapeHtml(cycle.primaryOutcome)}</h4>
+    </div>
+
+    <!-- Supporting Outcomes -->
+    <div class="cycle-supporting-list">
+      <span class="cycle-label-small" style="margin-bottom: 6px;">SUPPORTING OUTCOMES:</span>
+      <ul>
+        ${(cycle.supportingOutcomes || []).map(o => `<li>${escapeHtml(o)}</li>`).join('')}
+      </ul>
+    </div>
+
+    <!-- Success Criteria -->
+    <div class="criteria-checklist">
+      <span class="cycle-label-small" style="margin-bottom: 4px;">MEASURABLE SUCCESS CRITERIA:</span>
+      ${(cycle.successCriteria || []).map(sc => `
+        <div class="criteria-item">
+          <input type="checkbox" ${sc.completed ? 'checked' : ''} data-action="toggle-criteria" data-id="${sc.id}">
+          <span class="criteria-type-badge">${escapeHtml(sc.type)}</span>
+          <span style="flex: 1; color: var(--ink-primary);">${escapeHtml(sc.text)}</span>
+        </div>
+      `).join('')}
+    </div>
+
+    <!-- Constraints & Risks -->
+    <div class="constraints-risks-grid">
+      <div class="cr-block">
+        <span class="cr-label">KNOWN CONSTRAINTS:</span>
+        <p style="color: var(--ink-secondary); line-height: 1.45;">${escapeHtml((cycle.constraints || []).join(' ' ))}</p>
+      </div>
+      <div class="cr-block">
+        <span class="cr-label">STRATEGIC RISKS:</span>
+        <p style="color: var(--ink-secondary); line-height: 1.45;">${escapeHtml((cycle.risks || []).join(' ' ))}</p>
+      </div>
+    </div>
+  `;
+
+  // Render 5-year horizon preserved
+  if (horizonContainer) {
+    horizonContainer.innerHTML = (state.fiveYearHorizon || []).map(h => `
+      <div class="horizon-row" style="background: var(--bg-paper); border: 1px solid var(--rule-strong); padding: 16px; margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+          <strong style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--ink-primary);">${escapeHtml(h.year)} &bull; ${escapeHtml(h.headline)}</strong>
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted);">${h.progress}% Complete</span>
+        </div>
+        <p style="font-family: var(--font-sans); font-size: 0.88rem; color: var(--ink-secondary); margin-bottom: 8px;">${escapeHtml(h.focus)}</p>
+        <ul style="list-style: square; padding-left: 20px; font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-secondary);">
+          ${(h.milestones || []).map(m => `<li>${escapeHtml(m.text)}</li>`).join('')}
+        </ul>
+      </div>
+    `).join('');
+  }
+}
+
+// ----------------------------------------------------------------------------
+// 10. MODALS, DRAWERS & EVENT LISTENERS
+// ----------------------------------------------------------------------------
+function initEventListeners() {
+  // Navigation smooth scroll & active spy
+  const navItems = document.querySelectorAll('.nav-strip .nav-item');
+  navItems.forEach(item => {
+    item.addEventListener('click', e => {
       e.preventDefault();
-      const titleInput = document.getElementById('log-title-input');
-      const textInput = document.getElementById('log-text-input');
-      const tagsInput = document.getElementById('log-tags-input');
+      const targetId = item.getAttribute('href');
+      const target = document.querySelector(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        navItems.forEach(n => n.classList.remove('active'));
+        item.classList.add('active');
+      }
+    });
+  });
 
-      const title = titleInput ? titleInput.value.trim() : '';
-      const text = textInput ? textInput.value.trim() : '';
-      const rawTags = tagsInput ? tagsInput.value.trim() : '';
+  // Action Filters
+  document.querySelectorAll('.action-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.action-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.activeActionFilter = btn.dataset.filter;
+      renderTodayActions();
+    });
+  });
 
-      if (!title || !text) {
-        alert('Please provide a title and what you learned.');
+  // Action Item Clicks (Complete, Postpone, Delete)
+  const actionsList = document.getElementById('actions-list-container');
+  if (actionsList) {
+    actionsList.addEventListener('click', e => {
+      const itemEl = e.target.closest('.action-item');
+      if (!itemEl) return;
+      const id = itemEl.dataset.id;
+      const action = state.todayActions.find(a => a.id === id);
+      if (!action) return;
+
+      if (e.target.dataset.action === 'toggle-complete') {
+        action.status = e.target.checked ? 'completed' : 'pending';
+        persistState();
+        renderTodayActions();
+        renderSnapshotMetrics();
+        renderRecentActivity();
+        showToast(action.status === 'completed' ? 'Action completed!' : 'Action marked pending');
+      } else if (e.target.dataset.action === 'postpone') {
+        action.dueDate = 'Tomorrow';
+        action.status = 'pending';
+        persistState();
+        renderTodayActions();
+        showToast('Action postponed to tomorrow');
+      } else if (e.target.dataset.action === 'delete') {
+        state.todayActions = state.todayActions.filter(a => a.id !== id);
+        persistState();
+        renderTodayActions();
+        renderSnapshotMetrics();
+        showToast('Action removed');
+      }
+    });
+  }
+
+  // Add Action Modal
+  const addActionBtn = document.getElementById('add-action-btn');
+  const actionModalBackdrop = document.getElementById('action-modal-backdrop');
+  const closeActionModalBtn = document.getElementById('close-action-modal-btn');
+  const newActionForm = document.getElementById('new-action-form');
+
+  if (addActionBtn && actionModalBackdrop) {
+    addActionBtn.addEventListener('click', () => {
+      actionModalBackdrop.style.display = 'flex';
+      actionModalBackdrop.setAttribute('aria-hidden', 'false');
+    });
+  }
+  if (closeActionModalBtn && actionModalBackdrop) {
+    closeActionModalBtn.addEventListener('click', () => {
+      actionModalBackdrop.style.display = 'none';
+      actionModalBackdrop.setAttribute('aria-hidden', 'true');
+    });
+  }
+  if (newActionForm) {
+    newActionForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const title = document.getElementById('new-action-title').value.trim();
+      const category = document.getElementById('new-action-category').value.trim();
+      const priority = document.getElementById('new-action-priority').value;
+      const notes = document.getElementById('new-action-notes').value.trim();
+
+      if (!title) return;
+
+      const newAction = {
+        id: 'act-' + Date.now(),
+        title,
+        category: category || 'GENERAL',
+        projectId: state.settings.flagshipProjectId,
+        isMustDo: priority === 'must-do',
+        status: 'pending',
+        dueDate: 'Today',
+        notes
+      };
+
+      state.todayActions.unshift(newAction);
+      persistState();
+      renderTodayActions();
+      renderSnapshotMetrics();
+      newActionForm.reset();
+      actionModalBackdrop.style.display = 'none';
+      showToast('New action added to Today!');
+    });
+  }
+
+  // Promote to Flagship
+  const backlogGrid = document.getElementById('secondary-backlog-grid');
+  if (backlogGrid) {
+    backlogGrid.addEventListener('click', e => {
+      const btn = e.target.closest('[data-action="promote-flagship"]');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      const newFlagship = state.projects.find(p => p.id === id);
+      if (!newFlagship) return;
+
+      state.projects.forEach(p => { p.isFlagship = (p.id === id); });
+      state.settings.flagshipProjectId = id;
+      persistState();
+      renderCommandCenter();
+      renderProjectsSection();
+      showToast(`${newFlagship.title} is now your active Flagship!`);
+    });
+  }
+
+  // Advance Phase button
+  document.addEventListener('click', e => {
+    if (e.target && e.target.id === 'advance-phase-btn') {
+      const flagship = getFlagshipProject();
+      if (!flagship) return;
+      const phases = ["Idea", "Research", "Validation", "Building", "Testing", "Launch", "Iteration", "Completed"];
+      const currentIdx = phases.indexOf(flagship.phase || 'Building');
+      if (currentIdx < phases.length - 1) {
+        const nextPhase = phases[currentIdx + 1];
+        if (nextPhase === 'Completed' || nextPhase === 'Launch') {
+          const evidenceUrl = prompt('Evidence of delivery required for Launch/Completion. Enter demo URL or proof link:', flagship.evidence?.url || 'https://');
+          if (!evidenceUrl) {
+            alert('Cannot advance phase to Launch/Completed without verified evidence of delivery.');
+            return;
+          }
+          flagship.evidence = {
+            status: 'VERIFIED_DELIVERABLE',
+            description: 'Verified live demo & merchant release',
+            url: evidenceUrl
+          };
+        }
+        flagship.phase = nextPhase;
+        persistState();
+        renderCommandCenter();
+        renderProjectsSection();
+        showToast(`Phase advanced to: ${nextPhase}`);
+      }
+    }
+  });
+
+  // Project Evaluation Modal
+  const evalModalBackdrop = document.getElementById('eval-modal-backdrop');
+  const closeEvalModalBtn = document.getElementById('close-eval-modal-btn');
+  const saveEvalBtn = document.getElementById('save-eval-btn');
+
+  document.addEventListener('click', e => {
+    if (e.target && e.target.id === 'open-eval-modal-btn') {
+      const flagship = getFlagshipProject();
+      if (flagship && flagship.evaluation) {
+        document.getElementById('eval-interest').value = flagship.evaluation.interest || 8;
+        document.getElementById('eval-learning').value = flagship.evaluation.learning || 8;
+        document.getElementById('eval-feasibility').value = flagship.evaluation.feasibility || 8;
+        document.getElementById('eval-time').value = flagship.evaluation.timeToResult || 8;
+        document.getElementById('eval-demand').value = flagship.evaluation.customerDemand || 8;
+        document.getElementById('eval-alignment').value = flagship.evaluation.strategicAlignment || 8;
+        document.getElementById('eval-reasoning').value = flagship.evaluation.reasoning || '';
+      }
+      if (evalModalBackdrop) evalModalBackdrop.style.display = 'flex';
+    }
+  });
+
+  if (closeEvalModalBtn && evalModalBackdrop) {
+    closeEvalModalBtn.addEventListener('click', () => { evalModalBackdrop.style.display = 'none'; });
+  }
+
+  if (saveEvalBtn) {
+    saveEvalBtn.addEventListener('click', () => {
+      const flagship = getFlagshipProject();
+      if (!flagship) return;
+      flagship.evaluation = {
+        interest: Number(document.getElementById('eval-interest').value) || 8,
+        learning: Number(document.getElementById('eval-learning').value) || 8,
+        feasibility: Number(document.getElementById('eval-feasibility').value) || 8,
+        timeToResult: Number(document.getElementById('eval-time').value) || 8,
+        customerDemand: Number(document.getElementById('eval-demand').value) || 8,
+        strategicAlignment: Number(document.getElementById('eval-alignment').value) || 8,
+        reasoning: document.getElementById('eval-reasoning').value.trim()
+      };
+      persistState();
+      evalModalBackdrop.style.display = 'none';
+      showToast('Project evaluation saved!');
+    });
+  }
+
+  // Milestone Retrospective Modal
+  const retroModalBackdrop = document.getElementById('retro-modal-backdrop');
+  const closeRetroModalBtn = document.getElementById('close-retro-modal-btn');
+  const retroForm = document.getElementById('retro-form');
+
+  document.addEventListener('click', e => {
+    if (e.target && e.target.id === 'open-retro-modal-btn') {
+      if (retroModalBackdrop) {
+        document.getElementById('retro-date').value = new Date().toISOString().split('T')[0];
+        retroModalBackdrop.style.display = 'flex';
+      }
+    }
+  });
+
+  if (closeRetroModalBtn && retroModalBackdrop) {
+    closeRetroModalBtn.addEventListener('click', () => { retroModalBackdrop.style.display = 'none'; });
+  }
+
+  if (retroForm) {
+    retroForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const flagship = getFlagshipProject();
+      if (!flagship) return;
+
+      const newRetro = {
+        id: 'retro-' + Date.now(),
+        date: document.getElementById('retro-date').value,
+        milestone: document.getElementById('retro-milestone').value.trim(),
+        intended: document.getElementById('retro-intended').value.trim(),
+        actual: document.getElementById('retro-actual').value.trim(),
+        worked: document.getElementById('retro-worked').value.trim(),
+        failed: document.getElementById('retro-failed').value.trim(),
+        learned: document.getElementById('retro-learned').value.trim(),
+        next: document.getElementById('retro-next').value.trim()
+      };
+
+      if (!flagship.retrospectives) flagship.retrospectives = [];
+      flagship.retrospectives.unshift(newRetro);
+      persistState();
+      renderProjectsSection();
+      retroForm.reset();
+      retroModalBackdrop.style.display = 'none';
+      showToast('Milestone retrospective recorded!');
+    });
+  }
+
+  // Workout Logger: Add Exercise Row
+  const addExBtn = document.getElementById('add-exercise-row-btn');
+  const exContainer = document.getElementById('exercise-rows-container');
+  if (addExBtn && exContainer) {
+    addExBtn.addEventListener('click', () => {
+      const row = document.createElement('div');
+      row.className = 'exercise-row';
+      row.innerHTML = `
+        <input type="text" class="ex-name-input" placeholder="Exercise name" required>
+        <input type="number" class="ex-sets-input" placeholder="Sets" min="1" max="10" value="3" required>
+        <input type="text" class="ex-reps-input" placeholder="Reps" value="10, 10, 8" required>
+        <input type="text" class="ex-weight-input" placeholder="Weight" value="20 kg" required>
+        <button type="button" class="remove-row-btn" title="Remove exercise">&times;</button>
+      `;
+      exContainer.appendChild(row);
+    });
+
+    exContainer.addEventListener('click', e => {
+      if (e.target.classList.contains('remove-row-btn')) {
+        const rows = exContainer.querySelectorAll('.exercise-row');
+        if (rows.length > 1) {
+          e.target.closest('.exercise-row').remove();
+        } else {
+          showToast('Keep at least one exercise row');
+        }
+      }
+    });
+  }
+
+  // Workout Logger: Form Submit
+  const workoutForm = document.getElementById('workout-form');
+  const workoutDateInput = document.getElementById('workout-date');
+  if (workoutDateInput) workoutDateInput.value = new Date().toISOString().split('T')[0];
+
+  if (workoutForm) {
+    workoutForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const date = document.getElementById('workout-date').value;
+      const type = document.getElementById('workout-type').value;
+      const notes = document.getElementById('workout-notes').value.trim();
+      const completed = document.getElementById('workout-completed').checked;
+
+      const exercises = [];
+      document.querySelectorAll('.exercise-row').forEach(row => {
+        const name = row.querySelector('.ex-name-input')?.value.trim();
+        const sets = row.querySelector('.ex-sets-input')?.value.trim();
+        const reps = row.querySelector('.ex-reps-input')?.value.trim();
+        const weight = row.querySelector('.ex-weight-input')?.value.trim();
+        if (name) {
+          exercises.push({ name, sets, reps, weight });
+        }
+      });
+
+      if (exercises.length === 0) {
+        alert('Please add at least one exercise.');
         return;
       }
 
-      let tags = [];
-      if (rawTags) {
-        tags = rawTags.split(/[,]+/)
-          .map(t => t.trim().toLowerCase().replace(/^#+/, '').replace(/\s+/g, '-'))
-          .filter(Boolean);
-      }
-      if (tags.length === 0) {
-        tags = ['general'];
-      }
-
-      const today = new Date().toISOString().split('T')[0];
-      const newEntry = {
-        id: 'log-' + Date.now(),
-        date: today,
-        title: title,
-        learned: text,
-        tags: tags
+      const newWorkout = {
+        id: 'w-' + Date.now(),
+        date,
+        type,
+        completed,
+        exercises,
+        notes
       };
 
-      state.dailyLogs.unshift(newEntry);
-      saveStored(STORAGE_KEYS.DAILY_LOGS, state.dailyLogs);
-
-      state.activeLogTag = 'ALL';
-      renderTagFilterBar();
-      renderDailyLogs(newEntry.id);
-
-      if (titleInput) titleInput.value = '';
-      if (textInput) textInput.value = '';
-      if (tagsInput) tagsInput.value = '';
+      state.physical.workoutLogs.unshift(newWorkout);
+      persistState();
+      renderPhysicalSection();
+      renderSnapshotMetrics();
+      renderRecentActivity();
+      workoutForm.reset();
+      workoutDateInput.value = new Date().toISOString().split('T')[0];
+      showToast('Workout session recorded successfully!');
     });
   }
 
-  const exportBtn = document.getElementById('export-logs-btn');
+  // Applied Knowledge Note Form
+  const knoteForm = document.getElementById('knowledge-note-form');
+  if (knoteForm) {
+    knoteForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const concept = document.getElementById('knote-concept').value.trim();
+      const topic = document.getElementById('knote-topic').value.trim();
+      const appliedProjectId = document.getElementById('knote-project').value;
+      const explanation = document.getElementById('knote-explanation').value.trim();
+      const practicalExample = document.getElementById('knote-example').value.trim();
+      const questions = document.getElementById('knote-questions').value.trim();
+      const references = document.getElementById('knote-references').value.trim();
+      const rawTags = document.getElementById('knote-tags').value.trim();
+
+      const tags = rawTags.split(/[, ]+/).map(t => t.trim().toLowerCase().replace(/^#/, '')).filter(Boolean);
+
+      const newNote = {
+        id: 'note-' + Date.now(),
+        date: new Date().toISOString().split('T')[0],
+        topic: topic || 'General',
+        concept,
+        explanation,
+        whyItMatters: 'Applied building insight.',
+        practicalExample,
+        appliedProjectId,
+        questions,
+        references,
+        tags: tags.length > 0 ? tags : ['systems'],
+        understanding: {
+          canExplainWithoutNotes: true,
+          canImplement: true,
+          knowsLimitations: false
+        }
+      };
+
+      state.intellectualNotes.unshift(newNote);
+      persistState();
+      renderIntellectualSection();
+      renderSnapshotMetrics();
+      renderRecentActivity();
+      knoteForm.reset();
+      showToast('Applied knowledge note archived!');
+    });
+  }
+
+  // Knowledge Tag Filters & Live Search
+  const tagFilterBar = document.getElementById('knote-tag-filter-bar');
+  if (tagFilterBar) {
+    tagFilterBar.addEventListener('click', e => {
+      const btn = e.target.closest('.knote-tag-pill');
+      if (!btn) return;
+      state.activeLogTag = btn.dataset.tag;
+      renderIntellectualSection();
+    });
+  }
+
+  const knoteSearch = document.getElementById('knote-search-input');
+  if (knoteSearch) {
+    knoteSearch.addEventListener('input', () => {
+      state.searchQueryNotes = knoteSearch.value.trim();
+      renderIntellectualSection();
+    });
+  }
+
+  // Knowledge Understanding Prompt Checkboxes
+  const notesFeed = document.getElementById('knowledge-notes-feed');
+  if (notesFeed) {
+    notesFeed.addEventListener('change', e => {
+      const checkType = e.target.dataset.check;
+      const id = e.target.dataset.id;
+      if (!checkType || !id) return;
+      const note = state.intellectualNotes.find(n => n.id === id);
+      if (!note) return;
+      if (!note.understanding) note.understanding = {};
+
+      if (checkType === 'explain') note.understanding.canExplainWithoutNotes = e.target.checked;
+      else if (checkType === 'implement') note.understanding.canImplement = e.target.checked;
+      else if (checkType === 'limitations') note.understanding.knowsLimitations = e.target.checked;
+
+      persistState();
+    });
+  }
+
+  // Roll Radar Triad
+  const shuffleRadarBtn = document.getElementById('radar-shuffle-btn');
+  if (shuffleRadarBtn) {
+    shuffleRadarBtn.addEventListener('click', () => {
+      state.activeRadarTriadIdx = (state.activeRadarTriadIdx + 1);
+      renderRadarTriad();
+      showToast('Loaded next polymath intake triad');
+    });
+  }
+
+  // Content Capture Form (X / Public Presence)
+  const contentForm = document.getElementById('content-capture-form');
+  if (contentForm) {
+    contentForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const title = document.getElementById('content-title').value.trim();
+      const category = document.getElementById('content-category').value;
+      const status = document.getElementById('content-status').value;
+      const draft = document.getElementById('content-draft').value.trim();
+      const projectId = document.getElementById('content-project').value;
+      const publishedUrl = document.getElementById('content-pub-url').value.trim();
+
+      const newContent = {
+        id: 'x-' + Date.now(),
+        title,
+        category,
+        status,
+        draft,
+        platform: 'X',
+        projectId,
+        publishedUrl,
+        metrics: {
+          impressions: 0,
+          likes: 0,
+          reposts: 0,
+          isManual: true,
+          verificationNote: 'Manually logged draft'
+        }
+      };
+
+      state.contentPipeline.unshift(newContent);
+      persistState();
+      renderXSection();
+      renderSnapshotMetrics();
+      contentForm.reset();
+      showToast('Saved to X content pipeline!');
+    });
+  }
+
+  // Content Pipeline Card Actions (Advance Stage, Copy Draft)
+  const pipelineGrid = document.getElementById('pipeline-stages-grid');
+  if (pipelineGrid) {
+    pipelineGrid.addEventListener('click', e => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      const content = state.contentPipeline.find(c => c.id === id);
+      if (!content) return;
+
+      if (btn.dataset.action === 'copy-draft') {
+        if (navigator.clipboard && content.draft) {
+          navigator.clipboard.writeText(content.draft).then(() => {
+            showToast('Draft copy copied to clipboard!');
+          });
+        }
+      } else if (btn.dataset.action === 'next-stage') {
+        const stages = ['Idea', 'Draft', 'Ready', 'Published'];
+        const currentIdx = stages.indexOf(content.status);
+        if (currentIdx < stages.length - 1) {
+          content.status = stages[currentIdx + 1];
+          if (content.status === 'Published') {
+            const impressions = prompt('Enter verified Impressions (manual entry):', '500');
+            const likes = prompt('Enter verified Likes (manual entry):', '25');
+            content.metrics = {
+              impressions: Number(impressions) || 0,
+              likes: Number(likes) || 0,
+              reposts: 0,
+              isManual: true,
+              verificationNote: 'Manually verified from X dashboard'
+            };
+          }
+          persistState();
+          renderXSection();
+          renderSnapshotMetrics();
+          showToast(`Advanced to ${content.status}!`);
+        }
+      }
+    });
+  }
+
+  // Weekly Review Auto-Generate & Submit
+  const genReviewBtn = document.getElementById('generate-review-btn');
+  if (genReviewBtn) {
+    genReviewBtn.addEventListener('click', generateWeeklyReviewDraft);
+  }
+
+  const reviewForm = document.getElementById('weekly-review-form');
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const weekStarting = document.getElementById('review-week-date').value;
+      const nextWeekOutcome = document.getElementById('review-prompt-9').value.trim();
+      const summary = document.getElementById('review-summary-text').value.trim();
+
+      const newReview = {
+        id: 'rev-' + Date.now(),
+        weekStarting,
+        answers: {
+          shippedWork: document.getElementById('review-prompt-1').value.trim(),
+          deepLearnings: document.getElementById('review-prompt-2').value.trim(),
+          flagshipProgress: document.getElementById('review-prompt-3').value.trim(),
+          physicalTraining: document.getElementById('review-prompt-4').value.trim(),
+          mostValue: document.getElementById('review-prompt-5').value.trim(),
+          wastedTime: document.getElementById('review-prompt-6').value.trim(),
+          avoided: document.getElementById('review-prompt-7').value.trim(),
+          obstacle: document.getElementById('review-prompt-8').value.trim(),
+          nextWeekOutcome,
+          stopDoing: document.getElementById('review-prompt-10').value.trim()
+        },
+        generatedSummary: summary,
+        isFinalized: true
+      };
+
+      state.weeklyReviews.unshift(newReview);
+      persistState();
+      renderWeeklyReviewSection();
+      showToast('Weekly review finalized and archived!');
+    });
+  }
+
+  // Strategic Criteria Toggle
+  const cycleCard = document.getElementById('active-cycle-container');
+  if (cycleCard) {
+    cycleCard.addEventListener('change', e => {
+      if (e.target.dataset.action === 'toggle-criteria') {
+        const id = e.target.dataset.id;
+        const cycle = state.strategicCycles[0];
+        if (!cycle) return;
+        const item = cycle.successCriteria.find(sc => sc.id === id);
+        if (item) {
+          item.completed = e.target.checked;
+          persistState();
+          showToast(item.completed ? 'Criterion achieved!' : 'Criterion unchecked');
+        }
+      }
+    });
+  }
+
+  // Settings Drawer Toggle
+  const openSettingsBtn = document.getElementById('nav-settings-btn');
+  const closeSettingsBtn = document.getElementById('close-settings-btn');
+  const settingsBackdrop = document.getElementById('settings-backdrop');
+  const saveSettingsBtn = document.getElementById('save-settings-btn');
+  const northStarInput = document.getElementById('settings-north-star');
+  const flagshipSelect = document.getElementById('settings-flagship-select');
+  const editNorthStarBtn = document.getElementById('edit-north-star-btn');
+
+  function openSettings() {
+    if (northStarInput) northStarInput.value = state.profile.northStar || initialData.profile.northStar;
+    if (flagshipSelect) flagshipSelect.value = state.settings.flagshipProjectId || 'proj-orbit';
+    if (settingsBackdrop) {
+      settingsBackdrop.style.display = 'flex';
+      settingsBackdrop.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function closeSettings() {
+    if (settingsBackdrop) {
+      settingsBackdrop.style.display = 'none';
+      settingsBackdrop.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  if (openSettingsBtn) openSettingsBtn.addEventListener('click', openSettings);
+  if (editNorthStarBtn) editNorthStarBtn.addEventListener('click', openSettings);
+  if (closeSettingsBtn) closeSettingsBtn.addEventListener('click', closeSettings);
+
+  if (saveSettingsBtn) {
+    saveSettingsBtn.addEventListener('click', () => {
+      const ns = northStarInput?.value.trim();
+      const fs = flagshipSelect?.value;
+      if (ns) {
+        state.profile.northStar = ns;
+        state.settings.northStar = ns;
+      }
+      if (fs) {
+        state.settings.flagshipProjectId = fs;
+        state.projects.forEach(p => { p.isFlagship = (p.id === fs); });
+      }
+      persistState();
+      renderCommandCenter();
+      renderProjectsSection();
+      closeSettings();
+      showToast('Settings saved successfully!');
+    });
+  }
+
+  // Export JSON & Reset Defaults
+  const exportBtn = document.getElementById('export-json-btn');
   if (exportBtn) {
     exportBtn.addEventListener('click', () => {
-      let md = `# WHAT I LEARNED TODAY — BOLD\n\n`;
-      state.dailyLogs.forEach(l => {
-        const tagLine = (l.tags || []).map(t => `#${t}`).join(' ');
-        md += `## [${l.date}] ${l.title} ${tagLine ? `(${tagLine})` : ''}\n`;
-        md += `${l.learned}\n\n---\n\n`;
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+      const dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute("href", dataStr);
+      dlAnchor.setAttribute("download", `maxxing-system-export-${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
+      showToast('System data exported as JSON!');
+    });
+  }
+
+  const resetBtn = document.getElementById('reset-defaults-btn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (confirm('Reset all tracking records back to baseline initialData? This cannot be undone.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        state = initState();
+        persistState();
+        renderAll();
+        closeSettings();
+        showToast('System restored to default baseline.');
+      }
+    });
+  }
+
+  // Keyboard accessibility: Escape to close modals
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      const backdrops = document.querySelectorAll('.modal-backdrop');
+      backdrops.forEach(b => {
+        b.style.display = 'none';
+        b.setAttribute('aria-hidden', 'true');
       });
-      const blob = new Blob([md], { type: 'text/markdown' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `what-i-learned-${new Date().toISOString().split('T')[0]}.md`;
-      a.click();
-      URL.revokeObjectURL(url);
-    });
-  }
-
-  // Live Time Display (UTC / Local)
-  function updateLiveTime() {
-    const timeEl = document.getElementById('live-time-display');
-    if (timeEl) {
-      const now = new Date();
-      timeEl.textContent = `${now.toLocaleTimeString()} LOCAL / UTC ${now.toISOString().substring(11, 19)}`;
     }
-  }
-  updateLiveTime();
-  setInterval(updateLiveTime, 1000);
-
-  // Keep cadence graphs and 31-day October timeline dynamically updated every minute
-  setInterval(() => {
-    updateHeroCadenceGraphs();
-    renderOctoberTargets();
-  }, 60000);
-}
-
-function renderCrossStitchHero() {
-  const container = document.getElementById('hero-stitch-canvas');
-  if (container) {
-    container.innerHTML = renderCrossStitchSVG('BOLD', {
-      cellSize: 15,
-      strokeWidth: 3.2,
-      color: '#ffffff',
-      letterSpacing: 2
-    });
-  }
+  });
 }
 
 // ----------------------------------------------------------------------------
-// HERO TIME CADENCE GRAPHS (CURRENT MONTH & YEAR REMAINING)
+// MASTER RENDER ORCHESTRATOR
 // ----------------------------------------------------------------------------
-
-function updateHeroCadenceGraphs() {
-  const monthFillEl = document.getElementById('hero-month-fill');
-  const monthPinEl = document.getElementById('hero-month-pin');
-  const yearFillEl = document.getElementById('hero-year-fill');
-  const yearPinEl = document.getElementById('hero-year-pin');
-  const monthDaysLeftEl = document.getElementById('hero-month-days-left');
-  const monthPctLeftEl = document.getElementById('hero-month-pct-left');
-  const yearDaysLeftEl = document.getElementById('hero-year-days-left');
-  const yearPctLeftEl = document.getElementById('hero-year-pct-left');
-  const dateStrEl = document.getElementById('cadence-date-str');
-
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
-  const date = now.getDate();
-
-  // Days in month calculation
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const monthDaysElapsed = Math.min(date, daysInMonth);
-  const monthDaysLeft = Math.max(0, daysInMonth - monthDaysElapsed);
-  const monthPctElapsed = Math.min(100, Math.max(0, Math.round((monthDaysElapsed / daysInMonth) * 100)));
-  const monthPctRemaining = Math.max(0, 100 - monthPctElapsed);
-
-  // Day of year & Days in year
-  const startOfYear = new Date(year, 0, 1);
-  const endOfYear = new Date(year, 11, 31);
-  const totalDaysInYear = Math.round((endOfYear - startOfYear) / (1000 * 60 * 60 * 24)) + 1;
-  const dayOfYear = Math.floor((now - startOfYear) / (1000 * 60 * 60 * 24)) + 1;
-  const yearDaysLeft = Math.max(0, totalDaysInYear - dayOfYear);
-  const yearPctElapsed = Math.min(100, Math.max(0, Math.round((dayOfYear / totalDaysInYear) * 100)));
-  const yearPctRemaining = Math.max(0, 100 - yearPctElapsed);
-
-  // Text metrics
-  if (monthDaysLeftEl) monthDaysLeftEl.textContent = `${monthDaysLeft}`;
-  if (monthPctLeftEl) monthPctLeftEl.textContent = `${monthPctElapsed}%`;
-  if (yearDaysLeftEl) yearDaysLeftEl.textContent = `${yearDaysLeft}`;
-  if (yearPctLeftEl) yearPctLeftEl.textContent = `${yearPctElapsed}%`;
-
-  const monthName = now.toLocaleString('en-US', { month: 'short' }).toUpperCase();
-  if (dateStrEl) {
-    dateStrEl.textContent = `${monthName} ${year} • DAY ${dayOfYear} / ${totalDaysInYear}`;
-  }
-  const monthLabelEl = document.getElementById('cadence-month-label');
-  if (monthLabelEl) {
-    monthLabelEl.textContent = `MONTH // ${monthName}`;
-  }
-  const monthEndScaleEl = document.getElementById('cadence-month-end-scale');
-  if (monthEndScaleEl) {
-    monthEndScaleEl.textContent = `${daysInMonth}`;
-  }
-
-  // Update Month Gauge
-  if (monthFillEl) {
-    monthFillEl.style.width = `${monthPctElapsed}%`;
-    if (monthFillEl.parentElement) {
-      monthFillEl.parentElement.setAttribute('aria-valuenow', monthPctElapsed);
-    }
-  }
-  if (monthPinEl) {
-    monthPinEl.style.left = `${monthPctElapsed}%`;
-  }
-
-  // Update Year Gauge
-  if (yearFillEl) {
-    yearFillEl.style.width = `${yearPctElapsed}%`;
-    if (yearFillEl.parentElement) {
-      yearFillEl.parentElement.setAttribute('aria-valuenow', yearPctElapsed);
-    }
-  }
-  if (yearPinEl) {
-    yearPinEl.style.left = `${yearPctElapsed}%`;
-  }
+function renderAll() {
+  updateTimeCadence();
+  renderCommandCenter();
+  renderProjectsSection();
+  renderPhysicalSection();
+  renderIntellectualSection();
+  renderXSection();
+  renderCareerSection();
+  renderWeeklyReviewSection();
+  renderStrategicCyclesSection();
 }
 
-// ----------------------------------------------------------------------------
-// THEME SWITCHER (DARK & LIGHT MODE)
-// ----------------------------------------------------------------------------
+// Bootstrapping
+document.addEventListener('DOMContentLoaded', () => {
+  renderAll();
+  initEventListeners();
+  setInterval(updateTimeCadence, 1000);
+});
 
-function setupThemeToggle() {
-  const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-  if (typeof window.updateThemeButton === 'function') {
-    window.updateThemeButton(currentTheme);
-  }
-}
-
-// Backwards compatibility alias
-function renderSeptemberTargets() {
-  renderOctoberTargets();
-}
-
-// ----------------------------------------------------------------------------
-// SCROLL-SPY NAVIGATION TRACKER
-// ----------------------------------------------------------------------------
-
-function setupScrollSpy() {
-  const navItems = document.querySelectorAll('.nav-strip .nav-item');
-  if (!navItems.length) return;
-
-  const sectionIds = Array.from(navItems).map(item => {
-    const href = item.getAttribute('href');
-    return href && href.startsWith('#') ? href.substring(1) : null;
-  }).filter(Boolean);
-
-  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
-  if (!sections.length) return;
-
-  let isTicking = false;
-
-  function updateActiveNav() {
-    const scrollPos = window.scrollY + 140; // buffer for sticky nav & header
-    let currentSectionId = '';
-
-    for (let i = 0; i < sections.length; i++) {
-      const section = sections[i];
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      if (scrollPos >= top && scrollPos < top + height) {
-        currentSectionId = section.id;
-        break;
-      }
-    }
-
-    // Edge case: if near bottom of page, activate last section
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 60)) {
-      currentSectionId = sections[sections.length - 1].id;
-    }
-
-    navItems.forEach(item => {
-      const href = item.getAttribute('href');
-      if (currentSectionId && href === `#${currentSectionId}`) {
-        item.classList.add('active');
-        item.setAttribute('aria-current', 'true');
-      } else {
-        item.classList.remove('active');
-        item.removeAttribute('aria-current');
-      }
-    });
-
-    isTicking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    if (!isTicking) {
-      window.requestAnimationFrame(updateActiveNav);
-      isTicking = true;
-    }
-  }, { passive: true });
-
-  window.addEventListener('resize', () => {
-    if (!isTicking) {
-      window.requestAnimationFrame(updateActiveNav);
-      isTicking = true;
-    }
-  }, { passive: true });
-
-  // Initial trigger
-  updateActiveNav();
-}
-
-// ----------------------------------------------------------------------------
-// INITIAL BOOTSTRAP
-// ----------------------------------------------------------------------------
-
-function initApp() {
-  setupThemeToggle();
-  renderCrossStitchHero();
-  updateHeroCadenceGraphs();
-  setupFolderTabs();
-  renderOctoberTargets();
-  renderFiveYearHorizon();
-  renderBucketList();
-  renderRadarSection();
-  setupRadarControls();
-  renderTagFilterBar();
-  renderDailyLogs();
-  setupEventListeners();
-  setupScrollSpy();
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
-} else {
-  initApp();
+// Run immediate render in case DOM already loaded
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  renderAll();
+  initEventListeners();
+  setInterval(updateTimeCadence, 1000);
 }

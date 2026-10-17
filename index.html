@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BOLD — Personal Website &amp; Life Map</title>
-  <meta name="description" content="Bold. CMO at Orbit. Building AI memory architectures (Lumen) and studying systems.">
+  <title>MAXXING // Personal Operating System</title>
+  <meta name="description" content="MAXXING — Personal command center for tracking evolution as a builder, entrepreneur, intellectual, and physically capable individual.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
   <script>
     (function() {
       try {
-        var saved = localStorage.getItem('bold_theme');
+        var saved = localStorage.getItem('bold_theme') || localStorage.getItem('maxxing_theme');
         var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         var theme = (saved === 'dark' || (!saved && prefersDark)) ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', theme);
@@ -38,6 +38,7 @@
       html.setAttribute('data-theme', next);
       try {
         localStorage.setItem('bold_theme', next);
+        localStorage.setItem('maxxing_theme', next);
       } catch (e) {}
       updateThemeButton(next);
     }
@@ -51,15 +52,18 @@
   <!-- SITE HEADER / IDENTITY -->
   <header class="site-header">
     <div class="header-meta-bar">
-      <div>
-        <span class="tape-badge">BOLD</span>
-        <span style="margin-left: 10px; font-weight: 600;">PERSONAL BLUEPRINT</span>
+      <div class="header-logo-group">
+        <span class="tape-badge">MAXXING</span>
+        <span class="system-subtag">PERSONAL OPERATING SYSTEM // V1.0</span>
       </div>
       <div class="header-meta-controls">
         <span id="live-time-display">--:--:--</span>
         <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle dark and light theme" title="Toggle theme">
           <span class="theme-toggle-indicator" aria-hidden="true">◐</span>
           <span class="theme-toggle-text">DARK</span>
+        </button>
+        <button id="nav-settings-btn" class="settings-trigger-btn" aria-label="Open settings and configuration" title="System Settings">
+          <span>⚙ SETTINGS</span>
         </button>
         <script>
           (function() {
@@ -71,12 +75,18 @@
     </div>
 
     <div class="header-hero">
-      <!-- Main Hero Header Row: Left (Title & Tagline), Right (Time Cadence Aside) -->
       <div class="hero-header-row">
         <div class="hero-text-intro">
-          <h1 class="hero-title">BOLD</h1>
+          <div class="hero-callsign-strip">
+            <span class="callsign-tag">CALLSIGN: BOLD</span>
+            <span class="status-live-beacon"><span class="beacon-dot"></span> 1 PRIMARY FOCUS ACTIVE</span>
+          </div>
+          <h1 class="hero-title">MAXXING</h1>
           <p class="hero-tagline">
-            CMO at Orbit &bull; Building AI memory architectures &bull; India
+            CMO at Orbit &bull; Independent AI Systems Builder &bull; Athletic Frame &bull; India
+          </p>
+          <p class="hero-philosophy-quote">
+            &ldquo;One primary growth focus. A few supporting habits. Everything else deliberately deprioritized.&rdquo;
           </p>
         </div>
 
@@ -85,20 +95,20 @@
           <div class="cadence-aside-header">
             <div class="cadence-badge-wrap">
               <span class="cadence-live-dot" aria-hidden="true"></span>
-              <span class="cadence-aside-badge">CADENCE MONITOR</span>
+              <span class="cadence-aside-badge">CYCLE MONITOR</span>
             </div>
-            <span class="cadence-aside-sub" id="cadence-date-str">OCT 2026 &bull; DAY 277 / 365</span>
+            <span class="cadence-aside-sub" id="cadence-date-str">OCT 2026 &bull; DAY 18 / 31</span>
           </div>
 
-          <!-- Channel 1: Current Month (Top) -->
+          <!-- Channel 1: Current Month -->
           <div class="cadence-channel">
             <div class="cadence-channel-header">
-              <span class="channel-label" id="cadence-month-label">MONTH // OCT</span>
-              <span class="channel-stat"><strong id="hero-month-days-left">27</strong>d left &bull; <span id="hero-month-pct-left">13%</span></span>
+              <span class="channel-label" id="cadence-month-label">CYCLE // OCT</span>
+              <span class="channel-stat"><strong id="hero-month-days-left">13</strong>d left &bull; <span id="hero-month-pct-left">58%</span></span>
             </div>
             <div class="cadence-gauge-wrap">
               <div class="cadence-gauge-track" role="progressbar" aria-label="Month progress graph">
-                <div class="cadence-gauge-fill" id="hero-month-fill"></div>
+                <div class="cadence-gauge-fill" id="hero-month-fill" style="width: 58%;"></div>
                 <div class="cadence-gauge-pin" id="hero-month-pin" aria-hidden="true"></div>
               </div>
               <div class="cadence-gauge-scale" aria-hidden="true">
@@ -110,34 +120,31 @@
             </div>
           </div>
 
-          <!-- Channel 2: Current Year (Bottom) -->
+          <!-- Channel 2: Current 90-Day Quarter -->
           <div class="cadence-channel">
             <div class="cadence-channel-header">
-              <span class="channel-label">YEAR // 2026</span>
-              <span class="channel-stat"><strong id="hero-year-days-left">88</strong>d left &bull; <span id="hero-year-pct-left">76%</span></span>
+              <span class="channel-label">HORIZON // Q4 2026</span>
+              <span class="channel-stat"><strong id="hero-year-days-left">74</strong>d left &bull; <span id="hero-year-pct-left">19%</span></span>
             </div>
             <div class="cadence-gauge-wrap">
-              <div class="cadence-gauge-track" role="progressbar" aria-label="Year progress graph">
-                <div class="cadence-gauge-fill" id="hero-year-fill"></div>
+              <div class="cadence-gauge-track" role="progressbar" aria-label="Quarter progress graph">
+                <div class="cadence-gauge-fill" id="hero-year-fill" style="width: 19%;"></div>
                 <div class="cadence-gauge-pin" id="hero-year-pin" aria-hidden="true"></div>
               </div>
               <div class="cadence-gauge-scale" aria-hidden="true">
-                <span>Q1</span>
-                <span>Q2</span>
-                <span>Q3</span>
-                <span>Q4</span>
+                <span>OCT</span>
+                <span>NOV</span>
+                <span>DEC</span>
+                <span>HARVEST</span>
               </div>
             </div>
           </div>
         </aside>
       </div>
 
-      <!-- Central Ideation & Sketchbook Collage (Inspired by Daria Stolyarova & Diego Frank) -->
+      <!-- Central Ideation & Sketchbook Collage -->
       <div class="sketchbook-collage-wrapper">
-        
-        <!-- Left Column: Identity & Tech Learning Callouts -->
         <div class="collage-col collage-col-left">
-          <!-- Top Left Annotation -->
           <div class="annotation-card note-top-left">
             <span class="handwritten-label">Bold, 23, India</span>
             <svg class="sketch-arrow" width="60" height="34" viewBox="0 0 60 34" fill="none" aria-hidden="true">
@@ -145,10 +152,8 @@
               <path d="M 42 27 L 52 28 L 50 18" stroke="#162a56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
-
-          <!-- Bottom Left Annotation -->
           <div class="annotation-card note-bottom-left">
-            <span class="handwritten-label">AI Memory Architecture (Lumen)</span>
+            <span class="handwritten-label">AI Memory (Lumen / Sheldon)</span>
             <svg class="sketch-arrow" width="60" height="34" viewBox="0 0 60 34" fill="none" aria-hidden="true">
               <path d="M 4 28 C 22 26, 38 20, 52 6" stroke="#162a56" stroke-width="2" stroke-linecap="round"/>
               <path d="M 42 7 L 52 6 L 50 16" stroke="#162a56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -156,15 +161,12 @@
           </div>
         </div>
 
-        <!-- Center Column: Framed Portrait & Punchline Annotation -->
         <div class="collage-col collage-col-center">
           <div class="central-photo-frame">
             <div class="washi-tape-top"></div>
             <img src="./assets/bold_photo_3.png" alt="Bold portrait" class="central-photo-img">
             <div class="washi-tape-bottom"></div>
           </div>
-
-          <!-- Bottom Center Annotation -->
           <div class="annotation-card note-bottom-center">
             <svg class="sketch-arrow" width="36" height="28" viewBox="0 0 36 28" fill="none" aria-hidden="true">
               <path d="M 18 25 C 20 18, 16 12, 14 5" stroke="#162a56" stroke-width="2" stroke-linecap="round"/>
@@ -174,9 +176,7 @@
           </div>
         </div>
 
-        <!-- Right Column: CMO Annotation & Sticky Note -->
         <div class="collage-col collage-col-right">
-          <!-- Top Right Annotation -->
           <div class="annotation-card note-top-right">
             <svg class="sketch-arrow" width="60" height="34" viewBox="0 0 60 34" fill="none" aria-hidden="true">
               <path d="M 56 6 C 38 8, 22 14, 8 28" stroke="#162a56" stroke-width="2" stroke-linecap="round"/>
@@ -184,612 +184,1002 @@
             </svg>
             <span class="handwritten-label">CMO @ Orbit (GTM &amp; Growth)</span>
           </div>
-
-          <!-- Authentic Sticky Note (Post-It) -->
           <div class="sticky-note">
-            <div class="sticky-note-header">Note to self</div>
+            <div class="sticky-note-header">MAXXING DOCTRINE</div>
             <div class="sticky-note-text">
-              &bull; Push Orbit to 500 users<br>
-              &bull; Ship Lumen 3-tier memory engine<br>
-              &bull; Compound daily
+              &bull; Orbit Flagship: 10 Paid Pilots<br>
+              &bull; 4x Gym + Strict Overload<br>
+              &bull; Compound Daily
             </div>
           </div>
         </div>
-
       </div>
 
-      <!-- Bio & Stats below the central collage -->
-      <div style="max-width: 680px; width: 100%;">
-        <ul class="hero-bio" style="margin: 0 auto 16px;">
-          <li>Building at the intersection of AI, products, growth, and technology.</li>
-          <li>Currently CMO at Orbit: user acquisition, GTM, and merchant journey positioning.</li>
-          <li>Exploring AI memory architectures, second-brain systems, and knowledge retrieval (Lumen).</li>
-          <li>Learning by building, experimenting, and documenting the raw process.</li>
-        </ul>
-
+      <!-- Bio & Stats -->
+      <div style="max-width: 720px; width: 100%;">
         <div class="quick-stats-strip" style="justify-content: center;">
           <div class="stat-item"><span>AGE:</span> <strong>23</strong></div>
           <div class="stat-item"><span>LOCATION:</span> <strong>India</strong></div>
           <div class="stat-item"><span>CURRENT ROLE:</span> <strong>CMO at Orbit</strong></div>
-          <div class="stat-item"><span>STATUS:</span> <strong>Active Build Mode</strong></div>
+          <div class="stat-item"><span>PRIMARY FOCUS:</span> <strong id="quick-stat-flagship">Orbit ($10k MRR)</strong></div>
         </div>
       </div>
     </div>
 
-    <!-- Navigation Strip (Sticky Architectural Strip with Scroll-Spy) -->
-    <nav class="nav-strip" id="site-nav" aria-label="Quick jumps">
-      <a href="#section-polymath" class="nav-item" data-section="section-polymath"><span class="nav-code">[CORE]</span> Drive</a>
-      <a href="#section-doing" class="nav-item" data-section="section-doing"><span class="nav-code">[01]</span> Focus</a>
-      <a href="#section-carry" class="nav-item" data-section="section-carry"><span class="nav-code">[02]</span> Carry</a>
-      <a href="#section-projects" class="nav-item" data-section="section-projects"><span class="nav-code">[03]</span> Projects</a>
-      <a href="#section-targets" class="nav-item" data-section="section-targets"><span class="nav-code">[04]</span> Targets</a>
-      <a href="#section-horizon" class="nav-item" data-section="section-horizon"><span class="nav-code">[05]</span> Horizon</a>
-      <a href="#section-bucket" class="nav-item" data-section="section-bucket"><span class="nav-code">[06]</span> Q4 Goals</a>
-      <a href="#section-radar" class="nav-item" data-section="section-radar"><span class="nav-code">[07]</span> Radar</a>
-      <a href="#section-daily" class="nav-item" data-section="section-daily"><span class="nav-code">[08]</span> Daily</a>
-      <a href="#section-inspirations" class="nav-item" data-section="section-inspirations"><span class="nav-code">[09]</span> Archive</a>
+    <!-- Sticky Architectural Navigation Strip -->
+    <nav class="nav-strip" id="site-nav" aria-label="Primary sections navigation">
+      <a href="#section-command" class="nav-item active" data-section="section-command"><span class="nav-code">[01]</span> COMMAND</a>
+      <a href="#section-projects" class="nav-item" data-section="section-projects"><span class="nav-code">[02]</span> PROJECTS</a>
+      <a href="#section-physical" class="nav-item" data-section="section-physical"><span class="nav-code">[03]</span> PHYSICAL</a>
+      <a href="#section-intellect" class="nav-item" data-section="section-intellect"><span class="nav-code">[04]</span> INTELLECT</a>
+      <a href="#section-x" class="nav-item" data-section="section-x"><span class="nav-code">[05]</span> X / GTM</a>
+      <a href="#section-career" class="nav-item" data-section="section-career"><span class="nav-code">[06]</span> CAREER</a>
+      <a href="#section-review" class="nav-item" data-section="section-review"><span class="nav-code">[07]</span> REVIEW</a>
+      <a href="#section-cycles" class="nav-item" data-section="section-cycles"><span class="nav-code">[08]</span> CYCLES</a>
     </nav>
   </header>
 
-  <!-- POLYMATH DEFINITION BLOCK -->
-  <section id="section-polymath">
-    <div class="polymath-quote-card">
-      <div class="polymath-term">
-        A polymath —
-      </div>
-      <p class="polymath-def">
-        (Greek: <em>πολυμαθής</em>, polymathes, "having learned much"; Latin: <em>homo universalis</em>, "universal human") 
-        is an individual whose knowledge spans a substantial number of subjects, known to draw on complex bodies of knowledge to solve specific problems.
-      </p>
-    </div>
-  </section>
-
-  <!-- 01: WHAT I AM CURRENTLY DOING -->
-  <section id="section-doing">
+  <!-- =========================================================================
+       SECTION 01: COMMAND CENTER / HOME
+       ========================================================================= -->
+  <section id="section-command" class="maxxing-section">
     <div class="editorial-heading">
-      <span>What I Am Currently Doing</span>
+      <span>Command Center &bull; Direction &amp; Next Actions</span>
       <span class="heading-num">[01]</span>
     </div>
 
-    <!-- Tactile Folder Tabs -->
-    <div class="folders-container">
-      <div class="folder-tabs-header" role="tablist">
-        <button class="folder-tab active" data-tab="tab-orbit">Orbit // 500 Users &amp; YC</button>
-        <button class="folder-tab" data-tab="tab-software">AgentTrace // YC W27</button>
-        <button class="folder-tab" data-tab="tab-agency">Reddit &amp; ₹40K Income</button>
-        <button class="folder-tab" data-tab="tab-self">Daily Run, Flow &amp; Script</button>
+    <!-- North Star Banner -->
+    <div class="north-star-card">
+      <div class="north-star-top">
+        <div class="north-star-badge-wrap">
+          <span class="star-icon">★</span>
+          <span class="north-star-label">NORTH STAR</span>
+        </div>
+        <button id="edit-north-star-btn" class="mini-tool-btn" title="Edit North Star statement">Edit</button>
+      </div>
+      <p class="north-star-statement" id="display-north-star">
+        Building enduring independence through technical competence, AI software leverage, rigorous thinking, and uncompromising physical capability.
+      </p>
+      <div class="north-star-footer">
+        <span class="cycle-horizon-tag">CURRENT 90-DAY OBJECTIVE:</span>
+        <span class="cycle-horizon-text" id="display-cycle-objective">Scale Orbit toward $10,000 MRR, maintain consistent athletic training, and master core AI agent &amp; memory architectures.</span>
+      </div>
+    </div>
+
+    <!-- Command Center Split: Current Focus vs Active Priorities -->
+    <div class="command-split-grid">
+      <!-- Left: Current Focus Card -->
+      <div class="command-focus-card" id="command-focus-card">
+        <div class="command-focus-header">
+          <span class="focus-badge-pill">CURRENT FLAGSHIP FOCUS</span>
+          <span class="focus-phase-badge" id="focus-phase-display">BUILDING &amp; VALIDATION</span>
+        </div>
+        <h2 class="focus-project-name" id="focus-project-title">Orbit</h2>
+        <p class="focus-headline" id="focus-headline-text">
+          Scale Orbit from $0 to $10,000 MRR via high-signal merchant acquisition loops.
+        </p>
+
+        <div class="focus-rationale-box">
+          <span class="rationale-label">WHY IT MATTERS:</span>
+          <p class="rationale-text" id="focus-rationale-text">
+            Direct customer validation and revenue generation establish financial runway and prove market demand before scaling.
+          </p>
+        </div>
+
+        <div class="focus-action-banner">
+          <div class="focus-action-tag">NEXT CONCRETE ACTION:</div>
+          <div class="focus-action-body" id="focus-next-action-text">
+            Execute cold video audit teardowns for 20 high-volume Shopify stores.
+          </div>
+        </div>
+
+        <div class="focus-meta-strip">
+          <div class="focus-meta-item">
+            <span>NEXT MILESTONE:</span>
+            <strong id="focus-next-milestone">10 paid pilot merchants ($500+ MRR)</strong>
+          </div>
+          <div class="focus-meta-item">
+            <span>DELIVERY EVIDENCE:</span>
+            <span class="evidence-status-pill verified" id="focus-evidence-pill">VERIFIED PROOF</span>
+          </div>
+        </div>
       </div>
 
-      <div class="folder-content">
-        <!-- Tab 1: Orbit -->
-        <div class="folder-pane active" id="tab-orbit">
-          <h3 class="folder-details-lead">Orbit marketing sprint &bull; 500+ users, 30+ paid users, 2 agency deployments &amp; YC W27</h3>
-          <p class="folder-text">
-            Executing structured, high-signal marketing for Orbit. Scaling to 500+ registered users, converting 30+ active paid customers, onboarding 2 marketing/tech agencies using Orbit as their primary AI engine, and submitting Orbit into the Y Combinator W27 batch.
-          </p>
-          <div class="protocol-strip">
-            <span class="protocol-label">ORBIT OCT TARGET</span>
-            <span>500+ Users &rarr; 30+ Paid Subscribers &rarr; 2 Agency AI Stacks &rarr; YC W27 Submission</span>
-          </div>
+      <!-- Right: Active vs Supporting Priorities -->
+      <div class="command-priorities-card">
+        <div class="priorities-header">
+          <span class="priorities-label">RESOURCE ALLOCATION</span>
+          <span class="priorities-sub">Primary vs. Supporting</span>
         </div>
 
-        <!-- Tab 2: AgentTrace & YC W27 -->
-        <div class="folder-pane" id="tab-software">
-          <h3 class="folder-details-lead">AgentTrace launch sprint &bull; 300+ X followers, 150+ waitlist &amp; YC W27 submission</h3>
-          <p class="folder-text">
-            Full marketing push for AgentTrace: releasing live interactive agent trace replays and architecture teardowns, growing newly launched X (Twitter) profile from 0 to 300+ high-signal followers, scaling developer waitlist from 0 to 150+ engineers, and submitting both Orbit and AgentTrace to YC W27.
-          </p>
-          <div class="protocol-strip">
-            <span class="protocol-label">AGENTTRACE LAUNCH</span>
-            <span>Full Marketing &rarr; 0 to 300+ X Followers &rarr; 0 to 150+ Waitlist &rarr; YC W27 Batch</span>
+        <!-- Primary Focus Container -->
+        <div class="priority-block primary-block">
+          <div class="priority-tag-row">
+            <span class="priority-badge primary">PRIMARY GROWTH FOCUS (70% ENERGY)</span>
+            <span class="priority-name">Project Maxxing</span>
           </div>
+          <p class="priority-desc">
+            All peak creative morning blocks reserved strictly for Orbit GTM, merchant outbound, and checkout order recovery loops.
+          </p>
         </div>
 
-        <!-- Tab 3: Reddit Distribution & Personal Cashflow -->
-        <div class="folder-pane" id="tab-agency">
-          <h3 class="folder-details-lead">Distribution &amp; Cashflow &bull; Crack Reddit code (200+ karma) &amp; earn ₹40,000 personal net</h3>
-          <p class="folder-text">
-            Cracking high-signal developer distribution on Reddit: scaling from 0 to 200+ karma through authentic technical breakdowns and engineering insights (zero promo spam). Translating distribution and focused client execution into generating ₹40,000 personal profit for October runway.
-          </p>
-          <div class="protocol-strip">
-            <span class="protocol-label">DISTRIBUTION &amp; CASHFLOW</span>
-            <span>Crack Reddit Code &rarr; 0 to 200+ Karma &rarr; Value Dissections &rarr; ₹40,000 Personal Income</span>
+        <!-- Supporting Commitments -->
+        <div class="supporting-commitments-wrap">
+          <div class="priority-block supporting-block">
+            <div class="priority-tag-row">
+              <span class="priority-badge supporting">SUPPORTING HABIT (20% ENERGY)</span>
+              <span class="priority-name">Physical Maxxing</span>
+            </div>
+            <p class="priority-desc">
+              Athletic body recomposition: 4x/week lifting with progressive overload + daily running &amp; mobility. Non-negotiable energy anchor.
+            </p>
           </div>
-        </div>
 
-        <!-- Tab 4: Self-Mastery & Creative Craft -->
-        <div class="folder-pane" id="tab-self">
-          <h3 class="folder-details-lead">Personal evolution &bull; Daily run &amp; stretch, flow state, movie script &amp; 3 books</h3>
-          <p class="folder-text">
-            Stepping into the elevated version of self: daily non-negotiable running and mobility stretching, entering effortless deep flow states during execution blocks, adopting a disciplined new schedule, advancing the feature movie script through daily writing sprints, reading 3 impactful books, and absorbing broader interdisciplinary knowledge.
-          </p>
-          <div class="protocol-strip">
-            <span class="protocol-label">DAILY CADENCE</span>
-            <span>Daily Run &amp; Stretch &rarr; Deep Flow States &rarr; New Schedule &rarr; Movie Script &amp; 3 Books</span>
+          <div class="priority-block supporting-block">
+            <div class="priority-tag-row">
+              <span class="priority-badge integrated">INTEGRATED LEARNING (10% ENERGY)</span>
+              <span class="priority-name">Intellectual Maxxing</span>
+            </div>
+            <p class="priority-desc">
+              Applied knowledge only: study vector indexing, systems internals, and sales psychology directly through project execution.
+            </p>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Today's Next Actions (Must-Do vs Optional) -->
+    <div class="actions-section-card">
+      <div class="actions-header-row">
+        <div>
+          <span class="actions-section-title">TODAY'S NEXT ACTIONS</span>
+          <span class="actions-section-subtitle">Prioritized execution list &bull; Must-Do vs Optional</span>
+        </div>
+        <div class="actions-controls-group">
+          <div class="actions-filter-tabs" role="tablist">
+            <button class="action-tab-btn active" data-filter="all">ALL</button>
+            <button class="action-tab-btn" data-filter="must-do">MUST-DO ONLY</button>
+            <button class="action-tab-btn" data-filter="completed">COMPLETED</button>
+          </div>
+          <button id="add-action-btn" class="action-add-btn">+ ADD ACTION</button>
+        </div>
+      </div>
+
+      <!-- Action Items Container -->
+      <div class="actions-list" id="actions-list-container">
+        <!-- Injected dynamically by JS -->
+      </div>
+    </div>
+
+    <!-- Progress Snapshot (Authentic Metrics Only) -->
+    <div class="snapshot-section-card">
+      <div class="snapshot-header">
+        <span class="snapshot-title">PROGRESS SNAPSHOT</span>
+        <span class="snapshot-note">[DERIVED FROM REAL LOGGED RECORDS &bull; ZERO FABRICATED DATA]</span>
+      </div>
+      <div class="snapshot-metrics-grid" id="snapshot-metrics-grid">
+        <div class="snapshot-metric-card">
+          <span class="metric-label">FLAGSHIP MILESTONE</span>
+          <strong class="metric-val" id="metric-flagship-progress">68%</strong>
+          <span class="metric-sub" id="metric-flagship-sub">Orbit: Scaling Outbound</span>
+        </div>
+        <div class="snapshot-metric-card">
+          <span class="metric-label">TRAINING CONSISTENCY</span>
+          <strong class="metric-val" id="metric-workout-count">4 / 4</strong>
+          <span class="metric-sub">Workouts Logged This Week</span>
+        </div>
+        <div class="snapshot-metric-card">
+          <span class="metric-label">APPLIED KNOWLEDGE</span>
+          <strong class="metric-val" id="metric-notes-count">6</strong>
+          <span class="metric-sub">Project-Linked Notes</span>
+        </div>
+        <div class="snapshot-metric-card">
+          <span class="metric-label">X CONTENT PIPELINE</span>
+          <strong class="metric-val" id="metric-content-count">1 READY &bull; 1 PUB</strong>
+          <span class="metric-sub">Verified Technical Insights</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity Stream -->
+    <div class="recent-activity-card">
+      <div class="activity-header">
+        <span class="activity-title">RECENT OPERATIONAL ACTIVITY</span>
+        <span class="activity-count" id="activity-count-badge">LATEST EVENTS</span>
+      </div>
+      <div class="activity-stream" id="recent-activity-stream">
+        <!-- Injected dynamically by JS -->
       </div>
     </div>
   </section>
 
-  <!-- FIELD ARTIFACT 01: EARLY HUSTLE & INTENSE VELOCITY (YOUNG ELON MUSK) -->
-  <aside class="field-dispatch-card" aria-label="Field Artifact: Early Hustle and Extreme Velocity">
-    <div class="field-dispatch-inner">
-      <div class="field-dispatch-media">
-        <div class="field-photo-frame">
-          <img src="./assets/young_elon_musk_hacker.png" alt="Young Elon Musk smiling at his computer workstation during early startup days" class="field-dispatch-img" loading="lazy">
-          <div class="field-photo-tag">REF · 01</div>
-        </div>
-      </div>
-      <div class="field-dispatch-content">
-        <div class="field-dispatch-meta">
-          <span class="field-beacon" aria-hidden="true"></span>
-          <span class="field-label">FIELD ARTIFACT · 01</span>
-          <span class="field-category">FOUNDER CLOCK-RATE</span>
-        </div>
-        <h3 class="field-dispatch-title">Extreme Velocity &amp; The First-Principles Code Sprint</h3>
-        <blockquote class="field-dispatch-quote">
-          &ldquo;When starting out, we just rented a small office and slept on the couch. We had one computer, so the website was up during the day and I was coding at night, 7 days a week, all the time. Work super hard. Put in 80 to 100 hour weeks every week. This improves the odds of success.&rdquo;
-        </blockquote>
-        <p class="field-dispatch-takeaway">
-          <strong>CORE SYNTHESIS:</strong> Deconstruct problems down to fundamental truths and build with uncompromising clock-rate. Raw vertical output in your twenties creates compounding equity that capital alone cannot purchase.
-        </p>
-        <div class="field-dispatch-foot">
-          <span class="field-foot-ref">Archival Dispatch: Elon Musk (Zip2 / X.com Era)</span>
-          <span class="field-foot-date">OCTOBER SPRINT CADENCE</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 02: EVERYDAY CARRY // INSIDE MY BRAIN -->
-  <section id="section-carry">
+  <!-- =========================================================================
+       SECTION 02: PROJECT MAXXING
+       ========================================================================= -->
+  <section id="section-projects" class="maxxing-section">
     <div class="editorial-heading">
-      <span>Everyday Carry &bull; Inside My World</span>
+      <span>Project Maxxing &bull; The Flagship &amp; Backlog</span>
       <span class="heading-num">[02]</span>
     </div>
 
-    <div class="flatlay-container">
-      <div class="flatlay-photo-frame">
-        <img src="./assets/bold_everyday_carry.jpg" alt="Everyday Carry Flat-lay for Bold" class="flatlay-img">
-      </div>
-      <p class="flatlay-caption">
-        Graph paper flat-lay: Orbit mint &bull; AI Memory Architecture notebook &bull; The Polymath &bull; Wireframe glasses &bull; BOLD tape label &bull; Japanese cards &bull; Retro Mac icon
-      </p>
+    <!-- Flagship Spotlight Card -->
+    <div class="flagship-hero-card" id="flagship-hero-container">
+      <!-- Populated dynamically by JS -->
     </div>
+
+    <!-- Milestone Retrospectives History -->
+    <div class="retros-container" id="retros-container">
+      <div class="retros-header">
+        <span class="retros-title">MILESTONE RETROSPECTIVES &bull; PRACTICAL EXPERIENCE ACCUMULATOR</span>
+        <span class="retros-sub">What worked &bull; What failed &bull; Lessons learned</span>
+      </div>
+      <div class="retros-feed" id="retros-feed">
+        <!-- Injected dynamically by JS -->
+      </div>
+    </div>
+
+    <!-- Secondary Project Backlog -->
+    <div class="backlog-section-wrap">
+      <div class="backlog-header">
+        <div>
+          <span class="backlog-title">SECONDARY PROJECT BACKLOG</span>
+          <p class="backlog-sub">Preserved without competing for active attention. Can be promoted to Flagship at any time.</p>
+        </div>
+        <button id="add-project-btn" class="mini-tool-btn">+ New Backlog Project</button>
+      </div>
+
+      <div class="backlog-grid" id="secondary-backlog-grid">
+        <!-- Injected dynamically by JS: AgentTrace, Lumen, Jarvis -->
+      </div>
+    </div>
+
+    <!-- FIELD ARTIFACT 01: ELON MUSK (PRESERVED) -->
+    <aside class="field-dispatch-card" aria-label="Field Artifact: Early Hustle and Extreme Velocity">
+      <div class="field-dispatch-inner">
+        <div class="field-dispatch-media">
+          <div class="field-photo-frame">
+            <img src="./assets/young_elon_musk_hacker.png" alt="Young Elon Musk smiling at computer workstation" class="field-dispatch-img" loading="lazy">
+            <div class="field-photo-tag">REF &bull; 01</div>
+          </div>
+        </div>
+        <div class="field-dispatch-content">
+          <div class="field-dispatch-meta">
+            <span class="field-beacon" aria-hidden="true"></span>
+            <span class="field-label">FIELD ARTIFACT &bull; 01</span>
+            <span class="field-category">FOUNDER CLOCK-RATE</span>
+          </div>
+          <h3 class="field-dispatch-title">Extreme Velocity &amp; The First-Principles Code Sprint</h3>
+          <blockquote class="field-dispatch-quote">
+            &ldquo;When starting out, we just rented a small office and slept on the couch. We had one computer, so the website was up during the day and I was coding at night, 7 days a week, all the time. Work super hard. This improves the odds of success.&rdquo;
+          </blockquote>
+          <p class="field-dispatch-takeaway">
+            <strong>CORE SYNTHESIS:</strong> Deconstruct problems down to fundamental truths and build with uncompromising clock-rate. Raw vertical output in your twenties creates compounding equity.
+          </p>
+          <div class="field-dispatch-foot">
+            <span class="field-foot-ref">Archival Dispatch: Elon Musk (Zip2 / X.com Era)</span>
+            <span class="field-foot-date">DEEP EXECUTION CADENCE</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- FIELD ARTIFACT 02: LAB BENCH (PRESERVED) -->
+    <aside class="field-dispatch-card reverse" aria-label="Field Artifact: Hard Tech Laboratory Workbench">
+      <div class="field-dispatch-inner">
+        <div class="field-dispatch-media">
+          <div class="field-photo-frame">
+            <img src="./assets/lab_oscilloscope_workbench.jpg" alt="Electronic engineering workbench with stacked oscilloscopes" class="field-dispatch-img" loading="lazy">
+            <div class="field-photo-tag">REF &bull; 02</div>
+          </div>
+        </div>
+        <div class="field-dispatch-content">
+          <div class="field-dispatch-meta">
+            <span class="field-beacon" aria-hidden="true"></span>
+            <span class="field-label">FIELD ARTIFACT &bull; 02</span>
+            <span class="field-category">PHYSICAL INSTRUMENTATION</span>
+          </div>
+          <h3 class="field-dispatch-title">Signal Synthesis &amp; Bare-Metal Verification</h3>
+          <blockquote class="field-dispatch-quote">
+            &ldquo;Real engineering is proven in the telemetry of physical waveforms, spectrum analyzers, and rigorous bench testing. Software wrappers come and go, but hardware and systems rooted in physics endure forever.&rdquo;
+          </blockquote>
+          <p class="field-dispatch-takeaway">
+            <strong>LAB MANIFEST:</strong> The engineering foundation behind Orbit, AgentTrace, and Lumen: ruthless diagnostic rigor, clean signal transmission, and zero tolerance for vanity metrics.
+          </p>
+          <div class="field-dispatch-foot">
+            <span class="field-foot-ref">Hardware Laboratory Bench: RF Oscilloscope &amp; Spectrum Setup</span>
+            <span class="field-foot-date">DEEP WORK BENCHMARK</span>
+          </div>
+        </div>
+      </div>
+    </aside>
   </section>
 
-  <!-- 03: CURRENT PROJECTS -->
-  <section id="section-projects">
+  <!-- =========================================================================
+       SECTION 03: PHYSICAL MAXXING
+       ========================================================================= -->
+  <section id="section-physical" class="maxxing-section">
     <div class="editorial-heading">
-      <span>Current Projects</span>
+      <span>Physical Maxxing &bull; Athletic Frame &amp; Strength Architecture</span>
       <span class="heading-num">[03]</span>
     </div>
 
-    <div class="projects-list">
-      <!-- Project: Orbit -->
-      <article class="project-row">
-        <div class="project-row-top">
-          <h3 class="project-title">Orbit</h3>
-          <span class="project-role-badge">CMO &bull; Marketing &amp; Growth &bull; Scaling</span>
+    <!-- Physical Profile Header -->
+    <div class="physical-profile-card">
+      <div class="profile-top-strip">
+        <div>
+          <span class="profile-tag-pill">ATHLETIC ARCHITECTURE</span>
+          <h3 class="profile-main-title">Lean, Muscular &amp; Functionally Agile Physique</h3>
         </div>
-        <div class="project-tagline">E-commerce growth &amp; marketing engine ($0 &rarr; $10,000 MRR)</div>
-        <p class="project-desc">
-          Leading GTM, founder-to-founder acquisition loops, and merchant positioning. Conducting direct brand outreach across 250+ D2C stores, optimizing checkout drop-off, and scaling monthly recurring revenue toward $10,000 MRR.
-        </p>
-        <div class="project-tags-strip">
-          <span class="tag-pill">GTM Strategy</span>
-          <span class="tag-pill">Founder Outreach</span>
-          <span class="tag-pill">Revenue Loops</span>
-          <span class="tag-pill">Checkout CRO</span>
-        </div>
-        <div class="project-metrics-note">
-          <span>Target: $0 &rarr; $10,000 MRR &bull; 5% Conversion Goal</span>
-        </div>
-        <div class="retro-progress-box">
-          <div class="retro-progress-bar">
-            <div class="retro-progress-fill" style="width: 68%;"></div>
-          </div>
-          <span style="font-size: 0.8rem; font-weight: 700;">68%</span>
-        </div>
-      </article>
+        <button id="edit-physical-profile-btn" class="mini-tool-btn">Update Profile</button>
+      </div>
 
-      <!-- Project: AgentTrace -->
-      <article class="project-row">
-        <div class="project-row-top">
-          <h3 class="project-title">AgentTrace</h3>
-          <span class="project-role-badge">Founder &bull; YC Application Sprint</span>
+      <div class="profile-stats-grid">
+        <div class="pstat-item">
+          <span class="pstat-label">BODY WEIGHT</span>
+          <strong class="pstat-value" id="pstat-current-weight">71.4 kg</strong>
+          <span class="pstat-note">Current weigh-in</span>
         </div>
-        <div class="project-tagline">Autonomous AI agent observability &amp; execution tracing pipeline</div>
-        <p class="project-desc">
-          Building production observability and debugging for autonomous multi-agent reasoning chains. Packaging telemetry benchmarks, live interactive demos, and submitting to Y Combinator (YC).
-        </p>
-        <div class="project-tags-strip">
-          <span class="tag-pill">Agent Tracing</span>
-          <span class="tag-pill">Execution Graphs</span>
-          <span class="tag-pill">YC Candidate</span>
-          <span class="tag-pill">Observability</span>
+        <div class="pstat-item">
+          <span class="pstat-label">GOAL WEIGHT</span>
+          <strong class="pstat-value" id="pstat-goal-weight">75.0 kg</strong>
+          <span class="pstat-note">Target Lean Athletic Frame</span>
         </div>
-        <div class="project-metrics-note">
-          <span>Milestone: Complete Engine &amp; Submit Application to YC</span>
+        <div class="pstat-item">
+          <span class="pstat-label">HEIGHT</span>
+          <strong class="pstat-value" id="pstat-height">178 cm</strong>
+          <span class="pstat-note">Standing Height</span>
         </div>
-        <div class="retro-progress-box">
-          <div class="retro-progress-bar">
-            <div class="retro-progress-fill" style="width: 75%;"></div>
-          </div>
-          <span style="font-size: 0.8rem; font-weight: 700;">75%</span>
+        <div class="pstat-item">
+          <span class="pstat-label">BODY FAT TARGET</span>
+          <strong class="pstat-value" id="pstat-bf">12–14%</strong>
+          <span class="pstat-note">Visible Abs &amp; Vascularity</span>
         </div>
-      </article>
+      </div>
 
-      <!-- Project: Lumen -->
-      <article class="project-row">
-        <div class="project-row-top">
-          <h3 class="project-title">Lumen / Sheldon</h3>
-          <span class="project-role-badge">Creator &amp; Architect &bull; Prototype Phase</span>
-        </div>
-        <div class="project-tagline">Hierarchical AI memory engine and second-brain architecture</div>
-        <p class="project-desc">
-          A personal second-brain system structured across raw episodic logs, canonical entity memory, and abstract generalized concepts with sub-18ms HNSW vector recall on 100k vectors.
-        </p>
-        <div class="project-tags-strip">
-          <span class="tag-pill">AI Memory</span>
-          <span class="tag-pill">pgvector</span>
-          <span class="tag-pill">PostgreSQL</span>
-          <span class="tag-pill">TypeScript SDK</span>
-        </div>
-        <div class="project-metrics-note">
-          <span>Benchmarked: 18ms Latency &bull; 99.2% Recall on 100k Embeddings</span>
-        </div>
-        <div class="retro-progress-box">
-          <div class="retro-progress-bar">
-            <div class="retro-progress-fill" style="width: 60%;"></div>
-          </div>
-          <span style="font-size: 0.8rem; font-weight: 700;">60%</span>
-        </div>
-      </article>
+      <p class="physical-philosophy-note">
+        <strong>DIRECTIVE:</strong> Prioritize functional power-to-weight ratio, shoulder width, chest density, and cardiovascular stamina. Avoid excessive bulk or bloated aesthetics. No punitive streaks or shame language.
+      </p>
+    </div>
 
-      <!-- Project: Jarvis -->
-      <article class="project-row">
-        <div class="project-row-top">
-          <h3 class="project-title">Jarvis</h3>
-          <span class="project-role-badge">Architect &bull; Autonomous Agent</span>
+    <!-- Interactive Workout Logger & History Grid -->
+    <div class="workout-layout-grid">
+      <!-- Logger Form -->
+      <div class="workout-logger-card">
+        <div class="logger-card-header">
+          <span class="logger-title">LOG WORKOUT SESSION</span>
+          <span class="logger-sub">Record exercises, progressive overload &amp; sets</span>
         </div>
-        <div class="project-tagline">Personal autonomous executive assistant agent</div>
-        <p class="project-desc">
-          Autonomous task orchestration agent automating daily technical research digests, calendar scheduling, outreach pipelines, and continuous background monitoring with local-first tooling.
-        </p>
-        <div class="project-tags-strip">
-          <span class="tag-pill">Autonomous Workflows</span>
-          <span class="tag-pill">Task Orchestration</span>
-          <span class="tag-pill">Local LLM Tools</span>
-        </div>
-        <div class="project-metrics-note">
-          <span>Status: Autonomous Daily Digests &amp; Workflow Automations</span>
-        </div>
-        <div class="retro-progress-box">
-          <div class="retro-progress-bar">
-            <div class="retro-progress-fill" style="width: 45%;"></div>
+
+        <form id="workout-form" class="workout-form">
+          <div class="form-row">
+            <div class="form-field flex-1">
+              <label for="workout-date">DATE:</label>
+              <input type="date" id="workout-date" required>
+            </div>
+            <div class="form-field flex-2">
+              <label for="workout-type">SESSION TYPE:</label>
+              <select id="workout-type" required>
+                <option value="Upper Body & Chest Hypertrophy">Upper Body &amp; Chest Hypertrophy</option>
+                <option value="Pull & Posterior Chain">Pull &amp; Posterior Chain</option>
+                <option value="Legs & Core Stability">Legs &amp; Core Stability</option>
+                <option value="Cardio & Full-Body Mobility">Cardio &amp; Full-Body Mobility</option>
+                <option value="Push Strength">Push Strength (Chest / Shoulders / Triceps)</option>
+                <option value="Custom Protocol">Custom Session Protocol</option>
+              </select>
+            </div>
           </div>
-          <span style="font-size: 0.8rem; font-weight: 700;">45%</span>
+
+          <!-- Dynamic Exercise Table / Builder -->
+          <div class="exercises-builder-wrap">
+            <label class="builder-label">EXERCISES PERFORMED:</label>
+            <div class="exercise-rows-container" id="exercise-rows-container">
+              <div class="exercise-row">
+                <input type="text" class="ex-name-input" placeholder="Exercise name (e.g. Incline DB Press)" required>
+                <input type="number" class="ex-sets-input" placeholder="Sets" min="1" max="10" value="4" required>
+                <input type="text" class="ex-reps-input" placeholder="Reps (e.g. 10, 10, 8)" value="10, 10, 8, 8" required>
+                <input type="text" class="ex-weight-input" placeholder="Weight (e.g. 26 kg)" value="26 kg" required>
+                <button type="button" class="remove-row-btn" title="Remove exercise">&times;</button>
+              </div>
+            </div>
+            <button type="button" id="add-exercise-row-btn" class="add-row-btn">+ Add Another Exercise</button>
+          </div>
+
+          <div class="form-field">
+            <label for="workout-notes">SESSION OBSERVATIONS &amp; RPE:</label>
+            <textarea id="workout-notes" rows="2" placeholder="Form cues, progressive overload notes, fatigue state..."></textarea>
+          </div>
+
+          <div class="form-actions-bar">
+            <label class="checkbox-label">
+              <input type="checkbox" id="workout-completed" checked>
+              <span>Mark Session as Completed</span>
+            </label>
+            <button type="submit" class="submit-workout-btn">Record Workout</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Supporting Habits & Trends Card -->
+      <div class="habits-trends-card">
+        <div class="habits-header">
+          <span class="habits-title">SUPPORTING HABITS (OPTIONAL)</span>
+          <span class="habits-sub">Lightweight tracking &bull; Zero guilt</span>
         </div>
-      </article>
+
+        <div class="habits-pill-grid">
+          <div class="habit-item">
+            <span class="habit-name">SLEEP</span>
+            <strong class="habit-val" id="habit-sleep-val">7.5h / 8.0h</strong>
+            <span class="habit-status ok">Optimal Rest</span>
+          </div>
+          <div class="habit-item">
+            <span class="habit-name">PROTEIN</span>
+            <strong class="habit-val" id="habit-protein-val">140g Target</strong>
+            <span class="habit-status ok">Target Met</span>
+          </div>
+          <div class="habit-item">
+            <span class="habit-name">RECOVERY</span>
+            <strong class="habit-val" id="habit-recovery-val">High</strong>
+            <span class="habit-status ok">CNS Ready</span>
+          </div>
+          <div class="habit-item">
+            <span class="habit-name">DAILY STEPS</span>
+            <strong class="habit-val" id="habit-steps-val">8,500 Avg</strong>
+            <span class="habit-status ok">Active Base</span>
+          </div>
+        </div>
+
+        <!-- Training Consistency Gauge -->
+        <div class="training-consistency-box">
+          <div class="consistency-top">
+            <span class="consistency-label">WEEKLY TRAINING FREQUENCY</span>
+            <span class="consistency-stat"><strong>4 SESSIONS</strong> LOGGED THIS WEEK</span>
+          </div>
+          <div class="consistency-bars-row" id="consistency-bars-row">
+            <div class="cbar completed" title="Session 1: Completed">M</div>
+            <div class="cbar completed" title="Session 2: Completed">T</div>
+            <div class="cbar rest" title="Rest & Active Recovery">W</div>
+            <div class="cbar completed" title="Session 3: Completed">T</div>
+            <div class="cbar completed" title="Session 4: Completed">F</div>
+            <div class="cbar rest" title="Rest & Active Recovery">S</div>
+            <div class="cbar rest" title="Rest">S</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Workout History Feed -->
+    <div class="workout-history-wrap">
+      <div class="history-header">
+        <span class="history-title">VERIFIED TRAINING LOG HISTORY</span>
+        <span class="history-sub" id="workout-history-count">Showing verified sessions</span>
+      </div>
+      <div class="workout-history-list" id="workout-history-list">
+        <!-- Injected dynamically by JS -->
+      </div>
     </div>
   </section>
 
-  <!-- FIELD ARTIFACT 02: HARD TECH & SIGNAL BENCH (LAB WORKBENCH) -->
-  <aside class="field-dispatch-card reverse" aria-label="Field Artifact: Hard Tech Laboratory Workbench">
-    <div class="field-dispatch-inner">
-      <div class="field-dispatch-media">
-        <div class="field-photo-frame">
-          <img src="./assets/lab_oscilloscope_workbench.jpg" alt="Electronic engineering workbench with stacked oscilloscopes, spectrum analyzers, vintage mechanical keyboard, and hardware components" class="field-dispatch-img" loading="lazy">
-          <div class="field-photo-tag">REF · 02</div>
-        </div>
-      </div>
-      <div class="field-dispatch-content">
-        <div class="field-dispatch-meta">
-          <span class="field-beacon" aria-hidden="true"></span>
-          <span class="field-label">FIELD ARTIFACT · 02</span>
-          <span class="field-category">PHYSICAL INSTRUMENTATION</span>
-        </div>
-        <h3 class="field-dispatch-title">Signal Synthesis &amp; Bare-Metal Verification</h3>
-        <blockquote class="field-dispatch-quote">
-          &ldquo;Real engineering is proven in the telemetry of physical waveforms, spectrum analyzers, and rigorous bench testing. Software wrappers come and go, but hardware and systems rooted in physics endure forever.&rdquo;
-        </blockquote>
-        <p class="field-dispatch-takeaway">
-          <strong>LAB MANIFEST:</strong> The engineering foundation behind Orbit, AgentTrace, and Lumen: ruthless diagnostic rigor, clean signal transmission, and zero tolerance for superficial vanity metrics.
-        </p>
-        <div class="field-dispatch-foot">
-          <span class="field-foot-ref">Hardware Laboratory Bench: RF Oscilloscope &amp; Spectrum Setup</span>
-          <span class="field-foot-date">DEEP WORK BENCHMARK</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 04: TARGETS (OCTOBER 2026) -->
-  <section id="section-targets">
+  <!-- =========================================================================
+       SECTION 04: INTELLECTUAL MAXXING
+       ========================================================================= -->
+  <section id="section-intellect" class="maxxing-section">
     <div class="editorial-heading">
-      <span>October 2026 Targets</span>
+      <span>Intellectual Maxxing &bull; Applied Knowledge &amp; Second-Brain</span>
       <span class="heading-num">[04]</span>
     </div>
 
-    <!-- Architect's Diagnostic Ruler -->
-    <div class="targets-meta-strip">
-      <div class="targets-meta-col">
-        <span class="targets-meta-label">CYCLE COUNTDOWN</span>
-        <span class="targets-meta-val"><strong id="oct-days-left">27</strong> DAYS REMAINING</span>
+    <div class="intellect-manifesto-banner">
+      <span class="manifesto-pill">LEARNING THROUGH BUILDING</span>
+      <p class="manifesto-text">
+        Usable knowledge over consumption gamification. Intellectual intake primarily serves the active flagship project. Every note must connect concept, personal explanation, practical code example, and verified limitations.
+      </p>
+    </div>
+
+    <!-- Applied Knowledge Note Composer -->
+    <div class="knowledge-composer-card">
+      <div class="composer-card-header">
+        <span class="kcomposer-title">CAPTURE APPLIED KNOWLEDGE NOTE</span>
+        <span class="kcomposer-sub">Explain concepts in your own words &bull; Link to project</span>
       </div>
-      <div class="targets-meta-divider" aria-hidden="true"></div>
-      <div class="targets-meta-col">
-        <span class="targets-meta-label">OCTOBER ELAPSED (31-DAY SPRINT)</span>
-        <span class="targets-meta-val"><strong id="oct-month-elapsed">13%</strong> [DAY 04 / 31]</span>
-      </div>
-      <div class="targets-meta-divider" aria-hidden="true"></div>
-      <div class="targets-meta-col">
-        <span class="targets-meta-label">AGGREGATE PACE</span>
-        <span class="targets-meta-val"><strong id="oct-avg-progress">0%</strong> OVERALL</span>
-      </div>
-    </div>
 
-    <!-- 31-Day October Sprint Ribbon -->
-    <div class="october-days-ribbon" id="october-days-ribbon" aria-label="31-day October sprint timeline">
-      <!-- Populated dynamically by JavaScript -->
-    </div>
-
-    <!-- Filing Folder Deck -->
-    <div class="folder-deck-instruction">
-      <span class="deck-hint-pill">[FILING SYSTEM // CLICK ANY TAB TO PULL OUT DOSSIER]</span>
-    </div>
-    <div class="folder-deck" id="targets-list">
-      <!-- Populated dynamically by JavaScript -->
-    </div>
-  </section>
-
-  <!-- FIELD ARTIFACT 03: THE DEATH-GROUND DOCTRINE (ROBERT GREENE 33 STRATEGIES) -->
-  <aside class="field-dispatch-card" aria-label="Field Artifact: The Death-Ground Strategy">
-    <div class="field-dispatch-inner">
-      <div class="field-dispatch-media">
-        <div class="field-photo-frame">
-          <img src="./assets/death_ground_strategy.png" alt="Book page excerpt: Strategy 04 Create a Sense of Urgency and Desperation - The Death-Ground Strategy" class="field-dispatch-img" loading="lazy">
-          <div class="field-photo-tag">REF · 03</div>
-        </div>
-      </div>
-      <div class="field-dispatch-content">
-        <div class="field-dispatch-meta">
-          <span class="field-beacon" aria-hidden="true"></span>
-          <span class="field-label">FIELD ARTIFACT · 03</span>
-          <span class="field-category">STRATEGIC DOCTRINE</span>
-        </div>
-        <h3 class="field-dispatch-title">Strategy 04: The Death-Ground Doctrine</h3>
-        <blockquote class="field-dispatch-quote">
-          &ldquo;You are your own worst enemy. You waste precious time dreaming of the future instead of engaging in the present. Since nothing seems urgent to you, you are only half involved in what you do. The only way to change is through action and outside pressure. Place yourself on 'death ground,' where your back is against the wall and you have to fight like hell to get out alive.&rdquo;
-        </blockquote>
-        <p class="field-dispatch-takeaway">
-          <strong>OCTOBER SPRINT RESOLUTION:</strong> The psychological engine behind the 31-day October dossiers: zero safety net, high stakes, burning the ships, and converting every single day into non-negotiable forward momentum.
-        </p>
-        <div class="field-dispatch-foot">
-          <span class="field-foot-ref">Source: Robert Greene &bull; The 33 Strategies of War (Chapter 04)</span>
-          <span class="field-foot-date">URGENCY COMPRESSION</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 05: 5-YEAR STRATEGIC HORIZON -->
-  <section id="section-horizon">
-    <div class="editorial-heading">
-      <span>5-Year Strategic Horizon (2026 &ndash; 2031)</span>
-      <span class="heading-num">[05]</span>
-    </div>
-
-    <div class="horizon-section" id="horizon-list">
-      <!-- Populated by JavaScript -->
-    </div>
-  </section>
-
-  <!-- FIELD ARTIFACT 04: BE DELUSIONAL (CAT AND TIGER MIRROR) -->
-  <aside class="field-dispatch-card reverse" aria-label="Field Artifact: Be Delusional Manifesto">
-    <div class="field-dispatch-inner">
-      <div class="field-dispatch-media">
-        <div class="field-photo-frame">
-          <img src="./assets/be_delusional_tiger.png" alt="Illustration poster: Be Delusional. A cat looking into a mirror seeing a majestic tiger" class="field-dispatch-img" loading="lazy">
-          <div class="field-photo-tag">REF · 04</div>
-        </div>
-      </div>
-      <div class="field-dispatch-content">
-        <div class="field-dispatch-meta">
-          <span class="field-beacon" aria-hidden="true"></span>
-          <span class="field-label">FIELD ARTIFACT · 04</span>
-          <span class="field-category">RADICAL CONVICTION</span>
-        </div>
-        <h3 class="field-dispatch-title">Be Delusional: Audacity Over Consensus</h3>
-        <blockquote class="field-dispatch-quote">
-          &ldquo;There is a certain delusional quality that all successful people have to have. You have to believe that something different can happen, even before the physical world has caught up with your imagination.&rdquo;
-        </blockquote>
-        <p class="field-dispatch-takeaway">
-          <strong>THE 5-YEAR HORIZON ANCHOR:</strong> The conviction underpinning the 2026&ndash;2031 vision ($15k/mo to $1M/mo, feature films, $20M liquid cash). Reasonable people adapt to the world; unreasonable people persist in adapting the world to themselves.
-        </p>
-        <div class="field-dispatch-foot">
-          <span class="field-foot-ref">Manifesto: The Inner Tiger &bull; Vision Calibration</span>
-          <span class="field-foot-date">5-YEAR HORIZON DOCTRINE</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 06: LAST 3 MONTHS ROADMAP // OCT • NOV • DEC 2026 -->
-  <section id="section-bucket" class="q4-roadmap-section">
-    <div class="editorial-heading">
-      <span>Last 3 Months Goals &bull; Oct &bull; Nov &bull; Dec 2026</span>
-      <span class="heading-num">[06]</span>
-    </div>
-
-    <!-- Quarter Execution Ribbon -->
-    <div class="q4-ribbon-card">
-      <div class="q4-ribbon-left">
-        <span class="q4-badge-tag">[Q4 2026 MASTER BOARD]</span>
-        <span class="q4-subtext">90-Day Execution Compression &bull; Final Horizon for 2026</span>
-      </div>
-      <div class="q4-ribbon-months">
-        <span class="q4-month-pill active">OCTOBER: ACTIVE</span>
-        <span class="q4-month-sep">&rarr;</span>
-        <span class="q4-month-pill">NOVEMBER: ACCELERATE</span>
-        <span class="q4-month-sep">&rarr;</span>
-        <span class="q4-month-pill">DECEMBER: HARVEST</span>
-      </div>
-    </div>
-
-    <div class="bucket-summary">
-      <span>All deliverables &amp; personal milestones for Q4 2026. Click any goal to toggle completion.</span>
-      <strong id="bucket-count-badge">[0/15 COMPLETED &bull; 0%]</strong>
-    </div>
-
-    <div class="bucket-items-list" id="bucket-list-container">
-      <!-- Populated by JavaScript -->
-    </div>
-  </section>
-
-  <!-- FIELD ARTIFACT 05: VENTURE ARCHITECTURE (SAM ALTMAN / READ WRITE OWN) -->
-  <aside class="field-dispatch-card" aria-label="Field Artifact: Venture Architecture and Next-Gen Software">
-    <div class="field-dispatch-inner">
-      <div class="field-dispatch-media">
-        <div class="field-photo-frame">
-          <img src="./assets/sam_altman_read_write_own.jpg" alt="Sam Altman alongside Chris Dixon book Read Write Own: Building the Next Era of the Internet" class="field-dispatch-img" loading="lazy">
-          <div class="field-photo-tag">REF · 05</div>
-        </div>
-      </div>
-      <div class="field-dispatch-content">
-        <div class="field-dispatch-meta">
-          <span class="field-beacon" aria-hidden="true"></span>
-          <span class="field-label">FIELD ARTIFACT · 05</span>
-          <span class="field-category">VENTURE SCALE &amp; GTM</span>
-        </div>
-        <h3 class="field-dispatch-title">Architecting the Next Era of Software</h3>
-        <blockquote class="field-dispatch-quote">
-          &ldquo;Read this book to understand a compelling vision of where the internet should go and how to get there.&rdquo; &mdash; Sam Altman
-        </blockquote>
-        <p class="field-dispatch-takeaway">
-          <strong>GTM &amp; NETWORK MOATS:</strong> Connecting the Q4 sprint with the YC W27 batch and the Intellectual Intake Radar. Legendary software companies build ownership-first architecture and compounding network loops.
-        </p>
-        <div class="field-dispatch-foot">
-          <span class="field-foot-ref">Reference: Chris Dixon &bull; Read Write Own (Endorsed by Sam Altman)</span>
-          <span class="field-foot-date">YC W27 SCALE TRACK</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 07: INTELLECTUAL INTAKE RADAR -->
-  <section id="section-radar" class="radar-section-wrap">
-    <div class="editorial-heading">
-      <span>Intellectual Intake Radar &bull; The Polymath Matrix</span>
-      <span class="heading-num">[07]</span>
-    </div>
-
-    <!-- Radar Controller Banner -->
-    <div class="radar-controller-card">
-      <div class="radar-controller-top">
-        <div class="radar-badge-group">
-          <span class="radar-live-beacon" aria-hidden="true"></span>
-          <span class="radar-tag">Curated Intake Radar</span>
-          <span class="radar-archetype-pill">Polymath Matrix</span>
-        </div>
-        <div class="radar-actions-strip">
-          <div class="radar-month-selector-wrap">
-            <label for="radar-month-select" class="radar-select-label">CYCLE:</label>
-            <select id="radar-month-select" class="radar-month-select" aria-label="Select month for knowledge radar">
-              <option value="2026-10" selected>OCTOBER 2026 (ACTIVE SPRINT)</option>
-              <option value="2026-11">NOVEMBER 2026 (ACCELERATION)</option>
-              <option value="2026-12">DECEMBER 2026 (HARVEST & SCALE)</option>
+      <form id="knowledge-note-form" class="kcomposer-form">
+        <div class="form-row">
+          <div class="form-field flex-2">
+            <label for="knote-concept">CONCEPT / TITLE:</label>
+            <input type="text" id="knote-concept" placeholder="e.g. Idempotency Ledgers in High-Concurrency Webhooks" required>
+          </div>
+          <div class="form-field flex-1">
+            <label for="knote-topic">TOPIC:</label>
+            <input type="text" id="knote-topic" placeholder="e.g. Distributed Systems" required>
+          </div>
+          <div class="form-field flex-1">
+            <label for="knote-project">LINKED PROJECT:</label>
+            <select id="knote-project">
+              <option value="proj-orbit">Orbit (Flagship)</option>
+              <option value="proj-agenttrace">AgentTrace</option>
+              <option value="proj-lumen">Lumen / Sheldon</option>
+              <option value="proj-jarvis">Jarvis</option>
+              <option value="general">General Architecture</option>
             </select>
           </div>
-          <button id="radar-shuffle-btn" class="radar-btn radar-btn-shuffle" type="button" title="Shuffle high-signal triad across polymath tracks">
-            <span>🎲 Roll Next Triad</span>
-          </button>
-          <button id="radar-ai-toggle-btn" class="radar-btn radar-btn-ai" type="button" title="Configure or generate live AI recommendation brief">
-            <span>⚡ AI Generator</span>
-          </button>
         </div>
-      </div>
 
-      <!-- Month Focus Summary Subtitle -->
-      <div class="radar-focus-subtitle" id="radar-focus-subtitle">
-        <!-- Injected dynamically by JS -->
-      </div>
-
-      <!-- Polymath Archetype Filter Track Pills -->
-      <div class="radar-track-bar" id="radar-track-bar" role="tablist" aria-label="Filter intake recommendations by polymath archetype">
-        <!-- Injected dynamically by JS -->
-      </div>
-    </div>
-
-    <!-- Optional AI Key Drawer / Modal (Collapsible) -->
-    <div class="radar-ai-drawer" id="radar-ai-drawer" style="display: none;">
-      <div class="radar-ai-inner">
-        <div class="radar-ai-header">
-          <span class="radar-ai-title">⚡ AUTONOMOUS INTEL ENGINE (GOOGLE GEMINI API)</span>
-          <button id="radar-ai-close-btn" class="radar-ai-close" type="button" aria-label="Close AI settings">&times;</button>
+        <div class="form-field">
+          <label for="knote-explanation">EXPLANATION IN YOUR OWN WORDS (WHY IT MATTERS):</label>
+          <textarea id="knote-explanation" rows="3" placeholder="Explain the core mechanism as if teaching it. Strip away jargon..." required></textarea>
         </div>
-        <p class="radar-ai-desc">
-          Connect your free Google Gemini API key to autonomously research and generate bespoke Video + Substack + Book recommendations for any upcoming month or custom prompt based on your exact goals. Key is stored locally in your browser.
-        </p>
-        <div class="radar-ai-form-row">
-          <input type="password" id="radar-api-key-input" class="radar-ai-input" placeholder="Paste Gemini API Key (e.g. AIzaSy...)" autocomplete="off">
-          <button id="radar-ai-save-btn" class="radar-ai-action-btn" type="button">Save Key</button>
-          <button id="radar-ai-generate-btn" class="radar-ai-action-btn primary" type="button">Generate Live Brief</button>
-        </div>
-        <div id="radar-ai-status" class="radar-ai-status-msg"></div>
-      </div>
-    </div>
 
-    <!-- Active Triad Container (3-Column Grid) -->
-    <div class="radar-triad-grid" id="radar-triad-container" aria-live="polite">
-      <!-- Injected dynamically by JS: Video Intel, Substack Essay, Book Chapter -->
-    </div>
-  </section>
-
-  <!-- 08: WHAT I LEARNED TODAY (ULTRA-MINIMAL LOG) -->
-  <section id="section-daily" class="daily-section-wrap">
-    <div class="editorial-heading">
-      <span>What I Learned Today</span>
-      <span class="heading-num">[08]</span>
-    </div>
-
-    <!-- Ultra-Minimal Quick Composer -->
-    <div class="minimal-composer">
-      <form id="daily-log-form">
-        <input type="text" id="log-title-input" class="composer-title-input" placeholder="Title or core takeaway..." required>
-        <textarea id="log-text-input" class="composer-body-input" placeholder="What did you learn today? Notes, test results, or shift in thinking..." required></textarea>
-        
-        <div class="composer-bottom-bar">
-          <div class="composer-tags-wrapper">
-            <span class="composer-hash">#</span>
-            <input type="text" id="log-tags-input" class="composer-tags-input" placeholder="tags (e.g. ai, memory, gtm)">
+        <div class="form-row">
+          <div class="form-field flex-1">
+            <label for="knote-example">PRACTICAL IMPLEMENTATION EXAMPLE:</label>
+            <textarea id="knote-example" rows="2" placeholder="Where did you apply it? Code command, API pattern, or test result..."></textarea>
           </div>
-
-          <div class="composer-actions">
-            <button type="button" id="export-logs-btn" class="composer-export-btn" title="Export all logs as Markdown">Export .md</button>
-            <button type="submit" class="composer-submit-btn">Save</button>
+          <div class="form-field flex-1">
+            <label for="knote-questions">OPEN QUESTIONS &amp; LIMITATIONS:</label>
+            <textarea id="knote-questions" rows="2" placeholder="When does this fail? What questions remain unsolved?"></textarea>
           </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field flex-1">
+            <label for="knote-references">REFERENCES / CITATIONS:</label>
+            <input type="text" id="knote-references" placeholder="e.g. Malkov HNSW paper, Stripe API Docs">
+          </div>
+          <div class="form-field flex-1">
+            <label for="knote-tags">TAGS (COMMA SEPARATED):</label>
+            <input type="text" id="knote-tags" placeholder="e.g. ai, memory, systems, pgvector">
+          </div>
+        </div>
+
+        <div class="kcomposer-footer">
+          <div class="understanding-checks-preview">
+            <span>SELF-CHECK PROMPTS ATTACHED AUTOMATICALLY</span>
+          </div>
+          <button type="submit" class="submit-knote-btn">Save to Knowledge Library</button>
         </div>
       </form>
     </div>
 
-    <!-- Quiet Minimal Tag Filter Line -->
-    <div class="minimal-tag-filter" id="tag-filter-bar" role="tablist" aria-label="Filter entries by tag">
-      <!-- Populated dynamically: Filter: All · #ai · #gtm · #systems -->
+    <!-- Searchable Knowledge Library -->
+    <div class="knowledge-library-card">
+      <div class="klibrary-top-bar">
+        <div class="klibrary-title-group">
+          <span class="klibrary-title">SEARCHABLE KNOWLEDGE LIBRARY</span>
+          <span class="klibrary-count" id="klibrary-count-badge">6 Notes Archived</span>
+        </div>
+        <div class="klibrary-search-wrap">
+          <input type="text" id="knote-search-input" placeholder="Search concept, explanation, or tag..." aria-label="Search notes">
+        </div>
+      </div>
+
+      <!-- Tag Filter Bar -->
+      <div class="knote-tag-filter-bar" id="knote-tag-filter-bar" role="tablist">
+        <!-- Injected dynamically by JS: ALL, #ai, #memory, #systems, #gtm, etc. -->
+      </div>
+
+      <!-- Notes Feed -->
+      <div class="knowledge-notes-feed" id="knowledge-notes-feed">
+        <!-- Injected dynamically by JS -->
+      </div>
     </div>
 
-    <!-- Minimal Log Feed -->
-    <div class="minimal-log-feed" id="log-feed" role="feed" aria-label="Archived learning logs">
-      <!-- Populated by JavaScript -->
+    <!-- Intake Radar / The Polymath Matrix (Preserved as curated intake reference) -->
+    <div class="radar-section-wrap" style="margin-top: 40px;">
+      <div class="editorial-heading" style="margin-top: 0;">
+        <span>Intellectual Intake Radar &bull; The Polymath Curriculum</span>
+        <span class="heading-num">[REF]</span>
+      </div>
+      <div class="radar-controller-card">
+        <div class="radar-controller-top">
+          <div class="radar-badge-group">
+            <span class="radar-live-beacon" aria-hidden="true"></span>
+            <span class="radar-tag">Curated Intake Triad</span>
+            <span class="radar-archetype-pill">Polymath Matrix</span>
+          </div>
+          <div class="radar-actions-strip">
+            <button id="radar-shuffle-btn" class="radar-btn radar-btn-shuffle" type="button">
+              <span>🎲 Roll Next Triad</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="radar-triad-grid" id="radar-triad-container" aria-live="polite">
+        <!-- Injected dynamically by JS -->
+      </div>
     </div>
   </section>
 
-  <!-- 09: INSPIRATIONS & VISUAL ARCHIVE -->
-  <section id="section-inspirations">
+  <!-- =========================================================================
+       SECTION 05: X / PUBLIC PRESENCE
+       ========================================================================= -->
+  <section id="section-x" class="maxxing-section">
     <div class="editorial-heading">
-      <span>Visual Archive &bull; Aesthetic References</span>
+      <span>X &amp; Public Presence &bull; Building in Public</span>
+      <span class="heading-num">[05]</span>
+    </div>
+
+    <div class="x-positioning-card">
+      <div class="x-positioning-top">
+        <span class="x-badge">POSITIONING MANIFESTO</span>
+        <span class="x-handle">@whatboldoceanisdoing</span>
+      </div>
+      <p class="x-positioning-text">
+        <strong>BUILDER IN PROGRESS:</strong> Documenting the raw engineering, AI memory systems, and B2B growth experiments in public. No fake guru postures or inflated founder claims. Credibility comes from verifiable demos, architecture breakdowns, and transparent metrics.
+      </p>
+    </div>
+
+    <!-- Quick Content Capture Form -->
+    <div class="content-capture-card">
+      <div class="capture-header">
+        <span class="capture-title">QUICK CAPTURE CONTENT RECORD</span>
+        <span class="capture-sub">Idea &rarr; Draft &rarr; Ready &rarr; Published</span>
+      </div>
+
+      <form id="content-capture-form" class="content-form">
+        <div class="form-row">
+          <div class="form-field flex-2">
+            <label for="content-title">WORKING TITLE / HOOK:</label>
+            <input type="text" id="content-title" placeholder="e.g. Why 14-Tab Static Dashboards Are Dying (Conversational BI)" required>
+          </div>
+          <div class="form-field flex-1">
+            <label for="content-category">CATEGORY:</label>
+            <select id="content-category">
+              <option value="Building in Public">Building in Public</option>
+              <option value="Ideas & Insights">Ideas &amp; Insights</option>
+              <option value="Personal Journey">Personal Journey</option>
+            </select>
+          </div>
+          <div class="form-field flex-1">
+            <label for="content-status">STAGE:</label>
+            <select id="content-status">
+              <option value="Idea">Idea</option>
+              <option value="Draft" selected>Draft</option>
+              <option value="Ready">Ready to Post</option>
+              <option value="Published">Published</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="content-draft">POST / THREAD DRAFT COPY:</label>
+          <textarea id="content-draft" rows="4" placeholder="Write draft text or outline..." required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field flex-2">
+            <label for="content-project">RELATED PROJECT:</label>
+            <select id="content-project">
+              <option value="proj-orbit">Orbit (Flagship)</option>
+              <option value="proj-agenttrace">AgentTrace</option>
+              <option value="proj-lumen">Lumen / Sheldon</option>
+              <option value="proj-jarvis">Jarvis</option>
+              <option value="general">Personal Operating System</option>
+            </select>
+          </div>
+          <div class="form-field flex-2">
+            <label for="content-pub-url">PUBLISHED URL (OPTIONAL):</label>
+            <input type="url" id="content-pub-url" placeholder="https://x.com/username/status/...">
+          </div>
+        </div>
+
+        <div class="capture-actions-bar">
+          <span class="capture-metric-notice">[MANUAL METRICS ONLY &bull; NO SPOOFED APIS]</span>
+          <button type="submit" class="submit-content-btn">Save to Content Pipeline</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Content Pipeline Kanban / Table -->
+    <div class="pipeline-section-card">
+      <div class="pipeline-header">
+        <span class="pipeline-title">CONTENT PIPELINE WORKFLOW</span>
+        <span class="pipeline-sub">Drag or toggle stages: Idea &rarr; Draft &rarr; Ready &rarr; Published</span>
+      </div>
+
+      <div class="pipeline-stages-grid" id="pipeline-stages-grid">
+        <!-- Injected dynamically by JS: Columns for Idea, Draft, Ready, Published -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 06: CAREER & INCOME
+       ========================================================================= -->
+  <section id="section-career" class="maxxing-section">
+    <div class="editorial-heading">
+      <span>Career &amp; Income &bull; Commercial Independence</span>
+      <span class="heading-num">[06]</span>
+    </div>
+
+    <!-- Role & Responsibilities Card -->
+    <div class="career-overview-card">
+      <div class="career-top-strip">
+        <div>
+          <span class="career-role-badge">ACTIVE PRIMARY ROLE</span>
+          <h3 class="career-title" id="career-role-title">CMO &amp; Growth Lead at Orbit</h3>
+        </div>
+        <span class="security-privacy-pill">CONFIDENTIAL INTERNAL DATA SEPARATED</span>
+      </div>
+
+      <div class="career-responsibilities-list">
+        <span class="resp-header">CORE RESPONSIBILITIES:</span>
+        <ul id="career-responsibilities-ul">
+          <li>Leading outbound GTM strategy and direct founder acquisition loops.</li>
+          <li>Optimizing merchant checkout drop-off and conversion rate architecture.</li>
+          <li>Partnering with marketing/tech agencies to deploy Orbit as their AI automation stack.</li>
+          <li>Packaging traction deck and product metrics for YC W27 application.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Skills to Develop Matrix -->
+    <div class="skills-section-card">
+      <div class="skills-header">
+        <span class="skills-title">STRATEGIC SKILLS ACQUISITION MATRIX</span>
+        <span class="skills-sub">Deliberate competencies for software independence</span>
+      </div>
+      <div class="skills-grid" id="skills-matrix-grid">
+        <!-- Injected dynamically by JS: DevOps, AI Internals, B2B Sales, TypeScript -->
+      </div>
+    </div>
+
+    <!-- Income Experiments & Personal Runway Ledger -->
+    <div class="income-experiments-card">
+      <div class="income-header">
+        <div>
+          <span class="income-title">INDEPENDENT INCOME EXPERIMENTS &amp; RUNWAY</span>
+          <p class="income-sub">Milestones toward personal runway and hardware upgrade fund. (Targets, not guaranteed income).</p>
+        </div>
+        <div class="ledger-pill">
+          <span>OCTOBER RUNWAY TARGET:</span>
+          <strong>₹40,000 INR</strong>
+        </div>
+      </div>
+
+      <div class="experiments-table-wrap">
+        <table class="experiments-table">
+          <thead>
+            <tr>
+              <th>EXPERIMENT</th>
+              <th>STATUS</th>
+              <th>TARGET INCOME</th>
+              <th>CURRENT METRIC</th>
+              <th>STRATEGIC NOTES</th>
+            </tr>
+          </thead>
+          <tbody id="income-experiments-tbody">
+            <!-- Injected dynamically by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 07: WEEKLY REVIEW
+       ========================================================================= -->
+  <section id="section-review" class="maxxing-section">
+    <div class="editorial-heading">
+      <span>Weekly Review &bull; 10-Minute Reflection Engine</span>
+      <span class="heading-num">[07]</span>
+    </div>
+
+    <div class="review-manifesto-card">
+      <div class="review-top-bar">
+        <span class="review-clock-tag">10–15 MINUTE STRUCTURED CALIBRATION</span>
+        <button id="generate-review-btn" class="generate-review-btn">⚡ Auto-Generate Review Draft from Activity</button>
+      </div>
+      <p class="review-intro-text">
+        Honest reflection over productivity theater. Answer the 10 core questions to assess real forward velocity, eliminate friction, and designate the single outcome for the coming week.
+      </p>
+    </div>
+
+    <!-- Interactive 10-Question Review Form -->
+    <div class="review-form-card">
+      <form id="weekly-review-form">
+        <div class="form-row">
+          <div class="form-field flex-1">
+            <label for="review-week-date">WEEK COMMENCING:</label>
+            <input type="date" id="review-week-date" required>
+          </div>
+          <div class="form-field flex-2">
+            <label for="review-prompt-9">#1 SINGLE MOST IMPORTANT OUTCOME FOR NEXT WEEK:</label>
+            <input type="text" id="review-prompt-9" placeholder="The single non-negotiable outcome that matters most..." required>
+          </div>
+        </div>
+
+        <div class="prompts-grid">
+          <div class="prompt-field">
+            <label for="review-prompt-1">1. WHAT MEANINGFUL WORK DID I SHIP?</label>
+            <textarea id="review-prompt-1" rows="2" placeholder="Working code, delivered audits, published benchmarks..." required></textarea>
+          </div>
+          <div class="prompt-field">
+            <label for="review-prompt-2">2. WHAT DID I LEARN DEEPLY?</label>
+            <textarea id="review-prompt-2" rows="2" placeholder="Root principles, mental models, or systems insight..." required></textarea>
+          </div>
+          <div class="prompt-field">
+            <label for="review-prompt-3">3. WHAT PROGRESS DID I MAKE ON MY FLAGSHIP?</label>
+            <textarea id="review-prompt-3" rows="2" placeholder="Orbit merchant conversions, pilot feedback, or sales loops..." required></textarea>
+          </div>
+          <div class="prompt-field">
+            <label for="review-prompt-4">4. DID I MAINTAIN MY PHYSICAL TRAINING?</label>
+            <textarea id="review-prompt-4" rows="2" placeholder="Gym workouts completed, progressive overload, recovery..." required></textarea>
+          </div>
+          <div class="prompt-field">
+            <label for="review-prompt-5">5. WHAT GENERATED THE MOST VALUE?</label>
+            <textarea id="review-prompt-5" rows="2" placeholder="Highest leverage action taken this week..." required></textarea>
+          </div>
+          <div class="prompt-field">
+            <label for="review-prompt-6">6. WHAT WASTED TIME OR ATTENTION?</label>
+            <textarea id="review-prompt-6" rows="2" placeholder="Distractions, unvetted side pursuits, or minor details..." required></textarea>
+          </div>
+          <div class="prompt-field">
+            <label for="review-prompt-7">7. WHAT DID I AVOID OR POSTPONE?</label>
+            <textarea id="review-prompt-7" rows="2" placeholder="Uncomfortable tasks, cold calls, or hard bugs..." required></textarea>
+          </div>
+          <div class="prompt-field">
+            <label for="review-prompt-8">8. WHAT OBSTACLE NEEDS SOLVING?</label>
+            <textarea id="review-prompt-8" rows="2" placeholder="Bottleneck blocking flagship velocity..." required></textarea>
+          </div>
+          <div class="prompt-field" style="grid-column: 1 / -1;">
+            <label for="review-prompt-10">10. WHAT SHOULD I DELIBERATELY STOP DOING?</label>
+            <textarea id="review-prompt-10" rows="2" placeholder="Habits, unnecessary tasks, or reactive checks to eliminate..." required></textarea>
+          </div>
+        </div>
+
+        <div class="form-field" style="margin-top: 18px;">
+          <label for="review-summary-text">EDITABLE SYNTHESIS SUMMARY:</label>
+          <textarea id="review-summary-text" rows="3" placeholder="High-signal paragraph summarizing the week's trajectory..." required></textarea>
+        </div>
+
+        <div class="review-actions-bar">
+          <button type="submit" class="save-review-btn">Save &amp; Finalize Weekly Review</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Past Reviews Archive -->
+    <div class="past-reviews-card">
+      <div class="reviews-archive-header">
+        <span class="reviews-archive-title">PAST WEEKLY REVIEWS ARCHIVE</span>
+        <span class="reviews-archive-sub" id="reviews-count-badge">1 Review Archived</span>
+      </div>
+      <div class="past-reviews-list" id="past-reviews-list">
+        <!-- Injected dynamically by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 08: STRATEGIC CYCLES
+       ========================================================================= -->
+  <section id="section-cycles" class="maxxing-section">
+    <div class="editorial-heading">
+      <span>Strategic Cycles &bull; 90-Day Execution Horizon</span>
+      <span class="heading-num">[08]</span>
+    </div>
+
+    <!-- Active Cycle Card -->
+    <div class="cycle-master-card" id="active-cycle-container">
+      <!-- Injected dynamically by JS: Q4 2026 cycle details, Primary Outcome, Supporting Outcomes -->
+    </div>
+
+    <!-- Target vs Activity vs Output vs Outcome Hierarchy Diagram -->
+    <div class="hierarchy-card">
+      <div class="hierarchy-header">
+        <span class="hierarchy-title">THE STRATEGIC HIERARCHY: TARGET &rarr; ACTIVITY &rarr; OUTPUT &rarr; OUTCOME</span>
+        <p class="hierarchy-sub">Strict conceptual separation used throughout MAXXING to ensure efforts produce measurable business results.</p>
+      </div>
+
+      <div class="hierarchy-steps-grid">
+        <div class="hstep-card">
+          <div class="hstep-tag">01 // TARGET</div>
+          <h4 class="hstep-title">The Strategic Objective</h4>
+          <p class="hstep-desc">Validate customer demand &amp; achieve commercial PMF for Orbit.</p>
+        </div>
+        <div class="hstep-arrow" aria-hidden="true">&rarr;</div>
+
+        <div class="hstep-card">
+          <div class="hstep-tag">02 // ACTIVITY</div>
+          <h4 class="hstep-title">The Daily Input</h4>
+          <p class="hstep-desc">Record &amp; send personalized Loom video audits to qualified Shopify founders.</p>
+        </div>
+        <div class="hstep-arrow" aria-hidden="true">&rarr;</div>
+
+        <div class="hstep-card">
+          <div class="hstep-tag">03 // OUTPUT</div>
+          <h4 class="hstep-title">The Deliverable</h4>
+          <p class="hstep-desc">50 delivered teardowns, 20 pilot store integrations on store checkout.</p>
+        </div>
+        <div class="hstep-arrow" aria-hidden="true">&rarr;</div>
+
+        <div class="hstep-card hstep-card-final">
+          <div class="hstep-tag">04 // OUTCOME</div>
+          <h4 class="hstep-title">The Economic Result</h4>
+          <p class="hstep-desc">Convert 10+ paid recurring merchants generating $10,000 MRR.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIELD ARTIFACT 03: DEATH-GROUND STRATEGY (PRESERVED) -->
+    <aside class="field-dispatch-card" aria-label="Field Artifact: The Death-Ground Strategy">
+      <div class="field-dispatch-inner">
+        <div class="field-dispatch-media">
+          <div class="field-photo-frame">
+            <img src="./assets/death_ground_strategy.png" alt="Strategy 04 Death-Ground Strategy excerpt" class="field-dispatch-img" loading="lazy">
+            <div class="field-photo-tag">REF &bull; 03</div>
+          </div>
+        </div>
+        <div class="field-dispatch-content">
+          <div class="field-dispatch-meta">
+            <span class="field-beacon" aria-hidden="true"></span>
+            <span class="field-label">FIELD ARTIFACT &bull; 03</span>
+            <span class="field-category">STRATEGIC DOCTRINE</span>
+          </div>
+          <h3 class="field-dispatch-title">Strategy 04: The Death-Ground Doctrine</h3>
+          <blockquote class="field-dispatch-quote">
+            &ldquo;You are your own worst enemy. You waste precious time dreaming of the future instead of engaging in the present. Since nothing seems urgent to you, you are only half involved in what you do. Place yourself on 'death ground,' where your back is against the wall and you have to fight like hell to get out alive.&rdquo;
+          </blockquote>
+          <p class="field-dispatch-takeaway">
+            <strong>EXECUTION RESOLUTION:</strong> The psychological engine behind the 90-day cycles: zero safety net, high stakes, and converting every single day into non-negotiable forward momentum.
+          </p>
+          <div class="field-dispatch-foot">
+            <span class="field-foot-ref">Source: Robert Greene &bull; The 33 Strategies of War (Chapter 04)</span>
+            <span class="field-foot-date">URGENCY COMPRESSION</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- FIELD ARTIFACT 04: BE DELUSIONAL (PRESERVED) -->
+    <aside class="field-dispatch-card reverse" aria-label="Field Artifact: Be Delusional Manifesto">
+      <div class="field-dispatch-inner">
+        <div class="field-dispatch-media">
+          <div class="field-photo-frame">
+            <img src="./assets/be_delusional_tiger.png" alt="Be Delusional poster with cat and tiger reflection" class="field-dispatch-img" loading="lazy">
+            <div class="field-photo-tag">REF &bull; 04</div>
+          </div>
+        </div>
+        <div class="field-dispatch-content">
+          <div class="field-dispatch-meta">
+            <span class="field-beacon" aria-hidden="true"></span>
+            <span class="field-label">FIELD ARTIFACT &bull; 04</span>
+            <span class="field-category">RADICAL CONVICTION</span>
+          </div>
+          <h3 class="field-dispatch-title">Be Delusional: Audacity Over Consensus</h3>
+          <blockquote class="field-dispatch-quote">
+            &ldquo;There is a certain delusional quality that all successful people have to have. You have to believe that something different can happen, even before the physical world has caught up with your imagination.&rdquo;
+          </blockquote>
+          <p class="field-dispatch-takeaway">
+            <strong>THE 5-YEAR HORIZON ANCHOR:</strong> The conviction underpinning the 2026&ndash;2031 vision ($15k/mo to $1M/mo, feature films, $20M liquid cash). Reasonable people adapt to the world; unreasonable people persist in adapting the world to themselves.
+          </p>
+          <div class="field-dispatch-foot">
+            <span class="field-foot-ref">Manifesto: The Inner Tiger &bull; Vision Calibration</span>
+            <span class="field-foot-date">5-YEAR HORIZON DOCTRINE</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 5-Year Horizon (Preserved for long-term vision context) -->
+    <div class="horizon-section-card" style="margin-top: 40px;">
+      <div class="editorial-heading" style="margin-top: 0;">
+        <span>5-Year Strategic Horizon (2026 &ndash; 2031)</span>
+        <span class="heading-num">[LONG-RANGE]</span>
+      </div>
+      <div class="horizon-section" id="horizon-list">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECTION 09: VISUAL ARCHIVE & MENTAL MODELS (PRESERVED)
+       ========================================================================= -->
+  <section id="section-archive" class="maxxing-section">
+    <div class="editorial-heading">
+      <span>Visual Archive &bull; Aesthetic References &amp; Archetypes</span>
       <span class="heading-num">[09]</span>
     </div>
     <p style="font-size: 0.88rem; color: var(--ink-secondary); margin-bottom: 20px;">
@@ -812,6 +1202,7 @@
 
       <!-- Item 02: Think Before You Click -->
       <figure class="collage-item" style="--tilt: 1.4deg;">
+        <div class="tape-strip tape-top"></div>
         <div class="collage-img-wrap">
           <img src="./assets/media_1790024069851.jpg" alt="Think Before You Click retro PC net art" class="collage-img" loading="lazy">
         </div>
@@ -831,12 +1222,13 @@
         <figcaption class="collage-caption">
           <span class="collage-fig-tag">[REF 03]</span>
           <strong>First Principles &bull; Total Understanding</strong>
-          <span class="collage-note">"What I cannot create, I do not understand." The relentless drive to derive problems from scratch, strip away dogma, and break complex systems down until they are self-evident.</span>
+          <span class="collage-note">&ldquo;What I cannot create, I do not understand.&rdquo; The relentless drive to derive problems from scratch, strip away dogma, and break complex systems down until they are self-evident.</span>
         </figcaption>
       </figure>
 
       <!-- Item 04: Patrick Jane over Chessboard -->
       <figure class="collage-item" style="--tilt: -1.5deg;">
+        <div class="tape-strip tape-corner-right"></div>
         <div class="collage-img-wrap">
           <img src="./assets/patrick_jane_chess.png" alt="Patrick Jane smiling over a chessboard with a glass of tea" class="collage-img" loading="lazy">
         </div>
@@ -875,6 +1267,7 @@
 
       <!-- Item 07: Moon & Turbulent Ocean Waves -->
       <figure class="collage-item" style="--tilt: 1.2deg;">
+        <div class="tape-strip tape-top"></div>
         <div class="collage-img-wrap">
           <img src="./assets/media_1790022393513.jpg" alt="Vibrant golden full moon over turbulent stylized ocean waves" class="collage-img" loading="lazy">
         </div>
@@ -887,13 +1280,215 @@
     </div>
   </section>
 
+  <!-- =========================================================================
+       MODALS & DRAWERS
+       ========================================================================= -->
+
+  <!-- SETTINGS DRAWER -->
+  <div class="modal-backdrop" id="settings-backdrop" style="display: none;" aria-hidden="true">
+    <div class="settings-drawer" id="settings-drawer" role="dialog" aria-modal="true" aria-labelledby="settings-heading">
+      <div class="drawer-header">
+        <h3 id="settings-heading" class="drawer-title">⚙ MAXXING SETTINGS &amp; CONFIGURATION</h3>
+        <button id="close-settings-btn" class="drawer-close-btn" aria-label="Close settings">&times;</button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="form-field">
+          <label for="settings-north-star">NORTH STAR STATEMENT:</label>
+          <textarea id="settings-north-star" rows="3"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="settings-flagship-select">DESIGNATED FLAGSHIP PROJECT:</label>
+          <select id="settings-flagship-select">
+            <option value="proj-orbit">Orbit (E-commerce Growth)</option>
+            <option value="proj-agenttrace">AgentTrace (AI Observability)</option>
+            <option value="proj-lumen">Lumen / Sheldon (AI Memory Engine)</option>
+            <option value="proj-jarvis">Jarvis (Autonomous Assistant)</option>
+          </select>
+          <span class="field-hint">Only one project can hold the active flagship designation.</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field flex-1">
+            <label for="settings-weight-unit">WEIGHT UNIT:</label>
+            <select id="settings-weight-unit">
+              <option value="kg">Kilograms (kg)</option>
+              <option value="lbs">Pounds (lbs)</option>
+            </select>
+          </div>
+          <div class="form-field flex-1">
+            <label for="settings-currency">CURRENCY:</label>
+            <select id="settings-currency">
+              <option value="INR">INR (₹)</option>
+              <option value="USD">USD ($)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="settings-danger-zone">
+          <span class="danger-title">DATA MANAGEMENT &amp; EXPORT</span>
+          <div class="danger-actions-row">
+            <button id="export-json-btn" class="mini-tool-btn" type="button">Export System JSON</button>
+            <button id="reset-defaults-btn" class="mini-tool-btn danger" type="button">Reset to Defaults</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <button id="save-settings-btn" class="primary-btn" type="button">Save Configuration</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT EVALUATION MODAL -->
+  <div class="modal-backdrop" id="eval-modal-backdrop" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="eval-heading">
+      <div class="modal-header">
+        <h3 id="eval-heading" class="modal-title">⚖ PROJECT EVALUATION RUBRIC</h3>
+        <button id="close-eval-modal-btn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-intro">
+          Lightweight evaluation rubric across 6 dimensions (Score 1–10). Evaluates alignment before allocating deep energy.
+        </p>
+        <div class="eval-scores-grid">
+          <div class="eval-field">
+            <label for="eval-interest">Personal Interest (1-10):</label>
+            <input type="number" id="eval-interest" min="1" max="10" value="9">
+          </div>
+          <div class="eval-field">
+            <label for="eval-learning">Learning Value (1-10):</label>
+            <input type="number" id="eval-learning" min="1" max="10" value="8">
+          </div>
+          <div class="eval-field">
+            <label for="eval-feasibility">Feasibility (1-10):</label>
+            <input type="number" id="eval-feasibility" min="1" max="10" value="9">
+          </div>
+          <div class="eval-field">
+            <label for="eval-time">Time to Result (1-10):</label>
+            <input type="number" id="eval-time" min="1" max="10" value="8">
+          </div>
+          <div class="eval-field">
+            <label for="eval-demand">Customer Demand (1-10):</label>
+            <input type="number" id="eval-demand" min="1" max="10" value="9">
+          </div>
+          <div class="eval-field">
+            <label for="eval-alignment">Strategic Alignment (1-10):</label>
+            <input type="number" id="eval-alignment" min="1" max="10" value="10">
+          </div>
+        </div>
+        <div class="form-field" style="margin-top: 14px;">
+          <label for="eval-reasoning">STRATEGIC REASONING &amp; DECISION:</label>
+          <textarea id="eval-reasoning" rows="3" placeholder="Explain why this project is or isn't chosen as the active flagship..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="save-eval-btn" class="primary-btn" type="button">Save Evaluation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RETROSPECTIVE MODAL -->
+  <div class="modal-backdrop" id="retro-modal-backdrop" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="retro-heading">
+      <div class="modal-header">
+        <h3 id="retro-heading" class="modal-title">📝 MILESTONE RETROSPECTIVE LOGGER</h3>
+        <button id="close-retro-modal-btn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="retro-form">
+          <div class="form-row">
+            <div class="form-field flex-2">
+              <label for="retro-milestone">MILESTONE NAME:</label>
+              <input type="text" id="retro-milestone" placeholder="e.g. Onboarding v1 & Merchant Outbound" required>
+            </div>
+            <div class="form-field flex-1">
+              <label for="retro-date">DATE:</label>
+              <input type="date" id="retro-date" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field flex-1">
+              <label for="retro-intended">WHAT I INTENDED TO ACCOMPLISH:</label>
+              <textarea id="retro-intended" rows="2" required></textarea>
+            </div>
+            <div class="form-field flex-1">
+              <label for="retro-actual">WHAT I ACTUALLY ACCOMPLISHED:</label>
+              <textarea id="retro-actual" rows="2" required></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field flex-1">
+              <label for="retro-worked">WHAT WORKED:</label>
+              <textarea id="retro-worked" rows="2" required></textarea>
+            </div>
+            <div class="form-field flex-1">
+              <label for="retro-failed">WHAT FAILED / DIDN'T WORK:</label>
+              <textarea id="retro-failed" rows="2" required></textarea>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="retro-learned">WHAT I LEARNED &amp; WHAT I WOULD CHANGE:</label>
+            <textarea id="retro-learned" rows="2" required></textarea>
+          </div>
+          <div class="form-field">
+            <label for="retro-next">WHAT HAPPENS NEXT:</label>
+            <input type="text" id="retro-next" placeholder="Concrete next action..." required>
+          </div>
+          <div class="modal-footer" style="padding-top: 14px;">
+            <button type="submit" class="primary-btn">Save Retrospective</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD NEXT ACTION MODAL -->
+  <div class="modal-backdrop" id="action-modal-backdrop" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog small" role="dialog" aria-modal="true" aria-labelledby="action-modal-heading">
+      <div class="modal-header">
+        <h3 id="action-modal-heading" class="modal-title">+ ADD NEXT ACTION</h3>
+        <button id="close-action-modal-btn" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="new-action-form">
+          <div class="form-field">
+            <label for="new-action-title">ACTION TITLE:</label>
+            <input type="text" id="new-action-title" placeholder="What is the concrete next action to complete?" required>
+          </div>
+          <div class="form-row">
+            <div class="form-field flex-1">
+              <label for="new-action-category">CATEGORY / TAG:</label>
+              <input type="text" id="new-action-category" placeholder="e.g. ORBIT GTM" value="ORBIT GTM" required>
+            </div>
+            <div class="form-field flex-1">
+              <label for="new-action-priority">PRIORITY TIER:</label>
+              <select id="new-action-priority">
+                <option value="must-do" selected>MUST-DO (Non-Negotiable)</option>
+                <option value="optional">OPTIONAL (If Time Permits)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="new-action-notes">NOTES / CONTEXT:</label>
+            <input type="text" id="new-action-notes" placeholder="Optional context or reference...">
+          </div>
+          <div class="modal-footer" style="padding-top: 14px;">
+            <button type="submit" class="primary-btn">Add to Today's Actions</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- SITE FOOTER -->
   <footer class="site-footer">
-    <div>
-      <strong>BOLD</strong> &mdash; 2026 &bull; India
+    <div class="footer-left">
+      <strong>MAXXING</strong> &mdash; Personal Operating System &bull; 2026 &bull; India
     </div>
-    <div>
-      <span>HELVETICA &bull; IBM PLEX MONO &bull; WHITE CANVAS</span>
+    <div class="footer-right">
+      <span>HELVETICA &bull; IBM PLEX MONO &bull; RESTRAINED CRAFT</span>
     </div>
   </footer>
 
