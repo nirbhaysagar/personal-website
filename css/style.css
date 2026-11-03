@@ -995,9 +995,10 @@ html[data-theme="dark"] .nav-item.active .nav-code {
 }
 
 /* ==========================================================================
-   31-DAY OCTOBER SPRINT RIBBON & CALENDAR SCALE
+   30-DAY NOVEMBER SPRINT RIBBON & CALENDAR SCALE
    ========================================================================== */
 
+.november-days-ribbon,
 .october-days-ribbon {
   background: var(--bg-paper);
   border: 1.5px solid var(--rule-strong);
@@ -4924,6 +4925,7 @@ html[data-theme="dark"] .targets-meta-strip {
   background: var(--bg-paper);
 }
 
+html[data-theme="dark"] .november-days-ribbon,
 html[data-theme="dark"] .october-days-ribbon {
   background: var(--bg-paper);
   border-color: var(--rule-strong);

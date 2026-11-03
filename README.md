@@ -14,7 +14,7 @@ A high-contrast, pure white monochrome personal operating system and blueprint w
 2. **01: What I Am Currently Doing**: Current focus headline, deep work details, and daily protocol cadence.
 3. **02: Current Projects & Builds**: Project cards with tech stack tags, status badges, and progress bars.
 4. **03: Targets & Measurable Progress**:
-   - **Monthly Targets (October 2026)**: Time remaining counter, month elapsed gauge, completion %, and targets table with visual progress meters.
+   - **Monthly Targets (November 2026)**: Time remaining counter, month elapsed gauge, completion %, and targets table with visual progress meters.
    - **5-Year Horizon (2026–2031)**: Milestone roadmap graph across 5 years with progress bars and checkbox indicators.
 5. **04: The Bucket List**: Interactive checklist with local persistence (localStorage). Click any item to check/uncheck.
 6. **05: Daily Input ("What I Learned Today")**: Live logger form with instant entry addition, persistent local storage, and a 1-click **Export as Markdown** button.

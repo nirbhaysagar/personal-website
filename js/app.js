@@ -9,7 +9,7 @@ const STORAGE_KEYS = {
   DAILY_LOGS: 'bold_daily_logs_v3',
   Q4_GOALS: 'bold_q4_goals_v1',
   BUCKET_LIST: 'bold_q4_goals_v1',
-  TARGET_MILESTONES: 'bold_october_milestones_v4'
+  TARGET_MILESTONES: 'bold_november_milestones_v1'
 };
 
 function initQ4Goals() {
@@ -28,7 +28,7 @@ function initQ4Goals() {
 
 // Initialize milestone states from localStorage if previously stored
 const savedMilestones = loadStored(STORAGE_KEYS.TARGET_MILESTONES, {});
-const targetsSource = initialData.octoberTargets || initialData.septemberTargets || [];
+const targetsSource = initialData.novemberTargets || initialData.octoberTargets || initialData.septemberTargets || [];
 targetsSource.forEach(t => {
   if (t.milestones) {
     t.milestones.forEach(m => {
@@ -110,13 +110,14 @@ let state = {
   profile: initialData.profile,
   projects: initialData.projects,
   targets: targetsSource,
+  novemberTargets: targetsSource,
   octoberTargets: targetsSource,
   get septemberTargets() { return this.targets; },
   fiveYearHorizon: initialData.fiveYearHorizon,
   bucketList: q4GoalsList,
   q4Goals: q4GoalsList,
   radarCurriculum: initialData.radarCurriculum,
-  selectedRadarMonth: '2026-10',
+  selectedRadarMonth: '2026-11',
   selectedRadarTrack: 'all',
   activeRadarTriadIdx: 0,
   dailyLogs: normalizeDailyLogs(loadStored(STORAGE_KEYS.DAILY_LOGS, initialData.dailyLogs)),
@@ -151,20 +152,20 @@ function saveStored(key, value) {
 
 function renderTactileArtifact(t, idx) {
   if (t.id.includes('01') || t.id.includes('orb')) {
-    // 1. Orbit Marketing Engine (500+ Users, 30+ Paid, 2 Agencies & YC W27)
+    // 1. Orbit Marketing Engine (1,500+ Users, 50+ Paid, 4 Agencies)
     return `
       <div class="artifact-badge-card">
         <div class="lanyard-slot" aria-hidden="true"></div>
         <div class="badge-header">
-          <span class="badge-org">ORBIT // OCTOBER SPRINT</span>
+          <span class="badge-org">ORBIT // NOVEMBER SPRINT</span>
           <span class="spec-status-stamp">[IN SPRINT (0%)]</span>
         </div>
         <div class="badge-barcode">||| | |||| || ||| |||||</div>
         <div class="badge-details">
-          <div><strong>USERS:</strong> 0 / 500+ TOTAL USERS</div>
-          <div><strong>PAID:</strong> 0 / 30+ PAID SUBSCRIBERS</div>
-          <div><strong>ENTERPRISE:</strong> 0 / 2 AGENCIES ON CORE AI ENGINE</div>
-          <div><strong>YC BATCH:</strong> PITCH &amp; DECK SPRINT &bull; YC W27</div>
+          <div><strong>USERS:</strong> 0 / 1,500+ TOTAL USERS</div>
+          <div><strong>PAID:</strong> 0 / 50+ PAID SUBSCRIBERS</div>
+          <div><strong>ENTERPRISE:</strong> 0 / 4 AGENCIES ON CORE AI ENGINE</div>
+          <div><strong>RETENTION:</strong> CHECKOUT RECOVERY WORKFLOWS</div>
         </div>
         <svg class="badge-runner-doodle" viewBox="0 0 80 45" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round">
           <circle cx="20" cy="12" r="5"/>
@@ -175,40 +176,40 @@ function renderTactileArtifact(t, idx) {
       </div>
     `;
   } else if (t.id.includes('02') || t.id.includes('yc') || t.id.includes('trace') || t.id.includes('dist')) {
-    // 2. AgentTrace Launch, Audience & YC W27
+    // 2. AgentTrace Launch, Audience & Telemetry
     return `
       <div class="artifact-graph-sheet">
         <div class="washi-tape-strip" aria-hidden="true"></div>
         <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
-          AGENTTRACE // LAUNCH &amp; YC W27 MANIFEST
+          AGENTTRACE // TELEMETRY &amp; SCALE MANIFEST
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 110px;">YC W27 APPS:</span>
+          <span style="min-width: 110px;">PARTNER CALLS:</span>
           <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 2 SUBMITTED</span>
+          <span>0 / 5 CALLS</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 110px;">X REACH (300+):</span>
+          <span style="min-width: 110px;">X REACH (600+):</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
+          <span>0 / 600</span>
+        </div>
+        <div class="funnel-bar-item">
+          <span style="min-width: 110px;">WAITLIST (300+):</span>
           <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
           <span>0 / 300</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 110px;">WAITLIST (150+):</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 150</span>
-        </div>
-        <div class="funnel-bar-item">
           <span style="min-width: 110px;">REDDIT KARMA:</span>
           <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 200+</span>
+          <span>0 / 400+</span>
         </div>
         <span style="font-family: 'Caveat', cursive; font-size: 1.15rem; color: #2e5c38; display: block; margin-top: 8px;">
-          * Full marketing sprint active: live telemetry &amp; trace replays on X!
+          * Public beta telemetry demos &amp; trace replays active on X!
         </span>
       </div>
     `;
-  } else if (t.id.includes('03') || t.id.includes('fin') || t.id.includes('40k')) {
-    // 3. Personal Income (₹40,000 Milestone)
+  } else if (t.id.includes('03') || t.id.includes('fin') || t.id.includes('60k') || t.id.includes('40k')) {
+    // 3. Personal Income (₹60,000 Milestone)
     return `
       <div class="artifact-qa-sheet">
         <svg class="binder-clip-graphic" viewBox="0 0 40 50" fill="none" aria-hidden="true">
@@ -219,15 +220,15 @@ function renderTactileArtifact(t, idx) {
         </svg>
 
         <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
-          PERSONAL CASHFLOW // OCTOBER SPRINT
+          PERSONAL CASHFLOW // NOVEMBER SPRINT
         </div>
         <div style="font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.6; color: #333;">
-          &bull; October Income: <strong>₹0 / ₹40,000 PERSONAL NET</strong><br>
-          &bull; Pipeline: <strong>CLIENT &amp; FREELANCE SERVICES</strong><br>
+          &bull; November Income: <strong>₹0 / ₹60,000 PERSONAL NET</strong><br>
+          &bull; Pipeline: <strong>2 AGENCY RETAINERS &amp; SERVICES</strong><br>
           &bull; Budget Status: <strong>STRICT ZERO-BURN DISCIPLINE</strong><br>
           &bull; Target Runway: <strong>0% PROGRESS (CYCLE INITIATED)</strong>
         </div>
-        <div class="qa-stamp-circle">[RUNWAY DISCIPLINE // ₹40K TARGET]</div>
+        <div class="qa-stamp-circle">[RUNWAY DISCIPLINE // ₹60K TARGET]</div>
       </div>
     `;
   } else if (t.id.includes('04') || t.id.includes('self') || t.id.includes('flow') || t.id.includes('run')) {
@@ -245,7 +246,7 @@ function renderTactileArtifact(t, idx) {
           </div>
           <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #bbb; text-align: center; line-height: 1.5;">
             Daily Run &bull; Daily Stretch &bull; New Schedule &bull; Calmer, Sharper Version of Me<br>
-            <span style="color: #ffbe1a; font-weight: 700;">[DAY 04 / 31 ACTIVE &bull; 0% LOGGED]</span>
+            <span style="color: #ffbe1a; font-weight: 700;">[DAY 04 / 30 ACTIVE &bull; 0% LOGGED]</span>
           </div>
         </div>
       </div>
@@ -280,22 +281,22 @@ function renderTactileArtifact(t, idx) {
   }
 }
 
-function renderOctoberTargets() {
+function renderNovemberTargets() {
   const container = document.getElementById('targets-list');
-  const daysLeftEl = document.getElementById('oct-days-left') || document.getElementById('sep-days-left') || document.getElementById('target-days-left');
-  const monthElapsedEl = document.getElementById('oct-month-elapsed') || document.getElementById('sep-month-elapsed') || document.getElementById('target-month-elapsed');
-  const avgProgressEl = document.getElementById('oct-avg-progress') || document.getElementById('sep-avg-progress') || document.getElementById('target-avg-progress');
-  const ribbonEl = document.getElementById('october-days-ribbon');
+  const daysLeftEl = document.getElementById('nov-days-left') || document.getElementById('oct-days-left') || document.getElementById('sep-days-left') || document.getElementById('target-days-left');
+  const monthElapsedEl = document.getElementById('nov-month-elapsed') || document.getElementById('oct-month-elapsed') || document.getElementById('sep-month-elapsed') || document.getElementById('target-month-elapsed');
+  const avgProgressEl = document.getElementById('nov-avg-progress') || document.getElementById('oct-avg-progress') || document.getElementById('sep-avg-progress') || document.getElementById('target-avg-progress');
+  const ribbonEl = document.getElementById('november-days-ribbon') || document.getElementById('october-days-ribbon');
 
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth();
-  const daysInMonth = new Date(year, month + 1, 0).getDate(); // 31 for October
+  const daysInMonth = new Date(year, month + 1, 0).getDate(); // 30 for November
   const currentDay = Math.min(Math.max(now.getDate(), 1), daysInMonth);
   const daysLeft = Math.max(0, daysInMonth - currentDay);
   const elapsedPercent = Math.round((currentDay / daysInMonth) * 100);
 
-  const targets = state.octoberTargets || state.targets || state.septemberTargets || [];
+  const targets = state.novemberTargets || state.octoberTargets || state.targets || state.septemberTargets || [];
 
   const totalProg = targets.reduce((acc, t) => {
     const pct = Math.min(100, Math.round((t.currentValue / t.targetValue) * 100));
@@ -307,23 +308,23 @@ function renderOctoberTargets() {
   if (monthElapsedEl) monthElapsedEl.textContent = `${elapsedPercent}%`;
   if (avgProgressEl) avgProgressEl.textContent = `${avgProgress}%`;
 
-  // Render 31-Day October Sprint Ribbon
+  // Render 30-Day November Sprint Ribbon
   if (ribbonEl) {
     const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
     ribbonEl.innerHTML = `
       <div class="ribbon-header">
-        <span class="ribbon-title">31-DAY OCTOBER SPRINT TIMELINE &bull; OCT 01 &rarr; OCT 31</span>
-        <span class="ribbon-status">[DAY ${String(currentDay).padStart(2, '0')} / 31 ACTIVE &bull; ${daysLeft} DAYS REMAINING]</span>
+        <span class="ribbon-title">30-DAY NOVEMBER SPRINT TIMELINE &bull; NOV 01 &rarr; NOV 30</span>
+        <span class="ribbon-status">[DAY ${String(currentDay).padStart(2, '0')} / ${daysInMonth} ACTIVE &bull; ${daysLeft} DAYS REMAINING]</span>
       </div>
-      <div class="ribbon-grid" role="region" aria-label="October 31-day progress ribbon">
+      <div class="ribbon-grid" role="region" aria-label="November 30-day progress ribbon" style="grid-template-columns: repeat(${daysInMonth}, minmax(0, 1fr));">
         ${daysArray.map(d => {
           let statusClass = 'day-future';
           let marker = '&middot;';
-          let tooltip = `Oct ${String(d).padStart(2, '0')} — Upcoming Sprint Runway`;
+          let tooltip = `Nov ${String(d).padStart(2, '0')} — Upcoming Sprint Runway`;
           if (d < currentDay) {
             statusClass = 'day-past';
             marker = '&#10003;';
-            tooltip = `Oct ${String(d).padStart(2, '0')} — Completed Sprint ✓`;
+            tooltip = `Nov ${String(d).padStart(2, '0')} — Completed Sprint ✓`;
           } else if (d === currentDay) {
             statusClass = 'day-current';
             marker = '&#9679;';
@@ -352,7 +353,7 @@ function renderOctoberTargets() {
 
   container.innerHTML = targets.map((t, idx) => {
     const pct = Math.min(100, Math.round((t.currentValue / t.targetValue) * 100));
-    const formattedDeadline = t.deadline ? t.deadline.replace('2026-10-', 'Oct ').replace('2026-09-', 'Sep ') : 'Oct 31';
+    const formattedDeadline = t.deadline ? t.deadline.replace('2026-11-', 'Nov ').replace('2026-10-', 'Oct ').replace('2026-09-', 'Sep ') : 'Nov 30';
     const isPulled = activePulledFolderId === t.id;
     const tabOffset = tabOffsets[idx] || '16px';
 
@@ -422,7 +423,7 @@ function renderOctoberTargets() {
                 <div class="dossier-cleared-stamp" aria-label="Dossier Complete Stamp">
                   <div class="stamp-seal">
                     <span class="stamp-seal-badge">CLEARED // COMPLETE</span>
-                    <span class="stamp-seal-title">OCT 2026 DOSSIER</span>
+                    <span class="stamp-seal-title">NOV 2026 DOSSIER</span>
                     <span class="stamp-seal-sub">ALL SUBTARGETS VERIFIED &#10003;</span>
                   </div>
                 </div>
@@ -577,7 +578,7 @@ function renderOctoberTargets() {
       e.stopPropagation();
       const targetId = item.getAttribute('data-target-id');
       const milestoneId = item.getAttribute('data-milestone-id');
-      const targets = state.octoberTargets || state.targets || state.septemberTargets || [];
+      const targets = state.novemberTargets || state.octoberTargets || state.targets || state.septemberTargets || [];
       const target = targets.find(t => t.id === targetId);
       if (target && target.milestones) {
         const milestone = target.milestones.find(m => m.id === milestoneId);
@@ -631,7 +632,7 @@ function renderOctoberTargets() {
             return acc + p;
           }, 0);
           const avgP = targets.length > 0 ? Math.round(totalP / targets.length) : 0;
-          const avgProgressEl = document.getElementById('oct-avg-progress') || document.getElementById('target-avg-progress');
+          const avgProgressEl = document.getElementById('nov-avg-progress') || document.getElementById('oct-avg-progress') || document.getElementById('target-avg-progress');
           if (avgProgressEl) avgProgressEl.textContent = `${avgP}%`;
 
           // Persist to localStorage
@@ -1698,10 +1699,10 @@ total_laws: ${state.dailyLogs.length}
   updateLiveTime();
   setInterval(updateLiveTime, 1000);
 
-  // Keep cadence graphs and 31-day October timeline dynamically updated every minute
+  // Keep cadence graphs and 30-day November timeline dynamically updated every minute
   setInterval(() => {
     updateHeroCadenceGraphs();
-    renderOctoberTargets();
+    renderNovemberTargets();
   }, 60000);
 }
 
@@ -1806,9 +1807,12 @@ function setupThemeToggle() {
   }
 }
 
-// Backwards compatibility alias
+// Backwards compatibility aliases
+function renderOctoberTargets() {
+  renderNovemberTargets();
+}
 function renderSeptemberTargets() {
-  renderOctoberTargets();
+  renderNovemberTargets();
 }
 
 // ----------------------------------------------------------------------------
@@ -1889,7 +1893,7 @@ function initApp() {
   renderCrossStitchHero();
   updateHeroCadenceGraphs();
   setupFolderTabs();
-  renderOctoberTargets();
+  renderNovemberTargets();
   renderFiveYearHorizon();
   renderBucketList();
   renderRadarSection();
