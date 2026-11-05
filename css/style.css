@@ -2522,7 +2522,28 @@ html[data-theme="dark"] .folder-cleared-pill {
   background: transparent;
 }
 
-.q4-month-pill.active {
+button.q4-month-pill {
+  padding: 3px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--rule-light);
+  color: var(--ink-secondary);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: all 0.15s ease;
+}
+
+button.q4-month-pill:hover {
+  background: var(--bg-paper);
+  color: var(--ink-primary);
+  border-color: var(--rule-strong);
+}
+
+.q4-month-pill.active,
+button.q4-month-pill.active {
   background: #1a1a1a;
   color: #ffffff;
   border-color: #1a1a1a;
@@ -2538,10 +2559,45 @@ html[data-theme="dark"] .q4-ribbon-card {
   border-left-color: #f0f0f0;
 }
 
-html[data-theme="dark"] .q4-month-pill.active {
+html[data-theme="dark"] .q4-month-pill.active,
+html[data-theme="dark"] button.q4-month-pill.active {
   background: #f0f0f0;
   color: #111111;
   border-color: #f0f0f0;
+}
+
+.bucket-horizon-pill {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.bucket-horizon-pill.pill-2m {
+  background: #111111;
+  color: #ffffff;
+}
+
+.bucket-horizon-pill.pill-6m {
+  background: #f0f0f0;
+  color: #333333;
+  border: 1px solid #d4d4d4;
+}
+
+html[data-theme="dark"] .bucket-horizon-pill.pill-2m {
+  background: #f0f0f0;
+  color: #111111;
+}
+
+html[data-theme="dark"] .bucket-horizon-pill.pill-6m {
+  background: #242424;
+  color: #cccccc;
+  border-color: #383838;
 }
 
 .bucket-summary {

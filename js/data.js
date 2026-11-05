@@ -19,9 +19,9 @@ export const initialData = {
       "Learning by building, experimenting, and documenting the raw process."
     ],
     currentFocus: {
-      headline: "Scaling Orbit user acquisition and architecting AI memory systems (Lumen).",
-      details: "Focusing daily execution on Orbit's November acceleration push (GTM, outbound loops, agency partnerships, e-commerce conversion), while studying systems engineering and AI memory models.",
-      activeCadence: "Orbit Marketing & GTM → Merchant Journey Testing → Lumen Architecture → Technical Study & Systems Review"
+      headline: "Scaling Orbit to 1,000 users & 75+ paid, growing X to 2K, and building the distribution agency.",
+      details: "60-day sprint execution till Dec 31: Orbit founder loops (1,000 users, 75+ paid), growing X audience (2,000 followers, Marc Lou model), mastering organic launches ($500 in 7-10 days), mid-December side project validation, ₹1 Lakh personal profit, and AgentTrace AOS.",
+      activeCadence: "Orbit Founder Outreach → X Audience & Launch Sprints → Agency Systems & Client Pipelines → AgentTrace (AOS)"
     }
   },
 
@@ -82,146 +82,171 @@ export const initialData = {
 
   novemberTargets: [
     {
-      id: "target-nov-01",
-      code: "SPEC // ORB-MKT",
+      id: "target-2m-01",
+      code: "SPEC // ORB-REV",
       theme: "folder-manila",
       tabPos: 1,
-      tabTitle: "[01] ORBIT // 1,500 USERS",
-      title: "Orbit Marketing & Scaling: 1,500+ Users, 50+ Paid & Agency Deployments",
-      category: "PRODUCT GROWTH & REVENUE",
-      targetValue: 1500,
+      tabTitle: "[01] ORBIT // 1,000 USERS (75+ PAID)",
+      title: "Orbit Growth & Paid Conversion: 1,000 Users & 75+ Paid Customers",
+      category: "SAAS TRACTION & REVENUE",
+      targetValue: 1000,
       currentValue: 0,
       unit: "Users",
       status: "IN SPRINT (0%)",
-      deadline: "2026-11-30",
-      notes: "Scale Orbit to 1,500+ users, 50+ paying customers, 4 agency AI deployments, and solidify post-YC submission pipeline.",
-      mission: "Execute structured November marketing sprint for Orbit: scale direct founder-to-founder outreach loops, convert 50+ paying subscribers, partner with 4 agencies deploying Orbit as their core AI engine, and drive merchant retention through abandoned cart recovery.",
+      deadline: "2026-12-31",
+      notes: "Add ~1,000 users in next 60 days till December 31, converting at least 75+ into paid accounts.",
+      mission: "Execute structured founder acquisition loops and conversion funnels to onboard 1,000 registered users on Orbit by Dec 31, driving checkout optimization, case study teardowns, and automated cart recovery to secure 75+ paid subscriptions.",
       milestones: [
-        { id: "m-orb-1", group: "ACQUISITION", text: "Acquire 1,500+ registered users on Orbit through targeted founder marketing and teardowns", completed: false },
-        { id: "m-orb-2", group: "REVENUE", text: "Convert 50+ active paying subscribers on Orbit's core recurring tier", completed: false },
-        { id: "m-orb-3", group: "ENTERPRISE", text: "Onboard 4 partner agencies deploying Orbit as their primary AI operational engine", completed: false },
-        { id: "m-orb-4", group: "RETENTION", text: "Deploy automated checkout drop-off recovery workflows for top tier merchant stores", completed: false }
+        { id: "m-orb-1", group: "ACQUISITION", text: "Acquire ~1,000 registered users on Orbit over the next 60 days via direct founder outreach & growth loops", completed: false },
+        { id: "m-orb-2", group: "PAID USERS", text: "Convert at least 75+ active paid subscribers on Orbit's core recurring tier", completed: false },
+        { id: "m-orb-3", group: "FUNNELS", text: "Deploy automated checkout drop-off recovery workflows for top tier merchant stores", completed: false },
+        { id: "m-orb-4", group: "ENTERPRISE", text: "Onboard partner agencies deploying Orbit as their primary white-label operational AI engine", completed: false }
       ],
-      tactileMemo: "Orbit marketing converts fastest when agencies see automated client workflows and merchants see checkout order recovery.",
+      tactileMemo: "Users validate relevance; paid subscribers validate value. 1,000 signups with 75+ paid locks the foundation.",
       techDetails: {
-        focus: "1,500+ Users, 50+ Paid, 4 Agency Deployments, Post-YC Pipeline",
-        metrics: "Target: 1,500 Users • 50 Paid Subscribers • 4 Agencies • High Retention (Current: 0%)",
-        deliverable: "Onboarded users, paid subscription revenue & active agency retainer workflows"
+        focus: "1,000 Users, 75+ Paid Subscribers, Merchant Retention Funnels",
+        metrics: "Target: 1,000 Users • 75 Paid Subscribers • High MRR (Current: 0 / 0%)",
+        deliverable: "1,000 registered accounts, 75+ Stripe active subscriptions & automated retention ledger"
       }
     },
     {
-      id: "target-nov-02",
-      code: "SPEC // TRACE-DIST",
+      id: "target-2m-02",
+      code: "SPEC // X-GROWTH",
       theme: "folder-sage",
       tabPos: 2,
-      tabTitle: "[02] AGENTTRACE & DISTRIBUTION",
-      title: "AgentTrace Launch & Organic Distribution (X, Reddit & Observability Demo)",
-      category: "VENTURES & AUDIENCE",
-      targetValue: 300,
+      tabTitle: "[02] X AUDIENCE // 2K BUILDERS",
+      title: "X / Twitter Authority: Reach 2,000 High-Signal Builder Followers",
+      category: "AUDIENCE & DISTRIBUTION",
+      targetValue: 2000,
       currentValue: 0,
-      unit: "Waitlist",
+      unit: "Followers",
       status: "IN SPRINT (0%)",
-      deadline: "2026-11-30",
-      notes: "Follow up on YC W27 submissions; launch public beta telemetry demos, scale X to 600+ followers, waitlist to 300+ engineers, and maintain Reddit technical leadership.",
-      mission: "Deliver November distribution for AgentTrace: package interactive trace telemetry demos, grow X presence to 600+ technical followers, build developer waitlist to 300+ engineers, publish weekly technical teardowns on developer Reddit (400+ karma), and demo to early enterprise engineering teams.",
+      deadline: "2026-12-31",
+      notes: "Reach 2,000 followers on X by Dec 31. High-signal account modeled on Marc Lou & Pieter Levels for SaaS & growth.",
+      mission: "Establish a premier build-in-public presence on X: reach 2,000 authentic followers who follow to learn SaaS engineering, distribution, and growth tactics, sharing transparent building metrics, architecture teardowns, and zero-fluff lessons.",
       milestones: [
-        { id: "m-tr-1", group: "BETA DEMO", text: "Release public AgentTrace interactive trace replay dashboard & telemetry benchmarks", completed: false },
-        { id: "m-tr-2", group: "X AUDIENCE", text: "Grow X (Twitter) profile from 300 to 600+ high-signal technical followers via engineering threads", completed: false },
-        { id: "m-tr-3", group: "WAITLIST", text: "Scale AgentTrace developer waitlist from 150 to 300+ verified AI engineers and builders", completed: false },
-        { id: "m-tr-4", group: "REDDIT CODE", text: "Maintain developer Reddit authority: publish deep multi-agent debugging breakdowns (400+ karma)", completed: false },
-        { id: "m-tr-5", group: "FEEDBACK", text: "Run 5 technical customer interview calls with early swarm observability design partners", completed: false }
+        { id: "m-xg-1", group: "AUDIENCE", text: "Grow X / Twitter account to 2,000 engaged followers by December 31, 2026", completed: false },
+        { id: "m-xg-2", group: "CURATION", text: "Model profile positioning along Marc Lou & Pieter Levels (high-signal builder, zero vanity fluff)", completed: false },
+        { id: "m-xg-3", group: "CONTENT", text: "Publish daily build-in-public logs, SaaS growth metrics, technical insights & raw learnings", completed: false },
+        { id: "m-xg-4", group: "NETWORK", text: "Systematically interact with high-signal indie makers, tech founders, and growth operators", completed: false }
       ],
-      tactileMemo: "Observability for agent swarms is a greenfield market. High-signal technical distribution fills the waitlist.",
+      tactileMemo: "Followers follow proof of work. 2,000 real founders following for SaaS and growth is an unfair distribution moat.",
       techDetails: {
-        focus: "Interactive Telemetry Demos, 600+ X Followers, 300+ Waitlist, Design Partner Calls",
-        metrics: "Target: Live Tracing Demo • 600+ X Followers • 300+ Waitlist • 5 Partner Calls (Current: 0%)",
-        deliverable: "Live AgentTrace demo, developer waitlist ledger & design partner feedback records"
+        focus: "2,000 High-Signal Followers, Daily Build-in-Public, SaaS Distribution",
+        metrics: "Target: 2,000 Followers on X • Marc Lou / Pieter Levels Quality (Current: 0 / 0%)",
+        deliverable: "Verified 2,000 followers, high-engagement thread archive & inbound SaaS inquiries"
       }
     },
     {
-      id: "target-nov-03",
-      code: "SPEC // FIN-60K",
+      id: "target-2m-03",
+      code: "SPEC // X-LAUNCH",
       theme: "folder-lavender",
       tabPos: 3,
-      tabTitle: "[03] ₹60K PERSONAL INCOME",
-      title: "Personal Cashflow & Financial Discipline (₹60,000 Milestone)",
-      category: "FINANCES & CAPITAL",
-      targetValue: 60000,
+      tabTitle: "[03] X LAUNCH // $500 IN 7-10D",
+      title: "X Launch Playbook: Launch Any Product & Make $500 in 7–10 Days",
+      category: "DISTRIBUTION & MONETIZATION",
+      targetValue: 500,
       currentValue: 0,
-      unit: "INR Cashflow",
+      unit: "USD Revenue",
       status: "IN SPRINT (0%)",
-      deadline: "2026-11-30",
-      notes: "Generate ₹60,000 personal net profit this month through focused client, agency, and distribution output.",
-      mission: "Execute focused commercial discipline to compound personal runway: convert inbound interest and client retainer projects into generating ₹60,000 personal net income this month, maintaining zero-waste financial discipline and accumulating liquid capital reserves.",
+      deadline: "2026-12-31",
+      notes: "Master how to grow on X: launch any product/tool/PDF to make $500 in 7-10 days & get first 100 users in 2-3 days.",
+      mission: "Master organic micro-launch distribution on X: engineer the capability to launch any digital asset (micro-SaaS, developer tool, PDF guide) and reliably generate $500 in 7–10 days, while acquiring the first 100 users for any software project within 48–72 hours via X alone.",
       milestones: [
-        { id: "m-rd-1", group: "CASHFLOW", text: "Generate and secure ₹60,000 personal net income for November personal runway", completed: false },
-        { id: "m-rd-2", group: "RETAINERS", text: "Lock in 2 recurring agency consulting retainers for growth & automation engineering", completed: false },
-        { id: "m-rd-3", group: "LEDGER", text: "Maintain daily income & expenditure ledger with strict financial discipline", completed: false },
-        { id: "m-rd-4", group: "RESERVE", text: "Deposit 50% of surplus profit into personal liquid capital reserve fund", completed: false }
+        { id: "m-xl-1", group: "PLAYBOOK", text: "Master X growth mechanics: high-converting hooks, proof threads, and organic algorithmic reach", completed: false },
+        { id: "m-xl-2", group: "MICRO-LAUNCH", text: "Build repeatable system to launch any product/tool/PDF on X & make at least $500 in 7–10 days", completed: false },
+        { id: "m-xl-3", group: "TRACTION", text: "Master initial user acquisition: pull first 100 users for a SaaS in 2–3 days maximum via X alone", completed: false },
+        { id: "m-xl-4", group: "SYSTEM", text: "Package organic conversion funnels, DM sequences, and value-packed lead magnets", completed: false }
       ],
-      tactileMemo: "Financial discipline buys mental clarity. Lock in ₹60,000 personal profit to compound savings and build runway.",
+      tactileMemo: "When you can generate $500 in 7 days and 100 users in 48 hours from a single post, distribution is solved forever.",
       techDetails: {
-        focus: "Personal Income Generation, High-Ticket Retainers, Financial Runway",
-        metrics: "Target: ₹60,000 Personal Income Target (Current: ₹0 / 0%)",
-        deliverable: "Verified ₹60,000 bank cashflow & balanced personal ledger"
+        focus: "X Launch Blueprint, $500 in 7-10 Days, 100 Users in 48-72h",
+        metrics: "Target: $500 in 7-10 Days • 100 Users in 2-3 Days via X (Current: $0 / 0%)",
+        deliverable: "Repeatable X launch SOP, proof of $500 revenue sprint & 100-user intake pipeline"
       }
     },
     {
-      id: "target-nov-04",
-      code: "SPEC // SELF-FLOW",
+      id: "target-2m-04",
+      code: "SPEC // DEC-SPRINT",
       theme: "folder-ochre",
       tabPos: 4,
-      tabTitle: "[04] RUN, STRETCH & FLOW",
-      title: "Biological OS: Daily Running, Stretching, Flow State & Schedule",
-      category: "BODY & MIND PROTOCOL",
-      targetValue: 30,
+      tabTitle: "[04] MID-DEC // $500 IN 2 WKS",
+      title: "Mid-December Side Project Launch: $500 in 2-Week Validation Window",
+      category: "EXPERIMENT & VALIDATION",
+      targetValue: 500,
       currentValue: 0,
-      unit: "Days Logged",
+      unit: "USD Revenue",
       status: "IN SPRINT (0%)",
-      deadline: "2026-11-30",
-      notes: "Run and stretch daily, unlock deep flow state, master new schedule, and step into the calmer, sharper, better version of me.",
-      mission: "Implement a non-negotiable physical and mental protocol: daily running and mobility stretching, entering effortless deep flow states during execution blocks, adopting a strict rhythm, and evolving into a calmer, more observant, disciplined version of myself.",
+      deadline: "2026-12-31",
+      notes: "Launch side project by mid-December with a 2-week testing window (Dec 15–31) to validate $500 in 2 weeks purely via X.",
+      mission: "Stress-test the organic distribution thesis: build and ship a focused side project by mid-December, using the final 2 weeks of 2026 to generate $500 in revenue exclusively through X distribution, validating what to post, how to post, and how to convert.",
       milestones: [
-        { id: "m-sf-1", group: "CARDIO", text: "Run on a strict daily basis for cardiovascular stamina and peak mental energy", completed: false },
-        { id: "m-sf-2", group: "MOBILITY", text: "Daily full-body mobility stretching for flexibility, posture, and nervous system calm", completed: false },
-        { id: "m-sf-3", group: "FLOW STATE", text: "Enter consistent deep flow states for high-velocity coding, writing, and deep work", completed: false },
-        { id: "m-sf-4", group: "NEW SCHEDULE", text: "Lock in new schedule: disciplined morning wake-up, uninterrupted deep blocks & evening reset", completed: false },
-        { id: "m-sf-5", group: "BETTER ME", text: "Embody the elevated version of self: calm, observant, deductive analysis, better attitude", completed: false }
+        { id: "m-ds-1", group: "BUILD", text: "Build and polish focused side project ready for deployment by mid-December", completed: false },
+        { id: "m-ds-2", group: "WINDOW", text: "Open 2-week testing window (Dec 15–31) to validate the theory of generating $500 in 2 weeks", completed: false },
+        { id: "m-ds-3", group: "DISTRIBUTION", text: "Drive initial user signups, engagement, and paid conversions strictly via X account", completed: false },
+        { id: "m-ds-4", group: "ANALYSIS", text: "Document conversion telemetry, audience response, and tactical launch learnings", completed: false }
       ],
-      tactileMemo: "The run calibrates the lungs; the stretch calms the nervous system. A disciplined schedule makes flow states repeatable.",
+      tactileMemo: "A theory without a deadline is a daydream. Launch mid-December, 2-week window, $500 locked in.",
       techDetails: {
-        focus: "Daily Running, Mobility Stretching, Flow States, Daily Routine",
-        metrics: "Target: 30/30 Days Running & Stretching • 4+ Hours Daily Flow State (Current: 0%)",
-        deliverable: "Daily workout log, disciplined calendar blocks & transformed personal presence"
+        focus: "Mid-December Side Project, 2-Week Launch Window, $500 Revenue",
+        metrics: "Target: $500 Revenue Generated in Dec 15–31 Window (Current: $0 / 0%)",
+        deliverable: "Live deployed side project, verified $500 Stripe payout & launch post mortem"
       }
     },
     {
-      id: "target-nov-05",
-      code: "SPEC // CRAFT-READ",
+      id: "target-2m-05",
+      code: "SPEC // AGY-100K",
       theme: "folder-slate",
       tabPos: 5,
-      tabTitle: "[05] SCRIPT ACT II & 3 BOOKS",
-      title: "Intellectual Horizon & Craft: Movie Script Act II & Read 3 Books",
-      category: "INTELLECT & CREATIVITY",
-      targetValue: 3,
+      tabTitle: "[05] ₹1 LAKH & AGENCY OS",
+      title: "Personal Profit & Agency Architecture: ₹1,00,000 INR Net Profit",
+      category: "CASHFLOW & AGENCY SYSTEM",
+      targetValue: 100000,
       currentValue: 0,
-      unit: "Books Read",
+      unit: "INR Net Profit",
       status: "IN SPRINT (0%)",
-      deadline: "2026-11-30",
-      notes: "Complete Act II of the movie screenplay, read 3 books, and absorb broader sets of knowledge that spark deep interest.",
-      mission: "Expand intellectual range and creative execution: advance the feature movie screenplay through Act II via structured writing sprints, read and extract mental models from 3 high-impact books, enter creative flow state, and immerse in a broader horizon of multidisciplinary knowledge (systems, cinema, human psychology, and technology).",
+      deadline: "2026-12-31",
+      notes: "Earn ₹1,00,000 (₹1 Lakh) in total personal profit side-by-side and create a proper, structured distribution agency system.",
+      mission: "Create sustainable commercial sovereignty: generate ₹1,00,000 INR personal net profit by Dec 31 while formalizing a proper agency system—productized distribution offers, client acquisition pipelines, and delivery SOPs.",
       milestones: [
-        { id: "m-cr-1", group: "SCREENPLAY", text: "Complete Act II treatment and scene pages for feature movie screenplay", completed: false },
-        { id: "m-cr-2", group: "BOOK 01", text: "Read Book 01: Deep dive on systems thinking and foundational mental models", completed: false },
-        { id: "m-cr-3", group: "BOOK 02", text: "Read Book 02: Narrative structure, cinematic worldbuilding, and character psychology", completed: false },
-        { id: "m-cr-4", group: "BOOK 03", text: "Read Book 03: Polymath knowledge, philosophy, and strategic compounding", completed: false },
-        { id: "m-cr-5", group: "KNOWLEDGE", text: "Absorb broader set of interdisciplinary knowledge that sparks deep interest & synthesize notes", completed: false }
+        { id: "m-ag-1", group: "CAPITAL", text: "Generate ₹1,00,000 (₹1 Lakh) accumulated personal net profit across the 60-day sprint", completed: false },
+        { id: "m-ag-2", group: "AGENCY OS", text: "Architect a proper, structured distribution agency system with clear client pipelines", completed: false },
+        { id: "m-ag-3", group: "OFFERS", text: "Package high-ticket social distribution, launch systems, and GTM retainer offerings", completed: false },
+        { id: "m-ag-4", group: "DELIVERY", text: "Onboard paying agency clients and institutionalize repeatable execution workflows", completed: false }
       ],
-      tactileMemo: "Screenwriting tests storytelling architecture; books provide the mental ammunition. Constant curiosity keeps the mind sharp.",
+      tactileMemo: "Not just ad-hoc client work—a proper system. ₹1 Lakh net profit compounds runway; the agency compounds leverage.",
       techDetails: {
-        focus: "Movie Screenplay Act II, 3 Books Read, Polymath Knowledge",
-        metrics: "Target: Act II Screenplay Sprints • 3 Completed Books • Written Synthesis (Current: 0%)",
-        deliverable: "Screenplay Act II pages, 3 book executive summaries & knowledge journal"
+        focus: "₹1,00,000 Personal Net Profit, Proper Agency System, Distribution Retainers",
+        metrics: "Target: ₹1,00,000 Personal Net Profit • Structured Agency OS (Current: ₹0 / 0%)",
+        deliverable: "₹1,00,000 bank cashflow record, agency service playbook & signed retainer contracts"
+      }
+    },
+    {
+      id: "target-2m-06",
+      code: "SPEC // AOS-TRC",
+      theme: "folder-teal",
+      tabPos: 6,
+      tabTitle: "[06] AGENTTRACE // YC (AOS)",
+      title: "AgentTrace (AOS): Autonomous Agent Observability Engine & YC Batch",
+      category: "VENTURES & HARD TECH",
+      targetValue: 100,
+      currentValue: 0,
+      unit: "% Built",
+      status: "IN SPRINT (75%)",
+      deadline: "2026-12-31",
+      notes: "The AOS Target: Complete AgentTrace autonomous AI agent execution tracing & observability engine and submit to YC.",
+      mission: "Finalize and deploy AgentTrace (Autonomous Agent Observability System): complete multi-step trajectory replays, latency tracing, and telemetry SDK, submit the Y Combinator application package, and run design partner pilots.",
+      milestones: [
+        { id: "m-aos-1", group: "AOS ENGINE", text: "Complete autonomous AI agent execution tracing, trajectory graphs & error boundaries", completed: false },
+        { id: "m-aos-2", group: "YC BATCH", text: "Package Y Combinator (YC) application, deck, and live interactive demo video", completed: false },
+        { id: "m-aos-3", group: "TELEMETRY", text: "Ship open-source developer telemetry SDK and sub-15ms trace capture benchmark", completed: false },
+        { id: "m-aos-4", group: "PARTNERS", text: "Run technical pilot demos with engineering teams running multi-step agent swarms", completed: false }
+      ],
+      tactileMemo: "Observability for agent swarms is foundational infra. Polish the AOS engine, submit to YC, and lead the space.",
+      techDetails: {
+        focus: "AgentTrace AOS Build, YC Submission, Developer Telemetry SDK",
+        metrics: "Target: 100% Core Engine • YC Application Submitted (Current: 75%)",
+        deliverable: "Live AgentTrace platform, YC submission confirmation & telemetry npm package"
       }
     }
   ],
@@ -304,25 +329,24 @@ export const initialData = {
   ],
 
   q4Goals: [
-    { id: "q4-01", category: "VENTURES", text: "Submit AgentTrace project to Y Combinator (YC)", completed: false },
-    { id: "q4-02", category: "REVENUE", text: "Orbit marketing done right: systematically scale from $0 to $10,000 MRR", completed: false },
-    { id: "q4-03", category: "SOFTWARE", text: "Complete 3 landmark projects: AgentTrace, Lumen, and Jarvis", completed: false },
-    { id: "q4-04", category: "LANGUAGE", text: "Start learning another language (daily grammar, vocabulary & listening drills)", completed: false },
-    { id: "q4-05", category: "FINANCES", text: "Earn min. ₹1,00,000/- net profit per month personally", completed: false },
-    { id: "q4-06", category: "AGENCY", text: "Industry Plant Agency: manage personal budget now, expand capacity if things work well", completed: false },
-    { id: "q4-07", category: "PHYSICAL", text: "Become a better version of myself: physically fit with daily exercises (running & mobility stretching)", completed: false },
-    { id: "q4-08", category: "MINDSET", text: "Observational & deductive mindset: calm under pressure, observant, sharp at analyzing situations", completed: false },
-    { id: "q4-09", category: "STYLE & IMAGE", text: "Elevate personal image: curate new wardrobe of clothes, updated style, confident presence", completed: false },
-    { id: "q4-10", category: "CAPITAL", text: "Total personal earnings: ₹3,00,000/- INR minimum accumulated across Q4", completed: false },
-    { id: "q4-11", category: "LIFE SKILL", text: "Learn to ride a bike with complete control, technical balance, and road confidence", completed: false },
-    { id: "q4-12", category: "CINEMA", text: "Complete the full feature movie script from beat outline to final draft", completed: false },
-    { id: "q4-13", category: "HARDWARE", text: "Buy a brand-new high-performance phone and laptop workstation from personal profits", completed: false },
-    { id: "q4-14", category: "INTELLECT", text: "Absorb broader sets of multidisciplinary knowledge that spark deep interest (systems, cinema, science)", completed: false },
-    { id: "q4-15", category: "CRAFT", text: "Learn and master cardistry tricks, sleight-of-hand card cuts, and tactile flourishes", completed: false },
-    { id: "q4-16", category: "STUDY: DEVOPS", text: "Master DevOps & Production Infrastructure: Linux internals, Docker containerization, CI/CD pipelines, reverse proxies (Nginx/Caddy), zero-downtime deployments, and telemetry logging", completed: false },
-    { id: "q4-17", category: "STUDY: AI BUILDING", text: "Master AI Internals & Agent Building: Transformer attention mechanisms, local LLM quantization, tool/function calling graphs, evals & prompt engineering, and deterministic state machines", completed: false },
-    { id: "q4-18", category: "STUDY: SELLING & GTM", text: "Master High-Ticket Selling & Distribution: B2B consultative sales, cold outbound loops, objection handling, founder-to-founder demos, agency retainer closing, and value-based pricing", completed: false },
-    { id: "q4-19", category: "STUDY: 3 SYSTEMS", text: "Deep Technical Mastery for 3 Projects: Agent observability & execution DAGs (AgentTrace), Hierarchical pgvector/HNSW & sub-18ms retrieval (Lumen), and autonomous tool-execution runtimes (Jarvis)", completed: false }
+    // 2-MONTH EXECUTION SPRINT (DEADLINE: DECEMBER 31, 2026)
+    { id: "2m-01", horizon: "2-MONTH", category: "ORBIT // REVENUE", text: "Acquire ~1,000 registered users on Orbit with at least 75+ active paid subscribers by Dec 31", completed: false },
+    { id: "2m-02", horizon: "2-MONTH", category: "X AUDIENCE", text: "Reach 2,000 followers on X: high-signal builder profile (Marc Lou / Pieter Levels style) followed for SaaS & growth", completed: false },
+    { id: "2m-03", horizon: "2-MONTH", category: "X DISTRIBUTION", text: "Master X growth: build capability to launch any product/tool/PDF and make at least $500 in 7–10 days", completed: false },
+    { id: "2m-04", horizon: "2-MONTH", category: "SAAS TRACTION", text: "Master initial user acquisition: pull first 100 users for a SaaS product in 2–3 days maximum via X alone", completed: false },
+    { id: "2m-05", horizon: "2-MONTH", category: "SIDE PROJECT", text: "Launch mid-December side project with a 2-week testing window (Dec 15–31) to validate $500 revenue via X", completed: false },
+    { id: "2m-06", horizon: "2-MONTH", category: "CAPITAL", text: "Earn around ₹1,00,000 (₹1 Lakh) in total personal net profit across the 60-day sprint", completed: false },
+    { id: "2m-07", horizon: "2-MONTH", category: "AGENCY OS", text: "Architect a proper, structured distribution agency system with repeatable client pipelines and delivery SOPs", completed: false },
+    { id: "2m-08", horizon: "2-MONTH", category: "AOS // HARD TECH", text: "AgentTrace (AOS): Complete autonomous agent observability engine, live telemetry replays & submit to YC", completed: false },
+
+    // 6-MONTH STRATEGIC HORIZON (DEADLINE: MAY 31, 2027)
+    { id: "6m-01", horizon: "6-MONTH", category: "X MONETIZATION", text: "Grow X audience to 8,000+ followers; account verified (blue check) & monetized (> $500/mo X ad revenue)", completed: false },
+    { id: "6m-02", horizon: "6-MONTH", category: "MULTI-PLATFORM", text: "Reach 10,000 followers on Instagram & 10,000 on YouTube; build automated monetization systems around both", completed: false },
+    { id: "6m-03", horizon: "6-MONTH", category: "RECURRING REVENUE", text: "Set up revenue systems across SaaS, X agency & digital assets to earn $3,000 – $5,000/month recurring profit", completed: false },
+    { id: "6m-04", horizon: "6-MONTH", category: "DISTRIBUTION ENGINE", text: "Master marketing & social distribution to effortlessly attract and convert agency clients into the system", completed: false },
+    { id: "6m-05", horizon: "6-MONTH", category: "POLYMATH INTELLECT", text: "Deep mastery in mind, consciousness, psychology, tech, AI, SaaS & investing with 100% first-principles intensity", completed: false },
+    { id: "6m-06", horizon: "6-MONTH", category: "LUMEN JS", text: "Personal Projects: Build and deploy Lumen — hierarchical second-brain AI memory engine in JavaScript/TypeScript", completed: false },
+    { id: "6m-07", horizon: "6-MONTH", category: "DEBT ELIMINATION", text: "Pay down ~75% of personal notes and financial obligations from accumulated venture cashflow", completed: false }
   ],
   get bucketList() {
     return this.q4Goals;

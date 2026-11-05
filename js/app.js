@@ -7,9 +7,9 @@ import { renderCrossStitchSVG } from './stitch-font.js';
 
 const STORAGE_KEYS = {
   DAILY_LOGS: 'bold_daily_logs_v3',
-  Q4_GOALS: 'bold_q4_goals_v1',
-  BUCKET_LIST: 'bold_q4_goals_v1',
-  TARGET_MILESTONES: 'bold_november_milestones_v1'
+  Q4_GOALS: 'bold_2m_6m_targets_v1',
+  BUCKET_LIST: 'bold_2m_6m_targets_v1',
+  TARGET_MILESTONES: 'bold_2m_milestones_v1'
 };
 
 function initQ4Goals() {
@@ -152,20 +152,20 @@ function saveStored(key, value) {
 
 function renderTactileArtifact(t, idx) {
   if (t.id.includes('01') || t.id.includes('orb')) {
-    // 1. Orbit Marketing Engine (1,500+ Users, 50+ Paid, 4 Agencies)
+    // 1. Orbit Growth & Revenue (1,000 Users, 75+ Paid)
     return `
       <div class="artifact-badge-card">
         <div class="lanyard-slot" aria-hidden="true"></div>
         <div class="badge-header">
-          <span class="badge-org">ORBIT // NOVEMBER SPRINT</span>
-          <span class="spec-status-stamp">[IN SPRINT (0%)]</span>
+          <span class="badge-org">ORBIT // 60-DAY SPRINT</span>
+          <span class="spec-status-stamp">[DEC 31 RUNWAY]</span>
         </div>
         <div class="badge-barcode">||| | |||| || ||| |||||</div>
         <div class="badge-details">
-          <div><strong>USERS:</strong> 0 / 1,500+ TOTAL USERS</div>
-          <div><strong>PAID:</strong> 0 / 50+ PAID SUBSCRIBERS</div>
-          <div><strong>ENTERPRISE:</strong> 0 / 4 AGENCIES ON CORE AI ENGINE</div>
-          <div><strong>RETENTION:</strong> CHECKOUT RECOVERY WORKFLOWS</div>
+          <div><strong>USERS:</strong> 0 / 1,000 REGISTERED</div>
+          <div><strong>PAID:</strong> 0 / 75+ PAYING SUBSCRIBERS</div>
+          <div><strong>CHANNELS:</strong> DIRECT FOUNDER OUTREACH &amp; LOOPS</div>
+          <div><strong>RETENTION:</strong> AUTOMATED CART RECOVERY</div>
         </div>
         <svg class="badge-runner-doodle" viewBox="0 0 80 45" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round">
           <circle cx="20" cy="12" r="5"/>
@@ -175,41 +175,36 @@ function renderTactileArtifact(t, idx) {
         </svg>
       </div>
     `;
-  } else if (t.id.includes('02') || t.id.includes('yc') || t.id.includes('trace') || t.id.includes('dist')) {
-    // 2. AgentTrace Launch, Audience & Telemetry
+  } else if (t.id.includes('02') || t.id.includes('xg') || t.id.includes('x-growth')) {
+    // 2. X / Twitter Authority (2,000 High-Signal Followers)
     return `
       <div class="artifact-graph-sheet">
         <div class="washi-tape-strip" aria-hidden="true"></div>
         <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
-          AGENTTRACE // TELEMETRY &amp; SCALE MANIFEST
+          X / TWITTER // BUILDER MOAT MANIFEST
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 110px;">PARTNER CALLS:</span>
+          <span style="min-width: 120px;">FOLLOWERS (2,000):</span>
           <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 5 CALLS</span>
+          <span>0 / 2,000</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 110px;">X REACH (600+):</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 600</span>
+          <span style="min-width: 120px;">MODEL PROFILE:</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 100%;"></div></div>
+          <span>MARC LOU / LEVELS</span>
         </div>
         <div class="funnel-bar-item">
-          <span style="min-width: 110px;">WAITLIST (300+):</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 300</span>
-        </div>
-        <div class="funnel-bar-item">
-          <span style="min-width: 110px;">REDDIT KARMA:</span>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 0%;"></div></div>
-          <span>0 / 400+</span>
+          <span style="min-width: 120px;">TOPIC AUTHORITY:</span>
+          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width: 100%;"></div></div>
+          <span>SAAS &amp; GROWTH</span>
         </div>
         <span style="font-family: 'Caveat', cursive; font-size: 1.15rem; color: #2e5c38; display: block; margin-top: 8px;">
-          * Public beta telemetry demos &amp; trace replays active on X!
+          * Build in public: transparent SaaS numbers, teardowns &amp; zero vanity fluff!
         </span>
       </div>
     `;
-  } else if (t.id.includes('03') || t.id.includes('fin') || t.id.includes('60k') || t.id.includes('40k')) {
-    // 3. Personal Income (₹60,000 Milestone)
+  } else if (t.id.includes('03') || t.id.includes('xl') || t.id.includes('x-launch')) {
+    // 3. X Launch Playbook ($500 in 7-10 Days & 100 Users in 48-72h)
     return `
       <div class="artifact-qa-sheet">
         <svg class="binder-clip-graphic" viewBox="0 0 40 50" fill="none" aria-hidden="true">
@@ -220,39 +215,39 @@ function renderTactileArtifact(t, idx) {
         </svg>
 
         <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; margin-bottom: 10px; color: #1a1a1a; letter-spacing: 0.04em;">
-          PERSONAL CASHFLOW // NOVEMBER SPRINT
+          X LAUNCH PROTOCOL // RAPID MONETIZATION
         </div>
         <div style="font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.6; color: #333;">
-          &bull; November Income: <strong>₹0 / ₹60,000 PERSONAL NET</strong><br>
-          &bull; Pipeline: <strong>2 AGENCY RETAINERS &amp; SERVICES</strong><br>
-          &bull; Budget Status: <strong>STRICT ZERO-BURN DISCIPLINE</strong><br>
-          &bull; Target Runway: <strong>0% PROGRESS (CYCLE INITIATED)</strong>
+          &bull; Launch Engine: <strong>$500 IN 7–10 DAYS FROM ANY ASSET</strong><br>
+          &bull; Initial Traction: <strong>FIRST 100 USERS IN 48–72 HOURS VIA X</strong><br>
+          &bull; Playbook: <strong>HIGH-PULL HOOKS &amp; PROOF THREADS</strong><br>
+          &bull; Status: <strong>FRAMEWORK COMPILED &amp; READY TO TEST</strong>
         </div>
-        <div class="qa-stamp-circle">[RUNWAY DISCIPLINE // ₹60K TARGET]</div>
+        <div class="qa-stamp-circle">[DISTRIBUTION SOLVED // $500 REPEATABLE]</div>
       </div>
     `;
-  } else if (t.id.includes('04') || t.id.includes('self') || t.id.includes('flow') || t.id.includes('run')) {
-    // 4. Daily Running, Stretching, Flow State & New Schedule
+  } else if (t.id.includes('04') || t.id.includes('ds') || t.id.includes('dec-sprint')) {
+    // 4. Mid-December Side Project Launch ($500 in 2 Weeks)
     return `
       <div class="artifact-cassette-card">
         <div class="cassette-body">
           <div class="cassette-label-strip">
-            DAILY FLOW &bull; ATHLETIC PROTOCOL
+            MID-DECEMBER SPRINT &bull; 2-WEEK VALIDATION
           </div>
           <div class="cassette-spools">
             <div class="spool-hole"></div>
-            <span style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 2px;">FLOW STATE</span>
+            <span style="font-family: var(--font-mono); font-size: 9px; font-weight: 700; letter-spacing: 2px;">$500 TEST</span>
             <div class="spool-hole"></div>
           </div>
           <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #bbb; text-align: center; line-height: 1.5;">
-            Daily Run &bull; Daily Stretch &bull; New Schedule &bull; Calmer, Sharper Version of Me<br>
-            <span style="color: #ffbe1a; font-weight: 700;">[DAY 04 / 30 ACTIVE &bull; 0% LOGGED]</span>
+            Deploy Side Project Mid-Dec &bull; Window: Dec 15 &rarr; Dec 31<br>
+            <span style="color: #ffbe1a; font-weight: 700;">[ORGANIC X DISTRIBUTION ONLY &bull; TARGET: $500 IN 2 WKS]</span>
           </div>
         </div>
       </div>
     `;
-  } else {
-    // 5. Cinema Screenplay Sprints & Read 3 Books
+  } else if (t.id.includes('05') || t.id.includes('ag') || t.id.includes('agy-100k')) {
+    // 5. Personal Profit & Agency System (₹1 Lakh)
     return `
       <div class="artifact-spiral-sheet">
         <div class="spiral-holes" aria-hidden="true">
@@ -262,20 +257,41 @@ function renderTactileArtifact(t, idx) {
           <div class="spiral-ring"></div>
           <div class="spiral-ring"></div>
         </div>
-        <div class="artifact-spiral-title">CREATIVE SPRINT // SCRIPT &bull; 3 BOOKS</div>
+        <div class="artifact-spiral-title">CAPITAL OS // ₹1 LAKH &amp; AGENCY SYSTEM</div>
         <div class="spiral-tier-block">
-          <span class="spiral-tier-label">FEATURE MOVIE SCRIPT:</span>
-          Active writing sprints &bull; Scene outlines &bull; Character dialogue.
+          <span class="spiral-tier-label">NET PROFIT TARGET:</span>
+          ₹1,00,000 INR accumulated personal runway by Dec 31.
         </div>
         <div class="spiral-tier-block">
-          <span class="spiral-tier-label">READ 3 BOOKS:</span>
-          0 of 3 Books Completed [Systems &bull; Narrative &bull; Compounding].
+          <span class="spiral-tier-label">AGENCY ARCHITECTURE:</span>
+          Structured client pipeline &bull; Distribution retainers &bull; Delivery SOPs.
         </div>
         <div class="spiral-tier-block">
-          <span class="spiral-tier-label">FLOW &amp; KNOWLEDGE:</span>
-          Entering deep effortless flow &bull; Broadening intellect horizons.
+          <span class="spiral-tier-label">CLIENT OFFER:</span>
+          Productized social distribution &bull; Launch systems &bull; GTM loops.
         </div>
-        <span class="spiral-hand-note">* Screenplay architecture + book synthesis notes [0% Complete].</span>
+        <span class="spiral-hand-note">* Building a sovereign agency machine, not ad-hoc tasks [Cycle Initiated].</span>
+      </div>
+    `;
+  } else {
+    // 6. AgentTrace (AOS): Autonomous Agent Observability Engine & YC Batch
+    return `
+      <div class="artifact-badge-card" style="border-left: 3px solid #06b6d4;">
+        <div class="lanyard-slot" aria-hidden="true"></div>
+        <div class="badge-header">
+          <span class="badge-org">AGENTTRACE // AOS HARD TECH</span>
+          <span class="spec-status-stamp">[YC CANDIDATE]</span>
+        </div>
+        <div class="badge-barcode">||| | |||| || ||| |||||</div>
+        <div class="badge-details">
+          <div><strong>SYSTEM:</strong> AUTONOMOUS AGENT OBSERVABILITY</div>
+          <div><strong>MILESTONE:</strong> YC APPLICATION &amp; DEMO VIDEO</div>
+          <div><strong>SDK BENCHMARK:</strong> SUB-15MS TRACE REPLAY</div>
+          <div><strong>STATUS:</strong> CORE TRACE DAG ENGINE IN SPRINT</div>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #06b6d4; font-weight: 700; margin-top: 6px;">
+          [THE AOS TARGET &bull; FOUNDATIONAL INFRASTRUCTURE]
+        </div>
       </div>
     `;
   }
@@ -290,11 +306,12 @@ function renderNovemberTargets() {
 
   const now = new Date();
   const year = now.getFullYear();
-  const month = now.getMonth();
-  const daysInMonth = new Date(year, month + 1, 0).getDate(); // 30 for November
-  const currentDay = Math.min(Math.max(now.getDate(), 1), daysInMonth);
-  const daysLeft = Math.max(0, daysInMonth - currentDay);
-  const elapsedPercent = Math.round((currentDay / daysInMonth) * 100);
+  const targetEndDate = new Date(2026, 11, 31, 23, 59, 59); // Dec 31, 2026
+  const sprintStartDate = new Date(2026, 10, 1, 0, 0, 0); // Nov 01, 2026
+  const totalSprintDays = 61; // 30 days Nov + 31 days Dec
+  const elapsedDays = Math.max(1, Math.min(totalSprintDays, Math.floor((now - sprintStartDate) / (1000 * 60 * 60 * 24)) + 1));
+  const daysLeft = Math.max(0, Math.ceil((targetEndDate - now) / (1000 * 60 * 60 * 24)));
+  const elapsedPercent = Math.min(100, Math.round((elapsedDays / totalSprintDays) * 100));
 
   const targets = state.novemberTargets || state.octoberTargets || state.targets || state.septemberTargets || [];
 
@@ -308,27 +325,31 @@ function renderNovemberTargets() {
   if (monthElapsedEl) monthElapsedEl.textContent = `${elapsedPercent}%`;
   if (avgProgressEl) avgProgressEl.textContent = `${avgProgress}%`;
 
-  // Render 30-Day November Sprint Ribbon
+  // Render 60-Day Runway Timeline Ribbon
   if (ribbonEl) {
+    const month = now.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const currentDayInMonth = Math.min(Math.max(now.getDate(), 1), daysInMonth);
     const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+    const monthPrefix = month === 10 ? 'Nov' : 'Dec';
     ribbonEl.innerHTML = `
       <div class="ribbon-header">
-        <span class="ribbon-title">30-DAY NOVEMBER SPRINT TIMELINE &bull; NOV 01 &rarr; NOV 30</span>
-        <span class="ribbon-status">[DAY ${String(currentDay).padStart(2, '0')} / ${daysInMonth} ACTIVE &bull; ${daysLeft} DAYS REMAINING]</span>
+        <span class="ribbon-title">60-DAY RUNWAY TIMELINE &bull; NOV 01 &rarr; DEC 31, 2026</span>
+        <span class="ribbon-status">[DAY ${String(elapsedDays).padStart(2, '0')} / ${totalSprintDays} ACTIVE &bull; ${daysLeft} DAYS REMAINING TO DEC 31]</span>
       </div>
-      <div class="ribbon-grid" role="region" aria-label="November 30-day progress ribbon" style="grid-template-columns: repeat(${daysInMonth}, minmax(0, 1fr));">
+      <div class="ribbon-grid" role="region" aria-label="60-day sprint progress ribbon" style="grid-template-columns: repeat(${daysInMonth}, minmax(0, 1fr));">
         ${daysArray.map(d => {
           let statusClass = 'day-future';
           let marker = '&middot;';
-          let tooltip = `Nov ${String(d).padStart(2, '0')} — Upcoming Sprint Runway`;
-          if (d < currentDay) {
+          let tooltip = `${monthPrefix} ${String(d).padStart(2, '0')} — Upcoming Sprint Runway (${daysLeft}d to Dec 31)`;
+          if (d < currentDayInMonth) {
             statusClass = 'day-past';
             marker = '&#10003;';
-            tooltip = `Nov ${String(d).padStart(2, '0')} — Completed Sprint ✓`;
-          } else if (d === currentDay) {
+            tooltip = `${monthPrefix} ${String(d).padStart(2, '0')} — Completed Runway ✓`;
+          } else if (d === currentDayInMonth) {
             statusClass = 'day-current';
             marker = '&#9679;';
-            tooltip = `Day ${String(d).padStart(2, '0')} — Active Sprint Today (${daysLeft}d remaining)`;
+            tooltip = `Day ${String(d).padStart(2, '0')} — Active Sprint Today (${daysLeft}d to Dec 31)`;
           }
           return `
             <div class="day-cell ${statusClass}" data-tooltip="${tooltip}" data-day="${d}" tabindex="0" role="button" aria-label="${tooltip}">
@@ -345,15 +366,16 @@ function renderNovemberTargets() {
 
   const tabOffsets = [
     '16px',
-    'calc(16px + 18%)',
-    'calc(16px + 36%)',
-    'calc(16px + 54%)',
-    'calc(16px + 72%)'
+    'calc(16px + 15%)',
+    'calc(16px + 30%)',
+    'calc(16px + 45%)',
+    'calc(16px + 60%)',
+    'calc(16px + 75%)'
   ];
 
   container.innerHTML = targets.map((t, idx) => {
     const pct = Math.min(100, Math.round((t.currentValue / t.targetValue) * 100));
-    const formattedDeadline = t.deadline ? t.deadline.replace('2026-11-', 'Nov ').replace('2026-10-', 'Oct ').replace('2026-09-', 'Sep ') : 'Nov 30';
+    const formattedDeadline = t.deadline ? t.deadline.replace('2026-12-', 'Dec ').replace('2026-11-', 'Nov ').replace('2026-10-', 'Oct ').replace('2026-09-', 'Sep ') : 'Dec 31';
     const isPulled = activePulledFolderId === t.id;
     const tabOffset = tabOffsets[idx] || '16px';
 
@@ -423,7 +445,7 @@ function renderNovemberTargets() {
                 <div class="dossier-cleared-stamp" aria-label="Dossier Complete Stamp">
                   <div class="stamp-seal">
                     <span class="stamp-seal-badge">CLEARED // COMPLETE</span>
-                    <span class="stamp-seal-title">NOV 2026 DOSSIER</span>
+                    <span class="stamp-seal-title">2-MONTH DOSSIER // 2026</span>
                     <span class="stamp-seal-sub">ALL SUBTARGETS VERIFIED &#10003;</span>
                   </div>
                 </div>
@@ -691,23 +713,54 @@ function renderFiveYearHorizon() {
 // RENDER BUCKET LIST
 // ----------------------------------------------------------------------------
 
+let currentBucketHorizonFilter = 'ALL';
+
+function setupBucketHorizonFilters() {
+  const buttons = document.querySelectorAll('[data-horizon-filter]');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentBucketHorizonFilter = btn.getAttribute('data-horizon-filter') || 'ALL';
+      renderBucketList();
+    });
+  });
+}
+
 function renderBucketList() {
   const container = document.getElementById('bucket-list-container');
   const countBadge = document.getElementById('bucket-count-badge');
+  const summaryText = document.getElementById('bucket-summary-text');
   if (!container) return;
 
-  const list = state.q4Goals || state.bucketList || [];
-  const total = list.length;
-  const completed = list.filter(b => b.completed).length;
+  const fullList = state.q4Goals || state.bucketList || [];
+  const filteredList = currentBucketHorizonFilter === 'ALL'
+    ? fullList
+    : fullList.filter(item => item.horizon === currentBucketHorizonFilter);
+
+  const total = filteredList.length;
+  const completed = filteredList.filter(b => b.completed).length;
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   if (countBadge) {
-    countBadge.textContent = `[${completed}/${total} COMPLETED • ${percent}%]`;
+    const scopeLabel = currentBucketHorizonFilter === 'ALL' ? 'TOTAL' : currentBucketHorizonFilter;
+    countBadge.textContent = `[${scopeLabel}: ${completed}/${total} COMPLETED • ${percent}%]`;
   }
 
-  container.innerHTML = list.map(item => `
+  if (summaryText) {
+    if (currentBucketHorizonFilter === '2-MONTH') {
+      summaryText.textContent = '2-Month Sprint deliverables (deadline: Dec 31, 2026). Click any goal to toggle completion.';
+    } else if (currentBucketHorizonFilter === '6-MONTH') {
+      summaryText.textContent = '6-Month Strategic Horizon deliverables (deadline: May 31, 2027). Click to toggle.';
+    } else {
+      summaryText.textContent = 'All 2-Month Sprints & 6-Month Strategic Horizon deliverables. Click any goal to toggle completion.';
+    }
+  }
+
+  container.innerHTML = filteredList.map(item => `
     <div class="bucket-item-row ${item.completed ? 'completed' : ''}" data-id="${item.id}" role="checkbox" aria-checked="${item.completed}">
       <span class="bucket-box">${item.completed ? '✓' : ''}</span>
+      <span class="bucket-horizon-pill ${item.horizon === '2-MONTH' ? 'pill-2m' : 'pill-6m'}">${item.horizon || 'TARGET'}</span>
       <span class="bucket-cat">${item.category}</span>
       <span class="bucket-text">${item.text}</span>
     </div>
@@ -716,11 +769,11 @@ function renderBucketList() {
   container.querySelectorAll('.bucket-item-row').forEach(row => {
     row.addEventListener('click', () => {
       const id = row.getAttribute('data-id');
-      const item = list.find(b => b.id === id);
+      const item = fullList.find(b => b.id === id);
       if (item) {
         item.completed = !item.completed;
-        saveStored(STORAGE_KEYS.Q4_GOALS, list);
-        saveStored(STORAGE_KEYS.BUCKET_LIST, list);
+        saveStored(STORAGE_KEYS.Q4_GOALS, fullList);
+        saveStored(STORAGE_KEYS.BUCKET_LIST, fullList);
         renderBucketList();
       }
     });
@@ -1895,6 +1948,7 @@ function initApp() {
   setupFolderTabs();
   renderNovemberTargets();
   renderFiveYearHorizon();
+  setupBucketHorizonFilters();
   renderBucketList();
   renderRadarSection();
   setupRadarControls();
