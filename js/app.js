@@ -2130,7 +2130,7 @@ async function syncCloudData() {
         }
       }
 
-      if (newlyImported > 0) {
+      if (newlyImported > 0 && document.getElementById('log-feed')) {
         renderDisciplineFilterBar();
         renderTagFilterBar();
         renderDailyLogs();
@@ -2318,13 +2318,6 @@ function initApp() {
   setupBucketHorizonFilters();
   renderBucketList();
   renderSixMonthHorizon();
-  renderRadarSection();
-  setupRadarControls();
-  renderPolymathStats();
-  renderDisciplineFilterBar();
-  renderTagFilterBar();
-  renderDailyLogs();
-  setupPolymathComposer();
   setupEventListeners();
   setupScrollSpy();
   setupDatabaseModal();
