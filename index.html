@@ -56,6 +56,10 @@
         <span style="margin-left: 10px; font-weight: 600;">PERSONAL BLUEPRINT</span>
       </div>
       <div class="header-meta-controls">
+        <button id="db-sync-btn" class="db-sync-pill" type="button" aria-label="Database Cloud Sync" title="Database Cloud Sync (Supabase)">
+          <span class="db-sync-dot"></span>
+          <span class="db-sync-text">DB SYNC</span>
+        </button>
         <span id="live-time-display">--:--:--</span>
         <button id="theme-toggle" class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle dark and light theme" title="Toggle theme">
           <span class="theme-toggle-indicator" aria-hidden="true">◐</span>
@@ -220,14 +224,12 @@
     <nav class="nav-strip" id="site-nav" aria-label="Quick jumps">
       <a href="#section-polymath" class="nav-item" data-section="section-polymath"><span class="nav-code">[CORE]</span> Drive</a>
       <a href="#section-doing" class="nav-item" data-section="section-doing"><span class="nav-code">[01]</span> Focus</a>
-      <a href="#section-carry" class="nav-item" data-section="section-carry"><span class="nav-code">[02]</span> Carry</a>
-      <a href="#section-projects" class="nav-item" data-section="section-projects"><span class="nav-code">[03]</span> Projects</a>
-      <a href="#section-targets" class="nav-item" data-section="section-targets"><span class="nav-code">[04]</span> Targets</a>
-      <a href="#section-horizon" class="nav-item" data-section="section-horizon"><span class="nav-code">[05]</span> Horizon</a>
-      <a href="#section-bucket" class="nav-item" data-section="section-bucket"><span class="nav-code">[06]</span> 2M &amp; 6M</a>
-      <a href="#section-radar" class="nav-item" data-section="section-radar"><span class="nav-code">[07]</span> Radar</a>
-      <a href="#section-daily" class="nav-item" data-section="section-daily"><span class="nav-code">[08]</span> Intellectual</a>
-      <a href="#section-inspirations" class="nav-item" data-section="section-inspirations"><span class="nav-code">[09]</span> Archive</a>
+      <a href="#section-projects" class="nav-item" data-section="section-projects"><span class="nav-code">[02]</span> Projects</a>
+      <a href="#section-targets" class="nav-item" data-section="section-targets"><span class="nav-code">[03]</span> Targets</a>
+      <a href="#section-horizon" class="nav-item" data-section="section-horizon"><span class="nav-code">[04]</span> Horizon</a>
+      <a href="#section-radar" class="nav-item" data-section="section-radar"><span class="nav-code">[05]</span> Radar</a>
+      <a href="#section-daily" class="nav-item" data-section="section-daily"><span class="nav-code">[06]</span> Intellectual</a>
+      <a href="#section-inspirations" class="nav-item" data-section="section-inspirations"><span class="nav-code">[07]</span> Archive &amp; Doctrine</a>
     </nav>
   </header>
 
@@ -312,58 +314,11 @@
     </div>
   </section>
 
-  <!-- FIELD ARTIFACT 01: EARLY HUSTLE & INTENSE VELOCITY (YOUNG ELON MUSK) -->
-  <aside class="field-dispatch-card" aria-label="Field Artifact: Early Hustle and Extreme Velocity">
-    <div class="field-dispatch-inner">
-      <div class="field-dispatch-media">
-        <div class="field-photo-frame">
-          <img src="./assets/young_elon_musk_hacker.png" alt="Young Elon Musk smiling at his computer workstation during early startup days" class="field-dispatch-img" loading="lazy">
-          <div class="field-photo-tag">REF · 01</div>
-        </div>
-      </div>
-      <div class="field-dispatch-content">
-        <div class="field-dispatch-meta">
-          <span class="field-beacon" aria-hidden="true"></span>
-          <span class="field-label">FIELD ARTIFACT · 01</span>
-          <span class="field-category">FOUNDER CLOCK-RATE</span>
-        </div>
-        <h3 class="field-dispatch-title">Extreme Velocity &amp; The First-Principles Code Sprint</h3>
-        <blockquote class="field-dispatch-quote">
-          &ldquo;When starting out, we just rented a small office and slept on the couch. We had one computer, so the website was up during the day and I was coding at night, 7 days a week, all the time. Work super hard. Put in 80 to 100 hour weeks every week. This improves the odds of success.&rdquo;
-        </blockquote>
-        <p class="field-dispatch-takeaway">
-          <strong>CORE SYNTHESIS:</strong> Deconstruct problems down to fundamental truths and build with uncompromising clock-rate. Raw vertical output in your twenties creates compounding equity that capital alone cannot purchase.
-        </p>
-        <div class="field-dispatch-foot">
-          <span class="field-foot-ref">Archival Dispatch: Elon Musk (Zip2 / X.com Era)</span>
-          <span class="field-foot-date">NOVEMBER SPRINT CADENCE</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 02: EVERYDAY CARRY // INSIDE MY BRAIN -->
-  <section id="section-carry">
-    <div class="editorial-heading">
-      <span>Everyday Carry &bull; Inside My World</span>
-      <span class="heading-num">[02]</span>
-    </div>
-
-    <div class="flatlay-container">
-      <div class="flatlay-photo-frame">
-        <img src="./assets/bold_everyday_carry.jpg" alt="Everyday Carry Flat-lay for Bold" class="flatlay-img">
-      </div>
-      <p class="flatlay-caption">
-        Graph paper flat-lay: Orbit mint &bull; AI Memory Architecture notebook &bull; The Polymath &bull; Wireframe glasses &bull; BOLD tape label &bull; Japanese cards &bull; Retro Mac icon
-      </p>
-    </div>
-  </section>
-
-  <!-- 03: CURRENT PROJECTS -->
+  <!-- 02: CURRENT PROJECTS -->
   <section id="section-projects">
     <div class="editorial-heading">
       <span>Current Projects</span>
-      <span class="heading-num">[03]</span>
+      <span class="heading-num">[02]</span>
     </div>
 
     <div class="projects-list">
@@ -476,53 +431,23 @@
     </div>
   </section>
 
-  <!-- FIELD ARTIFACT 02: HARD TECH & SIGNAL BENCH (LAB WORKBENCH) -->
-  <aside class="field-dispatch-card reverse" aria-label="Field Artifact: Hard Tech Laboratory Workbench">
-    <div class="field-dispatch-inner">
-      <div class="field-dispatch-media">
-        <div class="field-photo-frame">
-          <img src="./assets/lab_oscilloscope_workbench.jpg" alt="Electronic engineering workbench with stacked oscilloscopes, spectrum analyzers, vintage mechanical keyboard, and hardware components" class="field-dispatch-img" loading="lazy">
-          <div class="field-photo-tag">REF · 02</div>
-        </div>
-      </div>
-      <div class="field-dispatch-content">
-        <div class="field-dispatch-meta">
-          <span class="field-beacon" aria-hidden="true"></span>
-          <span class="field-label">FIELD ARTIFACT · 02</span>
-          <span class="field-category">PHYSICAL INSTRUMENTATION</span>
-        </div>
-        <h3 class="field-dispatch-title">Signal Synthesis &amp; Bare-Metal Verification</h3>
-        <blockquote class="field-dispatch-quote">
-          &ldquo;Real engineering is proven in the telemetry of physical waveforms, spectrum analyzers, and rigorous bench testing. Software wrappers come and go, but hardware and systems rooted in physics endure forever.&rdquo;
-        </blockquote>
-        <p class="field-dispatch-takeaway">
-          <strong>LAB MANIFEST:</strong> The engineering foundation behind Orbit, AgentTrace, and Lumen: ruthless diagnostic rigor, clean signal transmission, and zero tolerance for superficial vanity metrics.
-        </p>
-        <div class="field-dispatch-foot">
-          <span class="field-foot-ref">Hardware Laboratory Bench: RF Oscilloscope &amp; Spectrum Setup</span>
-          <span class="field-foot-date">DEEP WORK BENCHMARK</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 04: TARGETS (2-MONTH SPRINT: NOV • DEC 2026) -->
+  <!-- 03: TARGETS & STRATEGIC HORIZON (UNIFIED COMMAND DECK) -->
   <section id="section-targets">
     <div class="editorial-heading">
-      <span>2-Month Execution Targets (Nov &bull; Dec 2026)</span>
-      <span class="heading-num">[04]</span>
+      <span>Execution Targets &amp; Strategic Horizon</span>
+      <span class="heading-num">[03]</span>
     </div>
 
     <!-- Architect's Diagnostic Ruler -->
     <div class="targets-meta-strip">
       <div class="targets-meta-col">
         <span class="targets-meta-label">2-MONTH COUNTDOWN</span>
-        <span class="targets-meta-val"><strong id="nov-days-left">56</strong> DAYS TO DEC 31</span>
+        <span class="targets-meta-val"><strong id="nov-days-left">49</strong> DAYS TO DEC 31</span>
       </div>
       <div class="targets-meta-divider" aria-hidden="true"></div>
       <div class="targets-meta-col">
         <span class="targets-meta-label">60-DAY RUNWAY ELAPSED</span>
-        <span class="targets-meta-val"><strong id="nov-month-elapsed">8%</strong> [NOV 01 &rarr; DEC 31]</span>
+        <span class="targets-meta-val"><strong id="nov-month-elapsed">20%</strong> [NOV 01 &rarr; DEC 31]</span>
       </div>
       <div class="targets-meta-divider" aria-hidden="true"></div>
       <div class="targets-meta-col">
@@ -531,55 +456,58 @@
       </div>
     </div>
 
-    <!-- 60-Day Sprint Ribbon -->
-    <div class="november-days-ribbon" id="november-days-ribbon" aria-label="60-day sprint timeline">
-      <!-- Populated dynamically by JavaScript -->
+    <!-- Horizon View Switcher -->
+    <div class="target-horizon-switcher" role="tablist">
+      <button type="button" class="target-view-btn active" data-target-view="2-month">
+        <span class="view-btn-icon">⚡</span> 2-MONTH SPRINT [DEC 31, 2026]
+      </button>
+      <button type="button" class="target-view-btn" data-target-view="6-month">
+        <span class="view-btn-icon">🔭</span> 6-MONTH HORIZON [MAY 31, 2027]
+      </button>
+      <button type="button" class="target-view-btn" data-target-view="checklist">
+        <span class="view-btn-icon">✓</span> MASTER CHECKLIST (15)
+      </button>
     </div>
 
-    <!-- Filing Folder Deck -->
-    <div class="folder-deck-instruction">
-      <span class="deck-hint-pill">[60-DAY EXECUTION DECK // CLICK ANY TAB TO PULL OUT DOSSIER]</span>
+    <!-- VIEW 1: 2-MONTH TACTICAL DOSSIERS DECK -->
+    <div id="target-view-2month" class="target-view-pane active">
+      <!-- 60-Day Sprint Ribbon -->
+      <div class="november-days-ribbon" id="november-days-ribbon" aria-label="60-day sprint timeline">
+        <!-- Populated dynamically by JavaScript -->
+      </div>
+
+      <div class="folder-deck-instruction">
+        <span class="deck-hint-pill">[FILING SYSTEM // CLICK ANY TAB TO PULL OUT DOSSIER]</span>
+      </div>
+      <div class="folder-deck" id="targets-list">
+        <!-- Populated dynamically by JavaScript -->
+      </div>
     </div>
-    <div class="folder-deck" id="targets-list">
-      <!-- Populated dynamically by JavaScript -->
+
+    <!-- VIEW 2: 6-MONTH STRATEGIC HORIZON (MAY 2027) -->
+    <div id="target-view-6month" class="target-view-pane" style="display: none;">
+      <div class="six-month-grid" id="six-month-container">
+        <!-- Populated dynamically by JavaScript -->
+      </div>
+    </div>
+
+    <!-- VIEW 3: MASTER INTERACTIVE CHECKLIST -->
+    <div id="target-view-checklist" class="target-view-pane" style="display: none;">
+      <div class="bucket-summary">
+        <span id="bucket-summary-text">All 15 deliverables for 2-Month Sprints and 6-Month Horizon. Click any item to toggle completion.</span>
+        <strong id="bucket-count-badge">[0/15 COMPLETED &bull; 0%]</strong>
+      </div>
+      <div class="bucket-items-list" id="bucket-list-container">
+        <!-- Populated by JavaScript -->
+      </div>
     </div>
   </section>
 
-  <!-- FIELD ARTIFACT 03: THE DEATH-GROUND DOCTRINE (ROBERT GREENE 33 STRATEGIES) -->
-  <aside class="field-dispatch-card" aria-label="Field Artifact: The Death-Ground Strategy">
-    <div class="field-dispatch-inner">
-      <div class="field-dispatch-media">
-        <div class="field-photo-frame">
-          <img src="./assets/death_ground_strategy.png" alt="Book page excerpt: Strategy 04 Create a Sense of Urgency and Desperation - The Death-Ground Strategy" class="field-dispatch-img" loading="lazy">
-          <div class="field-photo-tag">REF · 03</div>
-        </div>
-      </div>
-      <div class="field-dispatch-content">
-        <div class="field-dispatch-meta">
-          <span class="field-beacon" aria-hidden="true"></span>
-          <span class="field-label">FIELD ARTIFACT · 03</span>
-          <span class="field-category">STRATEGIC DOCTRINE</span>
-        </div>
-        <h3 class="field-dispatch-title">Strategy 04: The Death-Ground Doctrine</h3>
-        <blockquote class="field-dispatch-quote">
-          &ldquo;You are your own worst enemy. You waste precious time dreaming of the future instead of engaging in the present. Since nothing seems urgent to you, you are only half involved in what you do. The only way to change is through action and outside pressure. Place yourself on 'death ground,' where your back is against the wall and you have to fight like hell to get out alive.&rdquo;
-        </blockquote>
-        <p class="field-dispatch-takeaway">
-          <strong>2-MONTH SPRINT RESOLUTION:</strong> The psychological engine behind the 60-day sprint dossiers till Dec 31: zero safety net, high stakes, burning the ships, and converting every single day into non-negotiable forward momentum.
-        </p>
-        <div class="field-dispatch-foot">
-          <span class="field-foot-ref">Source: Robert Greene &bull; The 33 Strategies of War (Chapter 04)</span>
-          <span class="field-foot-date">URGENCY COMPRESSION</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 05: 5-YEAR STRATEGIC HORIZON -->
+  <!-- 04: 5-YEAR STRATEGIC HORIZON -->
   <section id="section-horizon">
     <div class="editorial-heading">
       <span>5-Year Strategic Horizon (2026 &ndash; 2031)</span>
-      <span class="heading-num">[05]</span>
+      <span class="heading-num">[04]</span>
     </div>
 
     <div class="horizon-section" id="horizon-list">
@@ -587,103 +515,11 @@
     </div>
   </section>
 
-  <!-- FIELD ARTIFACT 04: BE DELUSIONAL (CAT AND TIGER MIRROR) -->
-  <aside class="field-dispatch-card reverse" aria-label="Field Artifact: Be Delusional Manifesto">
-    <div class="field-dispatch-inner">
-      <div class="field-dispatch-media">
-        <div class="field-photo-frame">
-          <img src="./assets/be_delusional_tiger.png" alt="Illustration poster: Be Delusional. A cat looking into a mirror seeing a majestic tiger" class="field-dispatch-img" loading="lazy">
-          <div class="field-photo-tag">REF · 04</div>
-        </div>
-      </div>
-      <div class="field-dispatch-content">
-        <div class="field-dispatch-meta">
-          <span class="field-beacon" aria-hidden="true"></span>
-          <span class="field-label">FIELD ARTIFACT · 04</span>
-          <span class="field-category">RADICAL CONVICTION</span>
-        </div>
-        <h3 class="field-dispatch-title">Be Delusional: Audacity Over Consensus</h3>
-        <blockquote class="field-dispatch-quote">
-          &ldquo;There is a certain delusional quality that all successful people have to have. You have to believe that something different can happen, even before the physical world has caught up with your imagination.&rdquo;
-        </blockquote>
-        <p class="field-dispatch-takeaway">
-          <strong>THE 5-YEAR HORIZON ANCHOR:</strong> The conviction underpinning the 2026&ndash;2031 vision ($15k/mo to $1M/mo, feature films, $20M liquid cash). Reasonable people adapt to the world; unreasonable people persist in adapting the world to themselves.
-        </p>
-        <div class="field-dispatch-foot">
-          <span class="field-foot-ref">Manifesto: The Inner Tiger &bull; Vision Calibration</span>
-          <span class="field-foot-date">5-YEAR HORIZON DOCTRINE</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 06: 2-MONTH SPRINT & 6-MONTH STRATEGIC HORIZON -->
-  <section id="section-bucket" class="q4-roadmap-section">
-    <div class="editorial-heading">
-      <span>2-Month Sprint &bull; 6-Month Strategic Horizon</span>
-      <span class="heading-num">[06]</span>
-    </div>
-
-    <!-- Quarter Execution Ribbon -->
-    <div class="q4-ribbon-card">
-      <div class="q4-ribbon-left">
-        <span class="q4-badge-tag">[2M SPRINT &bull; 6M HORIZON]</span>
-        <span class="q4-subtext">2-Month Sprints (Dec 31, 2026) &bull; 6-Month Scale Engine (May 31, 2027)</span>
-      </div>
-      <div class="q4-ribbon-months">
-        <button type="button" class="q4-month-pill active" data-horizon-filter="ALL">ALL TARGETS (15)</button>
-        <span class="q4-month-sep">&bull;</span>
-        <button type="button" class="q4-month-pill" data-horizon-filter="2-MONTH">2-MONTH SPRINT [DEC 31]</button>
-        <span class="q4-month-sep">&bull;</span>
-        <button type="button" class="q4-month-pill" data-horizon-filter="6-MONTH">6-MONTH HORIZON [MAY 2027]</button>
-      </div>
-    </div>
-
-    <div class="bucket-summary">
-      <span id="bucket-summary-text">All 2-Month Sprints &amp; 6-Month Strategic Horizon deliverables. Click any goal to toggle completion.</span>
-      <strong id="bucket-count-badge">[0/15 COMPLETED &bull; 0%]</strong>
-    </div>
-
-    <div class="bucket-items-list" id="bucket-list-container">
-      <!-- Populated by JavaScript -->
-    </div>
-  </section>
-
-  <!-- FIELD ARTIFACT 05: VENTURE ARCHITECTURE (SAM ALTMAN / READ WRITE OWN) -->
-  <aside class="field-dispatch-card" aria-label="Field Artifact: Venture Architecture and Next-Gen Software">
-    <div class="field-dispatch-inner">
-      <div class="field-dispatch-media">
-        <div class="field-photo-frame">
-          <img src="./assets/sam_altman_read_write_own.jpg" alt="Sam Altman alongside Chris Dixon book Read Write Own: Building the Next Era of the Internet" class="field-dispatch-img" loading="lazy">
-          <div class="field-photo-tag">REF · 05</div>
-        </div>
-      </div>
-      <div class="field-dispatch-content">
-        <div class="field-dispatch-meta">
-          <span class="field-beacon" aria-hidden="true"></span>
-          <span class="field-label">FIELD ARTIFACT · 05</span>
-          <span class="field-category">VENTURE SCALE &amp; GTM</span>
-        </div>
-        <h3 class="field-dispatch-title">Architecting the Next Era of Software</h3>
-        <blockquote class="field-dispatch-quote">
-          &ldquo;Read this book to understand a compelling vision of where the internet should go and how to get there.&rdquo; &mdash; Sam Altman
-        </blockquote>
-        <p class="field-dispatch-takeaway">
-          <strong>GTM &amp; NETWORK MOATS:</strong> Connecting the Q4 sprint with the YC W27 batch and the Intellectual Intake Radar. Legendary software companies build ownership-first architecture and compounding network loops.
-        </p>
-        <div class="field-dispatch-foot">
-          <span class="field-foot-ref">Reference: Chris Dixon &bull; Read Write Own (Endorsed by Sam Altman)</span>
-          <span class="field-foot-date">YC W27 SCALE TRACK</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- 07: INTELLECTUAL INTAKE RADAR -->
+  <!-- 05: INTELLECTUAL INTAKE RADAR -->
   <section id="section-radar" class="radar-section-wrap">
     <div class="editorial-heading">
       <span>Intellectual Intake Radar &bull; The Polymath Matrix</span>
-      <span class="heading-num">[07]</span>
+      <span class="heading-num">[05]</span>
     </div>
 
     <!-- Radar Controller Banner -->
@@ -748,11 +584,11 @@
     </div>
   </section>
 
-  <!-- 08: INTELLECTUAL MAXXING ENGINE & POLYMATH KNOWLEDGE VAULT -->
+  <!-- 06: INTELLECTUAL MAXXING ENGINE & POLYMATH KNOWLEDGE VAULT -->
   <section id="section-daily" class="daily-section-wrap">
     <div class="editorial-heading">
       <span>Intellectual Maxxing Engine &bull; Polymath Daily Log</span>
-      <span class="heading-num">[08]</span>
+      <span class="heading-num">[06]</span>
     </div>
 
     <!-- Polymath Compounding Intelligence Banner -->
@@ -939,102 +775,140 @@
     </div>
   </section>
 
-  <!-- 09: INSPIRATIONS & VISUAL ARCHIVE -->
+  <!-- 07: INSPIRATIONS & VISUAL ARCHIVE (MERGED DOCTRINES COLLAGE) -->
   <section id="section-inspirations">
     <div class="editorial-heading">
-      <span>Visual Archive &bull; Aesthetic References</span>
-      <span class="heading-num">[09]</span>
+      <span>Visual Archive &bull; Core Doctrines &amp; Inspirations Collage</span>
+      <span class="heading-num">[07]</span>
     </div>
     <p style="font-size: 0.88rem; color: var(--ink-secondary); margin-bottom: 20px;">
-      Not just aesthetic references, but mental models: what I admire, study, and actively extract into how I build, think, and design.
+      Not just aesthetic references, but operating mental models: core doctrines, technical benchmarks, and philosophical convictions extracted into how I build, think, and design.
     </p>
 
     <div class="collage-masonry">
-      <!-- Item 01: Tony Stark in Workshop -->
+      <!-- Item 01: Young Elon Musk (Founder Clock-Rate & Velocity) -->
       <figure class="collage-item" style="--tilt: -1.2deg;">
         <div class="tape-strip tape-top"></div>
+        <div class="collage-img-wrap">
+          <img src="./assets/young_elon_musk_hacker.png" alt="Young Elon Musk at his workstation during early startup days" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[DOCTRINE · 01]</span>
+          <strong>Extreme Velocity &bull; First-Principles Code Sprint</strong>
+          <span class="collage-note">&ldquo;Work super hard. Put in 80 to 100 hour weeks every week. This improves the odds of success.&rdquo; &mdash; Elon Musk. Raw vertical output in your twenties compounds equity that capital alone cannot purchase.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Item 02: Tony Stark in Workshop -->
+      <figure class="collage-item" style="--tilt: 1.1deg;">
+        <div class="tape-strip tape-corner-left"></div>
         <div class="collage-img-wrap">
           <img src="./assets/tony_stark_builder.png" alt="Tony Stark in his workshop welding the Iron Man gauntlet" class="collage-img" loading="lazy">
         </div>
         <figcaption class="collage-caption">
-          <span class="collage-fig-tag">[REF 01]</span>
+          <span class="collage-fig-tag">[REF 02]</span>
           <strong>Hands-On Prototyping &bull; The Tinkerer's Garage</strong>
           <span class="collage-note">The obsessive builder impulse: making complex things with my own hands late at night, bypassing red tape, and closing the gap between raw thought and working prototypes through rapid iteration.</span>
         </figcaption>
       </figure>
 
-      <!-- Item 02: Think Before You Click -->
-      <figure class="collage-item" style="--tilt: 1.4deg;">
+      <!-- Item 03: Hardware Lab Bench (Bare-Metal Verification) -->
+      <figure class="collage-item" style="--tilt: -0.9deg;">
         <div class="collage-img-wrap">
-          <img src="./assets/media_1790024069851.jpg" alt="Think Before You Click retro PC net art" class="collage-img" loading="lazy">
+          <img src="./assets/lab_oscilloscope_workbench.jpg" alt="Engineering workbench with stacked oscilloscopes and spectrum analyzers" class="collage-img" loading="lazy">
         </div>
         <figcaption class="collage-caption">
-          <span class="collage-fig-tag">[REF 02]</span>
-          <strong>Deliberate Computing &bull; 90s Net Soul</strong>
-          <span class="collage-note">Intentional digital presence. Treating the computer as a thinking instrument rather than an attention trap. Questioning every input before letting it shape my mind.</span>
+          <span class="collage-fig-tag">[DOCTRINE · 03]</span>
+          <strong>Signal Telemetry &bull; Bare-Metal Verification</strong>
+          <span class="collage-note">&ldquo;Software wrappers come and go, but hardware and systems rooted in physics endure forever.&rdquo; Ruthless diagnostic rigor, clean signal transmission, and zero tolerance for vanity metrics.</span>
         </figcaption>
       </figure>
 
-      <!-- Item 03: Richard Feynman at Blackboard -->
+      <!-- Item 04: Robert Greene (The Death-Ground Doctrine) -->
+      <figure class="collage-item" style="--tilt: 1.4deg;">
+        <div class="tape-strip tape-top"></div>
+        <div class="collage-img-wrap">
+          <img src="./assets/death_ground_strategy.png" alt="Book page excerpt: The Death-Ground Strategy by Robert Greene" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[DOCTRINE · 04]</span>
+          <strong>The Death-Ground Doctrine &bull; Urgency Compression</strong>
+          <span class="collage-note">&ldquo;Place yourself on 'death ground,' where your back is against the wall and you have to fight like hell to get out alive.&rdquo; Zero safety net, high stakes, burning the ships, and converting every single day into forward momentum.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Item 05: Be Delusional Tiger (Audacity Over Consensus) -->
+      <figure class="collage-item" style="--tilt: -1.5deg;">
+        <div class="collage-img-wrap">
+          <img src="./assets/be_delusional_tiger.png" alt="A cat looking into a mirror seeing a majestic tiger" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[DOCTRINE · 05]</span>
+          <strong>Be Delusional &bull; Audacity Over Consensus</strong>
+          <span class="collage-note">&ldquo;You have to believe that something different can happen, even before the physical world has caught up with your imagination.&rdquo; The anchor behind the 5-Year Horizon ($15k/mo to $1M/mo, $20M liquid capital).</span>
+        </figcaption>
+      </figure>
+
+      <!-- Item 06: Sam Altman / Read Write Own (Venture Architecture) -->
       <figure class="collage-item" style="--tilt: 0.8deg;">
+        <div class="tape-strip tape-corner-right"></div>
+        <div class="collage-img-wrap">
+          <img src="./assets/sam_altman_read_write_own.jpg" alt="Sam Altman alongside Chris Dixon book Read Write Own" class="collage-img" loading="lazy">
+        </div>
+        <figcaption class="collage-caption">
+          <span class="collage-fig-tag">[DOCTRINE · 06]</span>
+          <strong>Venture Architecture &bull; Compounding Network Loops</strong>
+          <span class="collage-note">&ldquo;Read this book to understand a compelling vision of where the internet should go and how to get there.&rdquo; &mdash; Sam Altman. Building ownership-first software architecture and compounding distribution flywheels.</span>
+        </figcaption>
+      </figure>
+
+      <!-- Item 07: Richard Feynman at Blackboard -->
+      <figure class="collage-item" style="--tilt: -1.0deg;">
         <div class="tape-strip tape-corner-left"></div>
         <div class="collage-img-wrap">
           <img src="./assets/feynman_blackboard.png" alt="Richard Feynman at the blackboard with quantum physics equations" class="collage-img" loading="lazy">
         </div>
         <figcaption class="collage-caption">
-          <span class="collage-fig-tag">[REF 03]</span>
+          <span class="collage-fig-tag">[REF 07]</span>
           <strong>First Principles &bull; Total Understanding</strong>
-          <span class="collage-note">"What I cannot create, I do not understand." The relentless drive to derive problems from scratch, strip away dogma, and break complex systems down until they are self-evident.</span>
+          <span class="collage-note">&ldquo;What I cannot create, I do not understand.&rdquo; The drive to derive problems from scratch, strip away dogma, and break complex systems down until they are self-evident.</span>
         </figcaption>
       </figure>
 
-      <!-- Item 04: Patrick Jane over Chessboard -->
-      <figure class="collage-item" style="--tilt: -1.5deg;">
+      <!-- Item 08: Patrick Jane over Chessboard -->
+      <figure class="collage-item" style="--tilt: 1.2deg;">
         <div class="collage-img-wrap">
           <img src="./assets/patrick_jane_chess.png" alt="Patrick Jane smiling over a chessboard with a glass of tea" class="collage-img" loading="lazy">
         </div>
         <figcaption class="collage-caption">
-          <span class="collage-fig-tag">[REF 04]</span>
+          <span class="collage-fig-tag">[REF 08]</span>
           <strong>Observant Calm &bull; Strategic Game Sense</strong>
           <span class="collage-note">Total perceptive presence. Reading between the lines, staying playful under high stakes, and anticipating moves five steps ahead with calm, unbothered composure.</span>
         </figcaption>
       </figure>
 
-      <!-- Item 05: Koto Uniqode Cross-Stitch Pixel Identity -->
-      <figure class="collage-item" style="--tilt: 1deg;">
+      <!-- Item 09: Koto Uniqode Cross-Stitch Pixel Identity -->
+      <figure class="collage-item" style="--tilt: -1.3deg;">
         <div class="tape-strip tape-top"></div>
         <div class="collage-img-wrap">
           <img src="./assets/media_1790022241866.png" alt="Koto Uniqode woven cross-stitch pixel identity" class="collage-img" loading="lazy">
         </div>
         <figcaption class="collage-caption">
-          <span class="collage-fig-tag">[REF 05]</span>
+          <span class="collage-fig-tag">[REF 09]</span>
           <strong>Tactile Grid &bull; Digital Craft</strong>
-          <span class="collage-note">Proof that code and pixel systems don't have to feel cold or sterile. Extracting that woven, tactile warmth into digital interfaces so software feels physically crafted.</span>
+          <span class="collage-note">Proof that code and pixel systems don't have to feel cold or sterile. Extracting woven, tactile warmth into digital interfaces so software feels physically crafted.</span>
         </figcaption>
       </figure>
 
-      <!-- Item 06: Hydraulic Mech Suit Technical Blueprint -->
-      <figure class="collage-item" style="--tilt: -0.8deg;">
-        <div class="tape-strip tape-corner-right"></div>
-        <div class="collage-img-wrap">
-          <img src="./assets/mech_blueprint.png" alt="Technical engineering sketch of heavy hydraulic mech suit" class="collage-img" loading="lazy">
-        </div>
-        <figcaption class="collage-caption">
-          <span class="collage-fig-tag">[REF 06]</span>
-          <strong>Architectural Density &bull; Subsystem Design</strong>
-          <span class="collage-note">The discipline of rigorous engineering blueprints. Drafting every joint, hydraulic load, and data pipeline with total mechanical clarity before building.</span>
-        </figcaption>
-      </figure>
-
-      <!-- Item 07: Moon & Turbulent Ocean Waves -->
-      <figure class="collage-item" style="--tilt: 1.2deg;">
+      <!-- Item 10: Moon & Turbulent Ocean Waves -->
+      <figure class="collage-item" style="--tilt: 1.0deg;">
         <div class="collage-img-wrap">
           <img src="./assets/media_1790022393513.jpg" alt="Vibrant golden full moon over turbulent stylized ocean waves" class="collage-img" loading="lazy">
         </div>
         <figcaption class="collage-caption">
-          <span class="collage-fig-tag">[REF 07]</span>
+          <span class="collage-fig-tag">[REF 10]</span>
           <strong>Stillness Amid Noise &bull; Long-Term Compounding</strong>
-          <span class="collage-note">The quiet anchor. Maintaining razor-sharp focus and internal stillness while market hype and external waves churn beneath. Doing the deep, solitary work when the world is asleep.</span>
+          <span class="collage-note">The quiet anchor. Maintaining razor-sharp focus and internal stillness while market hype churns beneath. Doing the deep, solitary work when the world is asleep.</span>
         </figcaption>
       </figure>
     </div>
@@ -1049,6 +923,84 @@
       <span>HELVETICA &bull; IBM PLEX MONO &bull; WHITE CANVAS</span>
     </div>
   </footer>
+
+  <!-- SUPABASE CLOUD DATABASE SYNC MODAL -->
+  <dialog id="db-modal" class="blueprint-modal" aria-labelledby="db-modal-title">
+    <div class="blueprint-modal-box">
+      <div class="blueprint-modal-header">
+        <div>
+          <span class="modal-badge">[CLOUD DATABASE SYNC]</span>
+          <h2 id="db-modal-title" class="modal-title">Supabase Cloud Persistence</h2>
+        </div>
+        <button id="db-modal-close" class="modal-close-btn" type="button" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div class="blueprint-modal-body">
+        <p class="modal-desc">
+          Connect your free <strong>Supabase</strong> project (PostgreSQL) to sync your Daily Learning entries, target milestones, and personal progress safely to the cloud across all your devices.
+        </p>
+
+        <div id="db-status-banner" class="db-status-banner disconnected">
+          <span class="status-dot"></span>
+          <span id="db-status-text">STATUS: LOCAL ONLY (NOT CONNECTED TO CLOUD)</span>
+        </div>
+
+        <form id="db-config-form" class="modal-form">
+          <div class="form-group">
+            <label for="sb-url-input" class="form-label">SUPABASE PROJECT URL:</label>
+            <input type="url" id="sb-url-input" class="modal-input" placeholder="https://your-project-id.supabase.co" required>
+            <span class="form-help">Found in Supabase Dashboard &rarr; Project Settings &rarr; API &rarr; Project URL</span>
+          </div>
+
+          <div class="form-group">
+            <label for="sb-key-input" class="form-label">SUPABASE ANON / PUBLIC KEY:</label>
+            <input type="password" id="sb-key-input" class="modal-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." required>
+            <span class="form-help">Found in Supabase Dashboard &rarr; Project Settings &rarr; API &rarr; Project API keys (anon / public)</span>
+          </div>
+
+          <div class="modal-actions-row">
+            <button type="submit" id="db-connect-btn" class="modal-primary-btn">
+              CONNECT &amp; SYNC NOW
+            </button>
+            <button type="button" id="db-disconnect-btn" class="modal-secondary-btn" style="display: none;">
+              DISCONNECT
+            </button>
+          </div>
+        </form>
+
+        <div class="modal-schema-section">
+          <div class="schema-header">
+            <span>SQL SETUP SCRIPT (1-CLICK COPY):</span>
+            <button type="button" id="copy-sql-btn" class="copy-sql-btn">COPY SQL</button>
+          </div>
+          <pre class="schema-code-box"><code>-- Run in Supabase -> SQL Editor -> Run
+create table if not exists public.daily_logs (
+  id text primary key,
+  title text not null,
+  text text,
+  discipline text default 'software-craft',
+  tags jsonb default '[]'::jsonb,
+  code_snippet text,
+  cross_bridge text,
+  feynman_mastery jsonb default '{"explain": false, "code": false, "edges": false}'::jsonb,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table if not exists public.target_milestones (
+  id text primary key,
+  completed boolean default false,
+  updated_at timestamptz default now()
+);
+
+alter table public.daily_logs enable row level security;
+alter table public.target_milestones enable row level security;
+create policy "Anon access daily_logs" on public.daily_logs for all using (true) with check (true);
+create policy "Anon access target_milestones" on public.target_milestones for all using (true) with check (true);</code></pre>
+        </div>
+      </div>
+    </div>
+  </dialog>
 
   <script type="module" src="./js/app.js"></script>
 </body>

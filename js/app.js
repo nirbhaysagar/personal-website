@@ -1,5 +1,18 @@
 import { initialData } from './data.js';
 import { renderCrossStitchSVG } from './stitch-font.js';
+import {
+  initSupabase,
+  isSupabaseConnected,
+  loadSupabaseConfig,
+  saveSupabaseConfig,
+  testConnection,
+  fetchCloudDailyLogs,
+  upsertCloudDailyLog,
+  deleteCloudDailyLog,
+  fetchCloudMilestones,
+  upsertCloudMilestone,
+  SQL_SCHEMA
+} from './supabase.js';
 
 // ============================================================================
 // APP LOGIC: BOLD EDITORIAL BLUEPRINT & LOCAL DATA CONTROLLER
@@ -657,10 +670,11 @@ function renderNovemberTargets() {
           const avgProgressEl = document.getElementById('nov-avg-progress') || document.getElementById('oct-avg-progress') || document.getElementById('target-avg-progress');
           if (avgProgressEl) avgProgressEl.textContent = `${avgP}%`;
 
-          // Persist to localStorage
+          // Persist to localStorage and Cloud Database
           const saved = loadStored(STORAGE_KEYS.TARGET_MILESTONES, {});
           saved[milestone.id] = milestone.completed;
           saveStored(STORAGE_KEYS.TARGET_MILESTONES, saved);
+          upsertCloudMilestone(milestone.id, milestone.completed);
         }
       }
     });
@@ -774,6 +788,87 @@ function renderBucketList() {
         item.completed = !item.completed;
         saveStored(STORAGE_KEYS.Q4_GOALS, fullList);
         saveStored(STORAGE_KEYS.BUCKET_LIST, fullList);
+        upsertCloudMilestone(item.id, item.completed).catch(err => console.warn('Supabase milestone sync error:', err));
+        renderBucketList();
+        renderSixMonthHorizon();
+      }
+    });
+  });
+}
+
+// ----------------------------------------------------------------------------
+// RENDER 6-MONTH STRATEGIC HORIZON & TARGET VIEW SWITCHER
+// ----------------------------------------------------------------------------
+
+function renderSixMonthHorizon() {
+  const container = document.getElementById('six-month-container');
+  if (!container) return;
+
+  const allGoals = state.q4Goals || state.bucketList || [];
+  const list = allGoals.filter(g => g.horizon === '6-MONTH');
+
+  container.innerHTML = list.map((item, idx) => {
+    const isCompleted = Boolean(item.completed);
+    return `
+      <div class="six-month-card ${isCompleted ? 'is-completed' : ''}" data-id="${item.id}" role="checkbox" aria-checked="${isCompleted}" style="cursor: pointer;">
+        <div>
+          <div class="six-month-cat">
+            <span>[0${idx + 1}/07]</span> &bull; <span>${escapeHtml(item.category)}</span>
+          </div>
+          <h4 class="six-month-title">${escapeHtml(item.text)}</h4>
+        </div>
+        <div class="six-month-meta">
+          <span>DEADLINE: MAY 31, 2027</span>
+          <span style="font-weight: 700; ${isCompleted ? 'color: var(--accent-emerald, #10b981);' : ''}">${isCompleted ? '[✓ COMPLETED]' : '[· IN PROGRESS]'}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  container.querySelectorAll('.six-month-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.getAttribute('data-id');
+      const item = allGoals.find(g => g.id === id);
+      if (item) {
+        item.completed = !item.completed;
+        saveStored(STORAGE_KEYS.Q4_GOALS, allGoals);
+        saveStored(STORAGE_KEYS.BUCKET_LIST, allGoals);
+        upsertCloudMilestone(item.id, item.completed).catch(err => console.warn('Supabase sync error:', err));
+        renderSixMonthHorizon();
+        renderBucketList();
+      }
+    });
+  });
+}
+
+function setupTargetViewSwitcher() {
+  const buttons = document.querySelectorAll('.target-view-btn');
+  const panes = {
+    '2-month': document.getElementById('target-view-2month'),
+    '6-month': document.getElementById('target-view-6month'),
+    'checklist': document.getElementById('target-view-checklist')
+  };
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const view = btn.getAttribute('data-target-view');
+
+      Object.entries(panes).forEach(([k, pane]) => {
+        if (!pane) return;
+        if (k === view) {
+          pane.style.display = 'block';
+          pane.classList.add('active');
+        } else {
+          pane.style.display = 'none';
+          pane.classList.remove('active');
+        }
+      });
+
+      if (view === '6-month') {
+        renderSixMonthHorizon();
+      } else if (view === 'checklist') {
         renderBucketList();
       }
     });
@@ -1498,6 +1593,7 @@ function renderDailyLogs(highlightId = null) {
       if (confirm('Delete this polymath insight from your vault?')) {
         state.dailyLogs = state.dailyLogs.filter(l => l.id !== logId);
         saveStored(STORAGE_KEYS.DAILY_LOGS, state.dailyLogs);
+        deleteCloudDailyLog(logId).catch(err => console.warn('Supabase delete error:', err));
         renderTagFilterBar();
         renderDailyLogs();
       }
@@ -1651,6 +1747,7 @@ function setupEventListeners() {
 
       state.dailyLogs.unshift(newEntry);
       saveStored(STORAGE_KEYS.DAILY_LOGS, state.dailyLogs);
+      upsertCloudDailyLog(newEntry).catch(err => console.warn('Supabase log upsert error:', err));
 
       state.activeLogTag = 'ALL';
       state.activeDisciplineFilter = 'ALL';
@@ -1938,6 +2035,275 @@ function setupScrollSpy() {
 }
 
 // ----------------------------------------------------------------------------
+// SUPABASE CLOUD DATABASE CONTROLLER & MODAL
+// ----------------------------------------------------------------------------
+
+function updateDatabaseStatusUI(status, message) {
+  const syncBtn = document.getElementById('db-sync-btn');
+  const syncText = syncBtn ? syncBtn.querySelector('.db-sync-text') : null;
+  const statusBanner = document.getElementById('db-status-banner');
+  const statusText = document.getElementById('db-status-text');
+  const disconnectBtn = document.getElementById('db-disconnect-btn');
+  const connectBtn = document.getElementById('db-connect-btn');
+
+  if (status === 'connected') {
+    if (syncBtn) {
+      syncBtn.classList.remove('syncing', 'error');
+      syncBtn.classList.add('synced');
+    }
+    if (syncText) syncText.textContent = 'CLOUD SYNCED';
+    if (statusBanner) {
+      statusBanner.className = 'db-status-banner connected';
+    }
+    if (statusText) {
+      statusText.textContent = message || 'STATUS: CONNECTED TO SUPABASE (CLOUD SYNC ACTIVE)';
+    }
+    if (disconnectBtn) disconnectBtn.style.display = 'inline-block';
+    if (connectBtn) connectBtn.textContent = 'SAVE & RE-SYNC';
+  } else if (status === 'syncing') {
+    if (syncBtn) {
+      syncBtn.classList.remove('synced', 'error');
+      syncBtn.classList.add('syncing');
+    }
+    if (syncText) syncText.textContent = 'SYNCING...';
+    if (statusBanner) {
+      statusBanner.className = 'db-status-banner syncing';
+    }
+    if (statusText) statusText.textContent = message || 'STATUS: SYNCHRONIZING CLOUD & LOCAL DATA...';
+  } else if (status === 'error') {
+    if (syncBtn) {
+      syncBtn.classList.remove('synced', 'syncing');
+      syncBtn.classList.add('error');
+    }
+    if (syncText) syncText.textContent = 'SYNC ERROR';
+    if (statusBanner) {
+      statusBanner.className = 'db-status-banner error';
+    }
+    if (statusText) statusText.textContent = message || 'STATUS: SYNC ERROR (CHECK CREDENTIALS)';
+  } else {
+    // local / disconnected
+    if (syncBtn) {
+      syncBtn.classList.remove('synced', 'syncing', 'error');
+    }
+    if (syncText) syncText.textContent = 'DB SYNC';
+    if (statusBanner) {
+      statusBanner.className = 'db-status-banner disconnected';
+    }
+    if (statusText) statusText.textContent = 'STATUS: LOCAL ONLY (NOT CONNECTED TO CLOUD)';
+    if (disconnectBtn) disconnectBtn.style.display = 'none';
+    if (connectBtn) connectBtn.textContent = 'CONNECT & SYNC NOW';
+  }
+}
+
+async function syncCloudData() {
+  if (!isSupabaseConnected()) {
+    updateDatabaseStatusUI('disconnected');
+    return;
+  }
+
+  updateDatabaseStatusUI('syncing', 'FETCHING FROM SUPABASE CLOUD...');
+
+  try {
+    // 1. Fetch & merge daily logs
+    const cloudLogs = await fetchCloudDailyLogs();
+    if (Array.isArray(cloudLogs)) {
+      const localMap = new Map();
+      state.dailyLogs.forEach(l => localMap.set(l.id, l));
+
+      let newlyImported = 0;
+      cloudLogs.forEach(cl => {
+        if (!localMap.has(cl.id)) {
+          state.dailyLogs.push(cl);
+          localMap.set(cl.id, cl);
+          newlyImported++;
+        }
+      });
+
+      state.dailyLogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+      saveStored(STORAGE_KEYS.DAILY_LOGS, state.dailyLogs);
+
+      // Upload local logs that aren't yet in cloud
+      const cloudIds = new Set(cloudLogs.map(c => c.id));
+      for (const localLog of localMap.values()) {
+        if (!cloudIds.has(localLog.id)) {
+          await upsertCloudDailyLog(localLog).catch(e => console.warn('Cloud upload log err:', e));
+        }
+      }
+
+      if (newlyImported > 0) {
+        renderDisciplineFilterBar();
+        renderTagFilterBar();
+        renderDailyLogs();
+        renderPolymathStats();
+      }
+    }
+
+    // 2. Fetch & merge target milestones
+    const cloudMilestones = await fetchCloudMilestones();
+    if (cloudMilestones && typeof cloudMilestones === 'object') {
+      const savedMilestones = loadStored(STORAGE_KEYS.TARGET_MILESTONES, {});
+      let milestoneChanges = false;
+
+      // Update state.novemberTargets
+      const targets = state.novemberTargets || state.octoberTargets || state.targets || [];
+      targets.forEach(t => {
+        if (t.milestones) {
+          t.milestones.forEach(m => {
+            if (cloudMilestones[m.id] !== undefined) {
+              if (m.completed !== cloudMilestones[m.id]) {
+                m.completed = cloudMilestones[m.id];
+                milestoneChanges = true;
+              }
+              savedMilestones[m.id] = m.completed;
+            } else if (savedMilestones[m.id] !== undefined) {
+              upsertCloudMilestone(m.id, savedMilestones[m.id]).catch(() => {});
+            }
+          });
+          const completedCount = t.milestones.filter(m => m.completed).length;
+          t.currentValue = t.milestones.length > 0 ? Math.round((completedCount / t.milestones.length) * t.targetValue) : 0;
+        }
+      });
+      saveStored(STORAGE_KEYS.TARGET_MILESTONES, savedMilestones);
+
+      // Update state.q4Goals
+      const q4List = state.q4Goals || state.bucketList || [];
+      let q4Changes = false;
+      q4List.forEach(item => {
+        if (cloudMilestones[item.id] !== undefined) {
+          if (item.completed !== cloudMilestones[item.id]) {
+            item.completed = cloudMilestones[item.id];
+            q4Changes = true;
+          }
+        }
+      });
+      if (q4Changes) {
+        saveStored(STORAGE_KEYS.Q4_GOALS, q4List);
+        saveStored(STORAGE_KEYS.BUCKET_LIST, q4List);
+      }
+
+      if (milestoneChanges) {
+        renderNovemberTargets();
+      }
+      if (q4Changes) {
+        renderBucketList();
+        renderSixMonthHorizon();
+      }
+    }
+
+    updateDatabaseStatusUI('connected', 'STATUS: SYNCED WITH SUPABASE CLOUD (SAFE)');
+  } catch (err) {
+    console.error('Cloud sync error:', err);
+    updateDatabaseStatusUI('error', `STATUS: SYNC ERROR (${err.message || 'Check network / policies'})`);
+  }
+}
+
+function setupDatabaseModal() {
+  const syncBtn = document.getElementById('db-sync-btn');
+  const modal = document.getElementById('db-modal');
+  const closeBtn = document.getElementById('db-modal-close');
+  const configForm = document.getElementById('db-config-form');
+  const urlInput = document.getElementById('sb-url-input');
+  const keyInput = document.getElementById('sb-key-input');
+  const disconnectBtn = document.getElementById('db-disconnect-btn');
+  const copySqlBtn = document.getElementById('copy-sql-btn');
+
+  if (!modal) return;
+
+  const config = loadSupabaseConfig();
+  if (config.url && urlInput) urlInput.value = config.url;
+  if (config.anonKey && keyInput) keyInput.value = config.anonKey;
+
+  if (isSupabaseConnected()) {
+    updateDatabaseStatusUI('connected');
+  } else {
+    updateDatabaseStatusUI('disconnected');
+  }
+
+  function openModal() {
+    if (typeof modal.showModal === 'function') {
+      modal.showModal();
+    } else {
+      modal.setAttribute('open', '');
+    }
+  }
+
+  function closeModal() {
+    if (typeof modal.close === 'function') {
+      modal.close();
+    } else {
+      modal.removeAttribute('open');
+    }
+  }
+
+  if (syncBtn) {
+    syncBtn.addEventListener('click', openModal);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  if (configForm) {
+    configForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const url = urlInput ? urlInput.value.trim() : '';
+      const anonKey = keyInput ? keyInput.value.trim() : '';
+
+      if (!url || !anonKey) {
+        alert('Please enter both Supabase Project URL and Anon Public Key.');
+        return;
+      }
+
+      updateDatabaseStatusUI('syncing', 'VALIDATING SUPABASE CONNECTION...');
+      const testRes = await testConnection(url, anonKey);
+      if (!testRes.success) {
+        updateDatabaseStatusUI('error', `ERROR: ${testRes.error}`);
+        alert(`Supabase connection test failed:\n${testRes.error}`);
+        return;
+      }
+
+      saveSupabaseConfig(url, anonKey);
+      await initSupabase(url, anonKey);
+      await syncCloudData();
+      closeModal();
+    });
+  }
+
+  if (disconnectBtn) {
+    disconnectBtn.addEventListener('click', () => {
+      if (confirm('Disconnect from Supabase? All data will remain safely in your browser localStorage.')) {
+        saveSupabaseConfig('', '');
+        initSupabase('', '');
+        updateDatabaseStatusUI('disconnected');
+        if (urlInput) urlInput.value = '';
+        if (keyInput) keyInput.value = '';
+        closeModal();
+      }
+    });
+  }
+
+  if (copySqlBtn) {
+    copySqlBtn.addEventListener('click', () => {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(SQL_SCHEMA).then(() => {
+          const original = copySqlBtn.textContent;
+          copySqlBtn.textContent = 'COPIED!';
+          setTimeout(() => { copySqlBtn.textContent = original; }, 2000);
+        }).catch(() => {
+          alert('Could not auto-copy. Please select and copy the SQL code below.');
+        });
+      }
+    });
+  }
+}
+
+// ----------------------------------------------------------------------------
 // INITIAL BOOTSTRAP
 // ----------------------------------------------------------------------------
 
@@ -1948,8 +2314,10 @@ function initApp() {
   setupFolderTabs();
   renderNovemberTargets();
   renderFiveYearHorizon();
+  setupTargetViewSwitcher();
   setupBucketHorizonFilters();
   renderBucketList();
+  renderSixMonthHorizon();
   renderRadarSection();
   setupRadarControls();
   renderPolymathStats();
@@ -1959,6 +2327,15 @@ function initApp() {
   setupPolymathComposer();
   setupEventListeners();
   setupScrollSpy();
+  setupDatabaseModal();
+
+  initSupabase().then(() => {
+    if (isSupabaseConnected()) {
+      syncCloudData();
+    }
+  }).catch(err => {
+    console.warn('Initial Supabase boot notice:', err);
+  });
 }
 
 if (document.readyState === 'loading') {

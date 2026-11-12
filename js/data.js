@@ -351,6 +351,12 @@ export const initialData = {
   get bucketList() {
     return this.q4Goals;
   },
+  get twoMonthTargets() {
+    return this.q4Goals.filter(g => g.horizon === '2-MONTH');
+  },
+  get sixMonthTargets() {
+    return this.q4Goals.filter(g => g.horizon === '6-MONTH');
+  },
   radarCurriculum: {
     tracks: [
       { id: "all", name: "All Synthesis", badge: "DA VINCI × MUSK × JANE × SCOFIELD × TESLA × ALTMAN" },
