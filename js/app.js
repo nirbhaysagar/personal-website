@@ -312,6 +312,7 @@ function renderTactileArtifact(t, idx) {
 
 function renderNovemberTargets() {
   const container = document.getElementById('targets-list');
+  if (!container) return;
   const daysLeftEl = document.getElementById('nov-days-left') || document.getElementById('oct-days-left') || document.getElementById('sep-days-left') || document.getElementById('target-days-left');
   const monthElapsedEl = document.getElementById('nov-month-elapsed') || document.getElementById('oct-month-elapsed') || document.getElementById('sep-month-elapsed') || document.getElementById('target-month-elapsed');
   const avgProgressEl = document.getElementById('nov-avg-progress') || document.getElementById('oct-avg-progress') || document.getElementById('sep-avg-progress') || document.getElementById('target-avg-progress');
@@ -843,6 +844,7 @@ function renderSixMonthHorizon() {
 
 function setupTargetViewSwitcher() {
   const buttons = document.querySelectorAll('.target-view-btn');
+  if (!buttons || !buttons.length) return;
   const panes = {
     '2-month': document.getElementById('target-view-2month'),
     '6-month': document.getElementById('target-view-6month'),
