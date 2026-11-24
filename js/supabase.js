@@ -46,11 +46,11 @@ let currentConfig = null;
 export function loadSupabaseConfig() {
   try {
     const raw = localStorage.getItem(CONFIG_KEY);
-    if (!raw) return null;
-    return JSON.parse(raw);
+    if (!raw) return { url: '', anonKey: '' };
+    return JSON.parse(raw) || { url: '', anonKey: '' };
   } catch (e) {
     console.error('Failed to parse Supabase config:', e);
-    return null;
+    return { url: '', anonKey: '' };
   }
 }
 

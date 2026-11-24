@@ -2211,7 +2211,7 @@ function setupDatabaseModal() {
 
   if (!modal) return;
 
-  const config = loadSupabaseConfig();
+  const config = loadSupabaseConfig() || { url: '', anonKey: '' };
   if (config.url && urlInput) urlInput.value = config.url;
   if (config.anonKey && keyInput) keyInput.value = config.anonKey;
 
