@@ -506,17 +506,12 @@
     </div>
   </section>
 
-  <!-- =========================================================================
-       SECTION [03]: EXECUTION TARGETS & STRATEGIC HORIZON (COMMENTED OUT AS REQUESTED)
-       =========================================================================
-<!- - 03: TARGETS & STRATEGIC HORIZON (UNIFIED COMMAND DECK) -- >
+  <!-- TARGETS SECTION HIDDEN — kept for reference
   <section id="section-targets">
     <div class="editorial-heading">
       <span>Execution Targets &amp; Strategic Horizon</span>
       <span class="heading-num">[03]</span>
     </div>
-
-    <!- - Architect's Diagnostic Ruler -- >
     <div class="targets-meta-strip">
       <div class="targets-meta-col">
         <span class="targets-meta-label">2-MONTH COUNTDOWN</span>
@@ -525,7 +520,7 @@
       <div class="targets-meta-divider" aria-hidden="true"></div>
       <div class="targets-meta-col">
         <span class="targets-meta-label">60-DAY RUNWAY ELAPSED</span>
-        <span class="targets-meta-val"><strong id="nov-month-elapsed">20%</strong> [NOV 01 &rarr; DEC 31]</span>
+        <span class="targets-meta-val"><strong id="nov-month-elapsed">20%</strong> [NOV 01 to DEC 31]</span>
       </div>
       <div class="targets-meta-divider" aria-hidden="true"></div>
       <div class="targets-meta-col">
@@ -533,54 +528,28 @@
         <span class="targets-meta-val"><strong id="nov-avg-progress">0%</strong> OVERALL</span>
       </div>
     </div>
-
-    <!- - Horizon View Switcher -- >
     <div class="target-horizon-switcher" role="tablist">
-      <button type="button" class="target-view-btn active" data-target-view="2-month">
-        <span class="view-btn-icon">⚡</span> 2-MONTH SPRINT [DEC 31, 2026]
-      </button>
-      <button type="button" class="target-view-btn" data-target-view="6-month">
-        <span class="view-btn-icon">🔭</span> 6-MONTH HORIZON [MAY 31, 2027]
-      </button>
-      <button type="button" class="target-view-btn" data-target-view="checklist">
-        <span class="view-btn-icon">✓</span> MASTER CHECKLIST (15)
-      </button>
+      <button type="button" class="target-view-btn active" data-target-view="2-month">2-MONTH SPRINT</button>
+      <button type="button" class="target-view-btn" data-target-view="6-month">6-MONTH HORIZON</button>
+      <button type="button" class="target-view-btn" data-target-view="checklist">MASTER CHECKLIST</button>
     </div>
-
-    <!- - VIEW 1: 2-MONTH TACTICAL DOSSIERS DECK -- >
     <div id="target-view-2month" class="target-view-pane active">
-      <!- - 60-Day Sprint Ribbon -- >
-      <div class="november-days-ribbon" id="november-days-ribbon" aria-label="60-day sprint timeline">
-        <!- - Populated dynamically by JavaScript -- >
-      </div>
-
-      <div class="folder-deck-instruction">
-        <span class="deck-hint-pill">[FILING SYSTEM // CLICK ANY TAB TO PULL OUT DOSSIER]</span>
-      </div>
-      <div class="folder-deck" id="targets-list">
-        <!- - Populated dynamically by JavaScript -- >
-      </div>
+      <div class="november-days-ribbon" id="november-days-ribbon" aria-label="60-day sprint timeline"></div>
+      <div class="folder-deck-instruction"><span class="deck-hint-pill">[CLICK ANY TAB TO PULL OUT DOSSIER]</span></div>
+      <div class="folder-deck" id="targets-list"></div>
     </div>
-
-    <!- - VIEW 2: 6-MONTH STRATEGIC HORIZON (MAY 2027) -- >
     <div id="target-view-6month" class="target-view-pane" style="display: none;">
-      <div class="six-month-grid" id="six-month-container">
-        <!- - Populated dynamically by JavaScript -- >
-      </div>
+      <div class="six-month-grid" id="six-month-container"></div>
     </div>
-
-    <!- - VIEW 3: MASTER INTERACTIVE CHECKLIST -- >
     <div id="target-view-checklist" class="target-view-pane" style="display: none;">
       <div class="bucket-summary">
-        <span id="bucket-summary-text">All 15 deliverables for 2-Month Sprints and 6-Month Horizon. Click any item to toggle completion.</span>
-        <strong id="bucket-count-badge">[0/15 COMPLETED &bull; 0%]</strong>
+        <span id="bucket-summary-text">All deliverables.</span>
+        <strong id="bucket-count-badge">[0/15 COMPLETED]</strong>
       </div>
-      <div class="bucket-items-list" id="bucket-list-container">
-        <!- - Populated by JavaScript -- >
-      </div>
+      <div class="bucket-items-list" id="bucket-list-container"></div>
     </div>
   </section>
-  ========================================================================= -->
+  END TARGETS SECTION -->
 
   <!-- 03: 5-YEAR STRATEGIC HORIZON -->
   <section id="section-horizon">
