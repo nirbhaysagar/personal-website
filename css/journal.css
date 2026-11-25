@@ -211,7 +211,7 @@
   gap: 6px;
   border: 1px solid var(--rule-light);
   padding: 4px 10px;
-  background: var(--bg-page);
+  background: var(--bg-canvas);
   min-width: 220px;
 }
 
@@ -445,12 +445,13 @@
 }
 
 .journal-modal {
-  background: var(--bg-page);
+  background: var(--bg-canvas);
   border: 1px solid var(--rule-strong);
   border-top: 3px solid var(--ink-primary);
   max-width: 760px;
   width: 100%;
   position: relative;
+  z-index: 1;
   animation: modalSlideIn 0.18s ease;
 }
 
@@ -497,7 +498,7 @@
   text-transform: uppercase;
   padding: 3px 10px;
   background: var(--ink-primary);
-  color: var(--bg-page);
+  color: var(--bg-canvas);
 }
 
 .journal-modal-date {
@@ -533,6 +534,8 @@
   border: 1px solid var(--rule-light);
   padding: 3px 10px;
   text-transform: uppercase;
+  align-self: flex-start;
+  width: fit-content;
 }
 
 .journal-modal-close {
@@ -554,49 +557,21 @@
   color: var(--ink-primary);
 }
 
-/* Modal body content */
+/* Modal body: the processed thought as plain paragraphs */
 .journal-modal-body {
-  padding: 28px;
+  padding: 28px 32px 32px;
 }
 
-.journal-section {
-  margin-bottom: 28px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--rule-light);
-}
-
-.journal-section:last-of-type {
-  border-bottom: none;
-  margin-bottom: 0;
-}
-
-.journal-section-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--ink-muted);
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.journal-section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--rule-light);
-}
-
-.journal-section-text {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  color: var(--ink-secondary);
+.journal-prose {
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  color: var(--ink-primary);
   line-height: 1.75;
-  margin: 0;
-  white-space: pre-line;
+  margin: 0 0 1.15em;
+}
+
+.journal-prose:last-child {
+  margin-bottom: 0;
 }
 
 .journal-modal-related {

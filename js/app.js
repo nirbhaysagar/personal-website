@@ -1,4 +1,4 @@
-import { initialData } from './data.js';
+import { initialData } from './data.js?v=3';
 import { renderCrossStitchSVG } from './stitch-font.js';
 import {
   initSupabase,
@@ -26,7 +26,7 @@ const STORAGE_KEYS = {
   Q4_GOALS: 'bold_2m_6m_targets_v1',
   BUCKET_LIST: 'bold_2m_6m_targets_v1',
   TARGET_MILESTONES: 'bold_2m_milestones_v1',
-  JOURNAL_ENTRIES: 'bold_journal_entries_v1'
+  JOURNAL_ENTRIES: 'bold_journal_entries_v3'
 };
 
 function initQ4Goals() {
@@ -2201,34 +2201,8 @@ async function syncCloudData() {
       }
     }
 
-    // 3. Fetch & merge journal entries (non-blocking)
-    try {
-      const cloudEntries = await fetchCloudJournalEntries();
-      if (Array.isArray(cloudEntries) && cloudEntries.length > 0) {
-        const localMap = new Map(state.journalEntries.map(e => [e.id, e]));
-        let changed = false;
-        cloudEntries.forEach(ce => {
-          if (!localMap.has(ce.id)) {
-            state.journalEntries.push(ce);
-            localMap.set(ce.id, ce);
-            changed = true;
-          }
-        });
-        if (changed) {
-          state.journalEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
-          saveStored(STORAGE_KEYS.JOURNAL_ENTRIES, state.journalEntries);
-          renderJournalFeed();
-        }
-        const cloudIds = new Set(cloudEntries.map(c => c.id));
-        for (const localEntry of localMap.values()) {
-          if (!cloudIds.has(localEntry.id)) {
-            await upsertCloudJournalEntry(localEntry).catch(e => console.warn('Journal cloud upsert err:', e));
-          }
-        }
-      }
-    } catch (journalErr) {
-      console.warn('Journal cloud sync skipped:', journalErr);
-    }
+    // Journal posts were removed. Cloud sync stays off so the old entries
+    // are not pulled back into the page.
 
     updateDatabaseStatusUI('connected', 'STATUS: SYNCED WITH SUPABASE CLOUD (SAFE)');
   } catch (err) {
@@ -2435,11 +2409,14 @@ function openJournalModal(entryId) {
   const related = entry.related || [];
   const typeLabel = (entry.type || 'entry').replace('-', ' ').toUpperCase();
 
-  const sectionHtml = (label, text) => text ? `
-    <div class="journal-section">
-      <div class="journal-section-label">${label}</div>
-      <p class="journal-section-text">${text.replace(/\n/g, '<br>')}</p>
-    </div>` : '';
+  const proseHtml = ['question', 'observation', 'exploration', 'conclusion']
+    .map(key => (s[key] || '').trim())
+    .filter(Boolean)
+    .flatMap(text => text.split(/\n{2,}/))
+    .map(paragraph => paragraph.trim())
+    .filter(Boolean)
+    .map(paragraph => `<p class="journal-prose">${escapeHtml(paragraph).replace(/\n/g, '<br>')}</p>`)
+    .join('');
 
   const overlay = document.createElement('div');
   overlay.id = 'journal-modal-overlay';
@@ -2464,10 +2441,7 @@ function openJournalModal(entryId) {
         <button type="button" class="journal-modal-close" id="journal-modal-close-btn" aria-label="Close">CLOSE ×</button>
       </div>
       <div class="journal-modal-body">
-        ${sectionHtml('THE QUESTION', s.question)}
-        ${sectionHtml('OBSERVATION', s.observation)}
-        ${sectionHtml('EXPLORATION', s.exploration)}
-        ${sectionHtml('MY CURRENT CONCLUSION', s.conclusion)}
+        ${proseHtml}
       </div>
       ${related.length ? `
       <div class="journal-modal-related">

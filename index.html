@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/journal.css">
+  <link rel="stylesheet" href="./css/journal.css?v=3">
   <script>
     (function() {
       try {
@@ -226,7 +226,7 @@
       <a href="#section-polymath" class="nav-item" data-section="section-polymath"><span class="nav-code">[CORE]</span> Drive</a>
       <a href="#section-doing" class="nav-item" data-section="section-doing"><span class="nav-code">[01]</span> Focus</a>
       <a href="#section-projects" class="nav-item" data-section="section-projects"><span class="nav-code">[02]</span> Projects</a>
-      <a href="#section-journal" class="nav-item" data-section="section-journal"><span class="nav-code">[03]</span> Journal</a>
+      <!-- <a href="#section-journal" class="nav-item" data-section="section-journal"><span class="nav-code">[03]</span> Journal</a> -->
       <a href="#section-horizon" class="nav-item" data-section="section-horizon"><span class="nav-code">[04]</span> 5-Yr Horizon</a>
       <a href="#section-inspirations" class="nav-item" data-section="section-inspirations"><span class="nav-code">[05]</span> Archive &amp; Doctrine</a>
     </nav>
@@ -430,14 +430,14 @@
     </div>
   </section>
 
-  <!-- 03: JOURNAL -->
+  <!-- 03: JOURNAL hidden
   <section id="section-journal">
     <div class="editorial-heading">
       <span>Journal &bull; Thoughts, Discoveries &amp; Entries</span>
       <span class="heading-num">[03]</span>
     </div>
 
-    <!-- Journal Intro Banner -->
+    
     <div class="journal-hero-banner">
       <div class="journal-title-row">
         <div>
@@ -449,7 +449,7 @@
         </div>
       </div>
 
-      <!-- Content Types Explainer Strip -->
+      
       <div class="journal-pillars-strip">
         <div class="journal-pillar-item">
           <span class="pillar-label">ENTRIES</span>
@@ -466,9 +466,9 @@
       </div>
     </div>
 
-    <!-- Dual Filter Deck -->
+    
     <div class="journal-filter-deck">
-      <!-- Row 1: Content Type Filter -->
+      
       <div class="journal-type-filters-row">
         <span class="filter-deck-label">FILTER BY TYPE:</span>
         <div class="journal-type-pills" role="tablist" id="journal-type-bar" aria-label="Filter journal by content type">
@@ -480,7 +480,7 @@
         </div>
       </div>
 
-      <!-- Row 2: Category Filter & Search -->
+      
       <div class="journal-subfilter-row">
         <div class="journal-category-pills" id="journal-category-bar" role="tablist" aria-label="Filter journal by subject category">
           <button type="button" class="j-cat-btn active" data-category="ALL" role="tab" aria-selected="true">All Subjects</button>
@@ -500,11 +500,12 @@
       </div>
     </div>
 
-    <!-- Journal Stream Feed -->
+    
     <div class="journal-stream" id="journal-feed" role="feed" aria-label="Chronological journal stream">
-      <!-- Populated dynamically by JavaScript -->
+      
     </div>
   </section>
+  -->
 
   <!-- TARGETS SECTION HIDDEN — kept for reference
   <section id="section-targets">
@@ -791,6 +792,6 @@ create policy "Anon access target_milestones" on public.target_milestones for al
     </div>
   </dialog>
 
-  <script type="module" src="./js/app.js"></script>
+  <script type="module" src="./js/app.js?v=3"></script>
 </body>
 </html>
