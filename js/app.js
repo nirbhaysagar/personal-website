@@ -11,6 +11,9 @@ import {
   deleteCloudDailyLog,
   fetchCloudMilestones,
   upsertCloudMilestone,
+  fetchCloudJournalEntries,
+  upsertCloudJournalEntry,
+  deleteCloudJournalEntry,
   SQL_SCHEMA
 } from './supabase.js';
 
@@ -22,7 +25,8 @@ const STORAGE_KEYS = {
   DAILY_LOGS: 'bold_daily_logs_v3',
   Q4_GOALS: 'bold_2m_6m_targets_v1',
   BUCKET_LIST: 'bold_2m_6m_targets_v1',
-  TARGET_MILESTONES: 'bold_2m_milestones_v1'
+  TARGET_MILESTONES: 'bold_2m_milestones_v1',
+  JOURNAL_ENTRIES: 'bold_journal_entries_v1'
 };
 
 function initQ4Goals() {
@@ -136,7 +140,12 @@ let state = {
   dailyLogs: normalizeDailyLogs(loadStored(STORAGE_KEYS.DAILY_LOGS, initialData.dailyLogs)),
   activeLogTag: 'ALL',
   activeDisciplineFilter: 'ALL',
-  logSearchQuery: ''
+  logSearchQuery: '',
+  // Journal
+  journalEntries: loadStored(STORAGE_KEYS.JOURNAL_ENTRIES, null) || [...(initialData.journalEntries || [])],
+  activeJournalType: 'ALL',
+  activeJournalCategory: 'ALL',
+  journalSearchQuery: ''
 };
 
 let activePulledFolderId = targetsSource.find(t => t.id.includes('05'))?.id || targetsSource[0]?.id; // Lumen AI memory spec opened by default
@@ -2192,6 +2201,35 @@ async function syncCloudData() {
       }
     }
 
+    // 3. Fetch & merge journal entries (non-blocking)
+    try {
+      const cloudEntries = await fetchCloudJournalEntries();
+      if (Array.isArray(cloudEntries) && cloudEntries.length > 0) {
+        const localMap = new Map(state.journalEntries.map(e => [e.id, e]));
+        let changed = false;
+        cloudEntries.forEach(ce => {
+          if (!localMap.has(ce.id)) {
+            state.journalEntries.push(ce);
+            localMap.set(ce.id, ce);
+            changed = true;
+          }
+        });
+        if (changed) {
+          state.journalEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+          saveStored(STORAGE_KEYS.JOURNAL_ENTRIES, state.journalEntries);
+          renderJournalFeed();
+        }
+        const cloudIds = new Set(cloudEntries.map(c => c.id));
+        for (const localEntry of localMap.values()) {
+          if (!cloudIds.has(localEntry.id)) {
+            await upsertCloudJournalEntry(localEntry).catch(e => console.warn('Journal cloud upsert err:', e));
+          }
+        }
+      }
+    } catch (journalErr) {
+      console.warn('Journal cloud sync skipped:', journalErr);
+    }
+
     updateDatabaseStatusUI('connected', 'STATUS: SYNCED WITH SUPABASE CLOUD (SAFE)');
   } catch (err) {
     console.error('Cloud sync error:', err);
@@ -2306,6 +2344,213 @@ function setupDatabaseModal() {
 }
 
 // ----------------------------------------------------------------------------
+// JOURNAL SECTION — RENDER, FILTER & MODAL
+// ----------------------------------------------------------------------------
+
+function getFilteredJournalEntries() {
+  const { journalEntries, activeJournalType, activeJournalCategory, journalSearchQuery } = state;
+  return journalEntries
+    .filter(e => e.status === 'published' || !e.status)
+    .filter(e => {
+      if (activeJournalType === 'ALL') return true;
+      return e.type === activeJournalType;
+    })
+    .filter(e => {
+      if (activeJournalCategory === 'ALL') return true;
+      return e.category === activeJournalCategory;
+    })
+    .filter(e => {
+      if (!journalSearchQuery) return true;
+      const q = journalSearchQuery.toLowerCase();
+      return (
+        (e.title || '').toLowerCase().includes(q) ||
+        (e.excerpt || '').toLowerCase().includes(q) ||
+        (e.category || '').toLowerCase().includes(q) ||
+        (e.type || '').toLowerCase().includes(q) ||
+        (e.related || []).some(r => r.toLowerCase().includes(q))
+      );
+    })
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
+function buildEntryCard(entry) {
+  const typeLabel = (entry.type || 'entry').replace('-', ' ').toUpperCase();
+  return `
+    <article class="journal-entry-card" data-id="${entry.id}" role="article" tabindex="0" aria-label="Journal entry: ${entry.title}">
+      <div class="entry-type-col">
+        <span class="entry-type-badge" data-type="${entry.type}">${typeLabel}</span>
+      </div>
+      <div class="entry-content-col">
+        <span class="entry-date">${entry.displayDate || entry.date}</span>
+        <h3 class="entry-title">${entry.title}</h3>
+        <p class="entry-excerpt">${entry.excerpt || ''}</p>
+        <div class="entry-meta-row">
+          <span class="entry-category-tag">${entry.category || ''}</span>
+          <span class="entry-read-time">${entry.readingTime || ''}</span>
+        </div>
+      </div>
+      <div class="entry-arrow-col" aria-hidden="true">→</div>
+    </article>`;
+}
+
+function renderJournalFeed() {
+  const feed = document.getElementById('journal-feed');
+  const badge = document.getElementById('journal-count-badge');
+  if (!feed) return;
+
+  const filtered = getFilteredJournalEntries();
+
+  if (badge) {
+    badge.textContent = `${filtered.length} ${filtered.length === 1 ? 'ENTRY' : 'ENTRIES'} • CHRONOLOGICAL STREAM`;
+  }
+
+  if (filtered.length === 0) {
+    feed.innerHTML = '<div class="journal-empty-state">NO ENTRIES MATCH YOUR FILTERS</div>';
+    return;
+  }
+
+  feed.innerHTML = filtered.map(buildEntryCard).join('');
+
+  // Attach click + keyboard handlers
+  feed.querySelectorAll('.journal-entry-card').forEach(card => {
+    card.addEventListener('click', () => openJournalModal(card.dataset.id));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openJournalModal(card.dataset.id);
+      }
+    });
+  });
+}
+
+function openJournalModal(entryId) {
+  const entry = state.journalEntries.find(e => e.id === entryId);
+  if (!entry) return;
+
+  // Remove existing modal if any
+  const existing = document.getElementById('journal-modal-overlay');
+  if (existing) existing.remove();
+
+  const s = entry.sections || {};
+  const related = entry.related || [];
+  const typeLabel = (entry.type || 'entry').replace('-', ' ').toUpperCase();
+
+  const sectionHtml = (label, text) => text ? `
+    <div class="journal-section">
+      <div class="journal-section-label">${label}</div>
+      <p class="journal-section-text">${text.replace(/\n/g, '<br>')}</p>
+    </div>` : '';
+
+  const overlay = document.createElement('div');
+  overlay.id = 'journal-modal-overlay';
+  overlay.className = 'journal-modal-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', entry.title);
+
+  overlay.innerHTML = `
+    <div class="journal-modal" id="journal-modal-panel">
+      <div class="journal-modal-header">
+        <div class="journal-modal-meta">
+          <span class="journal-modal-num">${entry.type?.toUpperCase() || 'ENTRY'} / ${entry.number || entry.id}</span>
+          <div class="journal-modal-type-row">
+            <span class="journal-modal-type-badge">${typeLabel}</span>
+            <span class="journal-modal-date">${entry.displayDate || entry.date}</span>
+            <span class="journal-modal-read-time">${entry.readingTime || ''}</span>
+          </div>
+          <h2 class="journal-modal-title">${entry.title}</h2>
+          <span class="journal-modal-category">${entry.category || ''}</span>
+        </div>
+        <button type="button" class="journal-modal-close" id="journal-modal-close-btn" aria-label="Close">CLOSE ×</button>
+      </div>
+      <div class="journal-modal-body">
+        ${sectionHtml('THE QUESTION', s.question)}
+        ${sectionHtml('OBSERVATION', s.observation)}
+        ${sectionHtml('EXPLORATION', s.exploration)}
+        ${sectionHtml('MY CURRENT CONCLUSION', s.conclusion)}
+      </div>
+      ${related.length ? `
+      <div class="journal-modal-related">
+        <span class="related-label">RELATED:</span>
+        ${related.map(r => `<span class="related-tag">${r}</span>`).join('')}
+      </div>` : ''}
+    </div>`;
+
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  // Close handlers
+  const closeModal = () => {
+    overlay.remove();
+    document.body.style.overflow = '';
+  };
+
+  document.getElementById('journal-modal-close-btn').addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function escHandler(e) {
+    if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', escHandler); }
+  });
+
+  // Focus trap
+  const closeBtn = document.getElementById('journal-modal-close-btn');
+  if (closeBtn) closeBtn.focus();
+}
+
+function setupJournalFilters() {
+  const typeBar = document.getElementById('journal-type-bar');
+  const catBar = document.getElementById('journal-category-bar');
+  const searchInput = document.getElementById('journal-search-input');
+  const clearBtn = document.getElementById('journal-clear-search');
+
+  if (typeBar) {
+    typeBar.querySelectorAll('.j-type-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        typeBar.querySelectorAll('.j-type-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        state.activeJournalType = btn.dataset.type;
+        renderJournalFeed();
+      });
+    });
+  }
+
+  if (catBar) {
+    catBar.querySelectorAll('.j-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        catBar.querySelectorAll('.j-cat-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        state.activeJournalCategory = btn.dataset.category;
+        renderJournalFeed();
+      });
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      state.journalSearchQuery = searchInput.value.trim();
+      if (clearBtn) clearBtn.style.display = state.journalSearchQuery ? 'inline' : 'none';
+      renderJournalFeed();
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      state.journalSearchQuery = '';
+      clearBtn.style.display = 'none';
+      renderJournalFeed();
+    });
+  }
+}
+
+// ----------------------------------------------------------------------------
 // INITIAL BOOTSTRAP
 // ----------------------------------------------------------------------------
 
@@ -2323,6 +2568,8 @@ function initApp() {
   setupEventListeners();
   setupScrollSpy();
   setupDatabaseModal();
+  renderJournalFeed();
+  setupJournalFilters();
 
   initSupabase().then(() => {
     if (isSupabaseConnected()) {

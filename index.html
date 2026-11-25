@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/journal.css">
   <script>
     (function() {
       try {
@@ -225,9 +226,9 @@
       <a href="#section-polymath" class="nav-item" data-section="section-polymath"><span class="nav-code">[CORE]</span> Drive</a>
       <a href="#section-doing" class="nav-item" data-section="section-doing"><span class="nav-code">[01]</span> Focus</a>
       <a href="#section-projects" class="nav-item" data-section="section-projects"><span class="nav-code">[02]</span> Projects</a>
-      <!-- <a href="#section-targets" class="nav-item" data-section="section-targets"><span class="nav-code">[TARGETS]</span> Targets</a> -->
-      <a href="#section-horizon" class="nav-item" data-section="section-horizon"><span class="nav-code">[03]</span> 5-Yr Horizon</a>
-      <a href="#section-inspirations" class="nav-item" data-section="section-inspirations"><span class="nav-code">[04]</span> Archive &amp; Doctrine</a>
+      <a href="#section-journal" class="nav-item" data-section="section-journal"><span class="nav-code">[03]</span> Journal</a>
+      <a href="#section-horizon" class="nav-item" data-section="section-horizon"><span class="nav-code">[04]</span> 5-Yr Horizon</a>
+      <a href="#section-inspirations" class="nav-item" data-section="section-inspirations"><span class="nav-code">[05]</span> Archive &amp; Doctrine</a>
     </nav>
   </header>
 
@@ -426,6 +427,82 @@
           <span style="font-size: 0.8rem; font-weight: 700;">45%</span>
         </div>
       </article>
+    </div>
+  </section>
+
+  <!-- 03: JOURNAL -->
+  <section id="section-journal">
+    <div class="editorial-heading">
+      <span>Journal &bull; Thoughts, Discoveries &amp; Entries</span>
+      <span class="heading-num">[03]</span>
+    </div>
+
+    <!-- Journal Intro Banner -->
+    <div class="journal-hero-banner">
+      <div class="journal-title-row">
+        <div>
+          <span class="journal-badge">[LIFELONG LEDGER]</span>
+          <h2 class="journal-headline">A record of what I'm learning, thinking, and discovering.</h2>
+        </div>
+        <div class="journal-meta-count">
+          <span class="journal-count-pill" id="journal-count-badge">10 ENTRIES &bull; CHRONOLOGICAL STREAM</span>
+        </div>
+      </div>
+
+      <!-- Content Types Explainer Strip -->
+      <div class="journal-pillars-strip">
+        <div class="journal-pillar-item">
+          <span class="pillar-label">ENTRIES</span>
+          <span class="pillar-desc">Personal updates, execution logs &amp; building journey</span>
+        </div>
+        <div class="journal-pillar-item">
+          <span class="pillar-label">THOUGHTS</span>
+          <span class="pillar-desc">Ideas, reflections &amp; intellectual explorations</span>
+        </div>
+        <div class="journal-pillar-item">
+          <span class="pillar-label">DISCOVERIES</span>
+          <span class="pillar-desc">Lessons, extracted models &amp; foundational truths</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dual Filter Deck -->
+    <div class="journal-filter-deck">
+      <!-- Row 1: Content Type Filter -->
+      <div class="journal-type-filters-row">
+        <span class="filter-deck-label">FILTER BY TYPE:</span>
+        <div class="journal-type-pills" role="tablist" id="journal-type-bar" aria-label="Filter journal by content type">
+          <button type="button" class="j-type-btn active" data-type="ALL" role="tab" aria-selected="true">ALL</button>
+          <button type="button" class="j-type-btn" data-type="entry" role="tab" aria-selected="false">ENTRIES</button>
+          <button type="button" class="j-type-btn" data-type="thought" role="tab" aria-selected="false">THOUGHTS</button>
+          <button type="button" class="j-type-btn" data-type="discovery" role="tab" aria-selected="false">DISCOVERIES</button>
+          <button type="button" class="j-type-btn" data-type="exploration" role="tab" aria-selected="false">EXPLORATIONS</button>
+        </div>
+      </div>
+
+      <!-- Row 2: Category Filter & Search -->
+      <div class="journal-subfilter-row">
+        <div class="journal-category-pills" id="journal-category-bar" role="tablist" aria-label="Filter journal by subject category">
+          <button type="button" class="j-cat-btn active" data-category="ALL" role="tab" aria-selected="true">All Subjects</button>
+          <button type="button" class="j-cat-btn" data-category="Psychology" role="tab" aria-selected="false">Psychology</button>
+          <button type="button" class="j-cat-btn" data-category="Philosophy" role="tab" aria-selected="false">Philosophy</button>
+          <button type="button" class="j-cat-btn" data-category="Learning" role="tab" aria-selected="false">Learning</button>
+          <button type="button" class="j-cat-btn" data-category="Technology & AI" role="tab" aria-selected="false">Technology &amp; AI</button>
+          <button type="button" class="j-cat-btn" data-category="Human Potential" role="tab" aria-selected="false">Human Potential</button>
+          <button type="button" class="j-cat-btn" data-category="Life & Observations" role="tab" aria-selected="false">Life &amp; Observations</button>
+        </div>
+
+        <div class="journal-search-wrap">
+          <span class="search-lens" aria-hidden="true">🔍</span>
+          <input type="text" id="journal-search-input" class="journal-search-input" placeholder="Search thoughts, questions, categories..." autocomplete="off">
+          <button type="button" id="journal-clear-search" class="journal-clear-btn" style="display: none;" aria-label="Clear search">&times;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Journal Stream Feed -->
+    <div class="journal-stream" id="journal-feed" role="feed" aria-label="Chronological journal stream">
+      <!-- Populated dynamically by JavaScript -->
     </div>
   </section>
 

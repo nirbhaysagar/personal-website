@@ -29,14 +29,33 @@ create table if not exists public.target_milestones (
   updated_at timestamptz default now()
 );
 
+create table if not exists public.journal_entries (
+  id text primary key,
+  title text not null,
+  slug text not null,
+  type text not null,
+  category text not null,
+  excerpt text,
+  content jsonb,
+  tags jsonb default '[]'::jsonb,
+  reading_time text,
+  status text default 'published',
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
 -- Enable Row Level Security (RLS) with public access via Anon Key
 alter table public.daily_logs enable row level security;
 alter table public.target_milestones enable row level security;
+alter table public.journal_entries enable row level security;
 
 create policy "Allow anon access to daily_logs" on public.daily_logs
   for all using (true) with check (true);
 
 create policy "Allow anon access to target_milestones" on public.target_milestones
+  for all using (true) with check (true);
+
+create policy "Allow anon access to journal_entries" on public.journal_entries
   for all using (true) with check (true);
 `;
 
@@ -185,6 +204,88 @@ export async function upsertCloudMilestone(milestoneId, completed) {
     if (error) console.error('Supabase upsert milestone error:', error);
   } catch (err) {
     console.error('Network error updating milestone in Supabase:', err);
+  }
+}
+
+// ============================================================================
+// JOURNAL ENTRIES CLOUD CRUD
+// ============================================================================
+
+export async function fetchCloudJournalEntries() {
+  if (!client) return null;
+  try {
+    const { data, error } = await client
+      .from('journal_entries')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.warn('Supabase fetch journal_entries notice:', error);
+      return null;
+    }
+    return (data || []).map(row => ({
+      id: row.id,
+      number: row.number || row.id.replace('j-', ''),
+      title: row.title,
+      slug: row.slug,
+      type: row.type,
+      category: row.category,
+      date: row.date || (row.created_at ? row.created_at.split('T')[0] : new Date().toISOString().split('T')[0]),
+      displayDate: row.display_date || row.displayDate || '25 NOV 2026',
+      readingTime: row.reading_time || row.readingTime || '4 min read',
+      excerpt: row.excerpt || '',
+      sections: typeof row.content === 'object' && row.content !== null ? row.content : {
+        question: '',
+        observation: '',
+        exploration: typeof row.content === 'string' ? row.content : '',
+        conclusion: ''
+      },
+      related: Array.isArray(row.tags) ? row.tags : [],
+      status: row.status || 'published'
+    }));
+  } catch (err) {
+    console.error('Network error fetching journal entries from Supabase:', err);
+    return null;
+  }
+}
+
+export async function upsertCloudJournalEntry(entry) {
+  if (!client || !entry) return;
+  try {
+    const payload = {
+      id: entry.id,
+      title: entry.title,
+      slug: entry.slug || entry.id,
+      type: entry.type || 'thought',
+      category: entry.category || 'Learning',
+      excerpt: entry.excerpt || '',
+      content: entry.sections || {},
+      tags: entry.related || [],
+      reading_time: entry.readingTime || '4 min read',
+      status: entry.status || 'published',
+      updated_at: new Date().toISOString()
+    };
+    const { error } = await client
+      .from('journal_entries')
+      .upsert(payload, { onConflict: 'id' });
+
+    if (error) console.error('Supabase upsert journal entry error:', error);
+  } catch (err) {
+    console.error('Network error updating journal entry in Supabase:', err);
+  }
+}
+
+export async function deleteCloudJournalEntry(entryId) {
+  if (!client || !entryId) return;
+  try {
+    const { error } = await client
+      .from('journal_entries')
+      .delete()
+      .eq('id', entryId);
+
+    if (error) console.error('Supabase delete journal entry error:', error);
+  } catch (err) {
+    console.error('Network error deleting journal entry in Supabase:', err);
   }
 }
 
