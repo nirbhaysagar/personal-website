@@ -1,0 +1,270 @@
+/* Letters — a public reading list. Writing stays behind the desk. */
+
+.letters-masthead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 6px 0 8px;
+}
+
+.letters-dek {
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  max-width: 38rem;
+  margin: 0;
+}
+
+.letters-write-btn,
+.letter-text-btn,
+.letter-publish-btn {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--ink-primary);
+  border: 1px solid var(--rule-strong);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.letters-write-btn:hover,
+.letter-text-btn:hover,
+.letter-publish-btn:hover {
+  background: var(--ink-primary);
+  color: var(--bg-canvas);
+}
+
+.letters-feed {
+  margin-top: 8px;
+}
+
+.letters-empty,
+.letters-error {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  padding: 28px 0 8px;
+}
+
+.letter-row {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 18px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  border-bottom: 1px solid var(--rule-light);
+  padding: 22px 0;
+  cursor: pointer;
+}
+
+.letter-row:hover .letter-row-title {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.letter-row > span:last-child {
+  display: block;
+  min-width: 0;
+}
+
+.letter-row-date {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  padding-top: 6px;
+}
+
+.letter-row-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink-primary);
+  margin: 0;
+}
+
+.letter-row-excerpt {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  margin: 8px 0 0;
+}
+
+.letter-dialog {
+  width: min(720px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--rule-strong);
+  background: var(--bg-canvas);
+  color: var(--ink-primary);
+}
+
+.letter-dialog::backdrop {
+  background: rgba(12, 14, 18, 0.72);
+}
+
+.letter-sheet {
+  padding: 22px 28px 32px;
+  overflow: auto;
+  max-height: calc(100vh - 48px);
+}
+
+.letter-sheet-bar,
+.letter-desk-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.letter-owner-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.letter-sheet-date,
+.letter-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0 0 10px;
+}
+
+.letter-sheet-title,
+.letter-desk-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 0 0 22px;
+}
+
+.letter-sheet-body p {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ink-primary);
+  margin: 0 0 1.1em;
+}
+
+.letter-sheet-body p:last-child {
+  margin-bottom: 0;
+}
+
+.letter-desk-copy,
+.letter-hint,
+.letter-status {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  margin: 0 0 16px;
+}
+
+.letter-status {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  min-height: 1.2em;
+  margin: 14px 0 0;
+}
+
+.letter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.letter-field input,
+.letter-field textarea {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-primary);
+  background: var(--bg-canvas);
+  border: 1px solid var(--rule-light);
+  padding: 10px 12px;
+  width: 100%;
+}
+
+.letter-field textarea {
+  min-height: 240px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.letter-field input:focus,
+.letter-field textarea:focus {
+  outline: 1px solid var(--ink-primary);
+  border-color: var(--ink-primary);
+}
+
+.letter-setup {
+  border: 1px solid var(--rule-light);
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.letter-sql {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  background: var(--bg-paper);
+  color: var(--ink-secondary);
+  padding: 12px;
+  margin: 0 0 10px;
+  max-height: 180px;
+  overflow: auto;
+}
+
+.letter-danger {
+  color: var(--tape-red);
+  border-color: var(--tape-red);
+}
+
+@media (max-width: 640px) {
+  .letters-masthead,
+  .letter-row {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .letter-sheet-title,
+  .letter-desk-title {
+    font-size: 1.55rem;
+  }
+
+  .letter-sheet {
+    padding: 18px 16px 28px;
+  }
+}

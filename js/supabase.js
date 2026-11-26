@@ -7,7 +7,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 const CONFIG_KEY = 'bold_supabase_credentials';
 
-export const SQL_SCHEMA = `-- Supabase Schema for Personal Operating System (Bold OS)
+const SQL_SCHEMA_BASE = `-- Supabase Schema for Personal Operating System (Bold OS)
 -- Run this in your Supabase Project -> SQL Editor
 
 create table if not exists public.daily_logs (
@@ -58,6 +58,95 @@ create policy "Allow anon access to target_milestones" on public.target_mileston
 create policy "Allow anon access to journal_entries" on public.journal_entries
   for all using (true) with check (true);
 `;
+
+export const LETTERS_SQL = `-- Letters: anyone can read, only the writer passphrase can publish or edit.
+create table if not exists public.letters (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  body text not null,
+  published_on date not null default current_date,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists letters_published_on_idx
+  on public.letters (published_on desc, created_at desc);
+
+create table if not exists public.site_secrets (
+  id integer primary key,
+  writer_key text not null
+);
+
+alter table public.letters enable row level security;
+alter table public.site_secrets enable row level security;
+revoke all on table public.site_secrets from anon, authenticated;
+
+create or replace function public.writer_ok()
+returns boolean
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  expected text;
+  provided text;
+  headers json;
+begin
+  select writer_key into expected from public.site_secrets where id = 1;
+  begin
+    headers := current_setting('request.headers', true)::json;
+  exception when others then
+    headers := '{}'::json;
+  end;
+  provided := coalesce(
+    headers->>'x-writer-key',
+    nullif(current_setting('request.header.x-writer-key', true), ''),
+    ''
+  );
+  return expected is not null and provided <> '' and provided = expected;
+end;
+$$;
+
+create or replace function public.check_writer()
+returns boolean
+language sql
+security definer
+set search_path = public
+as $$
+  select public.writer_ok();
+$$;
+
+grant execute on function public.check_writer() to anon, authenticated;
+grant select, insert, update, delete on table public.letters to anon, authenticated;
+
+drop policy if exists "Anyone can read letters" on public.letters;
+create policy "Anyone can read letters"
+  on public.letters for select
+  using (true);
+
+drop policy if exists "Writer can publish letters" on public.letters;
+create policy "Writer can publish letters"
+  on public.letters for insert
+  with check (public.writer_ok());
+
+drop policy if exists "Writer can revise letters" on public.letters;
+create policy "Writer can revise letters"
+  on public.letters for update
+  using (public.writer_ok())
+  with check (public.writer_ok());
+
+drop policy if exists "Writer can remove letters" on public.letters;
+create policy "Writer can remove letters"
+  on public.letters for delete
+  using (public.writer_ok());
+
+-- Set your own passphrase. Do not commit the real one.
+-- insert into public.site_secrets (id, writer_key)
+-- values (1, 'your-long-private-passphrase')
+-- on conflict (id) do update set writer_key = excluded.writer_key;
+`;
+
+export const SQL_SCHEMA = `${SQL_SCHEMA_BASE}\n${LETTERS_SQL}`;
 
 let client = null;
 let currentConfig = null;

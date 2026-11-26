@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/journal.css?v=3">
+  <link rel="stylesheet" href="./css/letters.css?v=5">
   <script>
     (function() {
       try {
@@ -226,7 +227,7 @@
       <a href="#section-polymath" class="nav-item" data-section="section-polymath"><span class="nav-code">[CORE]</span> Drive</a>
       <a href="#section-doing" class="nav-item" data-section="section-doing"><span class="nav-code">[01]</span> Focus</a>
       <a href="#section-projects" class="nav-item" data-section="section-projects"><span class="nav-code">[02]</span> Projects</a>
-      <!-- <a href="#section-journal" class="nav-item" data-section="section-journal"><span class="nav-code">[03]</span> Journal</a> -->
+      <a href="#section-journal" class="nav-item" data-section="section-journal"><span class="nav-code">[03]</span> Journal</a>
       <a href="#section-horizon" class="nav-item" data-section="section-horizon"><span class="nav-code">[04]</span> 5-Yr Horizon</a>
       <a href="#section-inspirations" class="nav-item" data-section="section-inspirations"><span class="nav-code">[05]</span> Archive &amp; Doctrine</a>
     </nav>
@@ -430,14 +431,13 @@
     </div>
   </section>
 
-  <!-- 03: JOURNAL hidden
   <section id="section-journal">
     <div class="editorial-heading">
       <span>Journal &bull; Thoughts, Discoveries &amp; Entries</span>
       <span class="heading-num">[03]</span>
     </div>
 
-    
+    <!-- Journal Intro Banner -->
     <div class="journal-hero-banner">
       <div class="journal-title-row">
         <div>
@@ -445,11 +445,11 @@
           <h2 class="journal-headline">A record of what I'm learning, thinking, and discovering.</h2>
         </div>
         <div class="journal-meta-count">
-          <span class="journal-count-pill" id="journal-count-badge">10 ENTRIES &bull; CHRONOLOGICAL STREAM</span>
+          <span class="journal-count-pill" id="journal-count-badge">— ENTRIES &bull; CHRONOLOGICAL STREAM</span>
+          <button type="button" class="journal-write-btn" id="journal-write-btn" aria-label="Write new entry">+ Write</button>
         </div>
       </div>
 
-      
       <div class="journal-pillars-strip">
         <div class="journal-pillar-item">
           <span class="pillar-label">ENTRIES</span>
@@ -466,12 +466,11 @@
       </div>
     </div>
 
-    
+    <!-- Dual Filter Deck -->
     <div class="journal-filter-deck">
-      
       <div class="journal-type-filters-row">
         <span class="filter-deck-label">FILTER BY TYPE:</span>
-        <div class="journal-type-pills" role="tablist" id="journal-type-bar" aria-label="Filter journal by content type">
+        <div class="journal-type-pills" role="tablist" id="journal-type-bar">
           <button type="button" class="j-type-btn active" data-type="ALL" role="tab" aria-selected="true">ALL</button>
           <button type="button" class="j-type-btn" data-type="entry" role="tab" aria-selected="false">ENTRIES</button>
           <button type="button" class="j-type-btn" data-type="thought" role="tab" aria-selected="false">THOUGHTS</button>
@@ -480,32 +479,103 @@
         </div>
       </div>
 
-      
       <div class="journal-subfilter-row">
-        <div class="journal-category-pills" id="journal-category-bar" role="tablist" aria-label="Filter journal by subject category">
+        <div class="journal-category-pills" id="journal-category-bar" role="tablist">
           <button type="button" class="j-cat-btn active" data-category="ALL" role="tab" aria-selected="true">All Subjects</button>
-          <button type="button" class="j-cat-btn" data-category="Psychology" role="tab" aria-selected="false">Psychology</button>
-          <button type="button" class="j-cat-btn" data-category="Philosophy" role="tab" aria-selected="false">Philosophy</button>
-          <button type="button" class="j-cat-btn" data-category="Learning" role="tab" aria-selected="false">Learning</button>
-          <button type="button" class="j-cat-btn" data-category="Technology & AI" role="tab" aria-selected="false">Technology &amp; AI</button>
-          <button type="button" class="j-cat-btn" data-category="Human Potential" role="tab" aria-selected="false">Human Potential</button>
-          <button type="button" class="j-cat-btn" data-category="Life & Observations" role="tab" aria-selected="false">Life &amp; Observations</button>
+          <button type="button" class="j-cat-btn" data-category="Psychology" role="tab">Psychology</button>
+          <button type="button" class="j-cat-btn" data-category="Philosophy" role="tab">Philosophy</button>
+          <button type="button" class="j-cat-btn" data-category="Learning" role="tab">Learning</button>
+          <button type="button" class="j-cat-btn" data-category="Technology &amp; AI" role="tab">Technology &amp; AI</button>
+          <button type="button" class="j-cat-btn" data-category="Human Potential" role="tab">Human Potential</button>
+          <button type="button" class="j-cat-btn" data-category="Life &amp; Observations" role="tab">Life &amp; Observations</button>
         </div>
-
         <div class="journal-search-wrap">
-          <span class="search-lens" aria-hidden="true">🔍</span>
+          <span class="search-lens" aria-hidden="true">&#128269;</span>
           <input type="text" id="journal-search-input" class="journal-search-input" placeholder="Search thoughts, questions, categories..." autocomplete="off">
-          <button type="button" id="journal-clear-search" class="journal-clear-btn" style="display: none;" aria-label="Clear search">&times;</button>
+          <button type="button" id="journal-clear-search" class="journal-clear-btn" style="display:none;" aria-label="Clear search">&times;</button>
         </div>
       </div>
     </div>
 
-    
+    <!-- Journal Stream Feed -->
     <div class="journal-stream" id="journal-feed" role="feed" aria-label="Chronological journal stream">
-      
     </div>
   </section>
-  -->
+
+  <!-- Journal Compose Modal -->
+  <div id="journal-compose-overlay" class="journal-compose-overlay" style="display:none;" role="dialog" aria-modal="true" aria-label="Write new journal entry">
+    <div class="journal-compose-modal">
+      <div class="compose-header">
+        <span class="compose-header-label">NEW ENTRY</span>
+        <button type="button" class="compose-close-btn" id="compose-close-btn" aria-label="Close">&times;</button>
+      </div>
+      <div class="compose-body">
+        <div class="compose-row compose-row-inline">
+          <div class="compose-field compose-field-sm">
+            <label class="compose-label" for="compose-type">TYPE</label>
+            <select id="compose-type" class="compose-select">
+              <option value="thought">Thought</option>
+              <option value="entry">Entry</option>
+              <option value="discovery">Discovery</option>
+              <option value="exploration">Exploration</option>
+              <option value="open-question">Open Question</option>
+            </select>
+          </div>
+          <div class="compose-field compose-field-sm">
+            <label class="compose-label" for="compose-category">CATEGORY</label>
+            <select id="compose-category" class="compose-select">
+              <option value="Psychology">Psychology</option>
+              <option value="Philosophy">Philosophy</option>
+              <option value="Learning">Learning</option>
+              <option value="Technology &amp; AI">Technology &amp; AI</option>
+              <option value="Human Potential">Human Potential</option>
+              <option value="Life &amp; Observations">Life &amp; Observations</option>
+            </select>
+          </div>
+          <div class="compose-field compose-field-sm">
+            <label class="compose-label" for="compose-read-time">READ TIME</label>
+            <input type="text" id="compose-read-time" class="compose-input" placeholder="e.g. 3 min read" value="3 min read">
+          </div>
+        </div>
+        <div class="compose-field">
+          <label class="compose-label" for="compose-title">TITLE <span class="compose-required">*</span></label>
+          <input type="text" id="compose-title" class="compose-input compose-title-input" placeholder="What is this thought about?" autocomplete="off">
+        </div>
+        <div class="compose-field">
+          <label class="compose-label" for="compose-excerpt">EXCERPT / SUMMARY</label>
+          <textarea id="compose-excerpt" class="compose-textarea compose-textarea-sm" placeholder="One or two sentences that capture the core idea..." rows="2"></textarea>
+        </div>
+        <div class="compose-sections-label">SECTIONS <span class="compose-hint">(fill what applies)</span></div>
+        <div class="compose-field">
+          <label class="compose-label" for="compose-question">THE QUESTION</label>
+          <textarea id="compose-question" class="compose-textarea" placeholder="What question is this entry exploring?" rows="2"></textarea>
+        </div>
+        <div class="compose-field">
+          <label class="compose-label" for="compose-observation">OBSERVATION</label>
+          <textarea id="compose-observation" class="compose-textarea" placeholder="What have you noticed or observed?" rows="3"></textarea>
+        </div>
+        <div class="compose-field">
+          <label class="compose-label" for="compose-exploration">EXPLORATION / MAIN BODY <span class="compose-required">*</span></label>
+          <textarea id="compose-exploration" class="compose-textarea compose-textarea-lg" placeholder="Write your full thought here..." rows="6"></textarea>
+        </div>
+        <div class="compose-field">
+          <label class="compose-label" for="compose-conclusion">MY CURRENT CONCLUSION</label>
+          <textarea id="compose-conclusion" class="compose-textarea" placeholder="What do you currently believe or conclude?" rows="2"></textarea>
+        </div>
+        <div class="compose-field">
+          <label class="compose-label" for="compose-tags">RELATED TAGS <span class="compose-hint">(comma-separated)</span></label>
+          <input type="text" id="compose-tags" class="compose-input" placeholder="e.g. PSYCHOLOGY, HIGH-AGENCY, GROWTH">
+        </div>
+      </div>
+      <div class="compose-footer">
+        <span class="compose-status" id="compose-status">Entries are saved to your browser locally.</span>
+        <div class="compose-footer-btns">
+          <button type="button" class="compose-btn compose-btn-secondary" id="compose-cancel-btn">CANCEL</button>
+          <button type="button" class="compose-btn compose-btn-primary" id="compose-save-btn">SAVE ENTRY</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- TARGETS SECTION HIDDEN — kept for reference
   <section id="section-targets">
@@ -792,6 +862,63 @@ create policy "Anon access target_milestones" on public.target_milestones for al
     </div>
   </dialog>
 
-  <script type="module" src="./js/app.js?v=3"></script>
+  <dialog id="letter-reader" class="letter-dialog" aria-labelledby="letter-reader-title">
+    <article class="letter-sheet">
+      <div class="letter-sheet-bar">
+        <button type="button" class="letter-text-btn" id="letter-close">Close</button>
+        <div class="letter-owner-actions" id="letter-owner-actions" hidden>
+          <button type="button" class="letter-text-btn" id="letter-edit">Edit</button>
+          <button type="button" class="letter-text-btn letter-danger" id="letter-delete">Delete</button>
+        </div>
+      </div>
+      <p class="letter-sheet-date" id="letter-reader-date"></p>
+      <h2 class="letter-sheet-title" id="letter-reader-title"></h2>
+      <div class="letter-sheet-body" id="letter-reader-body"></div>
+    </article>
+  </dialog>
+
+  <dialog id="letter-desk" class="letter-dialog" aria-labelledby="letter-desk-title">
+    <form id="letter-form" class="letter-sheet letter-desk">
+      <div class="letter-desk-bar">
+        <p class="letter-kicker" id="letter-desk-title">The desk</p>
+        <button type="button" class="letter-text-btn" id="letter-desk-close">Close</button>
+      </div>
+
+      <div id="letter-lock">
+        <p class="letter-desk-copy">Only the author can publish or change a letter. Reading stays open.</p>
+        <div id="letter-setup" class="letter-setup">
+          <p class="letter-desk-copy">One-time setup. Run this in the Supabase SQL editor, and set your own passphrase with the commented insert. Then put the project URL and anon key in <code>js/publication.js</code> so visitors can read what you publish.</p>
+          <pre class="letter-sql" id="letter-sql"></pre>
+          <label class="letter-field">Supabase URL
+            <input type="url" id="letter-sb-url" placeholder="https://your-project.supabase.co" autocomplete="off">
+          </label>
+          <label class="letter-field">Anon key
+            <input type="text" id="letter-sb-key" placeholder="eyJhbGciOi..." autocomplete="off">
+          </label>
+        </div>
+        <label class="letter-field">Writer passphrase
+          <input type="password" id="letter-passphrase" autocomplete="current-password">
+        </label>
+        <button type="button" class="letter-publish-btn" id="letter-unlock">Unlock</button>
+      </div>
+
+      <div id="letter-compose" hidden>
+        <label class="letter-field">Date
+          <input type="date" id="letter-date" required>
+        </label>
+        <label class="letter-field">Title
+          <input type="text" id="letter-title" maxlength="160" required>
+        </label>
+        <label class="letter-field">Letter
+          <textarea id="letter-body" maxlength="20000" required></textarea>
+        </label>
+        <p class="letter-hint">A blank line starts a new paragraph.</p>
+        <button type="submit" class="letter-publish-btn" id="letter-publish">Publish</button>
+      </div>
+      <p class="letter-status" id="letter-status" role="status"></p>
+    </form>
+  </dialog>
+
+  <script type="module" src="./js/app.js?v=5"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
-import { initialData } from './data.js?v=3';
+import { initialData } from './data.js?v=5';
+import { initLetters } from './letters.js?v=5';
 import { renderCrossStitchSVG } from './stitch-font.js';
 import {
   initSupabase,
@@ -15,7 +16,7 @@ import {
   upsertCloudJournalEntry,
   deleteCloudJournalEntry,
   SQL_SCHEMA
-} from './supabase.js';
+} from './supabase.js?v=5';
 
 // ============================================================================
 // APP LOGIC: BOLD EDITORIAL BLUEPRINT & LOCAL DATA CONTROLLER
@@ -2525,6 +2526,118 @@ function setupJournalFilters() {
 }
 
 // ----------------------------------------------------------------------------
+// JOURNAL COMPOSE — Write & Save New Entries
+// ----------------------------------------------------------------------------
+
+function setupJournalCompose() {
+  const writeBtn    = document.getElementById('journal-write-btn');
+  const overlay     = document.getElementById('journal-compose-overlay');
+  const closeBtn    = document.getElementById('compose-close-btn');
+  const cancelBtn   = document.getElementById('compose-cancel-btn');
+  const saveBtn     = document.getElementById('compose-save-btn');
+  const statusEl    = document.getElementById('compose-status');
+
+  if (!writeBtn || !overlay) return;
+
+  function openCompose() {
+    // Reset form
+    ['compose-title','compose-excerpt','compose-question','compose-observation',
+     'compose-exploration','compose-conclusion','compose-tags'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    const readTimeEl = document.getElementById('compose-read-time');
+    if (readTimeEl) readTimeEl.value = '3 min read';
+    const typeEl = document.getElementById('compose-type');
+    if (typeEl) typeEl.value = 'thought';
+    const catEl = document.getElementById('compose-category');
+    if (catEl) catEl.value = 'Psychology';
+    if (statusEl) statusEl.textContent = 'Entries are saved to your browser locally.';
+    if (saveBtn) saveBtn.disabled = false;
+
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    const titleEl = document.getElementById('compose-title');
+    if (titleEl) setTimeout(() => titleEl.focus(), 80);
+  }
+
+  function closeCompose() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  writeBtn.addEventListener('click', openCompose);
+  closeBtn?.addEventListener('click', closeCompose);
+  cancelBtn?.addEventListener('click', closeCompose);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeCompose(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.style.display !== 'none') closeCompose();
+  });
+
+  saveBtn?.addEventListener('click', () => {
+    const title = document.getElementById('compose-title')?.value.trim();
+    const exploration = document.getElementById('compose-exploration')?.value.trim();
+
+    if (!title) {
+      alert('Please add a title before saving.');
+      document.getElementById('compose-title')?.focus();
+      return;
+    }
+    if (!exploration) {
+      alert('The main body / exploration section is required.');
+      document.getElementById('compose-exploration')?.focus();
+      return;
+    }
+
+    const type      = document.getElementById('compose-type')?.value || 'thought';
+    const category  = document.getElementById('compose-category')?.value || 'Psychology';
+    const readTime  = document.getElementById('compose-read-time')?.value.trim() || '3 min read';
+    const excerpt   = document.getElementById('compose-excerpt')?.value.trim() || '';
+    const question  = document.getElementById('compose-question')?.value.trim() || '';
+    const obs       = document.getElementById('compose-observation')?.value.trim() || '';
+    const conclusion= document.getElementById('compose-conclusion')?.value.trim() || '';
+    const tagsRaw   = document.getElementById('compose-tags')?.value.trim() || '';
+    const related   = tagsRaw ? tagsRaw.split(',').map(t => t.trim().toUpperCase()).filter(Boolean) : [];
+
+    const now = new Date();
+    const dateStr = now.toISOString().split('T')[0]; // YYYY-MM-DD
+    const displayDate = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
+    const id = `j-${Date.now()}`;
+    const num = String(state.journalEntries.length + 1).padStart(3, '0');
+
+    const newEntry = {
+      id,
+      number: num,
+      title,
+      slug: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+      type,
+      category,
+      date: dateStr,
+      displayDate,
+      readingTime: readTime,
+      excerpt: excerpt || exploration.slice(0, 120) + (exploration.length > 120 ? '...' : ''),
+      sections: { question, observation: obs, exploration, conclusion },
+      related,
+      status: 'published'
+    };
+
+    // Save
+    state.journalEntries.unshift(newEntry);
+    saveStored(STORAGE_KEYS.JOURNAL_ENTRIES, state.journalEntries);
+    renderJournalFeed();
+
+    // Cloud sync if connected
+    if (isSupabaseConnected()) {
+      upsertCloudJournalEntry(newEntry).catch(e => console.warn('Journal cloud upsert err:', e));
+    }
+
+    if (statusEl) statusEl.textContent = '✓ Saved!';
+    if (saveBtn) saveBtn.disabled = true;
+    setTimeout(closeCompose, 700);
+  });
+}
+
+// ----------------------------------------------------------------------------
 // INITIAL BOOTSTRAP
 // ----------------------------------------------------------------------------
 
@@ -2544,6 +2657,7 @@ function initApp() {
   setupDatabaseModal();
   renderJournalFeed();
   setupJournalFilters();
+  setupJournalCompose();
 
   initSupabase().then(() => {
     if (isSupabaseConnected()) {
