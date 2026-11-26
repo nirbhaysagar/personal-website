@@ -502,80 +502,38 @@
     </div>
   </section>
 
-  <!-- Journal Compose Modal -->
-  <div id="journal-compose-overlay" class="journal-compose-overlay" style="display:none;" role="dialog" aria-modal="true" aria-label="Write new journal entry">
-    <div class="journal-compose-modal">
-      <div class="compose-header">
-        <span class="compose-header-label">NEW ENTRY</span>
-        <button type="button" class="compose-close-btn" id="compose-close-btn" aria-label="Close">&times;</button>
+
+  <!-- Journal Write Panel -->
+  <div id="journal-write-panel" class="journal-write-panel" style="display:none;" role="dialog" aria-modal="true" aria-label="Write a thought">
+    <div class="write-panel-inner">
+      <div class="write-panel-top">
+        <div class="write-type-row">
+          <button class="write-type-pill active" data-wtype="thought">Thought</button>
+          <button class="write-type-pill" data-wtype="entry">Entry</button>
+          <button class="write-type-pill" data-wtype="discovery">Discovery</button>
+          <button class="write-type-pill" data-wtype="exploration">Exploration</button>
+        </div>
+        <button type="button" class="write-panel-close" id="write-panel-close" aria-label="Close">&times;</button>
       </div>
-      <div class="compose-body">
-        <div class="compose-row compose-row-inline">
-          <div class="compose-field compose-field-sm">
-            <label class="compose-label" for="compose-type">TYPE</label>
-            <select id="compose-type" class="compose-select">
-              <option value="thought">Thought</option>
-              <option value="entry">Entry</option>
-              <option value="discovery">Discovery</option>
-              <option value="exploration">Exploration</option>
-              <option value="open-question">Open Question</option>
-            </select>
-          </div>
-          <div class="compose-field compose-field-sm">
-            <label class="compose-label" for="compose-category">CATEGORY</label>
-            <select id="compose-category" class="compose-select">
-              <option value="Psychology">Psychology</option>
-              <option value="Philosophy">Philosophy</option>
-              <option value="Learning">Learning</option>
-              <option value="Technology &amp; AI">Technology &amp; AI</option>
-              <option value="Human Potential">Human Potential</option>
-              <option value="Life &amp; Observations">Life &amp; Observations</option>
-            </select>
-          </div>
-          <div class="compose-field compose-field-sm">
-            <label class="compose-label" for="compose-read-time">READ TIME</label>
-            <input type="text" id="compose-read-time" class="compose-input" placeholder="e.g. 3 min read" value="3 min read">
-          </div>
-        </div>
-        <div class="compose-field">
-          <label class="compose-label" for="compose-title">TITLE <span class="compose-required">*</span></label>
-          <input type="text" id="compose-title" class="compose-input compose-title-input" placeholder="What is this thought about?" autocomplete="off">
-        </div>
-        <div class="compose-field">
-          <label class="compose-label" for="compose-excerpt">EXCERPT / SUMMARY</label>
-          <textarea id="compose-excerpt" class="compose-textarea compose-textarea-sm" placeholder="One or two sentences that capture the core idea..." rows="2"></textarea>
-        </div>
-        <div class="compose-sections-label">SECTIONS <span class="compose-hint">(fill what applies)</span></div>
-        <div class="compose-field">
-          <label class="compose-label" for="compose-question">THE QUESTION</label>
-          <textarea id="compose-question" class="compose-textarea" placeholder="What question is this entry exploring?" rows="2"></textarea>
-        </div>
-        <div class="compose-field">
-          <label class="compose-label" for="compose-observation">OBSERVATION</label>
-          <textarea id="compose-observation" class="compose-textarea" placeholder="What have you noticed or observed?" rows="3"></textarea>
-        </div>
-        <div class="compose-field">
-          <label class="compose-label" for="compose-exploration">EXPLORATION / MAIN BODY <span class="compose-required">*</span></label>
-          <textarea id="compose-exploration" class="compose-textarea compose-textarea-lg" placeholder="Write your full thought here..." rows="6"></textarea>
-        </div>
-        <div class="compose-field">
-          <label class="compose-label" for="compose-conclusion">MY CURRENT CONCLUSION</label>
-          <textarea id="compose-conclusion" class="compose-textarea" placeholder="What do you currently believe or conclude?" rows="2"></textarea>
-        </div>
-        <div class="compose-field">
-          <label class="compose-label" for="compose-tags">RELATED TAGS <span class="compose-hint">(comma-separated)</span></label>
-          <input type="text" id="compose-tags" class="compose-input" placeholder="e.g. PSYCHOLOGY, HIGH-AGENCY, GROWTH">
-        </div>
-      </div>
-      <div class="compose-footer">
-        <span class="compose-status" id="compose-status">Entries are saved to your browser locally.</span>
-        <div class="compose-footer-btns">
-          <button type="button" class="compose-btn compose-btn-secondary" id="compose-cancel-btn">CANCEL</button>
-          <button type="button" class="compose-btn compose-btn-primary" id="compose-save-btn">SAVE ENTRY</button>
-        </div>
+      <input
+        type="text"
+        id="write-title"
+        class="write-title-input"
+        placeholder="Title"
+        autocomplete="off"
+      >
+      <textarea
+        id="write-body"
+        class="write-body-input"
+        placeholder="Write your thought here..."
+      ></textarea>
+      <div class="write-panel-footer">
+        <span class="write-save-status" id="write-save-status"></span>
+        <button type="button" class="write-save-btn" id="write-save-btn">Save</button>
       </div>
     </div>
   </div>
+
 
   <!-- TARGETS SECTION HIDDEN — kept for reference
   <section id="section-targets">
